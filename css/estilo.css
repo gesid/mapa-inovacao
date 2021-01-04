@@ -1,0 +1,174 @@
+html{
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+head{
+	padding: 0;
+	margin: 0;
+}
+body{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+footer{
+	height: 100%;
+	width: 100%;
+}
+
+nav{
+	margin: 0; 
+	padding: 0;
+}
+
+body header nav{
+	background-color: #122915;
+	margin: 0; 
+	padding: 0;
+}
+
+div div div{
+	padding: 0;
+}
+
+h4{  
+	right: 35%;
+}
+
+.navstyle{
+	background-color: #122915; 
+	height: 100% 
+	margin: 0; 
+	padding: 0;
+}
+
+.footerstyle{
+	background-color: #122915; 
+	height: 5%; 
+	margin-top: auto;
+}
+
+#map_button1{
+	float: left;
+	margin-left:29%;
+	width: 20%; 
+	border: thin;
+}
+
+#map_button2{ 
+	border: thin;
+}
+
+#divButton{
+	z-index: 1000; 
+	position: absolute;
+	height: 7%;
+	width: 100%;
+	top: 93%;
+}
+
+#divMsg{
+	z-index: 1000; 
+	position: absolute;
+	width: 100%;
+	height: 5%;
+	top: 88%; 
+}
+
+/*.list-group{
+    max-height: 300;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+    }*/
+
+    .scrollspySite{
+    	position: relative;
+    	overflow: auto;
+    	height: 92%;
+    }
+
+    #location-map {
+    	height: 100%;
+    	position: relative;
+    }
+    #cadastroLocal{
+    	z-index: 10000; 
+    	position: absolute;
+    	height: 83%;
+    	width: 100%;
+    	background-color:#FFFF;
+    	padding: 0%;
+    	margin: 0%;
+
+    }
+
+    .divisor{
+    	width: 1px;
+    	background: rgba(0,0,0,.5);
+    	margin: 11px 15px;
+    }
+
+    .btn-submit{
+    	color:white;
+    	background-color: #38610B;
+    	border-color: #1B2A0A;  
+    }
+
+    .btn-submit:hover{
+    	color:white;
+    	background-color: #243B0B;
+    	border-color: #1B2A0A;  
+    }
+
+    .btn-navegador{
+    	font-weight: 400;
+    	color: #ddd;
+    	text-decoration: none;  
+    }
+
+    .btn-navegador:hover{
+    	color: #F19A3D;
+    }
+
+    .btn-navegador:focus{
+    	box-shadow: none;
+    }
+
+    .textoAlerta{
+    	font-style:oblique;
+    	background-color: rgba(0,0,0,0.6);
+    	color: white;
+    	font-weight: bold;
+    	padding: 2px;
+    }
+
+    .texto-evento{
+    	color: #122915;  
+    }
+
+    .btn-selecionado{
+    	font-weight: 700;
+    	color: #c5be86;
+    	text-decoration: none;  
+    }
+
+    .btn-selecionado:hover{
+    	color: #c5be86;
+    }
+
+    .btn-selecionado:focus{
+    	box-shadow: none;
+    }
+
+    .list-group-item-action:focus,.list-group-item-action:hover{
+    	z-index: 1;
+    	color: #495057;
+    	text-decoration: none;
+    	background-color: #f1f1f1;
+    }
+

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
+
+  <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/estilo.css">
+
+  <script src="model/evento.js"></script>
+  <script src="dao/eventodao.js"></script>
+
+  <title>Rapadura Valley - Ecosistema de Inovação de Fortaleza</title>
+</head>
+
+<body style="display: flex; flex-direction: column;min-height: 100%;height: 100%; width: 100%; background-color:#FAFAFA;">
+  <header style="height: 10%">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="padding: 0;margin: 0; height: 100%;">
+      <div class="container">
+        <!--Logo -->
+        <a href="index.html" class="navbar-brand"><img src="img\logos\ecossistema-cearense.png" style="width: 180px;"></a>
+        <!--Navegação-->
+        <form>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+            <div class="btn-group mr-5" role="group" aria-label="First group">
+              <button id="perfil" type="button" class="btn btn-navegador" onclick="telaUsuario(this)">
+                <i class="far fa-id-badge"></i>
+                <p style="margin-bottom: 8px;"><small>Meu Perfil</small></p>
+              </button>
+              <a type="button" href="como-utilizar.html" class="btn btn-navegador">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p style="margin-bottom: 8px;"><small>Como Utilizar</small></p>
+              </a>
+              <a type="button" href="ecossistema.html" class="btn btn-navegador">
+                <i class="far fa-newspaper"></i>
+                <p style="margin-bottom: 8px;"><small>Ecossistema</small></p>
+              </a>
+              <a type="button" href="javascript:void(0)" class="btn btn-selecionado">
+                <i class="fas fa-theater-masks"></i>
+                <p style="margin-bottom: 8px;"><small>Eventos</small></p>
+              </a>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Third group">
+              <button id="log" type="button" class="btn btn-navegador" onclick="gerenciarEntradaSaida()">
+                <i class="fas fa-sign-out-alt"></i>
+                <p style="margin-bottom: 8px;">Sair</p>
+              </button>
+            </div>
+
+          </div>
+        </form>
+
+        <form class="form-inline">    
+          <div class="input-group">
+            <input id="barraBusca" type="text" class="form-control" placeholder="Tipo de Busca: por nome" aria-label="Buscar..." aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-light font-weight-bold" type="button" onclick="filtroBusca()">Buscar</button>
+              <button type="button" class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item disabled" href="#">Tipo de busca</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-tipo="Nome" data-texto="nome" onclick="escolhaBusca(this)">Por nome</a>
+                <a class="dropdown-item" href="#" data-tipo="Subtipo" data-texto="categoria" onclick="escolhaBusca(this)">Por categoria</a>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </nav>
+  </header> <!--Fim do cabeçalho-->
+
+  <!-- Modal Sobre -->
+  <div class="modal fade" id="modalSobre" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content" style="background-color:#FAFAFA;">
+        <div class="modal-header">
+          <h5 class="modal-title text-dark" id="exampleModalScrollableTitle">Sobre o Ecossistema Cearense de Inovação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="background-color:#122915;">
+         <div class="d-flex align-items-center justify-content-center"><img src="img\logos\ecossistema-cearense.png" style="width: 250px;">
+         </div>
+         <div>
+          <p style="color: white;">O Ecossistema Cearense de inovação é uma iniciativa de mapear os ecossistemas locais existentes no estado e seus componentes, com o intuito de fomentar uma maior conexão entre os participantes e com isso aumentar o desenvolvimento de inovação e novas tecnologias para a ecocômia local e nacional. Atualmente o ecossistema cearense é o terceiro maior mercado entre os ecossistemas da região, possuindo cerca de 16,6% das startups ativas e é de grande relevância para uma maior projeção desta rede, uma interrelação mais forte entre os componentes, para que se possar impulsionar ese mercado.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cartões de Eventos -->
+<div id="container_contudo" class="container" style="background-color: #748F6B;">
+  <h1 class="d-flex justify-content-center font-weight-bold" style="color: #ddd">Próximos Eventos:</h1>
+  <ul id="listaEventos" class="col-12 mt-2">
+    <template id="cardEventos">
+      <div class="card mb-3"> <!--Inicio Cartão 1-->
+        <div class="row no-gutters">
+          <div class="col-4">
+            <img style="height: 250px; width: 100%;" class="card-img">
+          </div>
+          <div class="col-8">
+            <div class="card-body" style="background-color:#E9E9E9;display:flex;flex-direction:column;min-height: 100%;">
+              <h3 style="color:#FF9500; margin-bottom:1px;" class="card-title font-weight-bold"></h3>
+              <h6 style="color:gray;" class="card-title font-weight-bold"></h3>
+                <p class="card-text"></p>
+
+                <div style="margin-top: auto;">
+                  <div class="d-flex flex-column" style="float:left; width: 60%;">
+
+                    <div class="d-flex align-items-center justify-content-start">
+                      <span style="font-size: 20px;"><i class="far fa-calendar-alt mr-2"></i></span>
+                      <p class="card-text"></p>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-start">
+                      <span style="font-size: 20px;"><i class="fas fa-map-marker-alt mr-2"></i></span>
+                      <p class="card-text"></p>
+                    </div>
+
+                  </div>
+
+                  <div style="float:right;">
+                    <a href="index.html" target="_blank" class="btn" style="background-color:#122915;color:white;">Site do Evento</a>
+                    <a href="index.html" target="_blank" class="btn btn-outline-secondary" onclick="passarEventoKey(this)">Ver no mapa</a>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div><!--Fim do Cartão 1-->
+      </template>
+    </ul>
+  </div>
+
+  <footer class="footerstyle">
+    <div class="d-flex justify-content-center"> 
+      <a class="mr-3" style="font-size: 20px;color: #ddd;" href="https://www.facebook.com/sharer/sharer.php?u=https://ecin.netlify.app/index.html" target="_blank" title="Compartilhar no Facebook"><i class="fa fa-facebook"></i>
+      </a>
+
+      <a class="mr-3" style="font-size: 20px;color: #ddd;" href="http://www.linkedin.com/shareArticle?mini=true&url=https://ecin.netlify.app/index.html&title=Botões de compartilhamento"  target="_blank" title="Compartilhar no LinkedIn"> <i class="fa fa-linkedin"></i>
+      </a>
+
+      <a style="font-size: 20px;color: #ddd;" href="http://twitter.com/share?text=Botões de compartilhamento&url=https://ecin.netlify.app/index.html"  target="_blank" data-role="shareLink" title="Compartilhar no Twitter"><i class="fa fa-twitter"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+
+  <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyD7mV-NjSQ8dNBQhX6OnHEli-cTL78JTfw",
+        authDomain: "tccv5-3c3e2.firebaseapp.com",
+        databaseURL: "https://tccv5-3c3e2.firebaseio.com",
+        projectId: "tccv5-3c3e2",
+        storageBucket: "tccv5-3c3e2.appspot.com",
+        messagingSenderId: "1057642468733",
+        appId: "1:1057642468733:web:3da625da68085f8a39e814",
+        measurementId: "G-XRDHGX61T2"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="javascript/logica-eventos.js"></script>
+    <script src="javascript/login.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,101 @@
+html{
+	height: 100%;
+	overflow: hidden;
+}
+html body{
+	height: 100%;
+}
+
+body{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#divPrincipal{
+	height: 90%;
+	overflow: auto;
+}
+
+main{
+
+}
+
+footer{
+	width: 100%;
+}
+
+nav{
+	margin: 0; 
+	padding: 0;
+}
+
+body header nav{
+	background-color:#122915;
+	margin: 0; 
+	padding: 0;
+}
+
+div div div{
+	padding: 0;
+}
+
+h4{  
+	right: 35%;
+}
+
+h5{
+	color:#FF9500;
+}
+
+h6{
+	color:#FE9A2E;
+}
+
+.divisor{
+	width: 1px;
+	background: rgba(0,0,0,.5);
+	margin: 11px 15px;
+}
+
+.footerstyle{
+	background-color: #122915; 
+	height: 5%; 
+	margin-top: auto;
+}
+
+.btn-navegador{
+	font-weight: 400;
+	color: #ddd;
+	text-decoration: none;  
+}
+
+.btn-navegador:hover{
+	  color: #F19A3D;
+}
+
+.btn-navegador:focus{
+	  box-shadow: none;
+}
+
+.barraEscolha{
+	color:#000;	
+}
+
+.barraEscolha:hover{
+	color:#FFCF9C;
+}
+
+.btn-selecionado{
+	font-weight: 700;
+	color: #c5be86;
+	text-decoration: none;  
+}
+
+.btn-selecionado:hover{
+	  color: #c5be86;
+}
+
+.btn-selecionado:focus{
+	  box-shadow: none;
+}

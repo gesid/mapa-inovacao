@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
+
+  <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/como-utilizar.css">
+
+  <title>Ecossistema Cearense de Inovação</title>
+</head>
+
+<body style="width: 100%; background-color:#FAFAFA;">
+  <header style="height: 10%">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="padding: 0;margin: 0; height: 100%;">
+      <div class="container">
+        <!--Logo -->
+        <a href="index.html" class="navbar-brand"><img src="img\logos\ecossistema-cearense.png" style="width: 180px;"></a>
+        <!--Navegação-->
+        <form>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group" aria-label="First group" style="margin-right: 345px;">
+              <button id="perfil" type="button" class="btn btn-navegador" onclick="telaUsuario(this)">
+                <i class="far fa-id-badge"></i>
+                <p style="margin-bottom: 8px;"><small>Meu Perfil</small></p>
+              </button>
+              <a type="button" href="javascript:void(0)" class="btn btn-selecionado">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p style="margin-bottom: 8px;"><small>Como Utilizar</small></p>
+              </a>
+              <a type="button" href="ecossistema.html" class="btn btn-navegador">
+                <i class="far fa-newspaper"></i>
+                <p style="margin-bottom: 8px;"><small>Ecossistema</small></p>
+              </a>
+              <a type="button" href="eventos.html" class="btn btn-navegador">
+                <i class="fas fa-theater-masks"></i>
+                <p style="margin-bottom: 8px;"><small>Eventos</small></p>
+              </a>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Third group">
+              <button id="log" type="button" class="btn btn-navegador" onclick="gerenciarEntradaSaida()">
+                <i class="fas fa-sign-out-alt"></i>
+                <p style="margin-bottom: 8px;">Sair</p>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </nav>
+  </header> <!--Fim do cabeçalho-->
+
+  <!-- Modal Sobre -->
+  <div class="modal fade" id="modalSobre" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content" style="background-color:#FAFAFA;">
+        <div class="modal-header">
+          <h5 class="modal-title text-dark" id="exampleModalScrollableTitle">Sobre o Ecossistema Cearense de Inovação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="background-color:#122915;">
+         <div class="d-flex align-items-center justify-content-center"><img src="img\logos\ecossistema-cearense.png" style="width: 250px;">
+         </div>
+         <div>
+          <p style="color: white;">O Ecossistema Cearense de inovação é uma iniciativa de mapear os ecossistemas locais existentes no estado e seus componentes, com o intuito de fomentar uma maior conexão entre os participantes e com isso aumentar o desenvolvimento de inovação e novas tecnologias para a ecocômia local e nacional. Atualmente o ecossistema cearense é o terceiro maior mercado entre os ecossistemas da região, possuindo cerca de 16,6% das startups ativas e é de grande relevância para uma maior projeção desta rede, uma interrelação mais forte entre os componentes, para que se possar impulsionar ese mercado.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>  
+
+<div id="divPrincipal">
+  <main class="container-fluid" style="height:auto; background-color: #748F6B;">
+    <div id="linhas" class="row">
+
+      <div id="divLista" class="col-2 position-fixed d-flex justify-content-center align-items-center" style="height: 85%"> 
+        <ul class="nav flex-column" style="text-align:center;">
+          <li class="nav-item barraFixa">
+            <a id="nl1" class="nav-link barraEscolha font-weight-bold" href="javascript:void(0)">Visualização dos componentes do Ecossistema</a>
+          </li>
+          <li id="nl2" class="nav-item barraFixa">
+            <a class="nav-link barraEscolha font-weight-bold" href="javascript:void(0)">Login e Cadastro</a>
+          </li>
+          <li id="nl3" class="nav-item barraFixa">
+            <a class="nav-link barraEscolha font-weight-bold" href="javascript:void(0)">Cadastro de Componentes e Eventos</a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="divConteudo" class="col offset-2" style="background-color:#FFFFFF;padding: 50px;">
+
+        <h1 class="font-weight-bold">Como Utilizar</h1><br>
+
+        <div style=" text-align:justify-content: ;">
+          <h5 id="topico1" class="font-weight-bold">Visualização dos componentes do Ecossistema:</h5>
+
+          <p>A principal função do sistema em questão é a possibilidade de visualização dos componentes do ecossistema de inovação do Ceará, todos concentrados em uma única plataforma, essa função é permitida mesmo para o usuário que não está logado no sistema.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img1.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>Para facilitar a visualização dos componentes, é possível verificar as informações de cada um deles, filtrados por categoria, na barra lateral da esquerda, que conta com as categorias existentes no ecossistema e ao lado o número de componentes da categoria. Clicando em uma das categorias será aberta uma tela com cartões de apresentação referentes aos componentes do ecossistema naquela categoria, sendo possível o acesso ao site, clicando no botão “Conheça Mais”, e a localização no mapa, clicando no botão “Localização”. Desta forma é dada a possibilidade de uma visão ampla dos componentes daquela categoria especifica, facilitando a busca pelas informações necessárias.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img2.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>Caso o usuário esteja procurando algum componente especifico, é possível fazer a filtragem pelo nome do componente na barra de busca que se encontra na barra de navegação da tela de exibição dos cartões.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img3.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>Também é possível visualizar no mapa apenas as categorias desejadas através do botão "Filtrar", que se encontra na barra de navegação do site.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img4.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>Na tela de filtragem é possível escolher as categorias que são desejadas a visualização e assim ser feita a filtragem, clicando no botão "Filtrar" no canto inferior direito da aba.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img5.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>A tela que segue mostra o mapa filtrado apenas por aceleradores</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img6.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>Na aba comunidade, que está destacada na imagem que segue, é possível visualizar as comunidades do ecossistema e destacar a área a qual o ecossistema engloba, pressionando o botão "Ativar", assim como também é possível apagar a área destacada pressionando o botão "Desativar".</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img7.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <h5 id="topico2" class="font-weight-bold">Login e Cadastro:</h5>
+          <p>Para acessar a função de adicionar novos componentes e eventos, é necessário está logado no sistema, para isso basta clicar no botão “Entrar” da barra de navegação superior, digitar suas credenciais nos campos indicados e fazer o login, caso ainda não possua cadastro, é possível fazer o cadastro clicando no link “Fazer Cadastro”, no canto inferior da página de login.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img8.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <h5 id="topico3" class="font-weight-bold">Cadastro de Componentes, Eventos e Comunidades:</h5>
+
+          <p>Para ter acesso a essa opção é necessário estar logado no sistema, quando o login for feito o botão de adicionar componentes irá dar acesso a uma tela de cadastro ao invés de redirecionar para a página de login.</p>
+
+          <h6>Cadastro de Componentes:</h6>
+
+          <p>Para cadastrar um novo componente do ecossistema é necessário clicar em “Cadastrar Componente”, em seguida aponte o local do endereço do componente em questão no mapa e clique em "Aqui!" para confirmar.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img9.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>Após confirmar o local no mapa, irá aparecer uma tela de cadastro que deve ser preenchida com os dados do local o qual está sendo feito o cadastro e em seguida clique em “Enviar”, completando o procedimento de cadastro.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img10.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <h6>Cadastro de Eventos:</h6>
+
+          <p>O cadastro de eventos segue o mesmo processo do cadastro de componentes até a tela de cadastro, lá é possível ver, na parte superior, a aba de eventos, onde é feito o cadastro dos próximos eventos agendados.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img11.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>Os eventos podem ser verificados na página de eventos, que pode ser acessada pela barra de navegação. Na página de eventos é possível ver os próximos eventos em formato de lista, os dados dos eventos cadastrados, um botão que irá levar para o site do evento e um segundo botão que irá levar para a localização do evento o mapa.</p>
+
+          <p>Na barra superior existe uma barra de busca, juntamente com um menu onde pode ser feita a escolha do tipo de busca, que pode ser pelo nome do evento ou pela categoria do evento.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img14.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <h5 id="topico4" class="font-weight-bold">Cadastro de Componentes, Eventos e Comunidades:</h5>
+          <h6 id="subtopico1">Cadastro de Comunidades:</h6>
+
+          <p>O cadastro de comunidade é feito pressionando o botão "+Comunidade" da barra de navegação.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img12.png" style="width: 900px; margin:10px;">
+          </div>
+
+          <p>Com isso, será aberta uma aba, onde é possível adicionar os dados da comunidade, inclusive o código para que seja delimitada a área desejada. O código necessário pode ser gerado no site <a href="http://geojson.io/" target="_blank">http://geojson.io/</a>, bastando inserir as delimitações da região com as ferramentas do próprio site ou por meio da importação de arquivo. Após a delimitaçao, um código em JSON será fornecido, e então será necessário copia-lo e cola-lo no espaço "Coordenadas da Região", da janela mostrada na figura a baixo.</p>
+
+          <div class="d-flex justify-content-center"> 
+            <img src="img/como-utilizar/img13.png" style="width: 900px; margin:10px;">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footerstyle">
+    <div class="d-flex justify-content-center"> 
+      <a class="mr-3" style="font-size: 20px;color: #ddd;" href="https://www.facebook.com/sharer/sharer.php?u=https://ecin.netlify.app/index.html" target="_blank" title="Compartilhar no Facebook"><i class="fa fa-facebook"></i>
+      </a>
+
+      <a class="mr-3" style="font-size: 20px;color: #ddd;" href="http://www.linkedin.com/shareArticle?mini=true&url=https://ecin.netlify.app/index.html&title=Botões de compartilhamento"  target="_blank" title="Compartilhar no LinkedIn"> <i class="fa fa-linkedin"></i>
+      </a>
+
+      <a style="font-size: 20px;color: #ddd;" href="http://twitter.com/share?text=Botões de compartilhamento&url=https://ecin.netlify.app/index.html"  target="_blank" data-role="shareLink" title="Compartilhar no Twitter"><i class="fa fa-twitter"></i>
+      </a>
+    </div>
+  </footer>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+
+<script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyD7mV-NjSQ8dNBQhX6OnHEli-cTL78JTfw",
+        authDomain: "tccv5-3c3e2.firebaseapp.com",
+        databaseURL: "https://tccv5-3c3e2.firebaseio.com",
+        projectId: "tccv5-3c3e2",
+        storageBucket: "tccv5-3c3e2.appspot.com",
+        messagingSenderId: "1057642468733",
+        appId: "1:1057642468733:web:3da625da68085f8a39e814",
+        measurementId: "G-XRDHGX61T2"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="javascript/como-utilizar.js"></script>
+    <script src="javascript/login.js"></script>
+    
+  </body>
+  </html>

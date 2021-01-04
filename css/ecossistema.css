@@ -1,0 +1,119 @@
+html{
+	height: 100%;
+	
+}
+html body{
+	height: 100%;
+}
+
+body{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+main{
+
+}
+
+footer{
+	width: 100%;
+}
+
+nav{
+	margin: 0; 
+	padding: 0;
+}
+
+body header nav{
+	background-color:#122915;
+	margin: 0; 
+	padding: 0;
+}
+
+div div div{
+	padding: 0;
+}
+
+h4{  
+	right: 35%;
+}
+
+h5{
+	color:#122915;
+}
+
+h6{
+	color:#FE9A2E;
+}
+
+div div ul li{
+	background-color: #FAFAFA;
+	font-weight: bold;
+}
+
+h4{
+	font-style: inherit;
+}
+
+.divisor{
+	width: 1px;
+	background: rgba(0,0,0,.5);
+	margin: 11px 15px;
+}
+
+.imgCarousel{
+	height: 400px;
+	width: 200px;
+}
+
+.imgNoticia{
+	padding: 10px;
+	height: 200px;
+}
+
+.centralizar{
+	text-align: center;
+}
+
+.backtexto{
+	background-color: rgba(0,0,0,0.5);
+}
+
+.barraFixa{
+	background-color: #F6E3CE;
+}
+
+.btn-navegador{
+	font-weight: 400;
+	color: #ddd;
+	text-decoration: none;  
+}
+
+.btn-navegador:hover{
+	  color: #F19A3D;
+}
+
+.btn-navegador:focus{
+	  box-shadow: none;
+}
+
+.btn-selecionado{
+	font-weight: 700;
+	color: #c5be86;
+	text-decoration: none;  
+}
+
+.btn-selecionado:hover{
+	  color: #c5be86;
+}
+
+.btn-selecionado:focus{
+	  box-shadow: none;
+}
+
+.footerstyle{
+	background-color: #122915; 
+	height: 5%; 
+	margin-top: auto;
+}

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity=" sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
+  <!-- Necessários para o timedatpicker  -->
+  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment-with-locales.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+  <script src="https://rawgit.com/tempusdominus/bootstrap-4/master/build/js/tempusdominus-bootstrap-4.min.js"></script>
+  <link href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- CSS Local -->
+  <link rel="stylesheet" type="text/css" href="css/estilo.css">
+  <!-- font-awsome-->
+  <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
+  <!--Compatilhamento FB-->
+
+  <title>Ecossistema Cearense de Inovação</title>
+</head>
+
+<body style="height: 100%; width: 100%;">
+  <header style="height: 10%">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="padding: 0;margin: 0; height: 100%;">
+      <div class="container">
+        <!--Logo -->
+        <a href="index.html" class="navbar-brand"><img src="img\logos\ecossistema-cearense.png" style="width: 180px;"></a>
+        <!--Navegação-->
+        <form>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-5" role="group" aria-label="First group">
+              <!--<button type="button" class="btn btn-navegador" data-toggle="modal" data-target="#modalSobre">-->
+                <button id="perfil" type="button" class="btn btn-navegador" onclick="telaUsuario(this)">
+                  <i class="far fa-id-badge"></i>
+                  <p style="margin-bottom: 8px;"><small>Meu Perfil</small></p>
+                </button>
+                <a type="button" href="como-utilizar.html" class="btn btn-navegador">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                  <p style="margin-bottom: 8px;"><small>Como Utilizar</small></p>
+                </a>
+                <a type="button" href="ecossistema.html" class="btn btn-navegador">
+                  <i class="far fa-newspaper"></i>
+                  <p style="margin-bottom: 8px;"><small>Ecossistema</small></p>
+                </a>
+                <a type="button" href="eventos.html" class="btn btn-navegador">
+                  <i class="fas fa-theater-masks"></i>
+                  <p style="margin-bottom: 8px;"><small>Eventos</small></p>
+                </a>
+              </div>
+
+              <div class="btn-group mr-5" role="group" aria-label="Second group">
+                <button type="button" class="btn btn-navegador" data-toggle="modal" data-target="#ModalFiltro">
+                  <i class="fas fa-filter"></i>
+                  <p style="margin-bottom: 8px;"><small>Filtrar</small></p>
+                </button>
+
+                <button type="button" class="btn btn-navegador" data-toggle="modal" onclick="limparComunidade()">
+                  <i class="fas fa-users"></i>
+                  <p style="margin-bottom: 8px;">+<small>Comunidades</small></p>
+                </button>
+
+                <a id="btn_marker" href="#" type="button" class="btn btn-navegador" onclick="selecionarLocal()">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <p style="margin-bottom: 8px;"><small>Cadastrar</small></p>
+                </a>
+
+              </div>
+
+              <div class="btn-group" role="group" aria-label="Third group">
+                <button id="log" type="button" class="btn btn-navegador" onclick="gerenciarEntradaSaida()">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <p style="margin-bottom: 8px;"><small>Sair</small></p>
+                </button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </nav>
+    </header> <!--Fim do cabeçalho-->
+
+    <!-- Modal Cadastro -->
+    <div class="modal fade bd-example-modal-lg" id="ModalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Cadastrar Instituição/Evento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="deletarMarcador()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist"><!---Barra do Navegador-->
+              <li class="nav-item">
+                <a class="nav-link active" id="local-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Instituição</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="evento-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Eventos</a>
+              </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <form><!-- Inicio do Conteúdo do Cadastro de locais-->
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="validacaoNomeLocal">Nome</label>
+                      <input class="form-control form-control" type="text" required="required" maxlength="33" id="validacaoNomeLocal" placeholder="Nome">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoSiteLocal">Site</label>
+                      <input class="form-control form-control" type="text" required="required" id="validacaoSiteLocal" placeholder="Site">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoTipoLocal">Tipo de Local</label>
+                      <select class="form-control form-control" id="validacaoTipoLocal" required="required" placeholder="validacaoTipoLocal">
+                        <option value="1" selected disabled>Selecionar...</option>
+                        <option>Aceleradora</option>
+                        <option>Advogados</option>
+                        <option>Catalisadores Locais</option>
+                        <option>Comunicação e Mídia</option>
+                        <option>Conexão com Mercado</option>
+                        <option>Conteúdo</option>
+                        <option>Coworking</option>
+                        <option>Créditos</option>
+                        <option>Editais</option>
+                        <option>Escolas</option>
+                        <option>Espaços Makers</option>
+                        <option>Eventos</option>
+                        <option>Fábrica de Aplicativos</option>
+                        <option>Governo</option>
+                        <option>Grandes Empresas</option>
+                        <option>Incubadoras</option>
+                        <option>Iniciativas Universitária</option>
+                        <option>Investidores</option>
+                        <option>Missões de Negócios</option>
+                        <option>Núcleos de Inovação</option>
+                        <option>Parques Tecnológicos</option>
+                        <option>Pré Aceleradoras</option>
+                        <option>Propriedade Intelectual</option>
+                        <option>Provedores de Serviços</option>
+                        <option>Mentoria</option>
+                        <option>Startup</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group custom-file"><!-- linha2-->
+                    <input type="file" class="custom-file-input custom-file-input-lg" id="uploader1">
+                    <label id="uploaderLabel1" class="custom-file-label" for="uploader1">Selecione a Logo</label>
+                  </div>
+
+                  <div class="form-row" style="margin-top: 7px"> <!-- linha3-->
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLatLocal">Latitude</label>
+                      <input class="form-control form-control" type="text" required="required" id="validacaoLatLocal" placeholder="Latitude" disabled="disabled">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLngLocal">Longitude</label>
+                      <input class="form-control form-control" type="text" required="required" id="validacaoLngLocal" placeholder="Longitude" disabled="disabled">
+                    </div>
+                  </div>
+
+                  <div class="form-row"> <!-- linha4-->
+
+                    <div class="form-group col-md-2">
+                      <label for="validacaoCEPLocal">CEP</label>
+                      <input class="form-control form-control" type="text" required="required" maxlength="9" id="validacaoCEPLocal" placeholder="CEP">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLogradouroLocal">Logradouro</label>
+                      <input class="form-control form-control" type="text" required="required" maxlength="30" id="validacaoLogradouroLocal" placeholder="Logradouro">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoNumeroLocal">Número</label>
+                      <input class="form-control form-control" type="text" required="required" maxlength="5" id="validacaoNumeroLocal" placeholder="Número">
+                    </div>
+                  </div>
+
+                  <div class="form-row"> <!-- linha5-->
+                    <div class="form-group col-md-4">
+                      <label for="validacaoComplementoLocal">Complemento</label>
+                      <input class="form-control form-control" type="text" id="validacaoComplementoLocal" maxlength="30" placeholder="Complemento">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoBairroLocal">Bairro</label>
+                      <input class="form-control form-control" type="text" required="required" maxlength="30" id="validacaoBairroLocal" placeholder="Bairro">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="validacaoCidadeLocal">Cidade</label>
+                      <input class="form-control form-control" type="text" required="required" maxlength="30" id="validacaoCidadeLocal" placeholder="Cidade">
+                    </div>
+
+                    <div class="form-group col-md-1">
+                      <label for="validacaoUFLocal">UF</label>
+                      <select class="form-control form-control" required="required" id="validacaoUFLocal">
+                        <option value="1" selected disabled>UF</option>
+                        <option>AC</option>
+                        <option>AL</option>
+                        <option>AP</option>
+                        <option>AM</option>
+                        <option>BA</option>
+                        <option>CE</option>
+                        <option>DF</option>
+                        <option>ES</option>
+                        <option>GO</option>
+                        <option>MA</option>
+                        <option>MT</option>
+                        <option>MS</option>
+                        <option>MG</option>
+                        <option>PA</option>
+                        <option>PB</option>
+                        <option>PR</option>
+                        <option>PE</option>
+                        <option>PI</option>
+                        <option>RJ</option>
+                        <option>RN</option>
+                        <option>RS</option>
+                        <option>RO</option>
+                        <option>RR</option>
+                        <option>SC</option>
+                        <option>SP</option>
+                        <option>SE</option>
+                        <option>TO</option>
+                      </select>
+                    </div>
+
+                  </div><!---Inicio do Conteudo-->
+                </form><!---Fim do Conteudo-->           
+              </div>
+
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <form><!---Inicio do Conteudo dos Eventos-->
+                  <div class="form-row"><!-- linha1-->
+                    <div class="form-group col-3">
+                      <label for="validacaoNomeEvento">Nome</label>
+                      <input class="form-control form-control" type="text" required="required" maxlength="33" id="validacaoNomeEvento" placeholder="Nome">
+                    </div>
+
+                    <div class="form-group col-3">
+                      <label for="validacaoSiteEvento">Site</label>
+                      <input class="form-control form-control" type="text" required="required" id="validacaoSiteEvento" placeholder="Site">
+                    </div>
+
+                    <div class="form-group col-3">
+                      <label for="validacaoTipoEvento">Tipo de Evento</label>
+                      <select class="form-control" id="validacaoTipoEvento" required="required">
+                        <option value="1" selected disabled>Selecionar...</option>
+                        <option>Empreendedorismo</option>
+                        <option>Tecnologia</option>
+                        <option>Inovação</option>
+                        <option>Negócios</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group col-3 form-group custom-file"style="margin-top: 4.1%">
+                      <input type="file" class="custom-file-input custom-file-input-lg" required="required" id="uploader2">
+                      <label id="uploaderLabel2" class="custom-file-label" for="uploader2">Imagem</label>
+
+                    </div>
+                  </div>
+
+                  <div class="form-row"> <!-- linha3-->
+                    <div class="form-group col-6">
+                      <label for="areatextoEvento">Descrição</label>
+                      <textarea class="form-control" id="areatextoEvento" maxlength="250" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group col-6" style="margin-top: 3%">
+                      <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                        <input id="dtpicker" type="text" class="form-control datetimepicker-input" required="required" data-target="#datetimepicker1"/>
+                        <span class="input-group-text" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                          <span class="fa fa-calendar"></span></span>
+                        </div>
+
+                        <div class="form-row">      
+                          <div class="form-group col-md-6">
+                            <label for="validacaoLatEvento">Latitude</label>
+                            <input class="form-control form-control" type="text" required="required" id="validacaoLatEvento" placeholder="Latitude" disabled="disabled">
+                          </div>
+
+                          <div class="form-group col-md-6">
+                            <label for="validacaoLngEvento">Latitude</label>
+                            <input class="form-control form-control" type="text" required="required" id="validacaoLngEvento" placeholder="Longitude" disabled="disabled">
+                          </div>
+                        </div> 
+                      </div>
+                    </div>
+
+                    <div class="form-row"> <!-- linha4-->
+
+                      <div class="form-group col-md-2">
+                        <label for="validacaoCEPEvento">CEP</label>
+                        <input class="form-control form-control" type="text" required="required" maxlength="9" id="validacaoCEPEvento" placeholder="CEP">
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="validacaoLogradouroEvento">Logradouro</label>
+                        <input class="form-control form-control" type="text" required="required" maxlength="30" id="validacaoLogradouroEvento" placeholder="Logradouro">
+                      </div>
+
+                      <div class="form-group col-md-4">
+                        <label for="validacaoNumeroEvento">Número</label>
+                        <input class="form-control form-control" type="text" required="required" maxlength="5" id="validacaoNumeroEvento" placeholder="Número">
+                      </div>
+                    </div>
+
+
+                    <div class="form-row"> <!-- linha5-->
+                      <div class="form-group col-md-4">
+                        <label for="validacaoComplementoEvento">Complemento</label>
+                        <input class="form-control form-control" type="text" id="validacaoComplementoEvento" maxlength="30" placeholder="Complemento">
+                      </div>
+
+                      <div class="form-group col-md-4">
+                        <label for="validacaoBairroEvento">Bairro</label>
+                        <input class="form-control form-control" type="text" required="required" maxlength="30" id="validacaoBairroEvento" placeholder="Bairro">
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="validacaoCidadeEvento">Cidade</label>
+                        <input class="form-control form-control" type="text" required="required" maxlength="30" id="validacaoCidadeEvento" placeholder="Cidade">
+                      </div>
+
+                      <div class="form-group col-md-1">
+                        <label for="validacaoUFEvento">UF</label>
+                        <select class="form-control form-control" required="required" id="validacaoUFEvento">
+                          <option value="1" selected disabled>UF</option>
+                          <option>AC</option>
+                          <option>AL</option>
+                          <option>AP</option>
+                          <option>AM</option>
+                          <option>BA</option>
+                          <option>CE</option>
+                          <option>DF</option>
+                          <option>ES</option>
+                          <option>GO</option>
+                          <option>MA</option>
+                          <option>MT</option>
+                          <option>MS</option>
+                          <option>MG</option>
+                          <option>PA</option>
+                          <option>PB</option>
+                          <option>PR</option>
+                          <option>PE</option>
+                          <option>PI</option>
+                          <option>RJ</option>
+                          <option>RN</option>
+                          <option>RS</option>
+                          <option>RO</option>
+                          <option>RR</option>
+                          <option>SC</option>
+                          <option>SP</option>
+                          <option>SE</option>
+                          <option>TO</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form><!---Fim do Conteudo-->
+                </div>
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="deletarMarcador()" >Fechar</button>
+              <button id="btn-enviar" type="button" class="btn btn-submit" onclick="gravarFormulario()">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div> <!--Fim do Modal Cadastro--->
+
+      <!-- Modal Filtro -->
+      <div class="modal fade" id="ModalFiltro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Filtros de Categorias</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"> <!--Inicio do Conteudo-->
+              <form>
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxTodos" value="Todos">
+                    <label class="form-check-label" style="font-weight: bold;" for="CheckboxTodos">Todos</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxAcelerador" value="Acelerador">
+                    <label class="form-check-label" for="CheckboxAcelerador">Acelerador</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxAdvogados" value="Advogados">
+                    <label class="form-check-label" for="CheckboxAdvogados">Advogados</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxCatalisadores" value="Catalisadores">
+                    <label class="form-check-label" for="CheckboxCatalisadores">Catalisadores Locais</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxComunicacao" value="Comunicacao">
+                    <label class="form-check-label" for="CheckboxComunicacao">Comunicação e Mídia</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxConexao" value="Conexao">
+                    <label class="form-check-label" for="CheckboxConexao">Conexão com Mercado</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxConteudo" value="Conteudo">
+                    <label class="form-check-label" for="CheckboxConteudo">Conteúdo</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxCoworking" value="Coworking">
+                    <label class="form-check-label" for="CheckboxCoworking">Coworking</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxCreditos" value="Creditos">
+                    <label class="form-check-label" for="CheckboxCreditos">Créditos</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxEditais" value="Editais">
+                    <label class="form-check-label" for="CheckboxEditais">Editais</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxEscolas" value="Escolas">
+                    <label class="form-check-label" for="CheckboxEscolas">Escolas</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxMakers" value="Makers">
+                    <label class="form-check-label" for="CheckboxMakers">Makers</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxEventos" value="Eventos">
+                    <label class="form-check-label" for="CheckboxEventos">Eventos</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxFabricaApp" value="FabricaApp">
+                    <label class="form-check-label" for="CheckboxFabricaApp">Fábrica de Aplicativos</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxGoverno" value="Governo">
+                    <label class="form-check-label" for="CheckboxGoverno">Governo</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxEmpresas" value="Empresas">
+                    <label class="form-check-label" for="CheckboxEmpresas">Grandes Empresas</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxIncubadoras" value="Incubadoras">
+                    <label class="form-check-label" for="CheckboxIncubadoras">Incubadoras</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxiniUniversitarias" value="iniUniversitarias">
+                    <label class="form-check-label" for="CheckboxiniUniversitarias">Iniciativas Universitárias</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxInvestidores" value="Investidores">
+                    <label class="form-check-label" for="CheckboxInvestidores">Investidores</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxMissoes" value="Missoes">
+                    <label class="form-check-label" for="CheckboxMissoes">Missões de Negócios</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxNucleos" value="Nucleos">
+                    <label class="form-check-label" for="CheckboxNucleos">Núcleos de Inovação</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxpreAceleradoras" value="preAceleradoras">
+                    <label class="form-check-label" for="CheckboxpreAceleradoras">Pré Aceleradoras</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxpropIntelectuais" value="propIntelectuais">
+                    <label class="form-check-label" for="CheckboxpropIntelectuais">Propriedade Intelectual</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxProvedores" value="Provedores">
+                    <label class="form-check-label" for="CheckboxProvedores">Provedores de Serviços</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="CheckboxMentoria" value="Mentoria">
+                    <label class="form-check-label" for="CheckboxMentoria">Mentoria</label>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-check form-check-inline col-md-6">
+                    <input class="form-check-input" type="checkbox" id="CheckboxStartup" value="Startup">
+                    <label class="form-check-label" for="CheckboxStartup">Startup</label>
+                  </div>
+                </div>              
+
+              </form>
+            </div> <!--Fim do Conteudo-->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-submit" data-dismiss="modal" onclick="filtroMarcador()">Filtrar</button>
+            </div>
+          </div>
+        </div>
+      </div> <!--Fim do Modal Filtro--->
+
+      <!-- Modal Comunidade -->
+      <div class="modal fade" id="ModalComunidade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Cadastrar Comunidades</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"> <!--Inicio do Conteudo-->
+
+              <form><!---Inicio do Conteudo dos Eventos-->
+                <div class="form-row"><!-- linha1-->
+                  <div class="form-group col-6">
+                    <label for="validacaoNomeComu">Nome</label>
+                    <input class="form-control form-control" type="text" required="required" maxlength="33" id="validacaoNomeComu" placeholder="Nome">
+                  </div>
+
+                  <div class="form-group col-6">
+                    <label for="validacaoSiteComu">Site</label>
+                    <input class="form-control form-control" type="text" required="required" id="validacaoSiteComu" placeholder="Site">
+                  </div>
+                </div>
+                <div class="form-row"><!-- linha2-->
+                  <div class="form-group col-12 form-group custom-file"style="margin-top: 4.1%">
+                    <input type="file" class="custom-file-input custom-file-input-lg" required="required" id="uploader3">
+                    <label id="uploaderLabel3" class="custom-file-label" for="uploader3">Imagem</label>   
+                  </div>
+                </div>
+
+                <div class="form-row"><!-- linha2-->
+                  <div class="form-group mt-3 col-12">
+                    <label for="validacaoCorComu">Cor</label>
+                    <input class="form-control form-control" type="color" required="required" id="validacaoCorComu" placeholder="Ex: #FFFFF">
+                  </div>
+                </div>
+
+                <div class="form-row"> <!-- linha3-->
+                  <div class="form-group col-12">
+                    <label for="areatextoEvento">Descrição da Comunidade</label>
+                    <textarea class="form-control" id="areatextoDescComu" rows="1" maxlength="100" required="required" placeholder="Faça uma breve descrição desta comunidade"></textarea>
+                  </div>
+                </div>
+              </form><!---Fim do Conteudo-->
+
+              <div class="form-row"> <!-- linha3-->
+                <div class="form-group col-12">
+                  <label for="areatextoEvento">Coordenadas da Região</label>
+                  <textarea class="form-control" id="areatextoComu" rows="3" required="required" placeholder="Insira o código de sua região aqui"></textarea>
+                </div>
+              </div>
+            </form><!---Fim do Conteudo-->
+
+            <small class="form-row d-flex justify-content-center">
+              <p style="margin: 0" href="">Dúvidas? Veja como como utilizar</p><a class="ml-1" href="javascript:void(0)" onclick="telaCadastroComunidade()">aqui</a>
+            </small>
+
+          </div> <!--Fim do Conteudo-->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-submit" onclick="gravarCadastroComunidade()">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div> <!--Fim do Modal Filtro--->
+
+    <!-- Modal Sobre -->
+    <div class="modal fade" id="modalSobre" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content" style="background-color:#FAFAFA;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Sobre o Ecossistema Cearense de Inovação</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="background-color:#122915;">
+            <div class="d-flex align-items-center justify-content-center"><img src="img\logos\ecossistema-cearense.png" style="width: 250px;">
+            </div>
+            <div>
+              <p style="color: white;">O Ecossistema Cearense de inovação é uma iniciativa de mapear os ecossistemas locais existentes no estado e seus componentes, com o intuito de fomentar uma maior conexão entre os participantes e com isso aumentar o desenvolvimento de inovação e novas tecnologias para a ecocômia local e nacional. Atualmente o ecossistema cearense é o terceiro maior mercado entre os ecossistemas da região, possuindo cerca de 16,6% das startups ativas e é de grande relevância para uma maior projeção desta rede, uma interrelação mais forte entre os componentes, para que se possar impulsionar ese mercado.
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="container_contudo" class="container-fluid" style="height: 90%;">
+      <div id="linhas" class="row" style="height: 100%">
+        <div id="coluna_barra1" class="col-2" style="padding: 0; height:100%;">
+          <div style="height: 8%; background-color:#D8D8D8;">
+            <h5 style="text-align:center; font-weight:bold;position: relative;top: 20%">Menu</h5>
+          </div>
+          <div data-spy="scroll" class="scrollspySite">
+            <ul id="listaOpcoes" class="list-group">
+
+              <template id="listaTipo"> <!-- Template da Lista de tipos de empreendimentos-->
+                <a id = "botao-opcao" href="#" style="text-align:center;border-left-width: 2px; border-right-width: 2px;" class="list-group-item list-group-item-action teste d-flex justify-content-between align-items-center" onclick="chamaBarraOculta(this);">
+                </a>
+              </template>
+
+            </ul>
+          </div>
+        </div>
+
+        <div id="janela_oculta" class="col-3" style="padding: 0; height:100%; display: none;"> <!--Barra oculta do sistema--> 
+          <div style="height: 8%; background-color:#D8D8D8; padding-top: 1% ">
+            <form class="form-inline">
+              <div class="input-group">
+                <input id="contBusca" class="form-control ml-5" style="margin-left: 2%" type="search" placeholder="Buscar" aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <a href="javascript:void(0)" id="botaoBusca" class="btn btn-secondary" type="submit" onclick="filtroSelect(this)"><i class="fas fa-search"></i>
+                  </a>
+                </div>
+                <button id="btn_sair" type="button" class="close ml-4"><span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div data-spy="scroll" data-target="#" data-offset="0" class="scrollspySite">
+            <ul id="cartao" style="padding: 0;">
+
+              <template id="cartaoEmpresa"> <!-- Template do Cartão das Empresas-->
+                <div  id="divImagemCartao" class="card" style="margin: 2%">
+                  <img class="card-img-top" src="https://s2.logaster.com/static/v3/img/products/logo.png" style="width: 120px; height: 100px; margin-left: 30%;margin-top: 2%;"></img> 
+                  <div class="card-body">
+                    <h5  class="card-title" style="font-weight: bold;"></h5>
+                    <p class="card-text"></p>
+                    <a class="btn btn-secondary btn-sm" href="#" target="_blank">Conheça Mais</a>
+                    <a class="btn btn-secondary btn-sm" onclick="zoomMarcador(this)" href="#">Localização</a>
+                    <p style="margin:0; padding: 2px;"><small>Marcado por:</small></p>
+                  </div>
+                </div>
+              </template>
+
+            </ul>
+          </div>
+        </div>
+
+        <div id="location-map" class="col-10" style="padding: 0; height: 100%;">
+
+          <div id="marcar_info" style="display:none;">
+            <div id="divMsg">
+              <div class="d-flex justify-content-center">
+                <h6 class="textoAlerta">Clique no mapa para definir o endereço do sua instituição/evento</h6>
+              </div>
+            </div>
+            <div id="divButton">
+              <div class="d-flex justify-content-center">
+                <button id="map_button2" class="btn btn-submit btn-sm" style="font-weight: bold;">Cancelar</button>
+              </div>
+            </div>
+          </div>   
+        </div>
+
+      </div>
+      <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg==" crossorigin=""></script>
+    </div>
+  </div>
+
+  <script>
+    var map = L.map('location-map').setView([ -3.770457, -38.529942], 12);
+
+    L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 19,
+        id: 'mapbox/streets-v11',
+        accessToken: 'your.mapbox.access.token'
+      }).addTo(map);
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+    <!--CDN da Masrcara-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyD7mV-NjSQ8dNBQhX6OnHEli-cTL78JTfw",
+        authDomain: "tccv5-3c3e2.firebaseapp.com",
+        databaseURL: "https://tccv5-3c3e2.firebaseio.com",
+        projectId: "tccv5-3c3e2",
+        storageBucket: "tccv5-3c3e2.appspot.com",
+        messagingSenderId: "1057642468733",
+        appId: "1:1057642468733:web:3da625da68085f8a39e814",
+        measurementId: "G-XRDHGX61T2"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="model/componente.js"></script>
+    <script src="model/evento.js"></script>
+    <script src="model/comunidade.js"></script>
+    <script src="model/usuario.js"></script>
+    <script src="model/tipo.js"></script>
+    <script src="dao/eventodao.js"></script>
+    <script src="dao/comunidadedao.js"></script>
+    <script src="dao/usuariodao.js"></script>
+    <script src="dao/entidadedao.js"></script>
+    <script src="javascript/login.js"></script>
+    <script src="javascript/logica.js"></script>
+    <script src="javascript/comunidades.js"></script>
+
+  </body>
+  </html>
