@@ -8,4 +8,5 @@ Dentre as diversas iniciativas de mapeamento do ecossistema local que são encon
 
 Este projeto foi inicialmente concebido pelo <a href="http://crateus.ufc.br/allysson" target="_blank" rel="noopener noreferrer">Prof. Allysson Allex Araújo</a> (Universidade Federal do Ceará - Campus de Crateús) e Rommel de Castro. Porém, nossa compreensão é que tal ideia seja evoluída e mantida como um projeto open source, inicialmente sob a <a href="https://opensource.org/licenses/MIT"> MIT License</a>, ou seja, de modo que a comunidade tenha liberdade para sugerir e implementar melhorias conforme necessário.
 
-A release atual (em fase de testes) da solução encontra-se disponível para acesso em: https://mapa-inovacao-ce.netlify.app.
+A release atual (em fase de testes) da solução encontra-se disponível para acesso em:
+- https://mapa-inovacao-ce.netlify.app.
