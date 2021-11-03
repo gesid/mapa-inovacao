@@ -1,0 +1,97 @@
+.box-cookies.hide {
+    display: none !important;
+}
+
+@media only screen and (min-width: 1200px) {
+    .box-cookies {
+        height: 87px;
+        min-width: 1250px;
+    }
+    .dimensaoConteudo {
+        padding: 0px 209px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .box-cookies {
+        height: auto;
+    }
+    .dimensaoConteudo {
+        padding: 0px 20px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .textoBotao {
+        display: flex;
+        align-items: center;
+    }
+    .box-cookies .btn-cookies {
+        margin: 0px 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .textoBotao {
+        display: grid;
+        align-items: column;
+    }
+    .box-cookies .btn-cookies {
+        margin: 0px 0px 20px 0px;
+    }
+}
+
+.box-cookies {
+    position: fixed;
+    background: rgba(44, 44, 44, .9);
+    width: 100%;
+    z-index: 1000;
+    bottom: 0;
+}
+
+.dimensaoConteudo {
+    height: inherit;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box-cookies .img-cookies {
+    width: 43px;
+    height: 43px;
+    color: white;
+    font-size: 50px;
+    margin: 12px 25px;
+    align-self: flex-start;
+}
+
+.box-cookies .title-cookies {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #fff;
+    font-size: 18px;
+    margin: 8px 0px 2px 0px;
+    font-weight: bold;
+}
+
+.box-cookies .msg-cookies {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #fff;
+    font-size: 13px;
+    min-width: 100px;
+}
+
+.box-cookies .btn-cookies {
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+}
+
+.box-cookies .btn-cookies {
+    width: 100px;
+    min-width: 100px;
+    height: 32px;
+    background: #FC6A38;
+    cursor: pointer;
+    border: none;
+}

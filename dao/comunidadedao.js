@@ -43,7 +43,9 @@ class comunidadeDAO{
 			let comunidade = new Comunidade(
 				child.val().Nome,
 				child.val().Site,
+				child.val().Cor,
 				child.val().Descricao,
+				child.val().Coordenadas,
 				child.val().URL,
 				child.key,
 				child.val().Usuario,

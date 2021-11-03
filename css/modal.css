@@ -1,0 +1,113 @@
+/*Modal no Geral*/
+
+.modal-dialog {
+    display: grid;
+    justify-content: center;
+}
+
+/*Modal Agadecimento*/
+
+.modalAgradecimento--posicionamento {
+    top: 200px;
+}
+
+.modalAgradecimento--dimensao {
+    width: 700px;
+}
+
+.modalAgradecimento--header {
+    padding: 10px 15px 10px 30px;
+}
+
+.modalAgradecimento--titulo {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.modalAgradecimento--body {
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.modalAgradecimento--divA {
+    width: inherit;
+    padding: 0px 10px 0px 10px;
+}
+
+.modalAgradecimento--divB {
+    margin-left: 17px;
+}
+
+.modalAgradecimento--conteudo {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.modalAgradecimento--btnFechar {
+    width: 114.47px;
+    height: 40px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    color: #FFFF;
+    margin-right: 3px;
+    border: 1px solid #FC6A38;
+    background: #FC6A38;
+}
+
+.modalAgradecimento--footer {
+    padding: 8px;
+}
+
+/*Modal filto*/
+
+@media only screen and (min-width: 800px) {
+    .modalFiltro--linhaSelecao {
+        display: flex;
+    }
+
+    .modalFiltro--coluna {
+        width: 50%;
+    }
+
+    .modalFiltro--dimensao {
+        width: 500px;
+    }
+
+    .startup-check{
+        margin-right: 0px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .modalFiltro--linhaSelecao {
+        display: block;
+    }
+
+    .modalFiltro--coluna {
+        width: 100%;
+    }
+
+    .modalFiltro--dimensao {
+        width: 300px;
+    }
+    .startup-check{
+        display: none;
+    }
+}
+
+.modalFiltro--Textos {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+}
+
+.modalFiltro--Select {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+
+/*Modal Cadastro*/

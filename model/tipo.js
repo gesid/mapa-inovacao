@@ -80,7 +80,7 @@ class Eventos extends componenteEco{
 }
 class FabricaApp extends componenteEco{
   constructor(){
-    super('Fabrica de Aplicativos','11-fabrica-de-aplicativos.png','11-fabrica-de-aplicativos.png')
+    super('Fábrica de Aplicativos','11-fabrica-de-aplicativos.png','11-fabrica-de-aplicativos.png')
   }
 }
 class Governo extends componenteEco{

@@ -1,5 +1,5 @@
 class Evento {
-  constructor(nome, site, tipo, subtipo, descricao, dia, hora, url, latitude,longitude, logradouro, numero, complemento, bairro, cidade, uf, cep, markerKey, userId){
+  constructor(nome, site, tipo, subtipo, descricao, dia, hora, url, latitude, longitude, logradouro, numero, complemento, bairro, cidade, uf, cep, markerKey, userId, validacao) {
     this.nome = nome
     this.site = site
     this.tipo = tipo
@@ -19,62 +19,66 @@ class Evento {
     this.cep = cep
     this.markerKey = markerKey
     this.userId = userId
+    this.validacao = validacao
   }
-  getNome(){
+  getNome() {
     return this.nome
   }
-  getSite(){
+  getSite() {
     return this.site
   }
-  getTipo(){
+  getTipo() {
     return this.tipo
   }
-  getSubtipo(){
+  getSubtipo() {
     return this.subtipo
   }
-  getDescricao(){
+  getDescricao() {
     return this.descricao
   }
-  getDia(){
+  getDia() {
     return this.dia
   }
-  getHora(){
+  getHora() {
     return this.hora
   }
-  getURL(){
+  getURL() {
     return this.url
   }
-  getLat(){
+  getLat() {
     return this.latitude
   }
-  getLng(){
+  getLng() {
     return this.longitude
   }
-  getLogradouro(){
+  getLogradouro() {
     return this.logradouro
   }
-  getNumero(){
+  getNumero() {
     return this.numero
-  }  
-  getComplemento(){
+  }
+  getComplemento() {
     return this.complemento
   }
-  getBairro(){
+  getBairro() {
     return this.bairro
   }
-  getCidade(){
+  getCidade() {
     return this.cidade
   }
-  getUF(){
+  getUF() {
     return this.uf
   }
-  getCEP(){
+  getCEP() {
     return this.cep
   }
-  getMarkerKey(){
+  getMarkerKey() {
     return this.markerKey
   }
-  getUserId(){
+  getUserId() {
     return this.userId
+  }
+  getValidacao() {
+    return this.validacao
   }
 }

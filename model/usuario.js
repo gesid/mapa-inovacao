@@ -1,8 +1,7 @@
 class Usuario {
-  constructor(nome, email, sexo){
+  constructor(nome, email){
     this.nome = nome
     this.email = email
-    this.sexo = sexo
     //this.imgUsuario = imgUsuario
   }
   getNome(){

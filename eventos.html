@@ -1,184 +1,285 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VEX6JVXGVX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+    gtag('config', 'G-VEX6JVXGVX');
+  </script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-  crossorigin=""/>
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
 
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-  crossorigin=""></script>
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
 
   <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" type="text/css" href="css/estilo.css">
+  <link rel="stylesheet" type="text/css" href="css/header.css">
+  <link rel="stylesheet" type="text/css" href="css/evento.css">
 
   <script src="model/evento.js"></script>
+
   <script src="dao/eventodao.js"></script>
 
-  <title>Rapadura Valley - Ecosistema de Inovação de Fortaleza</title>
+  <script src="model/usuario.js"></script>
+
+  <script src="dao/usuariodao.js"></script>
+
+  <link rel="shortcut icon" href="img/favicon_2.png" />
+  <title>Mapa do Ecossistema de Inovação Cearense</title>
 </head>
 
-<body style="display: flex; flex-direction: column;min-height: 100%;height: 100%; width: 100%; background-color:#FAFAFA;">
-  <header style="height: 10%">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="padding: 0;margin: 0; height: 100%;">
-      <div class="container">
-        <!--Logo -->
-        <a href="index.html" class="navbar-brand"><img src="img\logos\ecossistema-cearense.png" style="width: 180px;"></a>
-        <!--Navegação-->
-        <form>
-          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+<body>
 
-            <div class="btn-group mr-5" role="group" aria-label="First group">
-              <button id="perfil" type="button" class="btn btn-navegador" onclick="telaUsuario(this)">
-                <i class="far fa-id-badge"></i>
-                <p style="margin-bottom: 8px;"><small>Meu Perfil</small></p>
-              </button>
-              <a type="button" href="como-utilizar.html" class="btn btn-navegador">
-                <i class="fas fa-chalkboard-teacher"></i>
-                <p style="margin-bottom: 8px;"><small>Como Utilizar</small></p>
-              </a>
-              <a type="button" href="ecossistema.html" class="btn btn-navegador">
-                <i class="far fa-newspaper"></i>
-                <p style="margin-bottom: 8px;"><small>Ecossistema</small></p>
-              </a>
-              <a type="button" href="javascript:void(0)" class="btn btn-selecionado">
-                <i class="fas fa-theater-masks"></i>
-                <p style="margin-bottom: 8px;"><small>Eventos</small></p>
-              </a>
-            </div>
+  <header>
+    <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
 
-            <div class="btn-group" role="group" aria-label="Third group">
-              <button id="log" type="button" class="btn btn-navegador" onclick="gerenciarEntradaSaida()">
-                <i class="fas fa-sign-out-alt"></i>
-                <p style="margin-bottom: 8px;">Sair</p>
-              </button>
-            </div>
+      <!--Logo -->
+      <a href="index.html"><img class="logo" src="img\logos\logo-svg.svg"></a>
 
-          </div>
-        </form>
+      <!--Menu Hamburguer-->
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#menu-nav" aria-controls="#menu-nav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <form class="form-inline">    
-          <div class="input-group">
-            <input id="barraBusca" type="text" class="form-control" placeholder="Tipo de Busca: por nome" aria-label="Buscar..." aria-describedby="basic-addon2">
+      <!--Navegação-->
+      <div id="menu-nav" class="collapse navbar-collapse">
+
+        <ul class="navbar-nav btnNav">
+          <li class="nav-item">
+            <a type="button" href="ecossistema.html"
+              class="d-flex align-items-center justify-content-start nav-item-style">
+              <i class="fas fa-newspaper"></i>
+              <p class="texto-nav">ECOSSISTEMA</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a type="button" href="javascript:void(0)"
+              class="d-flex align-items-center justify-content-start nav-item-style" data-toggle="modal"
+              data-target="#modalSobre">
+              <i class="fas fa-chalkboard-teacher"> </i>
+              <p class="texto-nav">COMO UTILIZAR</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a type="button" href="eventos.html" class="d-flex align-items-center justify-content-start nav-item-style">
+              <i class="fas fa-theater-masks"> </i>
+              <p class="texto-nav">EVENTOS</p>
+            </a>
+          </li>
+        </ul>
+        <form class="form-inline" onsubmit="return false">
+
+          <div id="form-pc" class="input-group buscaHeader">
+            <input id="barraBusca" type="text" class="form-control" placeholder="Tipo de Busca: por nome"
+              aria-label="Buscar..." aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-outline-light font-weight-bold" type="button" onclick="filtroBusca()">Buscar</button>
-              <button type="button" class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+              <button class="btn btn-busca font-weight-bold" type="button" onclick="filtroBusca()">Buscar</button>
+              <button type="button" class="btn btn-busca-dropdown dropdown-toggle dropdown-toggle-split"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
+
               <div class="dropdown-menu">
                 <a class="dropdown-item disabled" href="#">Tipo de busca</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-tipo="Nome" data-texto="nome" onclick="escolhaBusca(this)">Por nome</a>
-                <a class="dropdown-item" href="#" data-tipo="Subtipo" data-texto="categoria" onclick="escolhaBusca(this)">Por categoria</a>
+                <a class="dropdown-item" href="#" data-tipo="Nome" data-texto="nome" onclick="escolhaBusca(this)">Por
+                  nome</a>
+                <a class="dropdown-item" href="#" data-tipo="Subtipo" data-texto="categoria"
+                  onclick="escolhaBusca(this)">Por categoria</a>
               </div>
             </div>
           </div>
+
+          <div id="btn-user" class="dropdownHeader">
+            <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+            </button>
+          </div>
         </form>
+
+
 
       </div>
     </nav>
-  </header> <!--Fim do cabeçalho-->
+  </header>
 
-  <!-- Modal Sobre -->
-  <div class="modal fade" id="modalSobre" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-      <div class="modal-content" style="background-color:#FAFAFA;">
-        <div class="modal-header">
-          <h5 class="modal-title text-dark" id="exampleModalScrollableTitle">Sobre o Ecossistema Cearense de Inovação</h5>
+  <!--Barra Mobile-->
+  <div id="barraMobile">
+    <form id="form-mobile" class="form-inline" onsubmit="return false">
+
+      <div class="input-group buscaHeader">
+        <input id="barraBusca" type="text" class="form-control" placeholder="Tipo de Busca: por nome"
+          aria-label="Buscar..." aria-describedby="basic-addon2">
+        <div class="input-group-append">
+
+          <button class="btn btn-busca font-weight-bold" type="button" onclick="filtroBusca()">Buscar</button>
+          <button type="button" class="btn btn-busca-dropdown dropdown-toggle dropdown-toggle-split"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+
+          <div class="dropdown-menu">
+            <a class="dropdown-item disabled" href="#">Tipo de busca</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" data-tipo="Nome" data-texto="nome" onclick="escolhaBusca(this)">Por
+              nome</a>
+            <a class="dropdown-item" href="#" data-tipo="Subtipo" data-texto="categoria"
+              onclick="escolhaBusca(this)">Por categoria</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal Como Utilizar -->
+  <div class="modal fade" id="modalSobre" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-utilizar modal-dialog-scrollable" role="document">
+      <div class="modal-content modal-content-utilizar">
+
+        <div class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center">
+          <p id="titulo-modal">Colaborar é muito simples! Veja no vídeo abaixo como funciona:</p>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" style="background-color:#122915;">
-         <div class="d-flex align-items-center justify-content-center"><img src="img\logos\ecossistema-cearense.png" style="width: 250px;">
-         </div>
-         <div>
-          <p style="color: white;">O Ecossistema Cearense de inovação é uma iniciativa de mapear os ecossistemas locais existentes no estado e seus componentes, com o intuito de fomentar uma maior conexão entre os participantes e com isso aumentar o desenvolvimento de inovação e novas tecnologias para a ecocômia local e nacional. Atualmente o ecossistema cearense é o terceiro maior mercado entre os ecossistemas da região, possuindo cerca de 16,6% das startups ativas e é de grande relevância para uma maior projeção desta rede, uma interrelação mais forte entre os componentes, para que se possar impulsionar ese mercado.
-          </p>
+
+        <div class="modal-body">
+          <div id="localVideo" class="d-flex align-items-center justify-content-center modal-video">
+
+          </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Cartões de Eventos -->
-<div id="container_contudo" class="container" style="background-color: #748F6B;">
-  <h1 class="d-flex justify-content-center font-weight-bold" style="color: #ddd">Próximos Eventos:</h1>
-  <ul id="listaEventos" class="col-12 mt-2">
-    <template id="cardEventos">
-      <div class="card mb-3"> <!--Inicio Cartão 1-->
-        <div class="row no-gutters">
-          <div class="col-4">
-            <img style="height: 250px; width: 100%;" class="card-img">
-          </div>
-          <div class="col-8">
-            <div class="card-body" style="background-color:#E9E9E9;display:flex;flex-direction:column;min-height: 100%;">
-              <h3 style="color:#FF9500; margin-bottom:1px;" class="card-title font-weight-bold"></h3>
-              <h6 style="color:gray;" class="card-title font-weight-bold"></h3>
-                <p class="card-text"></p>
+  <main class="main">
+    <!--Barra do título da página-->
+    <div class="d-flex justify-content-center">
+      <div id="barra-title">
+        <p id="barra-text-title" class="d-flex align-items-center justify-content-center">PRÓXIMOS EVENTOS</p>
+      </div>
+    </div>
 
-                <div style="margin-top: auto;">
-                  <div class="d-flex flex-column" style="float:left; width: 60%;">
+    <div class="d-flex justify-content-center">
+      <div id="eventoNaoEncontrado">
+        <i id="imgEventoNaoEncontrado" class="far fa-frown"></i>
+        <p id="textoEventoNaoEncontrado">Não há eventos com este título.</p>
+      </div>
+    </div>
 
-                    <div class="d-flex align-items-center justify-content-start">
-                      <span style="font-size: 20px;"><i class="far fa-calendar-alt mr-2"></i></span>
-                      <p class="card-text"></p>
+    <ul id="lista-eventos">
+      <template id="teplate-eventos">
+        <!--Inicio do cartão de eventos-->
+
+        <div class="d-flex align-items-center justify-content-center card-remove" style="margin-bottom: 15.2px;">
+          <div>
+            <div class="card-evento">
+
+              <div class="card-evento-A">
+                <img id="img-evento" src="">
+              </div>
+
+              <div class="card-evento-B">
+                <h5 id="titulo-evento">TITULO DO EVENTO</h5>
+
+                <p id="descricao-evento"> DESCRIÇÃO DO EVENTO</p>
+
+                <div>
+                  <div id="conteudo-evento-A">
+                    <div class="d-flex align-items-center justify-content-start dados-evento">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <p id="data-horario-evento">DATA - HORÁRIO</p>
                     </div>
 
-                    <div class="d-flex align-items-center justify-content-start">
-                      <span style="font-size: 20px;"><i class="fas fa-map-marker-alt mr-2"></i></span>
-                      <p class="card-text"></p>
+                    <div style="margin-top: 5px;" class="d-flex align-items-center justify-content-start dados-evento">
+                      <i class="fas fa-calendar-alt"></i>
+                      <p id="endereco-evento">RUA, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, CEP</p>
                     </div>
-
                   </div>
 
-                  <div style="float:right;">
-                    <a href="index.html" target="_blank" class="btn" style="background-color:#122915;color:white;">Site do Evento</a>
-                    <a href="index.html" target="_blank" class="btn btn-outline-secondary" onclick="passarEventoKey(this)">Ver no mapa</a>
+                  <div id="conteudo-evento-B" class="d-flex align-items-end texto-btn-evento1">
+                    <a id="btn-evento1" class="d-flex align-items-center justify-content-center" href="index.html"
+                      target="_blank" onclick="passarEventoKey(this)">
+                      <p class="texto-btn-evento1">Ver no mapa</p>
+                    </a>
+
+                    <a id="btn-evento2" class="d-flex align-items-center justify-content-center" href="index.html"
+                      target="_blank">
+                      <p class="texto-btn-evento2">Site do evento</p>
+                    </a>
                   </div>
 
                 </div>
-
               </div>
             </div>
           </div>
-        </div><!--Fim do Cartão 1-->
+        </div>
       </template>
     </ul>
-  </div>
 
-  <footer class="footerstyle">
-    <div class="d-flex justify-content-center"> 
-      <a class="mr-3" style="font-size: 20px;color: #ddd;" href="https://www.facebook.com/sharer/sharer.php?u=https://ecin.netlify.app/index.html" target="_blank" title="Compartilhar no Facebook"><i class="fa fa-facebook"></i>
-      </a>
+  </main>
 
-      <a class="mr-3" style="font-size: 20px;color: #ddd;" href="http://www.linkedin.com/shareArticle?mini=true&url=https://ecin.netlify.app/index.html&title=Botões de compartilhamento"  target="_blank" title="Compartilhar no LinkedIn"> <i class="fa fa-linkedin"></i>
-      </a>
+  <footer class="footerstyle footer">
+    <div class="prefooter">
+      <div class="div-footer1">
+        <ul>
+          <li>
+            <a id="email" href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}">
+              Para mais informações, fale conosco através do mapainovacao@ufc.br</a>
+            <p class="div-footer-beta">Versão 0.1 (Beta)</p>
+          </li>
+        </ul>
+      </div>
 
-      <a style="font-size: 20px;color: #ddd;" href="http://twitter.com/share?text=Botões de compartilhamento&url=https://ecin.netlify.app/index.html"  target="_blank" data-role="shareLink" title="Compartilhar no Twitter"><i class="fa fa-twitter"></i>
-      </a>
+    </div>
+
+    <div class="div-footer2">
+
+      <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
+        target="_blank" style="margin-bottom: 10px;" class="">POLÍTICAS DE PRIVACIDADE</a>
+      <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf" target="_blank" class="">
+        TERMOS DE USO</a>
+
     </div>
   </footer>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
 
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -188,22 +289,28 @@
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
 
   <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyD7mV-NjSQ8dNBQhX6OnHEli-cTL78JTfw",
-        authDomain: "tccv5-3c3e2.firebaseapp.com",
-        databaseURL: "https://tccv5-3c3e2.firebaseio.com",
-        projectId: "tccv5-3c3e2",
-        storageBucket: "tccv5-3c3e2.appspot.com",
-        messagingSenderId: "1057642468733",
-        appId: "1:1057642468733:web:3da625da68085f8a39e814",
-        measurementId: "G-XRDHGX61T2"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-    </script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyClfrEv6swF7n-tC27WUNV0Dhg_3BZ3lRQ",
+      authDomain: "mapa-ecin-13585.firebaseapp.com",
+      databaseURL: "https://mapa-ecin-13585-default-rtdb.firebaseio.com",
+      projectId: "mapa-ecin-13585",
+      storageBucket: "mapa-ecin-13585.appspot.com",
+      messagingSenderId: "675410893480",
+      appId: "1:675410893480:web:4e35bb2157f009ef90809d"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
-    <script src="javascript/logica-eventos.js"></script>
-    <script src="javascript/login.js"></script>
-  </body>
-  </html>
+  <script src="javascript/logica_comum.js"></script>
+
+  <script src="javascript/logica-eventos.js"></script>
+
+  <script src="javascript/login.js"></script>
+
+  <script src="javascript/modal.js"></script>
+
+</body>
+
+</html>

@@ -13,7 +13,7 @@ comunidadedao = new comunidadeDAO
 //Fim Inicio-------------------------------------------
 
   function limparComunidade(){
-    let status = $("#btn_marker").attr("data-status");
+    let status = $("#btn-user").attr("data-status");
     if(status==="logado"){
       document.getElementById('validacaoNomeComu').value = '';
       document.getElementById('validacaoSiteComu').value = '';
@@ -33,10 +33,12 @@ comunidadedao = new comunidadeDAO
 
     if (map.hasLayer(layerArray[componente.getAttribute("data-key")])) {
       map.removeLayer(layerArray[componente.getAttribute("data-key")]);
-      aux[0].innerHTML= 'Ativar'
+      aux[0].innerHTML= 'Ativar no mapa'
+      aux[0].setAttribute("Style","background: #FC6A38;")
     } else {
       map.addLayer(layerArray[componente.getAttribute("data-key")])
-      aux[0].innerHTML= 'Desativar'
+      aux[0].innerHTML= 'Desativar do mapa'
+      aux[0].setAttribute("Style","background: #CF5B15;")
     }
   }
 
