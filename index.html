@@ -732,6 +732,61 @@
   </div>
   <!--Fim do Modal Filtro--->
 
+  <!-- Modal Mensagem de cópia do Link de compartilhamento -->
+  <div class="modal fade" id="modalCompartilhamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog modalCompartilhamento--posicionamento" role="document">
+      <div class="modal-content modalCompartilhamento--dimensao">
+
+        <div class="modal-header modalCompartilhamento--header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+            <span aria-hidden="true">&times;</span>
+
+          </button>
+
+        </div>
+
+        <!--Inicio do Conteudo-->
+        <div class="modal-body modalCompartilhamento--body">
+
+          <div class="modalCompartilhamento--divA">
+
+            <span class="modalCompartilhamento--iconeCheck">
+              <i class="far fa-clipboard"></i>
+            </span>
+
+          </div>
+
+          <div class="modalCompartilhamento--divB">
+
+            <p id="instituicaoEvento" class="modalCompartilhamento--conteudo"><b>Link de Compartilhamento</b></p>
+
+            <div class="modalCompartilhamento--divC">
+
+              <input id="inputCompartilhamento" class="modalCompartilhamento--input" type="text" id="url"
+                value="http://mapainovacao.ufc.br/index.html" />
+              <button id="btnInputCompartilhamento" class="modalCompartilhamento--btnCopiar"
+                type="button">Copiar</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--Fim do Conteudo-->
+        <div class="modal-footer modalCompartilhamento--footer">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--Fim do Modal Mensagem de cópia do Link de compartilhamento--->
+
   <!-- Modal Mensagem de Agradecimento -->
   <div class="modal fade" id="modalAgradecimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -1222,7 +1277,7 @@
 
 
   <script src="model/componente.js"></script>
-  <script src="model/Ceara.js"></script>
+  <script src="model/ceara.js"></script>
   <script src="model/evento.js"></script>
   <script src="model/comunidade.js"></script>
   <script src="model/usuario.js"></script>

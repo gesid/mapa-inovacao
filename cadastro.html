@@ -36,7 +36,6 @@
   <script src="https://smtpjs.com/v3/smtp.js"></script>
 
   <link rel="stylesheet" type="text/css" href="css/header.css">
-
   <link rel="stylesheet" type="text/css" href="css/cadastro.css">
 
   <script src="dao/usuariodao.js"></script>
@@ -127,7 +126,7 @@
               <p id="card-login-title" class="d-flex justify-content-center">CADASTRO</p>
 
               <div class="form-group col-12">
-                <label class="card-login-text" for="exampleInputEmail1">NOME</label>
+                <label class="card-login-text" for="exampleInputEmail1">NOME COMPLETO</label>
                 <input type="text" class="card-login-form" id="cadastroNome" placeholder="Digite seu nome">
               </div>
 
@@ -150,7 +149,16 @@
 
               <div id="divTermos">
                 <input type="checkbox" id="termos" name="termos">
-                <label id="textoTermos" for="horns">Aceito o Termo de Uso e a Politica de Privacidade</label>
+                <label id="textoTermos" for="horns">Li e concordo com os
+
+                  <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf" target="_blank"
+                    class="" style="text-decoration: underline;">Termos de Uso</a>,
+                  <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
+                    target="_blank" class="" style="text-decoration: underline;">Política de Privacidade</a>
+                  e
+                  <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf"
+                    target="_blank" class="" style="text-decoration: underline;">Termo de Consentimento</a>
+                </label>
               </div>
 
               <div class="d-flex justify-content-center">
@@ -201,9 +209,11 @@
     <div class="div-footer2">
 
       <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
-        target="_blank" style="margin-bottom: 10px;" class="">POLÍTICAS DE PRIVACIDADE</a>
+        target="_blank" class="">POLÍTICAS DE PRIVACIDADE</a>
       <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf" target="_blank" class="">
         TERMOS DE USO</a>
+      <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf" target="_blank" class="">
+        TERMOS DE CONSENTIMENTO</a>
 
     </div>
   </footer>

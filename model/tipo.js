@@ -141,7 +141,7 @@ class Mentoria extends componenteEco{
 
 class Catalisadores extends componenteEco{
   constructor(){
-    super('Catalisadores Locais','23-Catalisadores-locais.png','23-Catalisadores-locais.png')
+    super('Catalisadores Locais','23-catalisadores-locais.png','23-catalisadores-locais.png')
   }
 }
 
