@@ -645,6 +645,7 @@ function exibirMarcadores(tipoClasse, entidade) { //Função responsável para M
   for (var m = 0; m < tipoClasse.length; m++) {
     for (var n = 0; n < entidade.length; n++) {
 
+
       if (entidade[n].getTipo() === tipoClasse[m].getNome()) {
 
         if ((entidade[n].getTipo() === 'Startup' && entidade[n].getClassificacao() === document.getElementById("filtroStartup").value)

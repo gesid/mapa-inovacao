@@ -152,14 +152,14 @@
     }
     #divisao4 {
         position: relative;
-        height: 271.2px;
+        height: 390px;
         width: 100%;
         padding-top: 30.4px;
         background: rgba(27, 84, 56, 0.05);
     }
     .divisao4-order {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
     }
     #img8-prop {
@@ -186,6 +186,21 @@
         width: 163.2px;
         margin: 32px 0px 0px 65px;
     }
+
+    #img13-prop {
+        position: relative;
+        height: 90.6px;
+        width: 136.8px;
+        margin: 32px 0px 0px 0px;
+    }
+
+    #img14-prop {
+        position: relative;
+        height: 61.6px;
+        width: 136.8px;
+        margin: 32px 0px 0px 65px;
+    }
+
     #divisao5 {
         position: relative;
         height: 656.8px;
@@ -399,27 +414,29 @@
         height: fit-content;
         width: 100%;
         margin-top: 40.4px;
-        padding: 30.4px 0px 30.4px 0px;
+        padding: 30.4px 0px 40.4px 0px;
         background: rgba(27, 84, 56, 0.05);
     }
+
     .divisao4-order {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     #img8-prop {
         position: relative;
         height: 57.6px;
         width: 199.04px;
         margin-top: 25px;
-        /*margin: 32px 0px 0px;*/
+        margin: 32px 20px 0px 0px;
     }
     #img9-prop {
         position: relative;
         height: 71.68px;
         width: 208px;
         margin-top: 25px;
-        /* margin: 32px 0px 0px 72.8px;*/
+        margin: 32px 20px 0px 0px;
     }
     #img10-prop {
         position: relative;
@@ -435,6 +452,21 @@
         margin-top: 25px;
         /*margin: 32px 0px 0px 72.8px;*/
     }
+
+    #img13-prop {
+        position: relative;
+        height: 90.6px;
+        width: 136.8px;
+        margin: 32px 30px 0px 0px;
+    }
+
+    #img14-prop {
+        position: relative;
+        height: 61.6px;
+        width: 136.8px;
+        margin: 32px 30px 0px 0px;
+    }
+    
     /*DIVISÃO 5*/
     #divisao5 {
         position: relative;
@@ -484,6 +516,53 @@
         font-size: 14.6px;
         margin: 0;
         padding: 15px 0px 0px 15px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .divisao4-order-linha{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #img8-prop {
+        position: relative;
+        height: 57.6px;
+        width: 199.04px;
+        margin: 32px 0px 0px 0px
+    }
+    #img9-prop {
+        position: relative;
+        height: 71.68px;
+        width: 208px;
+        margin: 32px 0px 0px 0px
+    }
+    #img10-prop {
+        position: relative;
+        height: 49.28px;
+        width: 109.44px;
+        margin: 32px 0px 0px 0px
+    }
+    #img11-prop {
+        position: relative;
+        height: 84.48px;
+        width: 130.56px;
+        margin: 32px 0px 0px 0px
+    }
+
+    #img13-prop {
+        position: relative;
+        height: 90.6px;
+        width: 136.8px;
+        margin: 32px 0px 0px 0px
+    }
+
+    #img14-prop {
+        position: relative;
+        height: 61.6px;
+        width: 136.8px;
+        margin: 32px 0px 0px 0px
     }
 }
 
