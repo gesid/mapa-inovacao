@@ -1,1133 +1,1632 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-VEX6JVXGVX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-VEX6JVXGVX");
+    </script>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VEX6JVXGVX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
 
-    gtag('config', 'G-VEX6JVXGVX');
-  </script>
+    <!-- JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-  <!-- Bootstrap JS 
+    <!-- Bootstrap JS 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity=" sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>-->
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
 
-  <!-- Necessários para o timedatpicker  -->
-  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment-with-locales.js"></script>
-  <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>-->
-  <script src="https://rawgit.com/tempusdominus/bootstrap-4/master/build/js/tempusdominus-bootstrap-4.min.js"></script>
-  <link href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.min.css"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Necessários para o timedatpicker  -->
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment-with-locales.js"></script>
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>-->
+    <script src="https://rawgit.com/tempusdominus/bootstrap-4/master/build/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link
+      href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
+    <!-- CSS Local -->
+    <link rel="stylesheet" type="text/css" href="css/estilo.css" />
 
-  <!-- CSS Local -->
-  <link rel="stylesheet" type="text/css" href="css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="css/mapa.css" />
 
-  <link rel="stylesheet" type="text/css" href="css/mapa.css">
+    <link rel="stylesheet" type="text/css" href="css/modal.css" />
 
-  <link rel="stylesheet" type="text/css" href="css/modal.css">
+    <link rel="stylesheet" type="text/css" href="css/cookies.css" />
+    <link rel="stylesheet" type="text/css" href="css/mapa-modal-patentes.css" />
 
-  <link rel="stylesheet" type="text/css" href="css/cookies.css">
+    <!-- font-awsome-->
+    <script
+      src="https://kit.fontawesome.com/16786d0779.js"
+      crossorigin="anonymous"
+    ></script>
+    <!--Compatilhamento FB-->
 
-  <!-- font-awsome-->
-  <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
-  <!--Compatilhamento FB-->
+    <link rel="shortcut icon" href="img/favicon_2.png" />
+    <title>Mapa do Ecossistema de Inovação Cearense</title>
+  </head>
 
-  <link rel="shortcut icon" href="img/favicon_2.png" />
-  <title>Mapa do Ecossistema de Inovação Cearense</title>
+  <body>
+    <header>
+      <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
+        <!--Logo -->
+        <a href="index.html" class="btnLogo"
+          ><img class="logo" src="img\logos\logo-svg.svg"
+        /></a>
 
-</head>
+        <!--Menu Hamburguer-->
+        <button
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#menu-nav"
+          aria-controls="#menu-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-<body>
+        <!--Navegação-->
+        <div id="menu-nav" class="collapse navbar-collapse">
+          <ul id="lista-nav" class="navbar-nav btnNav">
+            <li class="nav-item">
+              <a
+                type="button"
+                href="ecossistema.html"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-newspaper"></i>
+                <p class="texto-nav">ECOSSISTEMA</p>
+              </a>
+            </li>
 
-  <header>
+            <li class="nav-item">
+              <a
+                type="button"
+                href="javascript:void(0)"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+                data-toggle="modal"
+                data-target="#modalSobre"
+              >
+                <i class="fas fa-chalkboard-teacher"> </i>
+                <p class="texto-nav">TUTORIAL</p>
+              </a>
+            </li>
 
-    <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
+            <li class="nav-item">
+              <a
+                type="button"
+                href="javascript:void(0)"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+                data-toggle="modal"
+                data-target="#ModalFiltro"
+                onclick="inicializarFiltragem()"
+              >
+                <i class="fas fa-filter"></i>
+                <p class="texto-nav">FILTRAR</p>
+              </a>
+            </li>
 
-      <!--Logo -->
-      <a href="index.html" class="btnLogo"><img class="logo" src="img\logos\logo-svg.svg"></a>
+            <li id="opcaoCadastro" class="nav-item">
+              <a
+                type="button"
+                href="javascript:void(0)"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+                class="btn btn-navegador"
+                onclick="selecionarLocal()"
+              >
+                <i class="fas fa-map-marker-alt"></i>
+                <p class="texto-nav">CADASTRAR</p>
+              </a>
+            </li>
 
-      <!--Menu Hamburguer-->
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#menu-nav" aria-controls="#menu-nav"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <li class="nav-item">
+              <a
+                type="button"
+                href="eventos.html"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-theater-masks"> </i>
+                <p class="texto-nav">EVENTOS</p>
+              </a>
+            </li>
 
-      <!--Navegação-->
-      <div id="menu-nav" class="collapse navbar-collapse">
+            <li class="nav-item">
+              <div class="dropdown show">
+                <a
+                  class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style"
+                  href="#"
+                  role="button"
+                  id="dropDownNavPatente"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-stamp"> </i>
+                  <p class="texto-nav">PATENTES</p>
+                </a>
 
-        <ul id="lista-nav" class="navbar-nav btnNav">
+                <div
+                  class="dropdown-menu"
+                  id="opcoesDropdownPatentes"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="cadastro-patente.html"
+                    >Cadastrar Patente</a
+                  >
+                  <a class="dropdown-item" href="lista-patentes.html"
+                    >Ver lista de patentes</a
+                  >
+                </div>
+              </div>
+            </li>
 
-          <li class="nav-item">
-            <a type="button" href="ecossistema.html"
-              class="d-flex align-items-center justify-content-start nav-item-style">
-              <i class="fas fa-newspaper"></i>
-              <p class="texto-nav">ECOSSISTEMA</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a type="button" href="javascript:void(0)"
-              class="d-flex align-items-center justify-content-start nav-item-style" data-toggle="modal"
-              data-target="#modalSobre">
-              <i class="fas fa-chalkboard-teacher"> </i>
-              <p class="texto-nav">COMO UTILIZAR</p>
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-            <a type="button" href="javascript:void(0)"
-              class="d-flex align-items-center justify-content-start nav-item-style" data-toggle="modal"
-              data-target="#ModalFiltro" onclick="inicializarFiltragem()">
-              <i class="fas fa-filter"></i>
-              <p class="texto-nav">FILTRAR</p>
-            </a>
-          </li>
-
-          <li id="opcaoCadastro" class="nav-item">
-            <a type="button" href="javascript:void(0)"
-              class="d-flex align-items-center justify-content-start nav-item-style" class="btn btn-navegador"
-              onclick="selecionarLocal()">
-              <i class="fas fa-map-marker-alt"></i>
-              <p class="texto-nav">CADASTRAR</p>
-            </a>
-          </li>
-
-          <!--<li class="nav-item">
-            <a type="button" href="javascript:void(0)"
-              class="d-flex align-items-center justify-content-start nav-item-style" data-toggle="modal"
-              onclick="limparComunidade()">
-              <i class="fas fa-users"></i>
-              <p class="texto-nav">COMUNIDADES</p>
-            </a>
-          </li>-->
-
-          <li class="nav-item">
-            <a type="button" href="eventos.html" class="d-flex align-items-center justify-content-start nav-item-style">
-              <i class="fas fa-theater-masks"> </i>
-              <p class="texto-nav">EVENTOS</p>
-            </a>
-          </li>
-
-        </ul>
+            <!-- <li class="nav-item">
+              <a
+                type="button"
+                href="https://www.google.com"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-chart-pie"></i>
+                <p class="texto-nav">DASHBOARD</p>
+              </a>
+            </li> -->
+          </ul>
+        </div>
 
         <form id="btn-user" class="dropdownHeader">
-          <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-          </button>
+          <button
+            class="btn-dropdown-header dropdown-toggle"
+            type="button"
+            id="dropdownMenu2"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          ></button>
         </form>
+      </nav>
+    </header>
+    <!--Fim do cabeçalho-->
 
-      </div>
+    <!-- Modal Como Utilizar -->
+    <div
+      class="modal fade"
+      id="modalSobre"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalScrollableTitle"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-utilizar modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content modal-content-utilizar">
+          <div
+            class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
+          >
+            <p id="titulo-modal">
+              Colaborar é muito simples! Veja no vídeo abaixo como funciona:
+            </p>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
-
-    </nav>
-  </header>
-  <!--Fim do cabeçalho-->
-
-  <!-- Modal Como Utilizar -->
-  <div class="modal fade" id="modalSobre" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-utilizar modal-dialog-scrollable" role="document">
-      <div class="modal-content modal-content-utilizar">
-
-        <div class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center">
-          <p id="titulo-modal">Colaborar é muito simples! Veja no vídeo abaixo como funciona:</p>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <div id="localVideo" class="d-flex align-items-center justify-content-center modal-video">
-
+          <div class="modal-body">
+            <div
+              id="localVideo"
+              class="d-flex align-items-center justify-content-center modal-video"
+            ></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Modal Cadastro -->
-  <div class="modal fade bd-example-modal-lg" id="ModalCadastro" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Cadastrar Instituição/Evento</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="deletarMarcador()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+    <!-- Modal Cadastro -->
+    <div
+      class="modal fade bd-example-modal-lg"
+      id="ModalCadastro"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLabel"
+              style="font-weight: bold"
+            >
+              Cadastrar Instituição/Evento
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onclick="deletarMarcador()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
-        <div class="modal-body">
+          <div class="modal-body">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <!---Barra do Navegador-->
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="local-tab"
+                  data-toggle="tab"
+                  href="#home"
+                  role="tab"
+                  aria-controls="home"
+                  >Instituição</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="evento-tab"
+                  data-toggle="tab"
+                  href="#profile"
+                  role="tab"
+                  aria-controls="profile"
+                  >Eventos</a
+                >
+              </li>
+            </ul>
 
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <!---Barra do Navegador-->
-            <li class="nav-item">
-              <a class="nav-link active" id="local-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                aria-selected="true">Instituição</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="evento-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                aria-selected="false">Eventos</a>
-            </li>
-          </ul>
-
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <form>
-                <!-- Inicio do Conteúdo do Cadastro de locais-->
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label for="validacaoNomeLocal">Nome*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="33"
-                      id="validacaoNomeLocal" placeholder="Nome">
-                  </div>
-
-                  <div class="form-group col-md-4">
-                    <label for="validacaoSiteLocal">Site*</label>
-                    <input class="form-control form-control" type="text" required="required" id="validacaoSiteLocal"
-                      placeholder="Site">
-                  </div>
-
-                  <div class="form-group col-md-4">
-                    <label for="validacaoTipoLocal">Tipo de Local*</label>
-                    <select class="form-control form-control" id="validacaoTipoLocal" required="required"
-                      placeholder="validacaoTipoLocal" onclick="dropdownStartup()">
-                      <option value="1" selected disabled>Selecionar...</option>
-                      <option>Aceleradora</option>
-                      <!--<option>Advogados</option>-->
-                      <option>Catalisadores Locais</option>
-                      <option>Comunicação e Mídia</option>
-                      <!--<option>Conexão com Mercado</option>-->
-                      <!--<option>Conteúdo</option>-->
-                      <option>Coworking</option>
-                      <!--<option>Créditos</option>-->
-                      <!--<option>Editais</option>-->
-                      <option>Escolas</option>
-                      <option>Espaços Makers</option>
-                      <option>Eventos</option>
-                      <option>Fábrica de Aplicativos</option>
-                      <!--<option>Governo</option>-->
-                      <option>Grandes Empresas</option>
-                      <option>Incubadoras</option>
-                      <option>Iniciativas Universitárias</option>
-                      <option>Investidores</option>
-                      <!--<option>Missões de Negócios</option>-->
-                      <option>Núcleos de Inovação</option>
-                      <option>Parques Tecnológicos</option>
-                      <option>Pré Aceleradoras</option>
-                      <option>Propriedade Intelectual</option>
-                      <!--<option>Provedores de Serviços</option>-->
-                      <option>Mentoria</option>
-                      <option>Startup</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-row">
-
-                  <div class="form-group custom-file col-md-8">
-                    <!-- linha2-->
-                    <input type="file" class="custom-file-input custom-file-input-lg" id="uploader1">
-                    <label id="uploaderLabel1" class="custom-file-label" for="uploader1">Selecione a Logo*</label>
-                  </div>
-
-                  <div id="dropdownStartup" class="form-group col-md-4" style="display: none;">
-
-                    <label for="validacaoTipoLocal">Classificação do Local*</label>
-                    <select class="form-control form-control" id="validacaoClassificacao" required="required"
-                      placeholder="validacaoTipoLocal">
-                      <option value="1" selected disabled>Escolha seu tipo de startup</option>
-                      <option>Fintech</option>
-                      <option>Proptech</option>
-                      <option>Adtech – Martech</option>
-                      <option>Healthtech</option>
-                      <option>HRtech</option>
-                      <option>Legaltech</option>
-                      <option>Edtech</option>
-                      <option>Retailtech</option>
-                      <option>Insurtech</option>
-                      <option>Agtech</option>
-                    </select>
-
-                  </div>
-
-                </div>
-
-                <div class="form-row" style="margin-top: 7px">
-                  <!-- linha3-->
-                  <div class="form-group col-md-6">
-                    <label for="validacaoLatLocal">Latitude</label>
-                    <input class="form-control form-control" type="text" required="required" id="validacaoLatLocal"
-                      placeholder="Latitude" disabled="disabled">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="validacaoLngLocal">Longitude</label>
-                    <input class="form-control form-control" type="text" required="required" id="validacaoLngLocal"
-                      placeholder="Longitude" disabled="disabled">
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <!-- linha4-->
-
-                  <div class="form-group col-md-2">
-                    <label for="validacaoCEPLocal">CEP*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="9"
-                      id="validacaoCEPLocal" placeholder="CEP">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="validacaoLogradouroLocal">Logradouro*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoLogradouroLocal" placeholder="Logradouro">
-                  </div>
-
-                  <div class="form-group col-md-4">
-                    <label for="validacaoNumeroLocal">Número*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="5"
-                      id="validacaoNumeroLocal" placeholder="Número">
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <!-- linha5-->
-                  <div class="form-group col-md-4">
-                    <label for="validacaoComplementoLocal">Complemento</label>
-                    <input class="form-control form-control" type="text" id="validacaoComplementoLocal" maxlength="30"
-                      placeholder="Complemento">
-                  </div>
-
-                  <div class="form-group col-md-4">
-                    <label for="validacaoBairroLocal">Bairro*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoBairroLocal" placeholder="Bairro">
-                  </div>
-
-                  <div class="form-group col-md-3">
-                    <label for="validacaoCidadeLocal">Cidade*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoCidadeLocal" placeholder="Cidade">
-                  </div>
-
-                  <div class="form-group col-md-1">
-                    <label for="validacaoUFLocal">UF*</label>
-                    <select class="form-control form-control" required="required" id="validacaoUFLocal">
-                      <option value="1" selected disabled>UF</option>
-                      <option>AC</option>
-                      <option>AL</option>
-                      <option>AP</option>
-                      <option>AM</option>
-                      <option>BA</option>
-                      <option>CE</option>
-                      <option>DF</option>
-                      <option>ES</option>
-                      <option>GO</option>
-                      <option>MA</option>
-                      <option>MT</option>
-                      <option>MS</option>
-                      <option>MG</option>
-                      <option>PA</option>
-                      <option>PB</option>
-                      <option>PR</option>
-                      <option>PE</option>
-                      <option>PI</option>
-                      <option>RJ</option>
-                      <option>RN</option>
-                      <option>RS</option>
-                      <option>RO</option>
-                      <option>RR</option>
-                      <option>SC</option>
-                      <option>SP</option>
-                      <option>SE</option>
-                      <option>TO</option>
-                    </select>
-                  </div>
-
-                </div>
-                <!---Inicio do Conteudo-->
-              </form>
-              <!---Fim do Conteudo-->
-            </div>
-
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <form>
-                <!---Inicio do Conteudo dos Eventos-->
-                <div class="form-row">
-                  <!-- linha1-->
-                  <div class="form-group col-3">
-                    <label for="validacaoNomeEvento">Nome*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="33"
-                      id="validacaoNomeEvento" placeholder="Nome">
-                  </div>
-
-                  <div class="form-group col-3">
-                    <label for="validacaoSiteEvento">Site*</label>
-                    <input class="form-control form-control" type="text" required="required" id="validacaoSiteEvento"
-                      placeholder="Site">
-                  </div>
-
-                  <div class="form-group col-3">
-                    <label for="validacaoTipoEvento">Tipo de Evento*</label>
-                    <select class="form-control" id="validacaoTipoEvento" required="required">
-                      <option value="1" selected disabled>Selecionar...</option>
-                      <option>Empreendedorismo</option>
-                      <option>Tecnologia</option>
-                      <option>Inovação</option>
-                      <option>Negócios</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group col-3 form-group custom-file" style="margin-top: 4.1%">
-                    <input type="file" class="custom-file-input custom-file-input-lg" required="required"
-                      id="uploader2">
-                    <label id="uploaderLabel2" class="custom-file-label" for="uploader2">Imagem</label>
-
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <!-- linha3-->
-                  <div class="form-group col-6">
-                    <label for="areatextoEvento">Descrição*</label>
-                    <textarea class="form-control" id="areatextoEvento" maxlength="250" rows="3"></textarea>
-                  </div>
-
-                  <div class="form-group col-6" style="margin-top: 3%">
-
-                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                      <input id="dtpicker" type="text" class="form-control datetimepicker-input" required="required"
-                        data-target="#datetimepicker1" />
-                      <span class="input-group-text" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                        <span class="fa fa-calendar"></span></span>
+            <div class="tab-content mt-3" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <form>
+                  <!-- Inicio do Conteúdo do Cadastro de locais-->
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="validacaoNomeLocal">Nome*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="33"
+                        id="validacaoNomeLocal"
+                        placeholder="Nome"
+                      />
                     </div>
 
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="validacaoLatEvento">Latitude</label>
-                        <input class="form-control form-control" type="text" required="required" id="validacaoLatEvento"
-                          placeholder="Latitude" disabled="disabled">
-                      </div>
-
-                      <div class="form-group col-md-6">
-                        <label for="validacaoLngEvento">Latitude</label>
-                        <input class="form-control form-control" type="text" required="required" id="validacaoLngEvento"
-                          placeholder="Longitude" disabled="disabled">
-                      </div>
+                    <div class="form-group col-md-4">
+                      <label for="validacaoSiteLocal">Site*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="validacaoSiteLocal"
+                        placeholder="Site"
+                      />
                     </div>
 
+                    <div class="form-group col-md-4">
+                      <label for="validacaoTipoLocal">Tipo de Local*</label>
+                      <select
+                        class="form-control form-control"
+                        id="validacaoTipoLocal"
+                        required="required"
+                        placeholder="validacaoTipoLocal"
+                        onclick="dropdownStartup()"
+                      >
+                        <option value="1" selected disabled>
+                          Selecionar...
+                        </option>
+                        <option>Aceleradora</option>
+                        <!--<option>Advogados</option>-->
+                        <option>Catalisadores Locais</option>
+                        <option>Comunicação e Mídia</option>
+                        <!--<option>Conexão com Mercado</option>-->
+                        <!--<option>Conteúdo</option>-->
+                        <option>Coworking</option>
+                        <!--<option>Créditos</option>-->
+                        <!--<option>Editais</option>-->
+                        <option>Escolas</option>
+                        <option>Espaços Makers</option>
+                        <option>Eventos</option>
+                        <option>Fábrica de Aplicativos</option>
+                        <!--<option>Governo</option>-->
+                        <option>Grandes Empresas</option>
+                        <option>Incubadoras</option>
+                        <option>Iniciativas Universitárias</option>
+                        <option>Investidores</option>
+                        <!--<option>Missões de Negócios</option>-->
+                        <option>Núcleos de Inovação</option>
+                        <option>Parques Tecnológicos</option>
+                        <option>Pré Aceleradoras</option>
+                        <option>Propriedade Intelectual</option>
+                        <!--<option>Provedores de Serviços</option>-->
+                        <option>Mentoria</option>
+                        <option>Startup</option>
+                      </select>
+                    </div>
                   </div>
 
-                </div>
+                  <div class="form-row">
+                    <div class="form-group custom-file col-md-8">
+                      <!-- linha2-->
+                      <input
+                        type="file"
+                        class="custom-file-input custom-file-input-lg"
+                        id="uploader1"
+                      />
+                      <label
+                        id="uploaderLabel1"
+                        class="custom-file-label"
+                        for="uploader1"
+                        >Selecione a Logo*</label
+                      >
+                    </div>
 
-                <div class="form-row">
-                  <!-- linha4-->
-
-                  <div class="form-group col-md-2">
-                    <label for="validacaoCEPEvento">CEP*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="9"
-                      id="validacaoCEPEvento" placeholder="CEP">
+                    <div
+                      id="dropdownStartup"
+                      class="form-group col-md-4"
+                      style="display: none"
+                    >
+                      <label for="validacaoTipoLocal"
+                        >Classificação do Local*</label
+                      >
+                      <select
+                        class="form-control form-control"
+                        id="validacaoClassificacao"
+                        required="required"
+                        placeholder="validacaoTipoLocal"
+                      >
+                        <option value="1" selected disabled>
+                          Escolha seu tipo de startup
+                        </option>
+                      </select>
+                    </div>
                   </div>
 
-                  <div class="form-group col-md-6">
-                    <label for="validacaoLogradouroEvento">Logradouro*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoLogradouroEvento" placeholder="Logradouro">
+                  <div class="form-row" style="margin-top: 7px">
+                    <!-- linha3-->
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLatLocal">Latitude</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="validacaoLatLocal"
+                        placeholder="Latitude"
+                        disabled="disabled"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLngLocal">Longitude</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="validacaoLngLocal"
+                        placeholder="Longitude"
+                        disabled="disabled"
+                      />
+                    </div>
                   </div>
 
-                  <div class="form-group col-md-4">
-                    <label for="validacaoNumeroEvento">Número*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="5"
-                      id="validacaoNumeroEvento" placeholder="Número">
-                  </div>
-                </div>
+                  <div class="form-row">
+                    <!-- linha4-->
 
+                    <div class="form-group col-md-2">
+                      <label for="validacaoCEPLocal">CEP*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="9"
+                        id="validacaoCEPLocal"
+                        placeholder="CEP"
+                      />
+                    </div>
 
-                <div class="form-row">
-                  <!-- linha5-->
-                  <div class="form-group col-md-4">
-                    <label for="validacaoComplementoEvento">Complemento</label>
-                    <input class="form-control form-control" type="text" id="validacaoComplementoEvento" maxlength="30"
-                      placeholder="Complemento">
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLogradouroLocal">Logradouro*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoLogradouroLocal"
+                        placeholder="Logradouro"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoNumeroLocal">Número*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="5"
+                        id="validacaoNumeroLocal"
+                        placeholder="Número"
+                      />
+                    </div>
                   </div>
 
-                  <div class="form-group col-md-4">
-                    <label for="validacaoBairroEvento">Bairro*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoBairroEvento" placeholder="Bairro">
+                  <div class="form-row">
+                    <!-- linha5-->
+                    <div class="form-group col-md-4">
+                      <label for="validacaoComplementoLocal">Complemento</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        id="validacaoComplementoLocal"
+                        maxlength="30"
+                        placeholder="Complemento"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoBairroLocal">Bairro*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoBairroLocal"
+                        placeholder="Bairro"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="validacaoCidadeLocal">Cidade*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoCidadeLocal"
+                        placeholder="Cidade"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-1">
+                      <label for="validacaoUFLocal">UF*</label>
+                      <select
+                        class="form-control form-control"
+                        required="required"
+                        id="validacaoUFLocal"
+                      >
+                        <option value="1" selected disabled>UF</option>
+                        <option>AC</option>
+                        <option>AL</option>
+                        <option>AP</option>
+                        <option>AM</option>
+                        <option>BA</option>
+                        <option>CE</option>
+                        <option>DF</option>
+                        <option>ES</option>
+                        <option>GO</option>
+                        <option>MA</option>
+                        <option>MT</option>
+                        <option>MS</option>
+                        <option>MG</option>
+                        <option>PA</option>
+                        <option>PB</option>
+                        <option>PR</option>
+                        <option>PE</option>
+                        <option>PI</option>
+                        <option>RJ</option>
+                        <option>RN</option>
+                        <option>RS</option>
+                        <option>RO</option>
+                        <option>RR</option>
+                        <option>SC</option>
+                        <option>SP</option>
+                        <option>SE</option>
+                        <option>TO</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!---Inicio do Conteudo-->
+                </form>
+                <!---Fim do Conteudo-->
+              </div>
+
+              <div
+                class="tab-pane fade"
+                id="profile"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
+                <form>
+                  <!---Inicio do Conteudo dos Eventos-->
+                  <div class="form-row">
+                    <!-- linha1-->
+                    <div class="form-group col-3">
+                      <label for="validacaoNomeEvento">Nome*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="33"
+                        id="validacaoNomeEvento"
+                        placeholder="Nome"
+                      />
+                    </div>
+
+                    <div class="form-group col-3">
+                      <label for="validacaoSiteEvento">Site*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="validacaoSiteEvento"
+                        placeholder="Site"
+                      />
+                    </div>
+
+                    <div class="form-group col-3">
+                      <label for="validacaoTipoEvento">Tipo de Evento*</label>
+                      <select
+                        class="form-control"
+                        id="validacaoTipoEvento"
+                        required="required"
+                      >
+                        <option value="1" selected disabled>
+                          Selecionar...
+                        </option>
+                        <option>Empreendedorismo</option>
+                        <option>Tecnologia</option>
+                        <option>Inovação</option>
+                        <option>Negócios</option>
+                      </select>
+                    </div>
+
+                    <div
+                      class="form-group col-3 form-group custom-file"
+                      style="margin-top: 4.1%"
+                    >
+                      <input
+                        type="file"
+                        class="custom-file-input custom-file-input-lg"
+                        required="required"
+                        id="uploader2"
+                      />
+                      <label
+                        id="uploaderLabel2"
+                        class="custom-file-label"
+                        for="uploader2"
+                        >Imagem</label
+                      >
+                    </div>
                   </div>
 
-                  <div class="form-group col-md-3">
-                    <label for="validacaoCidadeEvento">Cidade*</label>
-                    <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoCidadeEvento" placeholder="Cidade">
+                  <div class="form-row">
+                    <!-- linha3-->
+                    <div class="form-group col-6">
+                      <label for="areatextoEvento">Descrição*</label>
+                      <textarea
+                        class="form-control"
+                        id="areatextoEvento"
+                        maxlength="250"
+                        rows="3"
+                      ></textarea>
+                    </div>
+
+                    <div class="form-group col-6" style="margin-top: 3%">
+                      <div
+                        class="input-group date"
+                        id="datetimepicker1"
+                        data-target-input="nearest"
+                      >
+                        <input
+                          id="dtpicker"
+                          type="text"
+                          class="form-control datetimepicker-input"
+                          required="required"
+                          data-target="#datetimepicker1"
+                        />
+                        <span
+                          class="input-group-text"
+                          data-target="#datetimepicker1"
+                          data-toggle="datetimepicker"
+                        >
+                          <span class="fa fa-calendar"></span
+                        ></span>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="validacaoLatEvento">Latitude</label>
+                          <input
+                            class="form-control form-control"
+                            type="text"
+                            required="required"
+                            id="validacaoLatEvento"
+                            placeholder="Latitude"
+                            disabled="disabled"
+                          />
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="validacaoLngEvento">Latitude</label>
+                          <input
+                            class="form-control form-control"
+                            type="text"
+                            required="required"
+                            id="validacaoLngEvento"
+                            placeholder="Longitude"
+                            disabled="disabled"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="form-group col-md-1">
-                    <label for="validacaoUFEvento">UF*</label>
-                    <select class="form-control form-control" required="required" id="validacaoUFEvento">
-                      <option value="1" selected disabled>UF</option>
-                      <option>AC</option>
-                      <option>AL</option>
-                      <option>AP</option>
-                      <option>AM</option>
-                      <option>BA</option>
-                      <option>CE</option>
-                      <option>DF</option>
-                      <option>ES</option>
-                      <option>GO</option>
-                      <option>MA</option>
-                      <option>MT</option>
-                      <option>MS</option>
-                      <option>MG</option>
-                      <option>PA</option>
-                      <option>PB</option>
-                      <option>PR</option>
-                      <option>PE</option>
-                      <option>PI</option>
-                      <option>RJ</option>
-                      <option>RN</option>
-                      <option>RS</option>
-                      <option>RO</option>
-                      <option>RR</option>
-                      <option>SC</option>
-                      <option>SP</option>
-                      <option>SE</option>
-                      <option>TO</option>
-                    </select>
+                  <div class="form-row">
+                    <!-- linha4-->
+
+                    <div class="form-group col-md-2">
+                      <label for="validacaoCEPEvento">CEP*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="9"
+                        id="validacaoCEPEvento"
+                        placeholder="CEP"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLogradouroEvento">Logradouro*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoLogradouroEvento"
+                        placeholder="Logradouro"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoNumeroEvento">Número*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="5"
+                        id="validacaoNumeroEvento"
+                        placeholder="Número"
+                      />
+                    </div>
                   </div>
-                </div>
-              </form>
-              <!---Fim do Conteudo-->
+
+                  <div class="form-row">
+                    <!-- linha5-->
+                    <div class="form-group col-md-4">
+                      <label for="validacaoComplementoEvento"
+                        >Complemento</label
+                      >
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        id="validacaoComplementoEvento"
+                        maxlength="30"
+                        placeholder="Complemento"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoBairroEvento">Bairro*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoBairroEvento"
+                        placeholder="Bairro"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="validacaoCidadeEvento">Cidade*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoCidadeEvento"
+                        placeholder="Cidade"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-1">
+                      <label for="validacaoUFEvento">UF*</label>
+                      <select
+                        class="form-control form-control"
+                        required="required"
+                        id="validacaoUFEvento"
+                      >
+                        <option value="1" selected disabled>UF</option>
+                        <option>AC</option>
+                        <option>AL</option>
+                        <option>AP</option>
+                        <option>AM</option>
+                        <option>BA</option>
+                        <option>CE</option>
+                        <option>DF</option>
+                        <option>ES</option>
+                        <option>GO</option>
+                        <option>MA</option>
+                        <option>MT</option>
+                        <option>MS</option>
+                        <option>MG</option>
+                        <option>PA</option>
+                        <option>PB</option>
+                        <option>PR</option>
+                        <option>PE</option>
+                        <option>PI</option>
+                        <option>RJ</option>
+                        <option>RN</option>
+                        <option>RS</option>
+                        <option>RO</option>
+                        <option>RR</option>
+                        <option>SC</option>
+                        <option>SP</option>
+                        <option>SE</option>
+                        <option>TO</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+                <!---Fim do Conteudo-->
+              </div>
             </div>
           </div>
 
-        </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn-cadastro1"
+              data-dismiss="modal"
+              onclick="deletarMarcador()"
+            >
+              Fechar
+            </button>
+            <button
+              id="btn-enviar"
+              type="button"
+              class="btn-cadastro2"
+              onclick="gravarFormulario()"
+            >
+              Enviar
+            </button>
 
-        <div class="modal-footer">
-          <button type="button" class="btn-cadastro1" data-dismiss="modal" onclick="deletarMarcador()">Fechar</button>
-          <button id="btn-enviar" type="button" class="btn-cadastro2" onclick="gravarFormulario()">Enviar</button>
-
-          <!--data-toggle="modal"
+            <!--data-toggle="modal"
           data-target="#modalAgradecimento"-->
-
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!--Fim do Modal Cadastro--->
+    <!--Fim do Modal Cadastro--->
 
-  <!-- Modal Filtro -->
-  <div class="modal fade" id="ModalFiltro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content modalFiltro--dimensao">
+    <!-- Modal Filtro -->
+    <div
+      class="modal fade"
+      id="ModalFiltro"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content modalFiltro--dimensao">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLabel"
+              style="font-weight: bold"
+            >
+              Filtros de Categorias
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!--Inicio do Conteudo-->
+            <form>
+              <div class="">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxTodos"
+                    value="Todos"
+                  />
+                  <label
+                    class="form-check-label"
+                    style="font-weight: bold"
+                    for="CheckboxTodos"
+                    >Todos</label
+                  >
+                </div>
+              </div>
 
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Filtros de Categorias</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxAcelerador"
+                    value="Acelerador"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxAcelerador"
+                    >Acelerador</label
+                  >
+                </div>
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxCatalisadores"
+                    value="Catalisadores"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxCatalisadores"
+                    >Catalisadores Locais</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxComunicacao"
+                    value="Comunicacao"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxComunicacao"
+                    >Comunicação e Mídia</label
+                  >
+                </div>
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxCoworking"
+                    value="Coworking"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxCoworking"
+                    >Coworking</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxEscolas"
+                    value="Escolas"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxEscolas"
+                    >Escolas</label
+                  >
+                </div>
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxMakers"
+                    value="Makers"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxMakers"
+                    >Makers</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxEventos"
+                    value="Eventos"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxEventos"
+                    >Eventos</label
+                  >
+                </div>
+
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxFabricaApp"
+                    value="FabricaApp"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxFabricaApp"
+                    >Fábrica de Aplicativos</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxEmpresas"
+                    value="Empresas"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxEmpresas"
+                    >Grandes Empresas</label
+                  >
+                </div>
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxIncubadoras"
+                    value="Incubadoras"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxIncubadoras"
+                    >Incubadoras</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxiniUniversitarias"
+                    value="iniUniversitarias"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxiniUniversitarias"
+                    >Iniciativas Universitárias</label
+                  >
+                </div>
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxInvestidores"
+                    value="Investidores"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxInvestidores"
+                    >Investidores</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxNucleos"
+                    value="Nucleos"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxNucleos"
+                    >Núcleos de Inovação</label
+                  >
+                </div>
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxParques"
+                    value="Parques"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxParques"
+                    >Parques Tecnológicos</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxpreAceleradoras"
+                    value="preAceleradoras"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxpreAceleradoras"
+                    >Pré Aceleradoras</label
+                  >
+                </div>
+
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxpropIntelectuais"
+                    value="propIntelectuais"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxpropIntelectuais"
+                    >Propriedade Intelectual</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxMentoria"
+                    value="Mentoria"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxMentoria"
+                    >Mentoria</label
+                  >
+                </div>
+
+                <div class="form-check form-check-inline modalFiltro--coluna">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="CheckboxStartup"
+                    onclick="startupCheck()"
+                    value="Startup"
+                  />
+                  <label
+                    class="form-check-label modalFiltro--Textos"
+                    for="CheckboxStartup"
+                    >Startup</label
+                  >
+                </div>
+              </div>
+
+              <div class="modalFiltro--linhaSelecao">
+                <div
+                  class="startup-check form-check form-check-inline modalFiltro--coluna"
+                ></div>
+                <div id="startupType" class="form-check form-check-inline">
+                  <select
+                    class="form-control form-control modalFiltro--Select"
+                    required="required"
+                    id="filtroStartup"
+                  >
+                    <option value="1" selected disabled>
+                      Escolha seu tipo de startup
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!--Fim do Conteudo-->
+          <div class="modal-footer">
+            <button
+              id="btn-filtro1"
+              class="texto-btn-filtro"
+              type="button"
+              data-dismiss="modal"
+            >
+              Fechar
+            </button>
+            <button
+              id="btn-filtro2"
+              class="texto-btn-filtro"
+              type="button"
+              data-dismiss="modal"
+              onclick="filtroMarcador()"
+            >
+              Filtrar
+            </button>
+          </div>
         </div>
-        <div class="modal-body">
+      </div>
+    </div>
+    <!--Fim do Modal Filtro--->
+
+    <!-- Modal Mensagem de cópia do Link de compartilhamento -->
+    <div
+      class="modal fade"
+      id="modalCompartilhamento"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modalCompartilhamento--posicionamento"
+        role="document"
+      >
+        <div class="modal-content modalCompartilhamento--dimensao">
+          <div class="modal-header modalCompartilhamento--header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
           <!--Inicio do Conteudo-->
-          <form>
-            <div class="">
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxTodos" value="Todos">
-                <label class="form-check-label" style="font-weight: bold;" for="CheckboxTodos">Todos</label>
-              </div>
+          <div class="modal-body modalCompartilhamento--body">
+            <div class="modalCompartilhamento--divA">
+              <span class="modalCompartilhamento--iconeCheck">
+                <i class="far fa-clipboard"></i>
+              </span>
             </div>
 
-            <div class="modalFiltro--linhaSelecao">
+            <div class="modalCompartilhamento--divB">
+              <p id="instituicaoEvento" class="modalCompartilhamento--conteudo">
+                <b>Link de Compartilhamento</b>
+              </p>
 
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxAcelerador" value="Acelerador">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxAcelerador">Acelerador</label>
-              </div>
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxCatalisadores" value="Catalisadores">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxCatalisadores">Catalisadores
-                  Locais</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxComunicacao" value="Comunicacao">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxComunicacao">Comunicação e
-                  Mídia</label>
-              </div>
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxCoworking" value="Coworking">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxCoworking">Coworking</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxEscolas" value="Escolas">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxEscolas">Escolas</label>
-              </div>
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxMakers" value="Makers">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxMakers">Makers</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxEventos" value="Eventos">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxEventos">Eventos</label>
-              </div>
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxFabricaApp" value="FabricaApp">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxFabricaApp">Fábrica de
-                  Aplicativos</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxEmpresas" value="Empresas">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxEmpresas">Grandes Empresas</label>
-              </div>
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxIncubadoras" value="Incubadoras">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxIncubadoras">Incubadoras</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxiniUniversitarias"
-                  value="iniUniversitarias">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxiniUniversitarias">Iniciativas
-                  Universitárias</label>
-              </div>
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxInvestidores" value="Investidores">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxInvestidores">Investidores</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxNucleos" value="Nucleos">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxNucleos">Núcleos de Inovação</label>
-              </div>
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxParques" value="Parques">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxParques">Parques Tecnológicos</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxpreAceleradoras" value="preAceleradoras">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxpreAceleradoras">Pré
-                  Aceleradoras</label>
-              </div>
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxpropIntelectuais" value="propIntelectuais">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxpropIntelectuais">Propriedade
-                  Intelectual</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxMentoria" value="Mentoria">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxMentoria">Mentoria</label>
-              </div>
-
-              <div class="form-check form-check-inline modalFiltro--coluna">
-                <input class="form-check-input" type="checkbox" id="CheckboxStartup" onclick="startupCheck()"
-                  value="Startup">
-                <label class="form-check-label modalFiltro--Textos" for="CheckboxStartup">Startup</label>
-              </div>
-
-            </div>
-
-            <div class="modalFiltro--linhaSelecao">
-              <div class="startup-check form-check form-check-inline modalFiltro--coluna">
-
-              </div>
-              <div id="startupType" class="form-check form-check-inline">
-                <select class="form-control form-control modalFiltro--Select" required="required" id="filtroStartup">
-                  <option value="1" selected disabled>Escolha seu tipo de startup</option>
-                  <option>Fintech</option>
-                  <option>Proptech</option>
-                  <option>Adtech – Martech</option>
-                  <option>Healthtech</option>
-                  <option>HRtech</option>
-                  <option>Legaltech</option>
-                  <option>Edtech</option>
-                  <option>Retailtech</option>
-                  <option>Insurtech</option>
-                  <option>Agtech</option>
-                </select>
+              <div class="modalCompartilhamento--divC">
+                <input
+                  id="inputCompartilhamento"
+                  class="modalCompartilhamento--input"
+                  type="text"
+                  id="url"
+                  value="http://mapainovacao.ufc.br/index.html"
+                />
+                <button
+                  id="btnInputCompartilhamento"
+                  class="modalCompartilhamento--btnCopiar"
+                  type="button"
+                >
+                  Copiar
+                </button>
               </div>
             </div>
+          </div>
 
-          </form>
-        </div>
-        <!--Fim do Conteudo-->
-        <div class="modal-footer">
-          <button id="btn-filtro1" class="texto-btn-filtro" type="button" data-dismiss="modal">Fechar</button>
-          <button id="btn-filtro2" class="texto-btn-filtro" type="button" data-dismiss="modal"
-            onclick="filtroMarcador()">Filtrar</button>
+          <!--Fim do Conteudo-->
+          <div class="modal-footer modalCompartilhamento--footer"></div>
         </div>
       </div>
     </div>
-  </div>
-  <!--Fim do Modal Filtro--->
+    <!--Fim do Modal Mensagem de cópia do Link de compartilhamento--->
 
-  <!-- Modal Mensagem de cópia do Link de compartilhamento -->
-  <div class="modal fade" id="modalCompartilhamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-
-    <div class="modal-dialog modalCompartilhamento--posicionamento" role="document">
-      <div class="modal-content modalCompartilhamento--dimensao">
-
-        <div class="modal-header modalCompartilhamento--header">
-
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-            <span aria-hidden="true">&times;</span>
-
-          </button>
-
-        </div>
-
-        <!--Inicio do Conteudo-->
-        <div class="modal-body modalCompartilhamento--body">
-
-          <div class="modalCompartilhamento--divA">
-
-            <span class="modalCompartilhamento--iconeCheck">
-              <i class="far fa-clipboard"></i>
-            </span>
-
+    <!-- Modal Mensagem de Agradecimento -->
+    <div
+      class="modal fade"
+      id="modalAgradecimento"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modalAgradecimento--posicionamento"
+        role="document"
+      >
+        <div class="modal-content modalAgradecimento--dimensao">
+          <div class="modal-header modalAgradecimento--header">
+            <p class="modalAgradecimento--titulo" id="exampleModalLabel">
+              Recebemos a solitação de cadastro!
+            </p>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onclick="reload()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
 
-          <div class="modalCompartilhamento--divB">
-
-            <p id="instituicaoEvento" class="modalCompartilhamento--conteudo"><b>Link de Compartilhamento</b></p>
-
-            <div class="modalCompartilhamento--divC">
-
-              <input id="inputCompartilhamento" class="modalCompartilhamento--input" type="text" id="url"
-                value="http://mapainovacao.ufc.br/index.html" />
-              <button id="btnInputCompartilhamento" class="modalCompartilhamento--btnCopiar"
-                type="button">Copiar</button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!--Fim do Conteudo-->
-        <div class="modal-footer modalCompartilhamento--footer">
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!--Fim do Modal Mensagem de cópia do Link de compartilhamento--->
-
-  <!-- Modal Mensagem de Agradecimento -->
-  <div class="modal fade" id="modalAgradecimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-
-    <div class="modal-dialog modalAgradecimento--posicionamento" role="document">
-      <div class="modal-content modalAgradecimento--dimensao">
-
-        <div class="modal-header modalAgradecimento--header">
-
-          <p class="modalAgradecimento--titulo" id="exampleModalLabel">Recebemos a solitação de cadastro!</p>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="reload()">
-
-            <span aria-hidden="true">&times;</span>
-
-          </button>
-
-        </div>
-
-        <!--Inicio do Conteudo-->
-        <div class="modal-body modalAgradecimento--body">
-
-          <div class="modalAgradecimento--divA">
-
-            <span style="font-size: 60px; color: #00B96B; height: fit-content; display: contents;">
-              <i class="fas fa-check-circle"></i>
-            </span>
-
-          </div>
-
-          <div class="modalAgradecimento--divB">
-
-            <p id="instituicaoEvento" class="modalAgradecimento--conteudo"><b>Obrigado por cadastrar sua
-                instituição!</b></p>
-            <p id="instituicaoEventoTx2" class="modalAgradecimento--conteudo">As informações estão <b>
-                <font color="green">em análise</font>
-              </b>, em breve sua instituição será
-              adicionada ao mapa!</p>
-            <p class="modalAgradecimento--conteudo">Caso ocorra algua pendência, informaremos por e-mail.</p>
-
-          </div>
-
-        </div>
-
-        <!--Fim do Conteudo-->
-        <div class="modal-footer modalAgradecimento--footer">
-
-          <button id="" class="modalAgradecimento--btnFechar" type="button" onclick="reload()">Fechar</button>
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <!--Fim do Modal Mensagem de Agradecimento--->
-
-  <!-- Modal Comunidade -->
-  <div class="modal fade" id="ModalComunidade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Cadastrar Comunidades</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
           <!--Inicio do Conteudo-->
-
-          <form>
-            <!---Inicio do Conteudo dos Eventos-->
-            <div class="form-row">
-              <!-- linha1-->
-              <div class="form-group col-6">
-                <label for="validacaoNomeComu">Nome</label>
-                <input class="form-control form-control" type="text" required="required" maxlength="33"
-                  id="validacaoNomeComu" placeholder="Nome">
-              </div>
-
-              <div class="form-group col-6">
-                <label for="validacaoSiteComu">Site</label>
-                <input class="form-control form-control" type="text" required="required" id="validacaoSiteComu"
-                  placeholder="Site">
-              </div>
-            </div>
-            <div class="form-row">
-              <!-- linha2-->
-              <div class="form-group col-12 form-group custom-file" style="margin-top: 4.1%">
-                <input type="file" class="custom-file-input custom-file-input-lg" required="required" id="uploader3">
-                <label id="uploaderLabel3" class="custom-file-label" for="uploader3">Imagem</label>
-              </div>
+          <div class="modal-body modalAgradecimento--body">
+            <div class="modalAgradecimento--divA">
+              <span
+                style="
+                  font-size: 60px;
+                  color: #00b96b;
+                  height: fit-content;
+                  display: contents;
+                "
+              >
+                <i class="fas fa-check-circle"></i>
+              </span>
             </div>
 
-            <div class="form-row">
-              <!-- linha2-->
-              <div class="form-group mt-3 col-12">
-                <label for="validacaoCorComu">Cor</label>
-                <input class="form-control form-control" type="color" required="required" id="validacaoCorComu"
-                  placeholder="Ex: #FFFFF">
-              </div>
+            <div class="modalAgradecimento--divB">
+              <p id="instituicaoEvento" class="modalAgradecimento--conteudo">
+                <b>Obrigado por cadastrar sua instituição!</b>
+              </p>
+              <p id="instituicaoEventoTx2" class="modalAgradecimento--conteudo">
+                As informações estão
+                <b> <font color="green">em análise</font> </b>, em breve sua
+                instituição será adicionada ao mapa!
+              </p>
+              <p class="modalAgradecimento--conteudo">
+                Caso ocorra algua pendência, informaremos por e-mail.
+              </p>
             </div>
+          </div>
+
+          <!--Fim do Conteudo-->
+          <div class="modal-footer modalAgradecimento--footer">
+            <button
+              id=""
+              class="modalAgradecimento--btnFechar"
+              type="button"
+              onclick="reload()"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Fim do Modal Mensagem de Agradecimento--->
+
+    <!-- Modal Comunidade -->
+    <div
+      class="modal fade"
+      id="ModalComunidade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLabel"
+              style="font-weight: bold"
+            >
+              Cadastrar Comunidades
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!--Inicio do Conteudo-->
+
+            <form>
+              <!---Inicio do Conteudo dos Eventos-->
+              <div class="form-row">
+                <!-- linha1-->
+                <div class="form-group col-6">
+                  <label for="validacaoNomeComu">Nome</label>
+                  <input
+                    class="form-control form-control"
+                    type="text"
+                    required="required"
+                    maxlength="33"
+                    id="validacaoNomeComu"
+                    placeholder="Nome"
+                  />
+                </div>
+
+                <div class="form-group col-6">
+                  <label for="validacaoSiteComu">Site</label>
+                  <input
+                    class="form-control form-control"
+                    type="text"
+                    required="required"
+                    id="validacaoSiteComu"
+                    placeholder="Site"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <!-- linha2-->
+                <div
+                  class="form-group col-12 form-group custom-file"
+                  style="margin-top: 4.1%"
+                >
+                  <input
+                    type="file"
+                    class="custom-file-input custom-file-input-lg"
+                    required="required"
+                    id="uploader3"
+                  />
+                  <label
+                    id="uploaderLabel3"
+                    class="custom-file-label"
+                    for="uploader3"
+                    >Imagem</label
+                  >
+                </div>
+              </div>
+
+              <div class="form-row">
+                <!-- linha2-->
+                <div class="form-group mt-3 col-12">
+                  <label for="validacaoCorComu">Cor</label>
+                  <input
+                    class="form-control form-control"
+                    type="color"
+                    required="required"
+                    id="validacaoCorComu"
+                    placeholder="Ex: #FFFFF"
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <!-- linha3-->
+                <div class="form-group col-12">
+                  <label for="areatextoEvento">Descrição da Comunidade</label>
+                  <textarea
+                    class="form-control"
+                    id="areatextoDescComu"
+                    rows="1"
+                    maxlength="100"
+                    required="required"
+                    placeholder="Faça uma breve descrição desta comunidade"
+                  ></textarea>
+                </div>
+              </div>
+            </form>
+            <!---Fim do Conteudo-->
 
             <div class="form-row">
               <!-- linha3-->
               <div class="form-group col-12">
-                <label for="areatextoEvento">Descrição da Comunidade</label>
-                <textarea class="form-control" id="areatextoDescComu" rows="1" maxlength="100" required="required"
-                  placeholder="Faça uma breve descrição desta comunidade"></textarea>
+                <label for="areatextoEvento">Coordenadas da Região</label>
+                <textarea
+                  class="form-control"
+                  id="areatextoComu"
+                  rows="3"
+                  required="required"
+                  placeholder="Insira o código de sua região aqui"
+                ></textarea>
               </div>
             </div>
-          </form>
-          <!---Fim do Conteudo-->
+            <!---Fim do Conteudo-->
 
-          <div class="form-row">
-            <!-- linha3-->
-            <div class="form-group col-12">
-              <label for="areatextoEvento">Coordenadas da Região</label>
-              <textarea class="form-control" id="areatextoComu" rows="3" required="required"
-                placeholder="Insira o código de sua região aqui"></textarea>
-            </div>
+            <small class="form-row d-flex justify-content-center">
+              <p style="margin: 0" href="">Dúvidas? Veja como como utilizar</p>
+              <a
+                class="ml-1"
+                href="javascript:void(0)"
+                onclick="telaCadastroComunidade()"
+                >aqui</a
+              >
+            </small>
           </div>
-          </form>
-          <!---Fim do Conteudo-->
-
-          <small class="form-row d-flex justify-content-center">
-            <p style="margin: 0" href="">Dúvidas? Veja como como utilizar</p><a class="ml-1" href="javascript:void(0)"
-              onclick="telaCadastroComunidade()">aqui</a>
-          </small>
-
-        </div>
-        <!--Fim do Conteudo-->
-        <div class="modal-footer">
-          <button type="button" class="btn-cadastro1" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn-cadastro2" onclick="gravarCadastroComunidade()">Enviar</button>
+          <!--Fim do Conteudo-->
+          <div class="modal-footer">
+            <button type="button" class="btn-cadastro1" data-dismiss="modal">
+              Fechar
+            </button>
+            <button
+              type="button"
+              class="btn-cadastro2"
+              onclick="gravarCadastroComunidade()"
+            >
+              Enviar
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Fim Modal Comunidade -->
+    <!-- Fim Modal Comunidade -->
 
-  <!-- Modal Categoria Mobile -->
-  <div class="modal fade" id="modalCategoriaMobile" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-mobile modal-dialog-scrollable" role="document">
-      <div class="modal-content modal-content-mobile">
-
-        <div class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center">
-          <p id="titulo-modal">Categorias</p>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body" style="padding: 0;">
-          <div class="">
-
-            <ul id="listaOpcoesMobile" class="list-group">
-              <template id="listaTipoMobile">
-                <!--Template da Lista de tipos de empreendimentos-->
-                <a id="botao-opcao-mobile" href="javascript:void(0)"
-                  class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-                  onclick="chamarModalCard(this)" data-dismiss="modal" data-toggle="modal"
-                  data-target="#modalCardMobile"></a>
-              </template>
-            </ul>
-
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn-categoria-mobile" data-dismiss="modal">Ir para o mapa</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Cards Mobile -->
-  <div class="modal fade" id="modalCardMobile" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-mobile modal-dialog-scrollable" role="document">
-      <div class="modal-content modal-content-mobile">
-
-        <div class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center">
-
-          <div class="d-flex align-items-center">
-            <img id="img-categoria" style="height:36px; width:36px; margin-right: 20px;"
-              src="img/img-bl/01-aceleradora.png" alt="">
-            <p id="nome-categoria" style="margin: 0;">Categorias</p>
+    <!-- Modal Categoria Mobile -->
+    <div
+      class="modal fade"
+      id="modalCategoriaMobile"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalScrollableTitle"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-mobile modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content modal-content-mobile">
+          <div
+            class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
+          >
+            <p id="titulo-modal">Categorias</p>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
 
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-
-        </div>
-
-        <div class="modal-body d-flex justify-content-center">
-          <div class="" style="align-items: center;">
-
-            <!-- Template do Cartão das Empresas-->
-            <ul id="cartaoMobile" style="padding: 0;">
-              <template id="cartaoEmpresaMobile">
-
-                <div id="divImagemCartao" class="template-cartao">
-                  <div id="div-card-superior" class="d-flex justify-content-center">
-
-                    <div id="div-superior-imagem">
-                      <img id="img-card-prop" src="img/image.jpg" alt="">
-                    </div>
-
-                    <div id="div-superior-conteudo">
-                      <div id="div-conteudo-titulo">
-                        <p id="txt-titulo-card">NOME</p>
-                      </div>
-
-                      <div id="div-conteudo-descricao">
-                        <p id="txt-descricao-card">DESCRIÇÃO</p>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div id="div-card-inferior">
-
-                    <div id="div-inferior-btns" class="d-flex align-items-end texto-btn-evento1">
-                      <a id="btn-card1" class="d-flex align-items-center justify-content-center texto-btn-card1"
-                        href="javascript:void(0)">
-                        -
-                      </a>
-
-                      <a id="btn-card2" class="d-flex align-items-center justify-content-center texto-btn-card2"
-                        href="index.html" target="_blank">
-                        -
-                      </a>
-                    </div>
-
-                    <div id="div-inferior-txt" class="d-flex">
-                      <p id="txt-marcadopor">Marcado por:</p>
-                      <a id="txt-marcadopor-nome">Sicrano</a>
-                    </div>
-
-                  </div>
-                </div>
-              </template>
-            </ul>
-
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn-categoria-mobile2" data-dismiss="modal" data-toggle="modal"
-            data-target="#modalCategoriaMobile">
-            <i class="fas fa-angle-left" style="padding-right: 20px; padding-left: 5px;"></i>
-            Categorias
-          </button>
-          <button type="button" class="btn-categoria-mobile" data-dismiss="modal">Ir para o mapa</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!--TELA PRINCIPAL---------------------------------------------------------------------------------->
-
-  <div id="container_contudo">
-
-    <div id="linhas" style="height: 100%">
-
-      <!--BARRA LATERAL-->
-      <div id="div-menu" class="d-flex align-items-start">
-
-        <div id="div-menu-categoria">
-          <div id="coluna-menu">
-
-            <div id="coluna-menu-titulo" class="d-flex align-items-center">
-              <h5 id="texto-menu-titulo">CATEGORIAS</h5>
-
-              <!--Botão do Mobile-->
-              <div id="botao-titulo-mobile" class="input-group-append">
-                <a href="javascript:void(0)" class="btn btn-orange" type="submit" onclick="" data-toggle="modal"
-                  data-target="#modalCategoriaMobile">
-                  <i class="fas fa-search"></i>
-                </a>
-              </div>
-
-            </div>
-
-            <!--Template da barra lateral-->
-            <div id="coluna-categorias" data-spy="scroll" class="scrollspySite">
-              <ul id="listaOpcoes" class="list-group">
-                <template id="listaTipo">
-                  <!-- Template da Lista de tipos de empreendimentos-->
-                  <a id="botao-opcao" href="javascript:void(0)"
+          <div class="modal-body" style="padding: 0">
+            <div class="">
+              <ul id="listaOpcoesMobile" class="list-group">
+                <template id="listaTipoMobile">
+                  <!--Template da Lista de tipos de empreendimentos-->
+                  <a
+                    id="botao-opcao-mobile"
+                    href="javascript:void(0)"
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-                    onclick="chamaBarraOculta(this);">
-                  </a>
+                    onclick="chamarModalCard(this)"
+                    data-dismiss="modal"
+                    data-toggle="modal"
+                    data-target="#modalCardMobile"
+                  ></a>
                 </template>
               </ul>
             </div>
+          </div>
 
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn-categoria-mobile"
+              data-dismiss="modal"
+            >
+              Ir para o mapa
+            </button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!--COLUNA OCULTA-->
-        <div id="div-menu-card">
-          <div id="janela_oculta" style="display: none;">
-
-            <!--Barra superior da coluna oculta-->
-            <div id="coluna-menu-busca" class="d-flex align-items-center justify-content-center">
-
-              <form class="form-inline" onsubmit="return false">
-                <div class="input-group">
-                  <input id="contBusca" class="form-control" type="search" placeholder="Buscar" aria-label="Search"
-                    aria-describedby="basic-addon2">
-
-                  <div class="input-group-append">
-                    <a id="botaoBusca" href="javascript:void(0)" class="btn btn-orange" type="submit"
-                      onclick="filtroSelect(this)">
-                      <i class="fas fa-search"></i>
-                    </a>
-                  </div>
-
-                  <button id="btn_sair" type="button" class="d-flex align-items-center justify-content-center">
-                    <i class="fas fa-times icon-close-prop"></i>
-                  </button>
-                </div>
-              </form>
+    <!-- Modal Cards Mobile -->
+    <div
+      class="modal fade"
+      id="modalCardMobile"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalScrollableTitle"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-mobile modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content modal-content-mobile">
+          <div
+            class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
+          >
+            <div class="d-flex align-items-center">
+              <img
+                id="img-categoria"
+                style="height: 36px; width: 36px; margin-right: 20px"
+                src="img/img-bl/01-aceleradora.png"
+                alt=""
+              />
+              <p id="nome-categoria" style="margin: 0">Categorias</p>
             </div>
 
-            <div data-spy="scroll" class="scrollspySite d-flex justify-content-center">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
+          <div class="modal-body d-flex justify-content-center">
+            <div class="" style="align-items: center">
               <!-- Template do Cartão das Empresas-->
-              <ul id="cartao" style="padding: 0;">
-                <template id="cartaoEmpresa">
-
+              <ul id="cartaoMobile" style="padding: 0">
+                <template id="cartaoEmpresaMobile">
                   <div id="divImagemCartao" class="template-cartao">
-                    <div id="div-card-superior" class="d-flex justify-content-center">
-
+                    <div
+                      id="div-card-superior"
+                      class="d-flex justify-content-center"
+                    >
                       <div id="div-superior-imagem">
-                        <img id="img-card-prop" src="img/image.jpg" alt="">
+                        <img id="img-card-prop" src="img/image.jpg" alt="" />
                       </div>
 
                       <div id="div-superior-conteudo">
@@ -1139,19 +1638,27 @@
                           <p id="txt-descricao-card">DESCRIÇÃO</p>
                         </div>
                       </div>
-
                     </div>
 
                     <div id="div-card-inferior">
-
-                      <div id="div-inferior-btns" class="d-flex align-items-end texto-btn-evento1">
-                        <a id="btn-card1" class="d-flex align-items-center justify-content-center texto-btn-card1"
-                          href="javascript:void(0)">
+                      <div
+                        id="div-inferior-btns"
+                        class="d-flex align-items-end texto-btn-evento1"
+                      >
+                        <a
+                          id="btn-card1"
+                          class="d-flex align-items-center justify-content-center texto-btn-card1"
+                          href="javascript:void(0)"
+                        >
                           -
                         </a>
 
-                        <a id="btn-card2" class="d-flex align-items-center justify-content-center texto-btn-card2"
-                          href="index.html" target="_blank">
+                        <a
+                          id="btn-card2 "
+                          class="d-flex align-items-center justify-content-center texto-btn-card2"
+                          href="index.html"
+                          target="_blank"
+                        >
                           -
                         </a>
                       </div>
@@ -1160,115 +1667,359 @@
                         <p id="txt-marcadopor">Marcado por:</p>
                         <a id="txt-marcadopor-nome">Sicrano</a>
                       </div>
-
                     </div>
                   </div>
                 </template>
               </ul>
-
-            </div>
-
-
-          </div>
-        </div>
-
-      </div>
-
-      <!--MAPA-->
-      <div id="div-mapa">
-        <div id="location-map">
-          <!--Botão de indicação do endereço-->
-          <div id="marcar_info" style="display:none;">
-            <div id="divMsg">
-              <div class="d-flex justify-content-center">
-                <h6 class="textoAlerta">Clique no mapa para definir o endereço do sua instituição/evento</h6>
-              </div>
-            </div>
-            <div id="divButton">
-              <div class="d-flex justify-content-center">
-                <button id="map_button2" class="btn btn-submit btn-sm" style="font-weight: bold;">Cancelar</button>
-              </div>
             </div>
           </div>
 
-        </div>
-      </div>
-
-      <!--Tela de Cookies-->
-      <div class="box-cookies hide">
-        <div class="dimensaoConteudo">
-          <i class="fas fa-cookie-bite img-cookies"></i>
-          <div class="textoBotao">
-            <div>
-              <p class="title-cookies">Cookies</p>
-              <p class="msg-cookies">Este site utiliza cookies para a sua melhor experiência. Consulte nossa Política de
-                Privacidade para saber mais sobre como usamos e cuidamos dos seus dados. Ao continuar navegando, você
-                concorda automaticamente com os termos apresentados.</p>
-            </div>
-            <button class="btn-cookies">OK</button>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn-categoria-mobile2"
+              data-dismiss="modal"
+              data-toggle="modal"
+              data-target="#modalCategoriaMobile"
+            >
+              <i
+                class="fas fa-angle-left"
+                style="padding-right: 20px; padding-left: 5px"
+              ></i>
+              Categorias
+            </button>
+            <button
+              type="button"
+              class="btn-categoria-mobile"
+              data-dismiss="modal"
+            >
+              Ir para o mapa
+            </button>
           </div>
         </div>
       </div>
-
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
-      integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
-      crossorigin=""></script>
+    <!-- Modal Listagem de Patentes -->
+    <div
+      class="modal fade bd-example-modal-lg"
+      id="modalListagemPatentes"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content" id="modalContentPatentes">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLabel"
+              style="font-weight: bold"
+            >
+              Patentes
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onclick="deletarMarcador()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
-  </div>
+          <div
+            class="modal-body modal-lg"
+            id="listaPatentes"
+            role="document"
+          ></div>
 
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn-cadastro1"
+              data-dismiss="modal"
+              onclick="deletarMarcador()"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fim Modal Listagem de Patentes -->
 
-  <script>
-    var map = L.map('location-map').setView([-5.197144, -39.162609], 7);
+    <!--TELA PRINCIPAL---------------------------------------------------------------------------------->
 
-    L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 19,
-      id: 'mapbox/streets-v11',
-      accessToken: 'your.mapbox.access.token'
-    }).addTo(map);
+    <div id="container_contudo">
+      <div id="linhas" style="height: 100%">
+        <!--BARRA LATERAL-->
+        <div id="div-menu" class="d-flex align-items-start">
+          <div id="div-menu-categoria">
+            <div id="coluna-menu">
+              <div id="coluna-menu-titulo" class="d-flex align-items-center">
+                <h5 id="texto-menu-titulo">CATEGORIAS</h5>
 
-  </script>
+                <!--Botão do Mobile-->
+                <div id="botao-titulo-mobile" class="input-group-append">
+                  <a
+                    href="javascript:void(0)"
+                    class="btn btn-orange"
+                    type="submit"
+                    onclick=""
+                    data-toggle="modal"
+                    data-target="#modalCategoriaMobile"
+                  >
+                    <i class="fas fa-search"></i>
+                  </a>
+                </div>
+              </div>
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+              <!--Template da barra lateral-->
+              <div
+                id="coluna-categorias"
+                data-spy="scroll"
+                class="scrollspySite"
+              >
+                <ul id="listaOpcoes" class="list-group">
+                  <template id="listaTipo">
+                    <!-- Template da Lista de tipos de empreendimentos-->
+                    <a
+                      id="botao-opcao"
+                      href="javascript:void(0)"
+                      class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                      onclick="chamaBarraOculta(this);"
+                    >
+                    </a>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
-  <!--CDN da Masrcara-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+          <!--COLUNA OCULTA-->
+          <div id="div-menu-card">
+            <div id="janela_oculta" style="display: none">
+              <!--Barra superior da coluna oculta-->
+              <div
+                id="coluna-menu-busca"
+                class="d-flex align-items-center justify-content-center"
+              >
+                <form class="form-inline" onsubmit="return false">
+                  <div class="input-group">
+                    <input
+                      id="contBusca"
+                      class="form-control"
+                      type="search"
+                      placeholder="Buscar"
+                      aria-label="Search"
+                      aria-describedby="basic-addon2"
+                    />
 
-  <script src="javascript/config.js"></script>
-  <script src="model/componente.js"></script>
-  <script src="model/ceara.js"></script>
-  <script src="model/evento.js"></script>
-  <script src="model/comunidade.js"></script>
-  <script src="model/usuario.js"></script>
-  <script src="model/tipo.js"></script>
-  <script src="dao/eventodao.js"></script>
-  <script src="dao/comunidadedao.js"></script>
-  <script src="dao/usuariodao.js"></script>
-  <script src="dao/entidadedao.js"></script>
-  <script src="javascript/login.js"></script>
-  <script src="javascript/logica_comum.js"></script>
-  <script src="javascript/logica.js"></script>
-  <script src="javascript/comunidades.js"></script>
-  <script src="javascript/cookies.js"></script>
-  <script src="javascript/modal.js"></script>
+                    <div class="input-group-append">
+                      <a
+                        id="botaoBusca"
+                        href="javascript:void(0)"
+                        class="btn btn-orange"
+                        type="submit"
+                        onclick="filtroSelect(this)"
+                      >
+                        <i class="fas fa-search"></i>
+                      </a>
+                    </div>
 
-</body>
+                    <button
+                      id="btn_sair"
+                      type="button"
+                      class="d-flex align-items-center justify-content-center"
+                    >
+                      <i class="fas fa-times icon-close-prop"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
 
+              <div
+                data-spy="scroll"
+                class="scrollspySite d-flex justify-content-center"
+              >
+                <!-- Template do Cartão das Empresas-->
+                <ul id="cartao" style="padding: 0">
+                  <template id="cartaoEmpresa">
+                    <div id="divImagemCartao" class="template-cartao">
+                      <div
+                        id="div-card-superior"
+                        class="d-flex justify-content-center"
+                      >
+                        <div id="div-superior-imagem">
+                          <img id="img-card-prop" src="img/image.jpg" alt="" />
+                        </div>
+
+                        <div id="div-superior-conteudo">
+                          <div id="div-conteudo-titulo">
+                            <p id="txt-titulo-card">NOME</p>
+                          </div>
+
+                          <div id="div-conteudo-descricao">
+                            <p id="txt-descricao-card">DESCRIÇÃO</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div id="div-card-inferior">
+                        <div
+                          id="div-inferior-btns"
+                          class="d-flex align-items-end texto-btn-evento1"
+                        >
+                          <a
+                            id="btn-card1"
+                            class="d-flex align-items-center justify-content-center texto-btn-card1"
+                            href="javascript:void(0)"
+                          >
+                            -
+                          </a>
+
+                          <a
+                            id="btn-card2"
+                            class="d-flex align-items-center justify-content-center texto-btn-card2"
+                            href="index.html"
+                            target="_blank"
+                          >
+                            -
+                          </a>
+                        </div>
+
+                        <div id="div-inferior-txt" class="d-flex">
+                          <p id="txt-marcadopor">Marcado por:</p>
+                          <a id="txt-marcadopor-nome">Sicrano</a>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--MAPA-->
+        <div id="div-mapa">
+          <div id="location-map">
+            <!--Botão de indicação do endereço-->
+            <div id="marcar_info" style="display: none">
+              <div id="divMsg">
+                <div class="d-flex justify-content-center">
+                  <h6 class="textoAlerta">
+                    Clique no mapa para definir o endereço do sua
+                    instituição/evento
+                  </h6>
+                </div>
+              </div>
+              <div id="divButton">
+                <div class="d-flex justify-content-center">
+                  <button
+                    id="map_button2"
+                    class="btn btn-submit btn-sm"
+                    style="font-weight: bold"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Tela de Cookies-->
+        <div class="box-cookies hide">
+          <div class="dimensaoConteudo">
+            <i class="fas fa-cookie-bite img-cookies"></i>
+            <div class="textoBotao">
+              <div>
+                <p class="title-cookies">Cookies</p>
+                <p class="msg-cookies">
+                  Este site utiliza cookies para a sua melhor experiência.
+                  Consulte nossa Política de Privacidade para saber mais sobre
+                  como usamos e cuidamos dos seus dados. Ao continuar navegando,
+                  você concorda automaticamente com os termos apresentados.
+                </p>
+              </div>
+              <button class="btn-cookies">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script
+        src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+        integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+        crossorigin=""
+      ></script>
+    </div>
+
+    <script>
+      var map = L.map("location-map").setView([-5.197144, -39.162609], 7);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 19,
+        id: "mapbox/streets-v11",
+        accessToken: "your.mapbox.access.token",
+      }).addTo(map);
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+    <!--CDN da Masrcara-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <script src="javascript/config.js"></script>
+
+    <script src="model/componente.js"></script>
+    <script src="model/ceara.js"></script>
+    <script src="model/evento.js"></script>
+    <script src="model/comunidade.js"></script>
+    <script src="model/usuario.js"></script>
+    <script src="model/tipo.js"></script>
+    <script src="model/Patente.js"></script>
+    <script src="model/SegmentoStartup.js"></script>
+
+    <script src="dao/eventodao.js"></script>
+    <script src="dao/comunidadedao.js"></script>
+    <script src="dao/usuariodao.js"></script>
+    <script src="dao/entidadedao.js"></script>
+    <script src="dao/PatenteDAO.js"></script>
+    <script src="dao/SegmentosStartupDao.js"></script>
+
+    <script src="javascript/segmentos-startups.js"></script>
+    <script src="javascript/marcador-patentes.js"></script>
+    <script src="javascript/barra-oculta-patentes.js"></script>
+    <script src="javascript/login.js"></script>
+    <script src="javascript/logica_comum.js"></script>
+    <script src="javascript/logica.js"></script>
+    <script src="javascript/comunidades.js"></script>
+    <script src="javascript/cookies.js"></script>
+    <script src="javascript/modal.js"></script>
+  </body>
 </html>

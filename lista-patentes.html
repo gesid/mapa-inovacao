@@ -8,6 +8,14 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
+    <!-- Firebase Setup  -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+    <script src="javascript/config.js"></script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
       async
@@ -56,13 +64,16 @@
     ></script>
 
     <link rel="stylesheet" type="text/css" href="css/header.css" />
-    <link rel="stylesheet" type="text/css" href="css/usuario.css" />
+    <link rel="stylesheet" type="text/css" href="css/lista-patentes.css" />
 
+    <script src="model/evento.js"></script>
     <script src="model/usuario.js"></script>
+    <script src="model/Patente.js"></script>
+
+    <script src="dao/eventodao.js"></script>
 
     <script src="dao/usuariodao.js"></script>
-
-    <script src="javascript/login.js"></script>
+    <script src="dao/PatenteDAO.js"></script>
 
     <link rel="shortcut icon" href="img/favicon_2.png" />
     <title>Mapa do Ecossistema de Inovação Cearense</title>
@@ -90,7 +101,7 @@
 
         <!--Navegação-->
         <div id="menu-nav" class="collapse navbar-collapse">
-          <ul class="navbar-nav btnNav">
+          <ul id="lista-nav" class="navbar-nav btnNav">
             <li class="nav-item">
               <a
                 type="button"
@@ -126,10 +137,40 @@
               </a>
             </li>
 
-            <!-- <li class="nav-item">
+            <li class="nav-item">
+              <div class="dropdown show">
+                <a
+                  class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style"
+                  href="#"
+                  role="button"
+                  id="dropDownNavPatente"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-stamp"> </i>
+                  <p class="texto-nav">PATENTES</p>
+                </a>
+
+                <div
+                  class="dropdown-menu"
+                  id="opcoesDropdownPatentes"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="./cadastro-patente.html"
+                    >Cadastrar Patente</a
+                  >
+                  <a class="dropdown-item" href="./lista-patentes.html"
+                    >Ver lista de patentes</a
+                  >
+                </div>
+              </div>
+            </li>
+            <!-- 
+            <li class="nav-item">
               <a
                 type="button"
-                href="eventos.html"
+                href="https://www.google.com"
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-chart-pie"></i>
@@ -139,18 +180,89 @@
           </ul>
         </div>
 
-        <form id="btn-user" class="dropdownHeader">
-          <button
-            class="btn-dropdown-header dropdown-toggle"
-            type="button"
-            id="dropdownMenu2"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          ></button>
-        </form>
+        <div id="menu-nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav btnNav"></ul>
+          <form class="form-inline" onsubmit="return false">
+            <div id="btn-user" class="dropdownHeader">
+              <button
+                class="btn-dropdown-header dropdown-toggle"
+                type="button"
+                id="dropdownMenu2"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              ></button>
+            </div>
+          </form>
+        </div>
       </nav>
     </header>
+
+    <!--Barra Mobile-->
+    <div id="barraMobile">
+      <form id="form-mobile" class="form-inline" onsubmit="return false">
+        <div class="input-group buscaHeader">
+          <input
+            id="barraBuscaPatentesMobile"
+            type="text"
+            class="form-control"
+            placeholder="Tipo de Busca: por título"
+            aria-label="Buscar..."
+            aria-describedby="basic-addon2"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-busca font-weight-bold"
+              type="button"
+              onclick="filtrarPatentesPorTipoBusca()"
+            >
+              Buscar
+            </button>
+            <button
+              type="button"
+              class="btn btn-busca-dropdown dropdown-toggle dropdown-toggle-split"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+
+            <div class="dropdown-menu">
+              <a class="dropdown-item disabled" href="#">Tipo de busca</a>
+              <div class="dropdown-divider"></div>
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="título"
+                data-texto="TITULO"
+                data-label="título"
+                onclick="selecionarTipoBusca(this)"
+                >Por título</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="Subtipo"
+                data-texto="DEPOSITANTE"
+                data-label="depositante"
+                onclick="selecionarTipoBusca(this)"
+                >Por depositante</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="Subtipo"
+                data-texto="SECAO"
+                data-label="seção"
+                onclick="selecionarTipoBusca(this)"
+                >Por seção</a
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
     <!-- Modal Como Utilizar -->
     <div
@@ -169,7 +281,7 @@
           <div
             class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
           >
-            <p id="titulo-modal">
+            <p id="título-modal">
               Colaborar é muito simples! Veja no vídeo abaixo como funciona:
             </p>
             <button
@@ -193,52 +305,26 @@
     </div>
 
     <main class="main">
-      <div class="d-flex align-items-center justify-content-center">
-        <div>
-          <div class="card-login">
-            <form>
-              <div>
-                <div class="d-flex justify-content-center">
-                  <div id="moldura-usuario">
-                    <i class="fas fa-user-circle" style="font-size: 120px"></i>
-                  </div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                  <p id="card-login-title"></p>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                  <small id="card-login-text"></small>
-                </div>
-              </div>
-
-              <div
-                class="form-row d-flex align-items-center justify-content-center"
-              >
-                <hr class="divisor" />
-                <small class="form-row d-flex justify-content-center">
-                  <a
-                    style="color: #2965da"
-                    class="card-login-text mr-1"
-                    href="mailto:mapa.inovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
-                    >Fale Conosco</a
-                  >
-                  <p>-</p>
-                  <a
-                    style="color: #2965da"
-                    class="card-login-text ml-1"
-                    href="javascript:void(0)"
-                    >Reportar Bugs/Melhorias</a
-                  >
-                </small>
-              </div>
-            </form>
-          </div>
+      <!--Barra do título da página-->
+      <div class="d-flex justify-content-center">
+        <div id="barra-title">
+          <p
+            id="barra-text-title"
+            class="d-flex align-items-center justify-content-center"
+          >
+            PATENTES
+          </p>
         </div>
       </div>
 
-      <!--<div class="margemInferior"></div>-->
+      <div class="d-flex justify-content-center">
+        <div id="eventoNaoEncontrado">
+          <i id="imgEventoNaoEncontrado" class="far fa-frown"></i>
+          <p id="textoEventoNaoEncontrado">Não há eventos com este título.</p>
+        </div>
+      </div>
+
+      <ul id="lista-patentes"></ul>
     </main>
 
     <footer class="footerstyle footer">
@@ -285,7 +371,6 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -302,18 +387,11 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
-
-    <script src="javascript/config.js"></script>
-
     <script src="javascript/logica_comum.js"></script>
-
-    <script src="javascript/usuario.js"></script>
-
+    <script src="javascript/login.js"></script>
     <script src="javascript/modal.js"></script>
+
+    <script src="javascript/lista-patentes.js"></script>
+    <script src="javascript/patentes.js"></script>
   </body>
 </html>
