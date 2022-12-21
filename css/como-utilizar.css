@@ -1,101 +1,100 @@
-html{
-	height: 100%;
-	overflow: hidden;
+html {
+  height: 100%;
+  overflow: hidden;
 }
-html body{
-	height: 100%;
-}
-
-body{
-	width: 100%;
-	margin: 0;
-	padding: 0;
+html body {
+  height: 100%;
 }
 
-#divPrincipal{
-	height: 90%;
-	overflow: auto;
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-main{
-
+#divPrincipal {
+  height: 90%;
+  overflow: auto;
 }
 
-footer{
-	width: 100%;
+main {
 }
 
-nav{
-	margin: 0; 
-	padding: 0;
+footer {
+  width: 100%;
 }
 
-body header nav{
-	background-color:#122915;
-	margin: 0; 
-	padding: 0;
+nav {
+  margin: 0;
+  padding: 0;
 }
 
-div div div{
-	padding: 0;
+body header nav {
+  background-color: #122915;
+  margin: 0;
+  padding: 0;
 }
 
-h4{  
-	right: 35%;
+div div div {
+  padding: 0;
 }
 
-h5{
-	color:#FF9500;
+h4 {
+  right: 35%;
 }
 
-h6{
-	color:#FE9A2E;
+h5 {
+  color: #ff9500;
 }
 
-.divisor{
-	width: 1px;
-	background: rgba(0,0,0,.5);
-	margin: 11px 15px;
+h6 {
+  color: #fe9a2e;
 }
 
-.footerstyle{
-	background-color: #122915; 
-	height: 5%; 
-	margin-top: auto;
+.divisor {
+  width: 1px;
+  background: rgba(0, 0, 0, 0.5);
+  margin: 11px 15px;
 }
 
-.btn-navegador{
-	font-weight: 400;
-	color: #ddd;
-	text-decoration: none;  
+.footerstyle {
+  background-color: #122915;
+  height: 5%;
+  margin-top: auto;
 }
 
-.btn-navegador:hover{
-	  color: #F19A3D;
+.btn-navegador {
+  font-weight: 400;
+  color: #ddd;
+  text-decoration: none;
 }
 
-.btn-navegador:focus{
-	  box-shadow: none;
+.btn-navegador:hover {
+  color: #f19a3d;
 }
 
-.barraEscolha{
-	color:#000;	
+.btn-navegador:focus {
+  box-shadow: none;
 }
 
-.barraEscolha:hover{
-	color:#FFCF9C;
+.barraEscolha {
+  color: #000;
 }
 
-.btn-selecionado{
-	font-weight: 700;
-	color: #c5be86;
-	text-decoration: none;  
+.barraEscolha:hover {
+  color: #ffcf9c;
 }
 
-.btn-selecionado:hover{
-	  color: #c5be86;
+.btn-selecionado {
+  font-weight: 700;
+  color: #c5be86;
+  text-decoration: none;
 }
 
-.btn-selecionado:focus{
-	  box-shadow: none;
+.btn-selecionado:hover {
+  color: #c5be86;
+}
+
+.btn-selecionado:focus {
+  box-shadow: none;
 }

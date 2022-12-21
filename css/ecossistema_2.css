@@ -1,4 +1,7 @@
 /*Notebook*/
+.navbar-expand-xl{
+    justify-content: space-between;
+}
 
 @media only screen and (min-width: 1200px) {
     html {
