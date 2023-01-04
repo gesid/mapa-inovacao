@@ -59,7 +59,7 @@ function gerarHtmlPatenteListaOculta(patente) {
         mt-3
       "
     >
-      <a href="/lista-patentes.html?key=${patente.keyFirebase}">Ver Mais Informações</a>
+      <a href="/patentes.html?key=${patente.keyFirebase}">Ver Mais Informações</a>
     </button>
   </div>
   `;
