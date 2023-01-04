@@ -1,0 +1,365 @@
+.barra {
+  background-color: #019267;
+}
+
+#todasCat {
+  cursor: pointer;
+}
+
+#barra_nav {
+  justify-content: space-between;
+}
+
+.navbar-collapse,
+#menu-nav {
+  flex-grow: 0;
+  flex-basis: 0%;
+}
+
+.texto-nav {
+  font-size: 13px;
+}
+
+.nav-item:last-child {
+  margin-left: 16px;
+}
+
+.dropdown-menu {
+  min-width: 0px;
+}
+
+@media only screen and (max-width: 1400px) {
+  .btn-busca {
+    width: 117px;
+    height: 35.2px;
+    border-width: 1px;
+    border-left-style: solid;
+    border-color: white;
+    border-radius: 0;
+    background: #fc6a38;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: small;
+  }
+  .btn-busca:hover {
+    color: #1f4d37;
+  }
+  .btn-busca-dropdown {
+    height: 35.2px;
+    border-width: 1px;
+    border-left-style: solid;
+    border-color: white;
+    border-radius: 0;
+    background: #fc6a38;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: small;
+  }
+  .btn-busca-dropdown:hover {
+    color: #1f4d37;
+  }
+  .form-control {
+    /* width: 200px; */
+    height: 35.2px;
+    border-radius: 0;
+  }
+  .buscaHeader {
+    position: relative;
+    right: 0px;
+  }
+  #barraMobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 54px;
+    background: #3d996d;
+  }
+  #form-mobile {
+    display: flex;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  /*PROPRIEDADES DA BARRA DE NAVEGAÇÃO*/
+  header {
+    background: linear-gradient(90deg, #1f4d37 0.68%, #00833a 99.69%);
+    width: 100%;
+    display: flex;
+    align-content: space-between;
+    padding: 12px 0px;
+  }
+  .navbar {
+    width: inherit;
+  }
+  .logo {
+    position: relative;
+    width: 116px;
+    height: 41.46px;
+    /* margin-left: 39.2px; */
+  }
+
+  .navbar-collapse {
+    flex-grow: 0;
+  }
+
+  .dropdownHeader {
+    position: relative;
+    /* margin-right: 62.4px; */
+  }
+  /*ESTILO DOSTEXTOS/BOTÕES*/
+  .btnNav {
+    position: relative;
+    /* margin-left: 177.6px; */
+    /* margin-right: auto; */
+  }
+  .btn-dropdown-header {
+    border: 1px solid #fc6a38;
+    width: 142.4px;
+    height: 35.2px;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    font-size: x-small;
+  }
+  .dropdown-item-list {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+  }
+  .dropdown-item-list:hover {
+    background: #f8f9fa;
+  }
+  .dropdown-item:active {
+    color: #00833a;
+  }
+
+  .buscaHeader {
+    position: absolute;
+    right: 220px;
+  }
+  .btn-busca {
+    width: 117px;
+    height: 35.2px;
+    border-width: 1px;
+    border-left-style: solid;
+    border-color: white;
+    border-radius: 0;
+    background: #fc6a38;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: small;
+  }
+  .btn-busca:hover {
+    color: #1f4d37;
+  }
+  .btn-busca-dropdown {
+    height: 35.2px;
+    border-width: 1px;
+    border-left-style: solid;
+    border-color: white;
+    border-radius: 0;
+    background: #fc6a38;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: small;
+  }
+  .btn-busca-dropdown:hover {
+    color: #1f4d37;
+  }
+  .form-control {
+    /* width: 200px; */
+    height: 35.2px;
+    border-radius: 0;
+  }
+
+  .btn-login {
+    border: 1px solid #fc6a38;
+    width: 117.6px;
+    height: 35.2px;
+    background-color: #fc6a38;
+    color: white;
+  }
+  .texto-btn-login {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 11.2px;
+    margin: 0px 0px 0px 0px;
+  }
+  .icon-prop {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+  .texto-usuario {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    margin: 0px 0px 0px 0px;
+  }
+  .icon-prop-usuario {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+  a:hover {
+    color: #1f4d37;
+    text-decoration: none;
+  }
+  .nav-item-style {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: white;
+    border-left-style: solid;
+    border-width: 1px;
+    border-color: #fc6a38;
+    padding-left: 15px;
+  }
+  .nav-item-style:hover {
+    color: #cf5b15;
+    text-decoration: none;
+  }
+  .texto-nav {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    margin: 0px 15px 0px 0px;
+    padding-left: 15px;
+  }
+  #form-mobile {
+    display: none;
+  }
+  #barraMobile {
+    display: none;
+    width: 100%;
+    height: 54px;
+    background: #3d996d;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  /*BARRA DE NAVEGAÇÃO*/
+  header {
+    background: linear-gradient(90deg, #1f4d37 0.68%, #00833a 99.69%);
+    width: 100%;
+    min-height: 60px;
+    left: 0px;
+    top: 0px;
+    display: flex;
+  }
+  .logo {
+    position: relative;
+    width: 107px;
+    height: 39px;
+    margin-left: 20px;
+  }
+  .navbar {
+    width: inherit;
+  }
+  .btn-dropdown-header {
+    border: 1px solid #fc6a38;
+    width: 142.4px;
+    height: 35.2px;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    font-size: x-small;
+  }
+  .dropdown-item-list {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+  }
+  .dropdown-item-list:hover {
+    background: #f8f9fa;
+  }
+  .dropdown-item:active {
+    color: #00833a;
+  }
+  .btn-login {
+    border: 1px solid #fc6a38;
+    width: 117.6px;
+    height: 35.2px;
+    background-color: #fc6a38;
+    color: white;
+    margin-top: 15px;
+  }
+  .texto-btn-login {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 11.2px;
+    margin: 0px 0px 0px 0px;
+  }
+  .icon-prop {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+  .texto-usuario {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    margin: 0px 0px 0px 0px;
+  }
+  .icon-prop-usuario {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+  a:hover {
+    color: #1f4d37;
+    text-decoration: none;
+  }
+  .nav-item-style {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: white;
+    border-left-style: solid;
+    border-width: 1px;
+    border-color: #fc6a38;
+    padding: 15px 0px 0px 15px;
+  }
+  .nav-item-style:hover {
+    color: #cf5b15;
+    text-decoration: none;
+  }
+  .texto-nav {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    margin: 0px 15px 0px 0px;
+    padding-left: 15px;
+  }
+  #form-pc {
+    display: none;
+  }
+
+  .nav-item {
+    justify-content: flex-start;
+  }
+
+  .nav-item:last-child {
+    margin-left: 0px;
+    margin-bottom: 24px;
+  }
+}

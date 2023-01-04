@@ -97,14 +97,15 @@ entidadedao.varredura().then(function (entidade) {
 
   exibirMarcadores(ecossistema, entidadeArray);
   ecossistema.forEach(criarListaOpcoes);
+
+  const patenteDAO = new PatenteDAO();
+
+  patenteDAO.listarTodasPatentes().then((patentes) => {
+    const contadorPatentes = document.querySelector(".contador-patentes");
+    contadorPatentes.innerHTML = patentes.length;
+  });
 });
 
-const patenteDAO = new PatenteDAO();
-
-patenteDAO.listarTodasPatentes().then((patentes) => {
-  const contadorPatentes = document.querySelector(".contador-patentes");
-  contadorPatentes.innerHTML = patentes.length;
-});
 //Fim Main-------------------------------------------------------------
 
 function reload() {
