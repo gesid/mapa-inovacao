@@ -102,7 +102,7 @@ function gerarHtmlPatenteLista(patente) {
                 btn-ver-descricao-patente-modal
               "
             >
-              <a href="/lista-patentes.html?key=${patente.keyFirebase}">
+              <a href="/patentes.html?key=${patente.keyFirebase}">
                 Ver Mais Informações
               </a>
             </button>
