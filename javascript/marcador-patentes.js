@@ -2,10 +2,10 @@ const modalListagemPatentes = document.getElementById("modalListagemPatentes");
 
 let patentesCadastradas = [];
 
-window.onload = async () => {
-  const patenteDAO = new PatenteDAO();
-  patentesCadastradas = await patenteDAO.listarTodasPatentes();
-};
+const patenteDAOMarcador = new PatenteDAO();
+patenteDAOMarcador.listarTodasPatentes().then((patentes) => {
+  patentesCadastradas = patentes;
+});
 
 async function mostrarModalListagemPatentes(elementoClicado) {
   const idDepositanteSelecionado = elementoClicado.dataset.key;

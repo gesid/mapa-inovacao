@@ -12,7 +12,7 @@ class PatenteDAO {
   async buscarPatentesFirebasePorDepositante(idDepositante) {
     const patentesFirebase = [];
 
-    const rootRef = database.ref("/patentes");
+    const rootRef = firebaseDatabase.ref("/patentes");
     const snapshot = await rootRef
       .orderByChild("IdDepositante")
       .equalTo(idDepositante)
@@ -37,7 +37,7 @@ class PatenteDAO {
   async buscarTodasPatentesFirebase() {
     const patentesFirebase = [];
 
-    const rootRef = database.ref("/patentes");
+    const rootRef = firebaseDatabase.ref("/patentes");
     const snapshot = await rootRef.orderByChild("Titulo").once("value");
 
     snapshot.forEach((child) => {
