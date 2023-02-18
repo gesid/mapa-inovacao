@@ -74,7 +74,7 @@ ecossistema.push(new Escolas());
 ecossistema.push(new Makers());
 ecossistema.push(new Eventos());
 ecossistema.push(new FabricaApp());
-//ecossistema.push(new Governo())
+ecossistema.push(new Governo());
 ecossistema.push(new Empresas());
 ecossistema.push(new Incubadoras());
 ecossistema.push(new iniUniversitarias());
@@ -684,43 +684,43 @@ function filtroMarcador() {
     selecaoFiltro.push(ecossistema[7]);
   }
   if ($("#CheckboxGoverno").prop("checked") == true) {
-    selecaoFiltro.push(ecossistema[100]);
-  }
-  if ($("#CheckboxEmpresas").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[8]);
   }
-  if ($("#CheckboxIncubadoras").prop("checked") == true) {
+  if ($("#CheckboxEmpresas").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[9]);
   }
-  if ($("#CheckboxiniUniversitarias").prop("checked") == true) {
+  if ($("#CheckboxIncubadoras").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[10]);
   }
-  if ($("#CheckboxInvestidores").prop("checked") == true) {
+  if ($("#CheckboxiniUniversitarias").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[11]);
+  }
+  if ($("#CheckboxInvestidores").prop("checked") == true) {
+    selecaoFiltro.push(ecossistema[12]);
   }
   if ($("#CheckboxMissoes").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[100]);
   }
   if ($("#CheckboxNucleos").prop("checked") == true) {
-    selecaoFiltro.push(ecossistema[12]);
-  }
-  if ($("#CheckboxParques").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[13]);
   }
-  if ($("#CheckboxpreAceleradoras").prop("checked") == true) {
+  if ($("#CheckboxParques").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[14]);
   }
-  if ($("#CheckboxpropIntelectuais").prop("checked") == true) {
+  if ($("#CheckboxpreAceleradoras").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[15]);
+  }
+  if ($("#CheckboxpropIntelectuais").prop("checked") == true) {
+    selecaoFiltro.push(ecossistema[16]);
   }
   if ($("#CheckboxProvedores").prop("checked") == true) {
     selecaoFiltro.push(ecossistema[100]);
   }
   if ($("#CheckboxMentoria").prop("checked") == true) {
-    selecaoFiltro.push(ecossistema[16]);
+    selecaoFiltro.push(ecossistema[17]);
   }
   if ($("#CheckboxStartup").prop("checked") == true) {
-    selecaoFiltro.push(ecossistema[17]);
+    selecaoFiltro.push(ecossistema[18]);
   }
 
   exibirMarcadores(selecaoFiltro, entidadeArray);
