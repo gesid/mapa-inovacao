@@ -319,6 +319,7 @@ function limparFormulario() {
   limparInputById("numeroPedidoInpi");
 
   dataPublicacoPatente = formattedDate;
+  depositantesSelecionados = [];
 
   limparSelecaoDepositantes();
   limparDepositantesSelecionados();

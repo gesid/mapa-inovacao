@@ -1,549 +1,383 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mapa Ecossistema de Inovação Cearense - Cadastro de Patente</title>
-    <link rel="shortcut icon" href="img/favicon_2.png" />
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa Ecossistema de Inovação Cearense - Cadastro de Patente</title>
+  <link rel="shortcut icon" href="img/favicon_2.png" />
 
-    <!-- JQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-    <!-- Necessários para o timedatpicker  -->
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment-with-locales.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
 
-    <script src="https://rawgit.com/tempusdominus/bootstrap-4/master/build/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Necessários para o timedatpicker  -->
+  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment-with-locales.js"></script>
 
-    <link
-      href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+  <script src="https://rawgit.com/tempusdominus/bootstrap-4/master/build/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/cadastro-patente.css" />
-    <link rel="stylesheet" type="text/css" href="css/modal.css" />
+  <link href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.min.css"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <!-- font-awsome-->
-    <script
-      src="https://kit.fontawesome.com/16786d0779.js"
-      crossorigin="anonymous"
-    ></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/header.css" />
+  <link rel="stylesheet" href="./css/cadastro-patente.css" />
+  <link rel="stylesheet" type="text/css" href="css/modal.css" />
+  <link rel="stylesheet" type="text/css" href="css/footer-component.css" />
 
-    <!-- Firebase Setup -->
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
-    <script src="javascript/config.js"></script>
-  </head>
+  <!-- font-awsome-->
+  <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
 
-  <body>
-    <header>
-      <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
-        <!--Logo -->
-        <a href="index.html" class="btnLogo"
-          ><img class="logo" src="img\logos\logo-svg.svg"
-        /></a>
+  <!-- Firebase Setup -->
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+  <script src="javascript/config.js"></script>
+</head>
 
-        <!--Menu Hamburguer-->
-        <button
-          class="navbar-toggler"
-          data-toggle="collapse"
-          data-target="#menu-nav"
-          aria-controls="#menu-nav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<body>
+  <header>
+    <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
+      <!--Logo -->
+      <a href="index.html" class="btnLogo"><img class="logo" src="img\logos\logo-svg.svg" /></a>
 
-        <!--Navegação-->
-        <div id="menu-nav" class="collapse navbar-collapse">
-          <ul id="lista-nav" class="navbar-nav btnNav">
-            <li class="nav-item">
-              <a
-                type="button"
-                href="ecossistema.html"
-                class="d-flex align-items-center justify-content-start nav-item-style"
-              >
-                <i class="fas fa-newspaper"></i>
-                <p class="texto-nav">ECOSSISTEMA</p>
+      <!--Menu Hamburguer-->
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#menu-nav" aria-controls="#menu-nav"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!--Navegação-->
+      <div id="menu-nav" class="collapse navbar-collapse">
+        <ul id="lista-nav" class="navbar-nav btnNav">
+          <li class="nav-item">
+            <a type="button" href="index.html" class="nav-item-style">
+              <i class="fas fa-map-marker-alt"> </i>
+              <p class="texto-nav">MAPA</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a type="button" href="ecossistema.html"
+              class="d-flex align-items-center justify-content-start nav-item-style">
+              <i class="fas fa-newspaper"></i>
+              <p class="texto-nav">ECOSSISTEMA</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a type="button" href="javascript:void(0)"
+              class="d-flex align-items-center justify-content-start nav-item-style" data-toggle="modal"
+              data-target="#modalSobre">
+              <i class="fas fa-chalkboard-teacher"> </i>
+              <p class="texto-nav">TUTORIAL</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a type="button" href="eventos.html" class="d-flex align-items-center justify-content-start nav-item-style">
+              <i class="fas fa-theater-masks"> </i>
+              <p class="texto-nav">EVENTOS</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <div class="dropdown show">
+              <a class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style" href="#"
+                role="button" id="dropDownNavPatente" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-stamp"> </i>
+                <p class="texto-nav">PATENTES</p>
               </a>
-            </li>
 
-            <li class="nav-item">
-              <a
-                type="button"
-                href="javascript:void(0)"
-                class="d-flex align-items-center justify-content-start nav-item-style"
-                data-toggle="modal"
-                data-target="#modalSobre"
-              >
-                <i class="fas fa-chalkboard-teacher"> </i>
-                <p class="texto-nav">TUTORIAL</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a
-                type="button"
-                href="eventos.html"
-                class="d-flex align-items-center justify-content-start nav-item-style"
-              >
-                <i class="fas fa-theater-masks"> </i>
-                <p class="texto-nav">EVENTOS</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <div class="dropdown show">
-                <a
-                  class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style"
-                  href="#"
-                  role="button"
-                  id="dropDownNavPatente"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-stamp"> </i>
-                  <p class="texto-nav">PATENTES</p>
-                </a>
-
-                <div
-                  class="dropdown-menu"
-                  id="opcoesDropdownPatentes"
-                  aria-labelledby="dropdownMenuLink"
-                >
-                  <a class="dropdown-item" href="./cadastro-patente.html"
-                    >Cadastrar Patente</a
-                  >
-                  <a class="dropdown-item" href="./patentes.html"
-                    >Ver lista de patentes</a
-                  >
-                </div>
-              </div>
-            </li>
-
-            <li class="nav-item">
-              <a
-                type="button"
-                href="dashboard.html"
-                class="d-flex align-items-center justify-content-start nav-item-style"
-              >
-                <i class="fas fa-chart-pie"></i>
-                <p class="texto-nav">DASHBOARD</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <form id="btn-user" class="dropdownHeader">
-          <button
-            class="btn-dropdown-header dropdown-toggle"
-            type="button"
-            id="dropdownMenu2"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          ></button>
-        </form>
-      </nav>
-    </header>
-
-    <section
-      class="d-flex align-items-center justify-content-center flex-d-column"
-    >
-      <form class="form-login d-flex align-items-center flex-column">
-        <h1>Cadastrar Patente</h1>
-
-        <div class="form-group col-12">
-          <label for="tituloPatente">Título da patente*</label>
-          <input
-            class="form-control form-control"
-            type="text"
-            required="required"
-            id="tituloPatente"
-            placeholder="Título da Patente*"
-          />
-        </div>
-
-        <div class="form-row mt-3 col-12">
-          <div class="form-group col-12">
-            <label for="descricaoPatente">Descrição*</label>
-            <textarea
-              class="form-control"
-              id="descricaoPatente"
-              rows="3"
-            ></textarea>
-          </div>
-        </div>
-
-        <div class="form-group col-12 mt-3">
-          <p class="strong-text">Seções da Patente*</p>
-
-          <div class="col-12">
-            <input
-              class="mr-2"
-              name="checkboxSecaoPatente"
-              type="checkbox"
-              id="necessidadesHumanasCbx"
-              value="Seção A - Necessidade Humanas"
-            />
-            <label for="necessidadesHumanasCbx"
-              >Seção A - Necessidade Humanas</label
-            >
-          </div>
-
-          <div class="col-12">
-            <input
-              class="mr-2"
-              name="checkboxSecaoPatente"
-              type="checkbox"
-              id="operacoesProcessamentoTransporteCbx"
-              value="Seção B - Operações de Processameto, Transporte"
-            />
-            <label for="operacoesProcessamentoTransporteCbx"
-              >Seção B - Operações de Processameto, Transporte</label
-            >
-          </div>
-
-          <div class="col-12">
-            <input
-              class="mr-2"
-              name="checkboxSecaoPatente"
-              type="checkbox"
-              id="quimicaMetalurgiaCbx"
-              value="Seção C - Química e Metalurgia"
-            />
-            <label for="quimicaMetalurgiaCbx"
-              >Seção C - Química e Metalurgia</label
-            >
-          </div>
-
-          <div class="col-12">
-            <input
-              class="mr-2"
-              name="checkboxSecaoPatente"
-              type="checkbox"
-              id="textelPapelCbx"
-              value="Seção D - Têxteis e Papel"
-            />
-            <label for="textelPapelCbx">Seção D - Têxteis e Papel</label>
-          </div>
-
-          <div class="col-12">
-            <input
-              class="mr-2"
-              name="checkboxSecaoPatente"
-              type="checkbox"
-              id="construcoesFixasCbx"
-              value="Seção E - Construções Fixas"
-            />
-            <label for="construcoesFixasCbx">Seção E - Construções Fixas</label>
-          </div>
-
-          <div class="col-12">
-            <input
-              class="mr-2"
-              name="checkboxSecaoPatente"
-              type="checkbox"
-              id="engMecanicaCbx"
-              value="Seção F - Eng. Mecânica, Iluminação, Aquecimento, Armas, Explosão"
-            />
-            <label for="engMecanicaCbx"
-              >Seção F - Eng. Mecânica, Iluminação, Aquecimento, Armas,
-              Explosão</label
-            >
-          </div>
-
-          <div class="col-12">
-            <input
-              class="mr-2"
-              name="checkboxClassficacaoPatente"
-              id="fisicaCbx"
-              type="checkbox"
-              value="Seção G - Física"
-            />
-            <label for="fisicaCbx">Seção G - Física</label>
-          </div>
-
-          <div class="col-12">
-            <input
-              class="mr-2"
-              name="checkboxClassficacaoPatente"
-              id="eletricidadeCbx"
-              type="checkbox"
-              value="Seção H - Eletricidade"
-            />
-            <label for="eletricidadeCbx">Seção H - Eletricidade</label>
-          </div>
-        </div>
-
-        <div class="form-group col-12">
-          <label for="classificacoesPatente">Classifições da Patente*</label>
-          <input
-            id="classificacoesPatente"
-            class="form-control form-control"
-            type="text"
-            required="required"
-            placeholder="Ex.: H01M 4/133; H01M 4/131; H01M 4/583"
-          />
-          <p class="texto-ajuda">
-            Cada classificação deve ser separada por ponto e vírgula(;) como no
-            exemplo*
-          </p>
-        </div>
-
-        <div class="form-row justify-content-between mt-3 col-12 p-0">
-          <div class="form-group col-6">
-            <label for="numeroPedidoInpi">Número do pedido no INPI*</label>
-            <input
-              class="form-control form-control"
-              type="text"
-              required="required"
-              id="numeroPedidoInpi"
-              placeholder="Número do pedido no INPI"
-            />
-          </div>
-
-          <div
-            class="input-group date col-6"
-            id="datetimePickerPatente"
-            data-target-input="nearest"
-          >
-            <div class="d-flex flex-column col-12 p-0">
-              <label for="datetimePickerPatente">Data de publicação*</label>
-
-              <div class="d-flex flex-row">
-                <input
-                  id="dtpicker"
-                  type="text"
-                  class="form-control datetimepicker-input"
-                  required="required"
-                  data-target="#datetimePickerPatente"
-                />
-                <span
-                  class="input-group-text"
-                  data-target="#datetimePickerPatente"
-                  data-toggle="datetimepicker"
-                >
-                  <span class="fa fa-calendar"></span>
-                </span>
+              <div class="dropdown-menu" id="opcoesDropdownPatentes" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="./cadastro-patente.html">Cadastrar patente</a>
+                <a class="dropdown-item" href="./patentes.html">Ver lista de patentes</a>
               </div>
             </div>
-          </div>
-        </div>
+          </li>
 
-        <div class="col-12 p-0">
-          <div class="grupo-selecao-depositante col-12 mt-3 p-0">
-            <h2 class="ml-3">Depositantes*</h2>
+          <li class="nav-item">
+            <a type="button" href="dashboard.html"
+              class="d-flex align-items-center justify-content-start nav-item-style">
+              <i class="fas fa-chart-pie"></i>
+              <p class="texto-nav">DASHBOARD</p>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-            <div
-              class="form-row justify-content-between mt-3 col-12 selecao-depositante"
-            >
-              <div class="form-group col-6 mb-0">
-                <label for="selectTipoDepositantePatente"
-                  >Classificação do Depositante*</label
-                >
-                <select
-                  class="form-control form-control mb-0"
-                  id="selectTipoDepositantePatente"
-                  required="required"
-                  placeholder="selectTipoDepositantePatente"
-                >
-                  <option value="NAO_SELECIONADO" selected disabled>
-                    Selecionar...
-                  </option>
-                  <option>Aceleradora</option>
-                  <option>Catalisadores Locais</option>
-                  <option>Comunicação e Mídia</option>
-                  <option>Coworking</option>
-                  <option>Escolas</option>
-                  <option>Espaços Makers</option>
-                  <option>Eventos</option>
-                  <option>Fábrica de Aplicativos</option>
-                  <option>Grandes Empresas</option>
-                  <option>Incubadoras</option>
-                  <option>Iniciativas Universitárias</option>
-                  <option>Investidores</option>
-                  <option>Núcleos de Inovação</option>
-                  <option>Parques Tecnológicos</option>
-                  <option>Pré Aceleradoras</option>
-                  <option>Propriedade Intelectual</option>
-                  <option>Mentoria</option>
-                  <option>Startup</option>
-                </select>
-              </div>
-
-              <div
-                class="col-6 d-flex flex-row align-items-end justify-content-between"
-              >
-                <div
-                  class="col-11 d-flex flex-row align-items-end justify-content-between"
-                >
-                  <div class="d-flex form-group col-12 flex-column p-0 mb-0">
-                    <label for="selectOpcoesDepositantePatente"
-                      >Despositante*</label
-                    >
-                    <select
-                      class="form-control form-control"
-                      id="selectOpcoesDepositantePatente"
-                      required="required"
-                      placeholder="selectOpcoesDepositantePatente"
-                      disabled
-                    ></select>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  id="btnAddPatente"
-                  class="btn btn-success btn-add-depositante"
-                >
-                  <i class="fas fa-plus"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="containerDepositantes"
-          class="col-12 justify-content-center align-items-center d-flex mt-4 flex-column"
-        >
-          <p>Nenhum depositante adicionada...</p>
-        </div>
-
-        <div class="col-12 justify-content-end align-items-center d-flex mt-5">
-          <button
-            type="button"
-            id="btnSalvarPatente"
-            class="btn btn-success btn-add-depositante mt-3 ml-4"
-          >
-            Cadastrar Patente
-          </button>
-        </div>
+      <form id="btn-user" class="dropdownHeader">
+        <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"></button>
       </form>
-    </section>
+    </nav>
+  </header>
 
-    <section>
-      <div
-        class="modal fade"
-        id="modalAgradecimento"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div
-          class="modal-dialog modalAgradecimento--posicionamento"
-          role="document"
-        >
-          <div class="modal-content modalAgradecimento--dimensao">
-            <div class="modal-header modalAgradecimento--header">
-              <p class="modalAgradecimento--titulo" id="exampleModalLabel">
-                Recebemos a solitação de cadastro!
-              </p>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+  <section class="d-flex align-items-center justify-content-center flex-d-column">
+    <form class="form-login d-flex align-items-center flex-column">
+      <h1>Cadastrar patente</h1>
+
+      <div class="form-group col-12">
+        <label for="tituloPatente">Título da patente*</label>
+        <input class="form-control form-control" type="text" required="required" id="tituloPatente"
+          placeholder="Título da Patente*" />
+      </div>
+
+      <div class="form-row mt-3 col-12">
+        <div class="form-group col-12">
+          <label for="descricaoPatente">Descrição*</label>
+          <textarea class="form-control" id="descricaoPatente" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group col-12 mt-3">
+        <p class="strong-text">Seções da Patente*</p>
+
+        <div class="col-12">
+          <input class="mr-2" name="checkboxSecaoPatente" type="checkbox" id="necessidadesHumanasCbx"
+            value="Seção A - Necessidade Humanas" />
+          <label for="necessidadesHumanasCbx">Seção A - Necessidade Humanas</label>
+        </div>
+
+        <div class="col-12">
+          <input class="mr-2" name="checkboxSecaoPatente" type="checkbox" id="operacoesProcessamentoTransporteCbx"
+            value="Seção B - Operações de Processameto, Transporte" />
+          <label for="operacoesProcessamentoTransporteCbx">Seção B - Operações de Processameto, Transporte</label>
+        </div>
+
+        <div class="col-12">
+          <input class="mr-2" name="checkboxSecaoPatente" type="checkbox" id="quimicaMetalurgiaCbx"
+            value="Seção C - Química e Metalurgia" />
+          <label for="quimicaMetalurgiaCbx">Seção C - Química e Metalurgia</label>
+        </div>
+
+        <div class="col-12">
+          <input class="mr-2" name="checkboxSecaoPatente" type="checkbox" id="textelPapelCbx"
+            value="Seção D - Têxteis e Papel" />
+          <label for="textelPapelCbx">Seção D - Têxteis e Papel</label>
+        </div>
+
+        <div class="col-12">
+          <input class="mr-2" name="checkboxSecaoPatente" type="checkbox" id="construcoesFixasCbx"
+            value="Seção E - Construções Fixas" />
+          <label for="construcoesFixasCbx">Seção E - Construções Fixas</label>
+        </div>
+
+        <div class="col-12">
+          <input class="mr-2" name="checkboxSecaoPatente" type="checkbox" id="engMecanicaCbx"
+            value="Seção F - Eng. Mecânica, Iluminação, Aquecimento, Armas, Explosão" />
+          <label for="engMecanicaCbx">Seção F - Eng. Mecânica, Iluminação, Aquecimento, Armas,
+            Explosão</label>
+        </div>
+
+        <div class="col-12">
+          <input class="mr-2" name="checkboxSecaoPatente" id="fisicaCbx" type="checkbox" value="Seção G - Física" />
+          <label for="fisicaCbx">Seção G - Física</label>
+        </div>
+
+        <div class="col-12">
+          <input class="mr-2" name="checkboxSecaoPatente" id="eletricidadeCbx" type="checkbox"
+            value="Seção H - Eletricidade" />
+          <label for="eletricidadeCbx">Seção H - Eletricidade</label>
+        </div>
+      </div>
+
+      <div class="form-group col-12">
+        <label for="classificacoesPatente">Classifições da Patente*</label>
+        <input id="classificacoesPatente" class="form-control form-control" type="text" required="required"
+          placeholder="Ex.: H01M 4/133; H01M 4/131; H01M 4/583" />
+        <p class="texto-ajuda">
+          Cada classificação deve ser separada por ponto e vírgula(;) como no
+          exemplo*
+        </p>
+      </div>
+
+      <div class="form-row justify-content-between mt-3 col-12 p-0">
+        <div class="form-group col-6">
+          <label for="numeroPedidoInpi">Número do pedido no INPI*</label>
+          <input class="form-control form-control" type="text" required="required" id="numeroPedidoInpi"
+            placeholder="Número do pedido no INPI" />
+        </div>
+
+        <div class="input-group date col-6" id="datetimePickerPatente" data-target-input="nearest">
+          <div class="d-flex flex-column col-12 p-0">
+            <label for="datetimePickerPatente">Data de publicação*</label>
+
+            <div class="d-flex flex-row">
+              <input id="dtpicker" type="text" class="form-control datetimepicker-input" required="required"
+                data-target="#datetimePickerPatente" />
+              <span class="input-group-text" data-target="#datetimePickerPatente" data-toggle="datetimepicker">
+                <span class="fa fa-calendar"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 p-0">
+        <div class="grupo-selecao-depositante col-12 mt-3 p-0">
+          <h2 class="ml-3">Depositantes*</h2>
+
+          <div class="form-row justify-content-between mt-3 col-12 selecao-depositante">
+            <div class="form-group col-6 mb-0">
+              <label for="selectTipoDepositantePatente">Classificação do Depositante*</label>
+              <select class="form-control form-control mb-0" id="selectTipoDepositantePatente" required="required"
+                placeholder="selectTipoDepositantePatente">
+                <option value="NAO_SELECIONADO" selected disabled>
+                  Selecionar...
+                </option>
+                <option>Aceleradora</option>
+                <option>Catalisadores Locais</option>
+                <option>Comunicação e Mídia</option>
+                <option>Coworking</option>
+                <option>Escolas</option>
+                <option>Espaços Makers</option>
+                <option>Eventos</option>
+                <option>Fábrica de Aplicativos</option>
+                <option>Grandes Empresas</option>
+                <option>Incubadoras</option>
+                <option>Iniciativas Universitárias</option>
+                <option>Investidores</option>
+                <option>Núcleos de Inovação</option>
+                <option>Parques Tecnológicos</option>
+                <option>Pré Aceleradoras</option>
+                <option>Propriedade Intelectual</option>
+                <option>Mentoria</option>
+                <option>Startup</option>
+              </select>
             </div>
 
-            <!--Inicio do Conteudo-->
-            <div class="modal-body modalAgradecimento--body">
-              <div class="modalAgradecimento--divA">
-                <span
-                  style="
-                    font-size: 60px;
-                    color: #00b96b;
-                    height: fit-content;
-                    display: contents;
-                  "
-                >
-                  <i class="fas fa-check-circle"></i>
-                </span>
+            <div class="col-6 d-flex flex-row align-items-end justify-content-between">
+              <div class="col-11 d-flex flex-row align-items-end justify-content-between">
+                <div class="d-flex form-group col-12 flex-column p-0 mb-0">
+                  <label for="selectOpcoesDepositantePatente">Despositante*</label>
+                  <select class="form-control form-control" id="selectOpcoesDepositantePatente" required="required"
+                    placeholder="selectOpcoesDepositantePatente" disabled></select>
+                </div>
               </div>
 
-              <div class="modalAgradecimento--divB">
-                <p id="instituicaoEvento" class="modalAgradecimento--conteudo">
-                  <b>Obrigado por cadastrar sua patente!</b>
-                </p>
-                <p
-                  id="instituicaoEventoTx2"
-                  class="modalAgradecimento--conteudo"
-                >
-                  As informações estão
-                  <b> <font color="green">em análise</font> </b>, em breve sua
-                  patente será associada aos depositantes no mapa!
-                </p>
-                <p class="modalAgradecimento--conteudo">
-                  Caso ocorra alguma pendência, informaremos por e-mail.
-                </p>
-              </div>
-            </div>
-
-            <!--Fim do Conteudo-->
-            <div class="modal-footer modalAgradecimento--footer">
-              <button
-                class="modalAgradecimento--btnFechar"
-                type="button"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                Fechar
+              <button type="button" id="btnAddPatente" class="btn btn-success btn-add-depositante">
+                <i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <script src="./model/componente.js"></script>
-    <script src="./model/usuario.js"></script>
+      <div id="containerDepositantes" class="col-12 justify-content-center align-items-center d-flex mt-4 flex-column">
+        <p>Nenhum depositante adicionada...</p>
+      </div>
 
-    <script src="./dao/entidadedao.js"></script>
-    <script src="./dao/PatenteDAO.js"></script>
-    <script src="./dao/usuariodao.js"></script>
+      <div class="col-12 justify-content-end align-items-center d-flex mt-5">
+        <button type="button" id="btnSalvarPatente" class="btn btn-success btn-add-depositante mt-3 ml-4">
+          Cadastrar patente
+        </button>
+      </div>
+    </form>
+  </section>
 
-    <script src="./javascript/cadastro-patente.js"></script>
-    <script src="./javascript/login.js"></script>
-    <script src="./javascript/logica_comum.js"></script>
-  </body>
+  <section>
+    <div class="modal fade" id="modalAgradecimento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modalAgradecimento--posicionamento" role="document">
+        <div class="modal-content modalAgradecimento--dimensao">
+          <div class="modal-header modalAgradecimento--header">
+            <p class="modalAgradecimento--titulo" id="exampleModalLabel">
+              Recebemos a solitação de cadastro!
+            </p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <!--Inicio do Conteudo-->
+          <div class="modal-body modalAgradecimento--body">
+            <div class="modalAgradecimento--divA">
+              <span style="
+                    font-size: 60px;
+                    color: #00b96b;
+                    height: fit-content;
+                    display: contents;
+                  ">
+                <i class="fas fa-check-circle"></i>
+              </span>
+            </div>
+
+            <div class="modalAgradecimento--divB">
+              <p id="instituicaoEvento" class="modalAgradecimento--conteudo">
+                <b>Obrigado por cadastrar sua patente!</b>
+              </p>
+              <p id="instituicaoEventoTx2" class="modalAgradecimento--conteudo">
+                As informações estão
+                <b>
+                  <font color="green">em análise</font>
+                </b>, em breve sua
+                patente será associada aos depositantes no mapa!
+              </p>
+              <p class="modalAgradecimento--conteudo">
+                Caso ocorra alguma pendência, informaremos por e-mail.
+              </p>
+            </div>
+          </div>
+
+          <!--Fim do Conteudo-->
+          <div class="modal-footer modalAgradecimento--footer">
+            <button class="modalAgradecimento--btnFechar" type="button" data-dismiss="modal" aria-label="Close">
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-content">
+      <div class="contact-info">
+        <a id="email" href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}">
+          Para mais informações, fale conosco através do
+          mapainovacao@ufc.br</a>
+        <p class="div-footer-beta">Versão 0.2 (Beta)</p>
+      </div>
+
+      <div class="policy">
+        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
+          target="_blank" class="">POLÍTICAS DE PRIVACIDADE</a>
+        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf" target="_blank" class="">
+          TERMOS DE USO</a>
+        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf" target="_blank"
+          class="">
+          TERMOS DE CONSENTIMENTO</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./model/componente.js"></script>
+  <script src="./model/usuario.js"></script>
+
+  <script src="./dao/entidadedao.js"></script>
+  <script src="./dao/PatenteDAO.js"></script>
+  <script src="./dao/usuariodao.js"></script>
+
+  <script src="./javascript/cadastro-patente.js"></script>
+  <script src="./javascript/login.js"></script>
+  <script src="./javascript/logica_comum.js"></script>
+</body>
+
 </html>
