@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  
+    <link rel="stylesheet" href="css/dashboard/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard/dropzone.css">
+    <link rel="stylesheet" href="css/dashboard/prism-okaidia.css">
+    
+    <link rel="stylesheet" href="css/dashboard/theme.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    
+    <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+<script>
+  if (usuario === null) {
+    window.location.href = "index.html";
+  }
+  let ehAdmin;
+  firebase
+    .database()
+    .ref("Usuario")
+    .on("value", function (snapshot) {
+      snapshot.forEach((element) => {
+        if (
+          element.val().Email == usuario.email &&
+          element.val().Admin === true
+        ) {
+          ehAdmin = true;
+        }
+      });
+      if (!ehAdmin) {
+        window.location.href = "index.html";
+      }
+    });
+</script>
+    <title>Backoffice</title>
+  </head>
+
+  <body class="bg-light" style="background-color: #DFDEDE !important;">
+      <div id="db-wrapper" class="toggled">
+          <!-- navbar vertical -->
+          <header>
+            <nav id="barra_nav" class="navbar navbar-expand-lg navbar-dark">
+              <!--Logo -->
+              <a href="index.html"
+                ><img class="logo" src="img\logos\logo-svg.svg"
+              /></a>
+      
+              <!--Menu Hamburguer-->
+              <button
+                class="navbar-toggler"
+                data-toggle="collapse"
+                data-target="#menu-nav"
+                aria-controls="#menu-nav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+      
+              <!--Navegação-->
+              <div id="menu-nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav btnNav">
+                  <li class="nav-item">
+                    <a type="button" href="index.html" class="nav-item-style">
+                      <i class="fas fa-map-marker-alt"> </i>
+                      <p class="texto-nav">MAPA</p>
+                    </a>
+                  </li>
+      
+                  <li class="nav-item">
+                    <a
+                      type="button"
+                      href="ecossistema.html"
+                      class="d-flex align-items-center justify-content-start nav-item-style"
+                    >
+                      <i class="fas fa-newspaper"></i>
+                      <p class="texto-nav">ECOSSISTEMA</p>
+                    </a>
+                  </li>
+      
+                  <li class="nav-item">
+                    <a
+                      type="button"
+                      href="javascript:void(0)"
+                      class="d-flex align-items-center justify-content-start nav-item-style"
+                      data-toggle="modal"
+                      data-target="#modalSobre"
+                    >
+                      <i class="fas fa-chalkboard-teacher"> </i>
+                      <p class="texto-nav">COMO UTILIZAR</p>
+                    </a>
+                  </li>
+      
+                  <li class="nav-item">
+                    <a
+                      type="button"
+                      href="eventos.html"
+                      class="d-flex align-items-center justify-content-start nav-item-style"
+                    >
+                      <i class="fas fa-theater-masks"> </i>
+                      <p class="texto-nav">TUTORIAL</p>
+                    </a>
+                  </li>
+      
+                  <li class="nav-item">
+                    <div class="dropdown show">
+                      <a
+                        class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style"
+                        href="#"
+                        role="button"
+                        id="dropDownNavPatente"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <i class="fas fa-stamp"> </i>
+                        <p class="texto-nav">PATENTES</p>
+                      </a>
+      
+                      <div
+                        class="dropdown-menu"
+                        id="opcoesDropdownPatentes"
+                        aria-labelledby="dropdownMenuLink"
+                      >
+                        <a class="dropdown-item" href="cadastro-patente.html"
+                          >Cadastrar patente</a
+                        >
+                        <a class="dropdown-item" href="patentes.html"
+                          >Ver lista de patentes</a
+                        >
+                      </div>
+                    </div>
+                  </li>
+      
+                  <li class="nav-item">
+                    <a
+                      type="button"
+                      href="dashboard.html"
+                      class="d-flex align-items-center justify-content-start nav-item-style"
+                    >
+                      <i class="fas fa-chart-pie"></i>
+                      <p class="texto-nav">DASHBOARD</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+      
+              <div class="empty-space"></div>
+            </nav>
+          </header>
+          <!-- Page content -->
+          <div id="page-content">
+          
+        
+        <!-- Container fluid -->
+        <div class="bg-primary pt-10 pb-21" style="background-color: #DFDEDE;"></div>
+        <div class="container-fluid mt-n22 px-6">
+          
+          <!-- row  -->
+          <div class="row mt-6">
+            <div class="col-md-12 col-12">
+              <!-- card  -->
+              <div class="card">
+                <!-- card header  -->
+                <div class="card-header bg-white py-4" class="filtro">
+                  <h4 class="mb-0" style="display: inline;">Solicitações</h4>
+                  <select  style="float: right; " id="filtrosSoli">
+                    <option value="todas">Solicitações</option>                           
+                    <option value="pendentes">Pendentes</option>
+                
+                    <option value="reprovadas">Reprovadas</option>  
+                    <option value="aprovadas">Aprovadas</option> 
+                    <option value="novas">Novas</option>    
+                    <option value="todasEntidades">Todas</option>     
+                    <option value="patentes">Patentes</option>                        
+                </select>
+                  
+                </div>
+                <!-- table  -->
+                <div class="table-responsive">
+                  <table class="table text-nowrap mb-0" id="paginasolitacao">
+                    <thead class="table-light">
+                      <tr>
+                       
+                        <th>Nome</th>
+                        <th>Usuario</th>
+                       <th>Email</th>
+                       <th>Categoria</th>
+                        
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    
+                  </table>
+                </div>
+                <!-- card footer  -->
+                <div class="card-footer bg-white text-center">
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- row  -->
+          <div class="row my-6">
+           
+            <!-- card  -->
+        
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form id="formModal">
+          <div class="row">
+            <div class="col">
+              <h5>Nome</h5>
+              <input type="text" style="color: black;" class="form-control" placeholder="Nome da entidade" id="nomeModal" >
+            </div>
+            <div class="col">
+              <h5>Site</h5>
+              <input type="text" class="form-control" style="color: black;" placeholder="Site da entidade" id="siteModal" >
+            </div>
+            <div class="col">
+              <h5>Tipo</h5>
+              <input type="text" class="form-control" style="color: black;" placeholder="Tipo" id="tipoModal" >
+            </div>
+            
+          </div>
+          <br>
+         
+          
+          <div class="row">
+           <div class="col">
+            
+              <div class="form-group custom-file col-md-8">
+                <!-- linha2-->
+                <img src="..." class="img-thumbnail" alt="..." id="imgModal">
+                <h5 id="dimensoes">dimensoes</h5>
+              </div>
+            
+            
+           </div>
+           <div class="col">
+            <h5>Classificação do Local</h5>
+            <input type="text" class="form-control" style="color: black;" placeholder="Classificação" id="classiModal" >
+          </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <h5>Latidude</h5>
+              <input type="text" class="form-control" style="color: black;" placeholder="Latidude" id="latidudeModal" >
+            </div>
+
+            <div class="col">
+              <h5>Longitude</h5>
+              <input type="text" class="form-control" style="color: black;" placeholder="Longitude" id="longitudeModal" >
+            </div>
+          </div>
+          <br>
+          <div class="row">
+
+            
+              <div class="col">
+                <h5>Complemento</h5>
+                <input type="text" class="form-control" style="color: black;" placeholder="Complemento" id="complementoModal" >
+              </div>
+              
+              <div class="col">
+                <h5>Bairro</h5>
+                <input type="text" class="form-control" style="color: black;" placeholder="Bairro" id="bairroModal" >
+              </div>
+
+              <div class="col">
+                <h5>Cidade</h5>
+                <input type="text" class="form-control" style="color: black;" placeholder="Cidade" id="cidadeModal" >
+              </div>
+
+              <div class="col">
+                <h5>UF</h5>
+                <select class="form-control form-control" style="color: black;" required="required" id="ufModal" >
+                  <option value="1" selected disabled>UF</option>
+                  <option>AC</option>
+                  <option>AL</option>
+                  <option>AP</option>
+                  <option>AM</option>
+                  <option>BA</option>
+                  <option>CE</option>
+                  <option>DF</option>
+                  <option>ES</option>
+                  <option>GO</option>
+                  <option>MA</option>
+                  <option>MT</option>
+                  <option>MS</option>
+                  <option>MG</option>
+                  <option>PA</option>
+                  <option>PB</option>
+                  <option>PR</option>
+                  <option>PE</option>
+                  <option>PI</option>
+                  <option>RJ</option>
+                  <option>RN</option>
+                  <option>RS</option>
+                  <option>RO</option>
+                  <option>RR</option>
+                  <option>SC</option>
+                  <option>SP</option>
+                  <option>SE</option>
+                  <option>TO</option>
+                </select>
+              </div>
+              <br>
+              <br>
+              <br>
+              <div class="row">
+                <h5 id="obsH5">
+                  Observação
+                </h5>
+                <div class="col">
+                  
+                  
+                  <textarea id = "ober" name="txtArea" class="form-control"     cols="30" rows="10" readonly ></textarea>
+                </div>
+              </div>
+          </div>
+          <br>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="reprovado">Reprovado</button>
+        <button type="button" class="btn btn-warning" style="color: white;" id="pendente">Pendente</button>
+        <button type="button" class="btn btn-success" id="aprovado">Aprovado</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modalPendencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Observação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+          <textarea name="textArea" class = "form-control" id="observacao" cols="30" rows="10"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button id="observarCancelar" type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+        
+        <button type="button" id = "confirmarBTN" class="btn btn-success">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade bd-example-modal-lg" id="patentes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </div>
+        </div>
+        <div class="modal-body">
+          <form id="formModal">
+            <div class="row">
+              <div class="col">
+                <h5>Titulo</h5>
+                <input type="text" style="color: black;" class="form-control" placeholder="nome" id="tituloPatente" >
+              </div>
+              <div class="col">
+                <h5>Data de Publicação</h5>
+                <input type="text" class="form-control" style="color: black;" placeholder="Data de Publicação" id="dataPatentes" >
+              </div>
+              <div class="col">
+                <h5>Depositantes</h5>
+                <select class="form-control form-control" style="color: black;" required="required" id="depositantesPaten" >
+                    <option value="1" selected disabled>Depositantes</option>
+                    
+                  </select>
+              </div>
+              
+            </div>
+            <br>
+           
+            
+            <div class="row">
+             <div class="col">
+              
+                <div class="form-group custom-file col-md-8">
+                  <!-- linha2-->
+                  <h5>Descrição</h5>
+                  <textarea id = "descri" name="txtArea" class="form-control"     cols="30" rows="10" readonly ></textarea>
+                  
+                </div>
+              
+              
+             </div>
+             
+            </div>
+            <br>
+            <div class="row">
+              <div class="col">
+                <h5>Numero do Pedido INPI</h5>
+                <input type="text" class="form-control" style="color: black;" placeholder="INPI" id="inpi" >
+              </div>
+  
+              <div class="col">
+                <h5>Seções</h5>
+                <select class="form-control form-control" style="color: black;" required="required" id="secoes" >
+                    <option value="1" selected disabled>Seções</option>
+                    
+                  </select>
+              </div>
+              <div class="col">
+                <h5>Classificações</h5>
+                <input type="text" style="color: black;" class="form-control" placeholder="Classificações" id="classiPatente" >
+              </div>
+            </div>
+            <br>
+            
+            <div class="row">
+              <h5 id="obsH5">
+                Observação
+              </h5>
+              <div class="col">
+                
+                
+                <textarea id = "obP" name="txtArea" class="form-control"     cols="30" rows="10" readonly ></textarea>
+              </div>
+            </div>
+            <br>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="reprovadoPat">Reprovado</button>
+          <button type="button" class="btn btn-warning" style="color: white;" id="pendentePat">Pendente</button>
+          <button type="button" class="btn btn-success" id="aprovadoPat">Aprovado</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <!-- Scripts -->
+    
+<script src="javascript/config.js"></script>
+<script src="javascript/dashboard/utils.js"></script>
+<script src="javascript/solitacoes.js"></script>
+
+  </body>
+</html>
