@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Firebase Setup  -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+    <script src="javascript/config.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-VEX6JVXGVX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-VEX6JVXGVX");
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+
+    <script
+      src="https://kit.fontawesome.com/16786d0779.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" type="text/css" href="css/header.css" />
+    <link rel="stylesheet" type="text/css" href="css/lista-patentes.css" />
+
+    <script src="model/evento.js"></script>
+    <script src="model/usuario.js"></script>
+    <script src="model/Patente.js"></script>
+
+    <script src="dao/eventodao.js"></script>
+
+    <script src="dao/usuariodao.js"></script>
+    <script src="dao/PatenteDAO.js"></script>
+
+    <link rel="shortcut icon" href="img/favicon_2.png" />
+    <title>Mapa do Ecossistema de Inovação Cearense</title>
+  </head>
+
+  <body>
+    <header>
+      <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
+        <!--Logo -->
+        <a href="index.html"
+          ><img class="logo" src="img\logos\logo-svg.svg"
+        /></a>
+
+        <!--Menu Hamburguer-->
+        <button
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#menu-nav"
+          aria-controls="#menu-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--Navegação-->
+        <div id="menu-nav" class="collapse navbar-collapse">
+          <ul id="lista-nav" class="navbar-nav btnNav">
+            <li class="nav-item">
+              <a type="button" href="index.html" class="nav-item-style">
+                <i class="fas fa-map-marker-alt"> </i>
+                <p class="texto-nav">MAPA</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                type="button"
+                href="ecossistema.html"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-newspaper"></i>
+                <p class="texto-nav">ECOSSISTEMA</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                type="button"
+                href="javascript:void(0)"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+                data-toggle="modal"
+                data-target="#modalSobre"
+              >
+                <i class="fas fa-chalkboard-teacher"> </i>
+                <p class="texto-nav">COMO UTILIZAR</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                type="button"
+                href="eventos.html"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-theater-masks"> </i>
+                <p class="texto-nav">EVENTOS</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <div class="dropdown show">
+                <a
+                  class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style"
+                  href="#"
+                  role="button"
+                  id="dropDownNavPatente"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-stamp"> </i>
+                  <p class="texto-nav">PATENTES</p>
+                </a>
+
+                <div
+                  class="dropdown-menu"
+                  id="opcoesDropdownPatentes"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="./cadastro-patente.html"
+                    >Cadastrar patente</a
+                  >
+                  <a class="dropdown-item" href="./patentes.html"
+                    >Ver lista de patentes</a
+                  >
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a
+                type="button"
+                href="dashboard.html"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-chart-pie"></i>
+                <p class="texto-nav">DASHBOARD</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div id="menu-nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav btnNav"></ul>
+          <form class="form-inline" onsubmit="return false">
+            <div id="btn-user" class="dropdownHeader">
+              <button
+                class="btn-dropdown-header dropdown-toggle"
+                type="button"
+                id="dropdownMenu2"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              ></button>
+            </div>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <!--Barra Mobile-->
+    <div id="barraMobile">
+      <form id="form-mobile" class="form-inline" onsubmit="return false">
+        <div class="input-group buscaHeader">
+          <input
+            id="barraBuscaPatentesMobile"
+            type="text"
+            class="form-control"
+            placeholder="Tipo de Busca: por título"
+            aria-label="Buscar..."
+            aria-describedby="basic-addon2"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-busca font-weight-bold"
+              type="button"
+              onclick="filtrarPatentesPorTipoBusca()"
+            >
+              Buscar
+            </button>
+            <button
+              type="button"
+              class="btn btn-busca-dropdown dropdown-toggle dropdown-toggle-split"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+
+            <div class="dropdown-menu">
+              <a class="dropdown-item disabled" href="#">Tipo de busca</a>
+              <div class="dropdown-divider"></div>
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="título"
+                data-texto="TITULO"
+                data-label="título"
+                onclick="selecionarTipoBusca(this)"
+                >Por título</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="Subtipo"
+                data-texto="DEPOSITANTE"
+                data-label="depositante"
+                onclick="selecionarTipoBusca(this)"
+                >Por depositante</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="Subtipo"
+                data-texto="SECAO"
+                data-label="seção"
+                onclick="selecionarTipoBusca(this)"
+                >Por seção</a
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal Como Utilizar -->
+    <div
+      class="modal fade"
+      id="modalSobre"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalScrollableTitle"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-utilizar modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content modal-content-utilizar">
+          <div
+            class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
+          >
+            <p id="título-modal">
+              Colaborar é muito simples! Veja no vídeo abaixo como funciona:
+            </p>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div
+              id="localVideo"
+              class="d-flex align-items-center justify-content-center modal-video"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="main">
+      <!--Barra do título da página-->
+      <div class="d-flex justify-content-center">
+        <div id="barra-title">
+          <p
+            id="barra-text-title"
+            class="d-flex align-items-center justify-content-center"
+          >
+            PATENTES
+          </p>
+        </div>
+      </div>
+
+      <ul id="lista-patentes"></ul>
+    </main>
+
+    <footer class="footerstyle footer">
+      <div class="prefooter">
+        <div class="div-footer1">
+          <ul>
+            <li>
+              <a
+                id="email"
+                href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
+              >
+                Para mais informações, fale conosco através do
+                mapainovacao@ufc.br</a
+              >
+              <p class="div-footer-beta">Versão 0.2 (Beta)</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="div-footer2">
+        <a
+          href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
+          target="_blank"
+          class=""
+          >POLÍTICAS DE PRIVACIDADE</a
+        >
+        <a
+          href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf"
+          target="_blank"
+          class=""
+        >
+          TERMOS DE USO</a
+        >
+        <a
+          href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf"
+          target="_blank"
+          class=""
+        >
+          TERMOS DE CONSENTIMENTO</a
+        >
+      </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="javascript/logica_comum.js"></script>
+    <script src="javascript/login.js"></script>
+    <script src="javascript/modal.js"></script>
+
+    <script src="javascript/lista-patentes.js"></script>
+    <script src="javascript/patentes.js"></script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+.descricao-patente {
+  text-align: justify;
+}
+
+.descricao-patente-escondida {
+  display: none;
+}
+
+.btn-manipular-visualizacao-desc {
+  background: none;
+  border: none;
+  color: #1b5438;
+  font-weight: bold;
+  outline: none !important;
+}
+
+.container-descricao-patente {
+  width: 100%;
+}
+
+#modalContentPatentes {
+  width: 50vw;
+}
+
+#listaPatentes {
+  width: 100%;
+}
+
+.btn-ver-descricao-patente-modal {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.btn-ver-descricao-patente-modal a {
+  color: white;
+}
+
+.btn-ver-descricao-patente-modal:hover a {
+  color: white;
+}
+
+@media only screen and (min-width: 1024px) {
+  .card-patente {
+    width: 100%;
+    background: rgba(160, 160, 160, 0.08);
+    border: 1px solid #d2d2d2;
+    box-sizing: border-box;
+    border-radius: 6px;
+  }
+
+  #listaPatentes {
+    width: 100%;
+  }
+
+  #titulo-patente {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: #1b5438;
+    font-size: 14px;
+  }
+
+  .card-patente-conteudo {
+    padding: 16px;
+    height: inherit;
+    width: 100%;
+    float: right;
+    background: rgb(213 232 221 / 75%);
+    border-radius: 0px 6px 6px 0px;
+  }
+
+  #dados-patente-autoria {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .dados-patente {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1b5438;
+  }
+  .dados-patente p {
+    font-size: 10px;
+    padding-left: 14.4px;
+    margin: 0;
+    color: rgba(44, 44, 44, 1);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .card-patente {
+    width: 100%;
+    background: rgba(160, 160, 160, 0.08);
+    border: 1px solid #d2d2d2;
+    box-sizing: border-box;
+    border-radius: 6px;
+  }
+
+  .card-patente-conteudo {
+    padding: 16px;
+    height: inherit;
+    width: 100%;
+    background: rgb(213 232 221 / 75%);
+    border-radius: 0px 6px 6px 0px;
+  }
+
+  #titulo-patente {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: #1b5438;
+    font-size: 14px;
+  }
+
+  #dados-patente-autoria {
+    width: 100%;
+  }
+
+  .dados-patente {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1b5438;
+  }
+  .dados-patente p {
+    font-size: 10px;
+    padding-left: 14.4px;
+    margin: 0;
+    color: rgba(44, 44, 44, 1);
+  }
+}

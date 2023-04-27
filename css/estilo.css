@@ -1,164 +1,214 @@
-html{
-	height: 100%;
-	width: 100%;
-	padding: 0;
-	margin: 0;
+html {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
-head{
-	padding: 0;
-	margin: 0;
+head {
+  padding: 0;
+  margin: 0;
 }
-body{
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-footer{
-	height: 100%;
-	width: 100%;
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-nav{
-	margin: 0; 
-	padding: 0;
+footer {
+  height: 100%;
+  width: 100%;
 }
 
-div div div{
-	padding: 0;
+nav {
+  margin: 0;
+  padding: 0;
 }
 
-h4{  
-	right: 35%;
+div div div {
+  padding: 0;
 }
 
-.navstyle{
-	background-color: #122915; 
-	height: 100%;
-	margin: 0; 
-	padding: 0;
+h4 {
+  right: 35%;
 }
 
-.footerstyle{
-	background-color: #122915; 
-	height: 5%; 
-	margin-top: auto;
+.dropdown-menu {
+  min-width: 0px;
 }
 
-#map_button1{
-	float: left;
-	margin-left:29%;
-	width: 20%; 
-	border: thin;
+.navstyle {
+  background-color: #122915;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-#map_button2{ 
-	border: thin;
+.footerstyle {
+  background-color: #122915;
+  height: 5%;
+  margin-top: auto;
 }
 
-#divButton{
-	z-index: 1000; 
-	position: absolute;
-	height: 7%;
-	width: 100%;
-	top: 93%;
+#map_button1 {
+  float: left;
+  margin-left: 29%;
+  width: 20%;
+  border: thin;
 }
 
-#divMsg{
-	z-index: 1000; 
-	position: absolute;
-	width: 100%;
-	height: 5%;
-	top: 88%; 
+#map_button2 {
+  border: thin;
 }
 
-/*.list-group{
-    max-height: 300;
-    overflow:scroll;
-    -webkit-overflow-scrolling: touch;
-    }*/
+#divButton {
+  z-index: 1000;
+  position: absolute;
+  height: 7%;
+  width: 100%;
+  top: 93%;
+}
 
-    .scrollspySite{
-    	position: relative;
-    	overflow: auto;
-    	height: 92%;
-    }
+#divMsg {
+  z-index: 1000;
+  position: absolute;
+  width: 100%;
+  height: 5%;
+  top: 88%;
+}
 
-    #cadastroLocal{
-    	z-index: 10000; 
-    	position: absolute;
-    	height: 83%;
-    	width: 100%;
-    	background-color:#FFFF;
-    	padding: 0%;
-    	margin: 0%;
+.btn-oculto {
+  display: none !important;
+}
 
-    }
+.scrollspySite {
+  position: relative;
+  overflow: auto;
+  height: 92%;
+}
 
-    .divisor{
-    	width: 1px;
-    	background: rgba(0,0,0,.5);
-    	margin: 11px 15px;
-    }
+#cadastroLocal {
+  z-index: 10000;
+  position: absolute;
+  height: 83%;
+  width: 100%;
+  background-color: #ffff;
+  padding: 0%;
+  margin: 0%;
+}
 
-    .btn-submit{
-    	color:white;
-    	background-color: #38610B;
-    	border-color: #1B2A0A;  
-    }
+.divisor {
+  width: 1px;
+  background: rgba(0, 0, 0, 0.5);
+  margin: 11px 15px;
+}
 
-    .btn-submit:hover{
-    	color:white;
-    	background-color: #243B0B;
-    	border-color: #1B2A0A;  
-    }
+.btn-submit {
+  color: white;
+  background-color: #38610b;
+  border-color: #1b2a0a;
+}
 
-    .btn-navegador{
-    	font-weight: 400;
-    	color: #ddd;
-    	text-decoration: none;  
-    }
+.btn-submit:hover {
+  color: white;
+  background-color: #243b0b;
+  border-color: #1b2a0a;
+}
 
-    .btn-navegador:hover{
-    	color: #F19A3D;
-    }
+.btn-navegador {
+  font-weight: 400;
+  color: #ddd;
+  text-decoration: none;
+}
 
-    .btn-navegador:focus{
-    	box-shadow: none;
-    }
+.btn-navegador:hover {
+  color: #f19a3d;
+}
 
-    .textoAlerta{
-    	font-style:oblique;
-    	background-color: rgba(0,0,0,0.6);
-    	color: white;
-    	font-weight: bold;
-    	padding: 2px;
-    }
+.btn-navegador:focus {
+  box-shadow: none;
+}
 
-    .texto-evento{
-    	color: #122915;  
-    }
+.textoAlerta {
+  font-style: oblique;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-weight: bold;
+  padding: 2px;
+}
 
-    .btn-selecionado{
-    	font-weight: 700;
-    	color: #c5be86;
-    	text-decoration: none;  
-    }
+.texto-evento {
+  color: #122915;
+}
 
-    .btn-selecionado:hover{
-    	color: #c5be86;
-    }
+.btn-selecionado {
+  font-weight: 700;
+  color: #c5be86;
+  text-decoration: none;
+}
 
-    .btn-selecionado:focus{
-    	box-shadow: none;
-    }
+.btn-selecionado:hover {
+  color: #c5be86;
+}
 
-    .list-group-item-action:focus,.list-group-item-action:hover{
-    	z-index: 1;
-    	color: #495057;
-    	text-decoration: none;
-    	background-color: #f1f1f1;
-    }
+.btn-selecionado:focus {
+  box-shadow: none;
+}
 
+.list-group-item-action:focus,
+.list-group-item-action:hover {
+  z-index: 1;
+  color: #495057;
+  text-decoration: none;
+  background-color: #f1f1f1;
+}
+
+.card-patente-barra {
+  width: 304px;
+  width: 304px;
+  margin-top: 16px;
+  border-bottom: 2px solid #d6d6d6;
+  padding-bottom: 16px;
+  padding: 12px 8px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background: #f6f6f6;
+}
+
+h5.card-patente-titulo {
+  font-size: 12px;
+  color: #1f4d37;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: justify;
+}
+
+p.card-patente-descricao {
+  font-size: 14px;
+  text-align: justify;
+}
+
+div.info-patente i {
+  font-size: 12px;
+  color: #1f4d37;
+}
+
+div.info-patente p {
+  font-size: 12px;
+  color: #1f4d37;
+}
+
+.btn-ver-descricao-patente {
+  padding: 4px 12px;
+  font-size: 12px;
+  width: 100%;
+}
+
+.btn-ver-descricao-patente a {
+  color: white;
+}
+
+.btn-ver-descricao-patente:hover a {
+  color: white;
+}

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <title>Mapa do Ecossistema de Inovação Cearense</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <link rel="stylesheet" href="css/dashboard/dropzone.css" />
+  <link rel="stylesheet" href="css/dashboard/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="css/dashboard/prism-okaidia.css" />
+
+  <link rel="stylesheet" href="css/dashboard/header-dashboard.css" />
+
+  <link rel="stylesheet" href="css/dashboard/theme.css" />
+  <link rel="stylesheet" href="css/dashboard/dashboard.css" />
+  <link rel="stylesheet" href="css/footer-component.css" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <link rel="shortcut icon" href="img/favicon_2.png" />
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- font-awsome-->
+  <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+  <div id="db-wrapper" class="toggled">
+    <!-- navbar vertical -->
+    <!-- Page content -->
+    <div id="page-content">
+      <div>
+        <header>
+          <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
+            <!--Logo -->
+            <a href="index.html"><img class="logo" src="img/logos/logo-svg.svg" /></a>
+
+            <!--Menu Hamburguer-->
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#menu-nav" aria-controls="#menu-nav"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Navegação-->
+            <div id="menu-nav" class="collapse navbar-collapse navbar">
+              <ul id="lista-nav" class="navbar-nav btnNav">
+                <li class="nav-item">
+                  <a type="button" href="index.html" class="nav-item-style">
+                    <i class="fas fa-map-marker-alt"> </i>
+                    <p class="texto-nav">MAPA</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a type="button" href="ecossistema.html"
+                    class="d-flex align-items-center justify-content-start nav-item-style">
+                    <i class="fas fa-newspaper"></i>
+                    <p class="texto-nav">ECOSSISTEMA</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a type="button" href="eventos.html"
+                    class="d-flex align-items-center justify-content-start nav-item-style">
+                    <i class="fas fa-theater-masks"> </i>
+                    <p class="texto-nav">EVENTOS</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <div class="dropdown show">
+                    <a class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style" href="#"
+                      role="button" id="dropDownNavPatente" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="fas fa-stamp"> </i>
+                      <p class="texto-nav">PATENTES</p>
+                    </a>
+
+                    <div class="dropdown-menu" id="opcoesDropdownPatentes" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="./cadastro-patente.html">Cadastrar patente</a>
+                      <a class="dropdown-item" href="./patentes.html">Ver lista de patentes</a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nav-item">
+                  <a type="button" href="dashboard.html"
+                    class="d-flex align-items-center justify-content-start nav-item-style">
+                    <i class="fas fa-chart-pie"></i>
+                    <p class="texto-nav">DASHBOARD</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <form id="btn-user" class="dropdownHeader">
+              <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            </form>
+          </nav>
+        </header>
+      </div>
+      <!-- Container fluid -->
+      <div class="barra pt-10 pb-21"></div>
+      <div class="container-fluid mt-n22 px-6">
+        <!-- row  -->
+        <div class="row mt-6">
+          <div class="col-md-12 col-12">
+            <div class="card">
+              <!-- card header  -->
+              <div class="card-header bg-white py-4">
+                <h4 class="mb-0">Categorias de entidades</h4>
+              </div>
+              <!-- table  -->
+              <div class="table-responsive">
+                <table class="table text-nowrap mb-0" id="categoria">
+                  <thead class="table-light">
+                    <tr>
+                      <th></th>
+                      <th>Nome</th>
+
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabela"></tbody>
+                </table>
+                <div style="height: 260px" id="animacaoInicio"></div>
+              </div>
+              <!-- card footer  -->
+              <div class="card-footer bg-white text-center">
+                <a class="link-primary" style="color: #019267" id="todasCat">mostrar mais categorias</a>
+              </div>
+            </div>
+            <!-- card  -->
+          </div>
+          <br />
+          <br />
+
+          <!-- table  -->
+
+          <!-- card footer  -->
+        </div>
+        <br />
+        <br />
+
+        <div class="row-my-6">
+          <div class="col-md-12 col-12">
+            <div class="card">
+              <!-- card header  -->
+              <div class="card-header bg-white py-4">
+                <h4 class="mb-0" style="display: inline">
+                  Categorias de entidades por região ou comunidade
+                </h4>
+
+                <select style="float: right; border-color: #fd7e14" id="filtroRegiao">
+                  <option value="todas">Todas as categorias de entidades</option>
+                  <option value="aceleradora">Aceleradora</option>
+                  <option value="catalisadores">Catalisadores Locais</option>
+
+                  <option value="comunicacao">Comunicação e Mídia</option>
+                  <option value="coworking">Coworking</option>
+                  <option value="startup">Startup</option>
+                  <option value="escolas">Escolas</option>
+                  <option value="Fábrica de Aplicativos">
+                    Fábrica de Aplicativos
+                  </option>
+                  <option value="Grandes Empresas">Grandes Empresas</option>
+                  <option value="Incubadoras">Incubadoras</option>
+                  <option value="Iniciativas Universitárias">
+                    Iniciativas Universitárias
+                  </option>
+                  <option value="Investidores">Investidores</option>
+                  <option value="Núcleos de Inovação">
+                    Núcles de Inovação
+                  </option>
+                  <option value="Parques Tecnológicos">
+                    Parques Tecnológicos
+                  </option>
+                  <option value="Propriedade Intelectual">
+                    Propriedade Intelectual
+                  </option>
+                  <option value="Mentoria">Mentoria</option>
+                  <option value="Pré Aceleradoras">Pré Aceleradoras</option>
+                </select>
+              </div>
+              <div class="row my-6" id="column" style="height: 300px; width: 100%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- row  -->
+        <div class="row my-6">
+          <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
+            <!-- card  -->
+            <div class="card h-100">
+              <div class="card-header bg-white py-4">
+                <h4 class="mb-0" style="display: inline">
+                  Categorias de entidades
+                </h4>
+
+                <select style="float: right; border-color: #fd7e14" id="filtroRegiaoEntidade">
+                  <option value="nenhuma">Todas as comunidades/regiões</option>
+                  <option value="Kariri Valley">Kariri Valley</option>
+                  <option value="Rapadura">Rapadura Valley</option>
+                  <option value="Região Norte">Região Norte</option>
+                  <option value="Sertão de Crateús">Sertão de Crateús</option>
+                  <option value="Sertão Central">Sertão Central</option>
+                  <option value="Chapadan da Ibiapara">
+                    Chapada da Ibiapara
+                  </option>
+                  <option value="Metropolitano">Metropolitano</option>
+                  <option value="Jaguaribe">Jaguaribe</option>
+                  <option value="Centro Sul">Centro Sul</option>
+                  <option value="Maciço do Baturité">
+                    Maciço do Baturité
+                  </option>
+                  <option value="Itapipoca">Itapipoca</option>
+                  <option value="Litoral Leste">Litoral Leste</option>
+                </select>
+              </div>
+              <div class="card-body">
+                <div id="graficoComunidade" style="height: 300px"></div>
+              </div>
+            </div>
+          </div>
+          <!-- card  -->
+          <div class="col-xl-6 col-lg-12 col-md-12 col-12">
+            <div class="card h-100">
+              <!-- card header  -->
+              <div class="card-header bg-white py-4">
+                <h4 class="mb-0" style="display: inline">
+                  Segmentos de startup
+                </h4>
+
+                <select style="float: right; border-color: #fd7e14" id="filtroTipoStartup">
+                  <option value="nenhuma">Todas as comunidades/regiões</option>
+                  <option value="Kariri Valley">Kariri Valley</option>
+                  <option value="Rapadura">Rapadura Valley</option>
+                  <option value="Região Norte">Região Norte</option>
+                  <option value="Sertão de Crateús">Sertão De Crateús</option>
+                  <option value="Sertão Central">Sertão Central</option>
+                  <option value="Chapadan da Ibiapara">
+                    Chapada da Ibiapara
+                  </option>
+                  <option value="Metropolitano">Metropolitano</option>
+                  <option value="Jaguaribe">Jaguaribe</option>
+                  <option value="Centro Sul">Centro Sul</option>
+                  <option value="Maciço do Baturité">
+                    Maciço do Baturité
+                  </option>
+                  <option value="Itapipoca">Itapipoca</option>
+                  <option value="Litoral Leste">Litoral Leste</option>
+                </select>
+              </div>
+              <div class="card-body">
+                <div id="graficoTipoStartup" style="height: 300px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-content">
+      <div class="contact-info">
+        <a id="email" href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}">
+          Para mais informações, fale conosco através do
+          mapainovacao@ufc.br</a>
+        <p class="div-footer-beta">Versão 0.2 (Beta)</p>
+      </div>
+
+      <div class="policy">
+        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
+          target="_blank" class="">POLÍTICAS DE PRIVACIDADE</a>
+        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf" target="_blank" class="">
+          TERMOS DE USO</a>
+        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf" target="_blank"
+          class="">
+          TERMOS DE CONSENTIMENTO</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="javascript/dashboard/jquery.min.js"></script>
+  <script src="javascript/dashboard/bootstrap.bundle.min.js"></script>
+  <script src="javascript/dashboard/jquery.slimscroll.min.js"></script>
+  <script src="javascript/dashboard/feather.min.js"></script>
+  <script src="javascript/dashboard/prism.js"></script>
+  <script src="javascript/dashboard/apexcharts.min.js"></script>
+  <script src="javascript/dashboard/dropzone.min.js"></script>
+  <script src="javascript/dashboard/prism-toolbar.min.js"></script>
+  <script src="javascript/dashboard/prism-copy-to-clipboard.min.js"></script>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+
+  <script src="javascript/config.js"></script>
+
+  <script src="model/usuario.js"></script>
+  <script src="dao/usuariodao.js"></script>
+  <script src="javascript/logica_comum.js"></script>
+  <script src="javascript/dashboard/main.js"></script>
+  <script src="javascript/dashboard/feather.js"></script>
+  <script src="javascript/dashboard/sidebarMenu.js"></script>
+
+  <script src="javascript/dashboard/utils.js"></script>
+  <script src="javascript/dashboard/mostra.js"></script>
+  <script src="javascript/dashboard/dashboard.js"></script>
+</body>
+
+</html>

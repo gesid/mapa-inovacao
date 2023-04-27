@@ -1,0 +1,662 @@
+/*NOTEBOOK*/
+.descricao-patente-escondida {
+  display: none;
+}
+
+.btn-escondido {
+  display: none;
+}
+
+.btn-manipular-visualizacao-desc {
+  background: none;
+  border: none;
+  color: #1b5438;
+  font-weight: bold;
+  outline: none !important;
+}
+
+.titulo-secoes {
+  font-size: 14px;
+  color: #1b5438;
+  font-weight: bold;
+}
+
+.secao {
+  font-size: 14px;
+}
+
+.label-classificacoes {
+  font-size: 14px;
+  color: #1b5438;
+  font-weight: bold;
+}
+
+.classificacoes {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#btn-evento1 {
+  border-radius: 2px;
+}
+
+#form-mobile {
+  width: 70%;
+  max-width: 900px;
+}
+
+.buscaHeader {
+  width: 100%;
+  padding: 1rem 0px;
+}
+
+#barraMobile {
+  /* padding: 2rem 0px; */
+}
+
+@media (max-width: 1400px) {
+  #form-pc {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    background-color: #fafafa;
+    height: 100%;
+  }
+  /*HEADER*/
+
+  /*MODAL*/
+  #titulo-modal {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: bold;
+    font-size: 17.6px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  .modal-dialog {
+    max-width: 699.2px;
+    top: 104px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .modal-content {
+    height: 420.8px;
+  }
+  .modal-header {
+    height: 48.8px;
+    border: 1px solid #dee2e6;
+  }
+  .modal-video {
+    width: inherit;
+    height: 307.2px;
+    margin: 0;
+  }
+  /*MAIN*/
+  .main {
+    position: relative;
+    width: 100%;
+    min-height: calc(100% - 144px);
+    padding-top: 15px;
+    left: 0;
+  }
+  #eventoNaoEncontrado {
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    width: 870.4px;
+    height: 200px;
+    background: rgba(160, 160, 160, 0.08);
+    border: 1px solid #d2d2d2;
+    box-sizing: border-box;
+    border-radius: 6px;
+  }
+
+  #imgEventoNaoEncontrado {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 100%;
+    font-size: 70px;
+  }
+
+  #textoEventoNaoEncontrado {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  #lista-patentes {
+    margin: 0;
+    padding: 0;
+  }
+  .card-patente {
+    width: 70%;
+    background: rgba(160, 160, 160, 0.08);
+    border: 1px solid #d2d2d2;
+    box-sizing: border-box;
+    border-radius: 6px;
+    max-width: 900px;
+  }
+
+  #img-evento {
+    height: 100%;
+    width: 100%;
+    border-radius: 6px 0px 0px 6px;
+  }
+  .card-patente-conteudo {
+    padding: 16px;
+    height: inherit;
+    width: 100%;
+    float: right;
+    background: rgb(213 232 221 / 75%);
+    border-radius: 0px 6px 6px 0px;
+  }
+  #titulo-patente {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    margin: 20.8px 0px 11.2px 18.4px;
+    color: #1b5438;
+  }
+  .descricao-patente {
+    /* height: 53.6px; */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 12.8px;
+    margin: 0px 11.2px 22.2px 18.4px;
+    text-align: justify;
+  }
+  #dados-patente-autoria {
+    /* height: 44.8px; */
+    width: 60%;
+    float: left;
+    margin: 0px 0px 0px 18.4px;
+  }
+  #conteudo-evento-B {
+    /* padding: 12px;
+    display: flex;
+    justify-content: flex-end; */
+  }
+  .dados-patente {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1b5438;
+  }
+  .dados-patente p {
+    font-size: 10px;
+    padding-left: 14.4px;
+    margin: 0;
+    color: rgba(44, 44, 44, 1);
+  }
+  #btn-evento1 {
+    padding: 6px 12px;
+    border: 1px solid #fc6a38;
+    background: #fc6a38;
+  }
+  .texto-btn-evento1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    color: white;
+    margin: 0;
+  }
+  #btn-evento2 {
+    height: 70%;
+    width: 49%;
+    border: 1px solid #fc6a38;
+    background: white;
+  }
+  a:hover {
+    color: #1f4d37;
+    text-decoration: none;
+  }
+  .texto-btn-evento2 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    color: #fc6a38;
+    margin: 0;
+  }
+  #card-login-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  #barra-title {
+    width: 70%;
+    max-width: 900px;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0px;
+    background-color: rgba(27, 84, 56, 1);
+    border-radius: 6px;
+    margin-bottom: 2rem;
+  }
+  #barra-text-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0px;
+  }
+  .card-login-text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: small;
+  }
+  #txtAjuda {
+    position: absolute;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: small;
+    text-decoration: underline;
+    padding: 5px 15px 0px 0px;
+    right: 0px;
+  }
+  .card-login-form {
+    width: 100%;
+    height: 30px;
+    background: #ffffff;
+    border: 0.5px solid #c5c5c5;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding-left: 10px;
+    font-size: small;
+    font-style: italic;
+    line-height: 19px;
+  }
+  /*FOOTER*/
+  footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 73.6px;
+    background: linear-gradient(
+      90deg,
+      rgba(31, 77, 55, 0.5) 0.68%,
+      rgba(0, 131, 58, 0.5) 99.69%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .prefooter {
+    display: contents;
+  }
+  .div-footer1 {
+    margin-right: 40px;
+  }
+  .div-footer1 ul {
+    margin: 0;
+    padding: 0;
+  }
+  .div-footer1 ul li {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    margin: 0px 10px 0px 0px;
+  }
+  .div-footer1_1 {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    margin: 0px 50px 0px 0px;
+  }
+  .div-footer2 {
+    width: 220px;
+    padding-left: 40px;
+    border-left-style: solid;
+    border-width: thin;
+    color: white;
+    display: grid;
+  }
+  .div-footer2 a {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: bold;
+    font-size: x-small;
+    color: white;
+    margin: 0px 0px 3px 0px;
+  }
+  .div-footer-beta {
+    width: fit-content;
+    font-size: x-small;
+    color: white;
+    margin: 0;
+  }
+  .container {
+    min-height: 100%;
+  }
+  #email {
+    color: white;
+    text-decoration: none;
+    margin: 0;
+  }
+}
+
+/*MOBILE*/
+
+@media only screen and (max-width: 1024px) {
+  html {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  body {
+    background-color: white;
+    height: max-content;
+  }
+  /*BARRA DE NAVEGAÇÃO*/
+
+  /*MAIN*/
+  .main {
+    position: relative;
+    width: 100%;
+    min-height: calc(100% - 144px);
+    padding-top: 15px;
+    left: 0;
+  }
+  #barra-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 331px;
+    height: 36px;
+    background-color: rgba(27, 84, 56, 1);
+    border-radius: 6px;
+    margin-bottom: 15.2px;
+  }
+  #barra-text-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+  }
+  #lista-patentes {
+    margin: 0;
+    padding: 0;
+  }
+  .card-patente {
+    width: 331px;
+    /* height: 254px; */
+    background: rgba(160, 160, 160, 0.08);
+    border: 1px solid #d2d2d2;
+    box-sizing: border-box;
+    border-radius: 6px;
+  }
+  #img-evento {
+    height: 100%;
+    width: 100%;
+    border-radius: 6px 0px 0px 6px;
+  }
+  .card-patente-conteudo {
+    padding: 16px;
+    height: inherit;
+    width: 100%;
+    float: right;
+    background: rgb(213 232 221 / 75%);
+    border-radius: 0px 6px 6px 0px;
+  }
+  #titulo-patente {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    margin: 20.8px 0px 11.2px 18.4px;
+    color: #1b5438;
+  }
+  .descricao-patente {
+    /* height: 70.4px; */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    margin: 0px 11.2px 11px 18.4px;
+    text-align: justify;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  #dados-patente-autoria {
+    height: fit-content;
+    width: 287px;
+    margin: 0px 0px 0px 18.4px;
+  }
+  #conteudo-evento-B {
+    padding: 12px;
+  }
+  .dados-patente {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1b5438;
+  }
+  .dados-patente p {
+    font-size: 10px;
+    padding-left: 14.4px;
+    margin: 0;
+    color: rgba(44, 44, 44, 1);
+  }
+  #btn-evento1 {
+    padding: 6px 12px;
+    border: 1px solid #fc6a38;
+    background: #fc6a38;
+  }
+  .texto-btn-evento1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: x-small;
+    color: white;
+    margin: 0;
+  }
+  #btn-evento2 {
+    height: 70%;
+    width: 49%;
+    border: 1px solid #fc6a38;
+    background: white;
+  }
+  a:hover {
+    color: #1f4d37;
+    text-decoration: none;
+  }
+  .texto-btn-evento2 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: x-small;
+    color: #fc6a38;
+    margin: 0;
+  }
+  #card-login-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .card-login-text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: small;
+  }
+  #txtAjuda {
+    position: absolute;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: small;
+    text-decoration: underline;
+    padding: 5px 15px 0px 0px;
+    right: 0px;
+  }
+  .card-login-form {
+    width: 100%;
+    height: 30px;
+    background: #ffffff;
+    border: 0.5px solid #c5c5c5;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding-left: 10px;
+    font-size: small;
+    font-style: italic;
+    line-height: 19px;
+  }
+  /*FOOTER*/
+  footer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 13px 31px 25.1px 38.39px;
+    margin-top: 36px;
+    background: linear-gradient(
+      90deg,
+      rgba(31, 77, 55, 0.5) 0.68%,
+      rgba(0, 131, 58, 0.5) 99.69%
+    );
+  }
+  .prefooter {
+    display: flex;
+  }
+  .div-footer1 ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  .div-footer1 ul li {
+    display: block;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+  }
+  .div-footer1 ul li i {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+  }
+  .div-footer1_1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    margin-top: 20px;
+  }
+  .div-footer2 {
+    width: 196px;
+    font-size: x-small;
+    color: white;
+    display: grid;
+    padding-top: 10px;
+  }
+
+  .div-footer2 a {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    color: white;
+  }
+  .div-footer-beta {
+    width: fit-content;
+    font-size: x-small;
+    color: white;
+    margin: 0;
+  }
+  .container {
+    min-height: 100%;
+  }
+  #email {
+    color: white;
+    text-decoration: none;
+    margin: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .btnNav {
+    position: relative;
+    margin-left: 0px;
+    margin-right: auto;
+  }
+  .nav-item-style {
+    color: white;
+    border-left-style: solid;
+    border-width: 1px;
+    border-color: #fc6a38;
+    padding: 15px 0px 0px 15px;
+  }
+  .btn-login {
+    border: 1px solid #fc6a38;
+    width: 117.6px;
+    height: 35.2px;
+    background-color: #fc6a38;
+    color: white;
+    margin-top: 15px;
+  }
+}
+
+.form-inline .custom-select,
+.form-inline .input-group {
+  width: 100%;
+}
+
+@media only screen and (max-width: 1400px) {
+  #barraMobile {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #form-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0px;
+  }
+
+  .buscaHeader {
+    position: relative;
+    right: 0px;
+    width: 100%;
+    padding: 0px;
+  }
+
+  #barraMobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
