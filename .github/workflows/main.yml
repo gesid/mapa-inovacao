@@ -16,7 +16,7 @@ jobs:
         server: ${{ secrets.SERVER }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        # local_path: './static/*'
-        remote_path: './home/usuario/git/mapa-inovação/'
+        local_path: './home/usuario/git/mapa-inovação'
+        remote_path: './home/usuario/git/mapa-inovação'
         sftp_only: true
 
