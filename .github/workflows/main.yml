@@ -2,21 +2,21 @@ on:
   push:
     branches:
       - main
-name: Deploy website on push
 jobs:
-  web-deploy:
-    name: Deploy
+  deploy_job:
     runs-on: ubuntu-latest
+    name: deploy
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v3
-
-    - name: Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Deploy file
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
-        server: ${{ secrets.SERVER }}
         username: ${{ secrets.USERNAME }}
+        server: ${{ secrets.SERVER }}
         password: ${{ secrets.PASSWORD }}
-        port: 2222
-        protocol: ftps
-        server-dir: ./home/usuario/git/mapa-inovação/
+        port: ${{ secrets.PORT }}
+        # local_path: './static/*'
+        remote_path: './home/usuario/git/mapa-inovação/'
+        sftp_only: true
+
