@@ -31,7 +31,7 @@ class usuarioDAO {
 		const rootRef = database.ref('/Usuario/' + userId);
 
 		return rootRef.once('value').then(function (snapshot) {
-			let usuario = new Usuario(snapshot.val().Nome, snapshot.val().Email)
+			let usuario = new Usuario(snapshot.val()?.Nome, snapshot.val()?.Email)
 			usuarioArray.push(usuario)
 			
 			return usuario
