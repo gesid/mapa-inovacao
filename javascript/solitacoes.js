@@ -1,29 +1,5 @@
 var nomeEnti;
-firebase.auth().onAuthStateChanged(async function (user) {
-  setTimeout(() => {}, 500);
-  let usuario = user;
-  console.log(usuario);
-  if (usuario === null) {
-    window.location.href = "index.html";
-  }
-  let ehAdmin;
-  firebase
-    .database()
-    .ref("Usuario")
-    .on("value", function (snapshot) {
-      snapshot.forEach((element) => {
-        if (
-          element.val().Email == usuario.email &&
-          element.val().Admin === true
-        ) {
-          ehAdmin = true;
-        }
-      });
-      if (!ehAdmin) {
-        window.location.href = "index.html";
-      }
-    });
-});
+
 //$("#patentes").modal("show");
 function patentes() {
   firebase

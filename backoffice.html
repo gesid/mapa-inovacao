@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
   
     <link rel="stylesheet" href="css/dashboard/bootstrap-icons.css">
@@ -21,32 +21,14 @@
 <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
 <script>
-  if (usuario === null) {
-    window.location.href = "index.html";
-  }
-  let ehAdmin;
-  firebase
-    .database()
-    .ref("Usuario")
-    .on("value", function (snapshot) {
-      snapshot.forEach((element) => {
-        if (
-          element.val().Email == usuario.email &&
-          element.val().Admin === true
-        ) {
-          ehAdmin = true;
-        }
-      });
-      if (!ehAdmin) {
-        window.location.href = "index.html";
-      }
-    });
+  
 </script>
     <title>Backoffice</title>
   </head>
 
   <body class="bg-light" style="background-color: #DFDEDE !important;">
-      <div id="db-wrapper" class="toggled">
+      <div style="display: none;" id="carregar">
+        <div id="db-wrapper" class="toggled">
           <!-- navbar vertical -->
           <header>
             <nav id="barra_nav" class="navbar navbar-expand-lg navbar-dark">
@@ -473,14 +455,21 @@
     </div>
   </div>
 
+      </div>
 
-
+<div class="d-flex align-items-center justify-content-center flex-column" style="margin:250px ;" id="spinner">
+  <div id="carregando" class="spinner-border text-success " role="status" align="center" style="margin: 10px;">
+    
+  </div>
+  validando acesso
+  <br>
+</div>
 
     <!-- Scripts -->
     
 <script src="javascript/config.js"></script>
+<script src="javascript/verificarUsuarioBackoffice.js"></script>
 <script src="javascript/dashboard/utils.js"></script>
 <script src="javascript/solitacoes.js"></script>
-
   </body>
 </html>
