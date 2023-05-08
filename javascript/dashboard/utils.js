@@ -42,6 +42,19 @@ let bool = true;
 async function carregar() {
   let vetorEntidades = [];
   let aux = [];
+
+  await firebase
+    .database()
+    .ref("patentes")
+    .once("value", function (snapshot) {
+      var num = snapshot.numChildren();
+      aux.push({
+        nome: "Patentes",
+        imagem: "img/img-bl/28-patentes.png",
+        quantidade: num,
+      });
+    });
+
   await firebase
     .database()
     .ref("Comunidades")
@@ -152,3 +165,69 @@ async function carregar() {
 }
 
 carregar();
+
+firebase
+  .database()
+  .ref("marcadores")
+  .once("value", function (snapshot) {
+    paginasolitacao(snapshot);
+    $(function () {
+      let filtro = $("#filtrosSoli");
+      console.log(filtro);
+      filtro.on("change", function () {
+        console.log("condição");
+        if (filtro.val() == "pendentes") {
+          document.querySelector("table").innerHTML = " ";
+          let paginasolitacao = document.getElementById("paginasolitacao");
+          paginasolitacao.innerHTML =
+            ' <thead class="table-light"><tr><th>Nome</th><th>Usuario</th><th>Email</th><th>Categoria</th><th>Status</th></tr></thead>';
+
+          console.log("mostraPendentes");
+          pendenteNoBanco(snapshot);
+        }
+        if (filtro.val() == "todas") {
+          document.querySelector("table").innerHTML = " ";
+          let pagina = document.getElementById("paginasolitacao");
+          pagina.innerHTML =
+            ' <thead class="table-light"><tr><th>Nome</th><th>Usuario</th><th>Email</th><th>Categoria</th><th>Status</th></tr></thead>';
+          paginasolitacao(snapshot);
+        }
+        if (filtro.val() == "reprovadas") {
+          document.querySelector("table").innerHTML = " ";
+          let pagina = document.getElementById("paginasolitacao");
+          pagina.innerHTML =
+            ' <thead class="table-light"><tr><th>Nome</th><th>Usuario</th><th>Email</th><th>Categoria</th><th>Status</th></tr></thead>';
+          reprovadoNoBanco(snapshot);
+        }
+        if (filtro.val() == "novas") {
+          document.querySelector("table").innerHTML = " ";
+          let pagina = document.getElementById("paginasolitacao");
+          pagina.innerHTML =
+            ' <thead class="table-light"><tr><th>Nome</th><th>Usuario</th><th>Email</th><th>Categoria</th><th>Status</th></tr></thead>';
+          novasNoBanco(snapshot);
+        }
+        if (filtro.val() == "todasEntidades") {
+          document.querySelector("table").innerHTML = " ";
+          let pagina = document.getElementById("paginasolitacao");
+          pagina.innerHTML =
+            ' <thead class="table-light"><tr><th>Nome</th><th>Usuario</th><th>Email</th><th>Categoria</th><th>Status</th></tr></thead>';
+          carregarTodasEntidades(snapshot);
+        }
+        if (filtro.val() == "aprovadas") {
+          document.querySelector("table").innerHTML = " ";
+          let pagina = document.getElementById("paginasolitacao");
+          pagina.innerHTML =
+            ' <thead class="table-light"><tr><th>Nome</th><th>Usuario</th><th>Email</th><th>Categoria</th><th>Status</th></tr></thead>';
+          carregarAprovadasNoBanco(snapshot);
+        }
+        if (filtro.val() == "patentes") {
+          document.querySelector("table").innerHTML = " ";
+          let pagina = document.getElementById("paginasolitacao");
+
+          pagina.innerHTML =
+            ' <thead class="table-light"><tr><th>Nome</th><th>Usuario</th><th>Email</th><th>Categoria</th><th>Status</th></tr></thead>';
+          patentes();
+        }
+      });
+    });
+  });
