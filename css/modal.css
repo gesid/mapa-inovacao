@@ -194,3 +194,42 @@
 }
 
 /*Modal Cadastro*/
+
+#status-novo{
+  background-color: #059CF1;
+  border-radius: 20px;
+  width: 120px;
+  height: 40px;
+  bottom: 4%;
+  color: white;
+  text-align: center;
+}
+
+#status-reprovado{
+  background-color: #FF5B5B;
+  border-radius: 20px;
+  width: 120px;
+  height: 40px;
+  bottom: 4%;
+  text-align: center;
+  color: white;
+}
+#status-aprovado{
+  background-color: #14C771;
+  border-radius: 20px;
+  width: 120px;
+  height: 40px;
+  bottom: 4%;
+  color: white;
+}
+#status-pendente{
+  background-color: #FF9345;
+  border-radius: 20px;
+  width: 120px;
+  height: 40px;
+  bottom: 4%;
+  color: white;
+}
+#notificacao{
+  background-color: #76D3A7;
+}
