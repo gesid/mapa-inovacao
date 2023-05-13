@@ -969,8 +969,22 @@ function pendenteNoBanco(dataSnapshot) {
           $("#modalPendencia").modal("show");
           let txtArea = document.getElementById("observacao");
           document.getElementById("confirmarBTN").onclick = function () {
+            dados = {
+              Nome: nomeModal.value,
+              Bairro: bairroModal.value,
+
+              Cidade: cidadeModal.value,
+              Classificacao: classiModal.value,
+              Complemento: complementoModal.value,
+              Latitude: latidudeModal.value,
+              Longitude: longitudeModal.value,
+
+              Site: siteModal.value,
+              Tipo: tipoModal.value,
+              UF: ufModal.value,
+            };
             updateObservacacao(item.key, txtArea.value);
-            reprovar(item.key, value);
+            reprovar(item.key, value, dados);
           };
         };
 
@@ -991,7 +1005,21 @@ function pendenteNoBanco(dataSnapshot) {
           $("#modalPendencia").modal("show");
           let txtArea = document.getElementById("observacao");
           document.getElementById("confirmarBTN").onclick = function () {
-            pendente(item.key, value);
+            dados = {
+              Nome: nomeModal.value,
+              Bairro: bairroModal.value,
+
+              Cidade: cidadeModal.value,
+              Classificacao: classiModal.value,
+              Complemento: complementoModal.value,
+              Latitude: latidudeModal.value,
+              Longitude: longitudeModal.value,
+
+              Site: siteModal.value,
+              Tipo: tipoModal.value,
+              UF: ufModal.value,
+            };
+            pendente(item.key, value, dados);
             updateObservacacao(item.key, txtArea.value);
           };
         };

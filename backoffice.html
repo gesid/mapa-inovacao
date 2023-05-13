@@ -31,113 +31,90 @@
         <div id="db-wrapper" class="toggled">
           <!-- navbar vertical -->
           <header>
-            <nav id="barra_nav" class="navbar navbar-expand-lg navbar-dark">
+            <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
               <!--Logo -->
-              <a href="index.html"
-                ><img class="logo" src="img\logos\logo-svg.svg"
-              /></a>
-      
+              <a href="index.html" class="btnLogo"><img class="logo" src="img\logos\logo-svg.svg" /></a>
+        
               <!--Menu Hamburguer-->
-              <button
-                class="navbar-toggler"
-                data-toggle="collapse"
-                data-target="#menu-nav"
-                aria-controls="#menu-nav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
+              <button class="navbar-toggler" data-toggle="collapse" data-target="#menu-nav" aria-controls="#menu-nav"
+                aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-      
+        
               <!--Navegação-->
               <div id="menu-nav" class="collapse navbar-collapse">
-                <ul class="navbar-nav btnNav">
+                <ul id="lista-nav" class="navbar-nav btnNav">
                   <li class="nav-item">
-                    <a type="button" href="index.html" class="nav-item-style">
-                      <i class="fas fa-map-marker-alt"> </i>
-                      <p class="texto-nav">MAPA</p>
-                    </a>
-                  </li>
-      
-                  <li class="nav-item">
-                    <a
-                      type="button"
-                      href="ecossistema.html"
-                      class="d-flex align-items-center justify-content-start nav-item-style"
-                    >
+                    <a type="button" href="ecossistema.html"
+                      class="d-flex align-items-center justify-content-start nav-item-style">
                       <i class="fas fa-newspaper"></i>
                       <p class="texto-nav">ECOSSISTEMA</p>
                     </a>
                   </li>
-      
+        
                   <li class="nav-item">
-                    <a
-                      type="button"
-                      href="javascript:void(0)"
-                      class="d-flex align-items-center justify-content-start nav-item-style"
-                      data-toggle="modal"
-                      data-target="#modalSobre"
-                    >
+                    <a type="button" href="javascript:void(0)"
+                      class="d-flex align-items-center justify-content-start nav-item-style" data-toggle="modal"
+                      data-target="#modalSobre">
                       <i class="fas fa-chalkboard-teacher"> </i>
-                      <p class="texto-nav">COMO UTILIZAR</p>
-                    </a>
-                  </li>
-      
-                  <li class="nav-item">
-                    <a
-                      type="button"
-                      href="eventos.html"
-                      class="d-flex align-items-center justify-content-start nav-item-style"
-                    >
-                      <i class="fas fa-theater-masks"> </i>
                       <p class="texto-nav">TUTORIAL</p>
                     </a>
                   </li>
-      
+        
+                  <li class="nav-item">
+                    <a type="button" href="javascript:void(0)"
+                      class="d-flex align-items-center justify-content-start nav-item-style" data-toggle="modal"
+                      data-target="#ModalFiltro" onclick="inicializarFiltragem()">
+                      <i class="fas fa-filter"></i>
+                      <p class="texto-nav">FILTRAR</p>
+                    </a>
+                  </li>
+        
+                  <li id="opcaoCadastro" class="nav-item">
+                    <a type="button" href="javascript:void(0)"
+                      class="d-flex align-items-center justify-content-start nav-item-style" class="btn btn-navegador"
+                      onclick="selecionarLocal()">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <p class="texto-nav">CADASTRAR</p>
+                    </a>
+                  </li>
+        
+                  <li class="nav-item">
+                    <a type="button" href="eventos.html" class="d-flex align-items-center justify-content-start nav-item-style">
+                      <i class="fas fa-theater-masks"> </i>
+                      <p class="texto-nav">EVENTOS</p>
+                    </a>
+                  </li>
+        
                   <li class="nav-item">
                     <div class="dropdown show">
-                      <a
-                        class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style"
-                        href="#"
-                        role="button"
-                        id="dropDownNavPatente"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
+                      <a class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style" href="#"
+                        role="button" id="dropDownNavPatente" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-stamp"> </i>
                         <p class="texto-nav">PATENTES</p>
                       </a>
-      
-                      <div
-                        class="dropdown-menu"
-                        id="opcoesDropdownPatentes"
-                        aria-labelledby="dropdownMenuLink"
-                      >
-                        <a class="dropdown-item" href="cadastro-patente.html"
-                          >Cadastrar patente</a
-                        >
-                        <a class="dropdown-item" href="patentes.html"
-                          >Ver lista de patentes</a
-                        >
+        
+                      <div class="dropdown-menu" id="opcoesDropdownPatentes" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="cadastro-patente.html">Cadastrar patente</a>
+                        <a class="dropdown-item" href="patentes.html">Ver lista de patentes</a>
                       </div>
                     </div>
                   </li>
-      
+        
                   <li class="nav-item">
-                    <a
-                      type="button"
-                      href="dashboard.html"
-                      class="d-flex align-items-center justify-content-start nav-item-style"
-                    >
+                    <a type="button" href="dashboard.html"
+                      class="d-flex align-items-center justify-content-start nav-item-style">
                       <i class="fas fa-chart-pie"></i>
                       <p class="texto-nav">DASHBOARD</p>
                     </a>
                   </li>
                 </ul>
               </div>
-      
-              <div class="empty-space"></div>
+        
+              <form id="btn-user" class="dropdownHeader">
+                <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false"></button>
+              </form>
             </nav>
           </header>
           <!-- Page content -->
@@ -466,10 +443,13 @@
 </div>
 
     <!-- Scripts -->
-    
+    <script src="model/usuario.js"></script>
+    <script src="dao/usuariodao.js"></script>
 <script src="javascript/config.js"></script>
 <script src="javascript/verificarUsuarioBackoffice.js"></script>
+<script src="javascript/logica_comum.js"></script>
 <script src="javascript/dashboard/utils.js"></script>
 <script src="javascript/solitacoes.js"></script>
+
   </body>
 </html>
