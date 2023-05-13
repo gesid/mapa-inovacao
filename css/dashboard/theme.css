@@ -26828,7 +26828,7 @@ body {
   min-width: 24rem !important;
   border-radius: 0.5rem;
 }
-
+/*
 .dropdown-toggle::after {
   margin-left: 0.255em;
   vertical-align: 0.255em;
@@ -26839,7 +26839,7 @@ body {
   border-bottom: 0;
   border-left: 0rem;
   float: right;
-}
+} */
 
 .dropup .dropdown-toggle::after {
   display: inline-block;
