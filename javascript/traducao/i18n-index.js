@@ -69,6 +69,13 @@ $(function() {
                                 subnavListar: "Listar Patentes"
                             }
                     
+                        },
+                        barraLateral:{
+                            titulo: 'CATEGORIAS', 
+                        },
+                        cadastro:{
+                            legenda: 'Clique no mapa para definir o endereço do sua instituição/evento',
+                            btnLegenda: 'Cancelar'
                         }
                     }
                 },
@@ -117,6 +124,13 @@ $(function() {
                                 "subnavCadastro": "Register Patents",
                                 "subnavListar": "List Patents"
                             },
+                        },
+                        barraLateral:{
+                            titulo: 'CATEGORIES', 
+                        },
+                        cadastro:{
+                            legenda: 'Click on the map to define the address of your institution/event',
+                            btnLegenda: 'Cancel'
                         }
                     }
                 }
