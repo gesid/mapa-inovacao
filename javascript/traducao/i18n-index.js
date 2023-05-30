@@ -15,13 +15,13 @@ $(function() {
          * locales/lng_a_ser_usada/translation.json
          * para cada idioma.    */
         //.use(i18nextHttpBackend)
+        //.use(i18next-localstorage-backend)
         .init({
 
             //Ver erros no console
             debug: true,
             //Idioma que será o padrão.O primeiro a ser carregado
             fallbackLng:'pt',
-
             resources:{
                 pt:{
                     translation:{
@@ -72,10 +72,15 @@ $(function() {
                         },
                         barraLateral:{
                             titulo: 'CATEGORIAS', 
+                            comunidades: 'Comunidades',
                         },
                         cadastro:{
                             legenda: 'Clique no mapa para definir o endereço do sua instituição/evento',
-                            btnLegenda: 'Cancelar'
+                            btnLegenda: 'Cancelar',
+                            marcador:{
+                                legenda: "Confirmar",
+                                btn: "Aqui!"
+                            }
                         }
                     }
                 },
@@ -126,11 +131,16 @@ $(function() {
                             },
                         },
                         barraLateral:{
-                            titulo: 'CATEGORIES', 
+                            titulo: 'CATEGORIES',
+                            comunidades: 'Communities',
                         },
                         cadastro:{
                             legenda: 'Click on the map to define the address of your institution/event',
-                            btnLegenda: 'Cancel'
+                            btnLegenda: 'Cancel',
+                            marcador:{
+                                legenda: "Confirm",
+                                btn: "Here!"
+                            }
                         }
                     }
                 }

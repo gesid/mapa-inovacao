@@ -126,7 +126,8 @@ function criarOpcaoComunidade(comunidades) {
   let a = template.content.querySelector("a");
   let imgLink = document.createElement("imgLink");
   //imgLink.src = componente.getImagemBarra()
-
+  
+  //a.setAttribute("data-i18n", "barraLateral.comunidades");
   a.innerHTML = `<img style="height:36px; width:36px" src= "img/img-bl/27-comunidade.png">
   Comunidades
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>`;
@@ -151,7 +152,7 @@ function criarListaOpcoes(tipoClasse) {
   }">${tipoClasse.getBadge()}</span>`;
 
   a.setAttribute("data-tipo", tipoClasse.getNome());
-
+  
   if (tipoClasse.getNome() != "Eventos") {
     listaOpcoes.appendChild(document.importNode(template.content, true));
   }
@@ -970,7 +971,7 @@ function selecionarLocal() {
         .bindPopup(
           `<div class="row d-flex justify-content-center">
     <h6 class="col-12 font-weight-bold">Confirmar</h6>
-    <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()">Aqui!</button>
+    <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()" >Aqui!</button>
     </div>`
         )
         .openPopup();
