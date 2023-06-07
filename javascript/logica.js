@@ -962,32 +962,28 @@ function selecionarLocal() {
     map.on("click", function (e) {
       if (marker) {
         map.removeLayer(marker);
-        //escolhaLayer.clearLayers();
       }
+
       marker = L.marker(e.latlng)
         .addTo(map)
-        //marker = L.marker(e.latlng)
         .bindPopup(
           `<div class="row d-flex justify-content-center">
-    <h6 class="col-12 font-weight-bold">Confirmar</h6>
-    <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()">Aqui!</button>
-    </div>`
+            <h6 class="col-12 font-weight-bold">Confirmar</h6>
+            <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()">Aqui!</button>
+          </div>`
         )
         .openPopup();
-      //escolhaLayer.addLayer(marker).addTo(map);
-
-      //marker = L.marker([latitude, longitude]).addTo(mymap);
 
       lat = e.latlng.lat;
       lng = e.latlng.lng;
+
       document.getElementById("validacaoLatLocal").value = lat;
       document.getElementById("validacaoLngLocal").value = lng;
 
       document.getElementById("validacaoLatEvento").value = lat;
       document.getElementById("validacaoLngEvento").value = lng;
 
-      document.getElementById("validacaoLatPatente").value = lat;
-      document.getElementById("validacaoLngPatente").value = lng;
+
     });
   } else {
     window.location.href = "login.html";
@@ -999,6 +995,7 @@ function chamarModalCadastro() {
     alert("Selecione um local no mapa");
   } else {
     map.off("click");
+
 
     document.getElementById("validacaoNomeLocal").value = "";
     document.getElementById("validacaoSiteLocal").value = "";
@@ -1035,12 +1032,88 @@ function chamarModalCadastro() {
     $("#ModalCadastro").modal("show");
 
     $("#marcar_info").attr("style", "display: none;");
+
+    const latitudeDoLocalSelecionado = document.getElementById("validacaoLatLocal").value;
+    const longitudeDoLocalSelecionado = document.getElementById("validacaoLngLocal").value;
+
+    buscarEnderecoPorLatitudeLongitude(latitudeDoLocalSelecionado, longitudeDoLocalSelecionado).then((endereco) => {
+      preencherInformacoesDoEndereco(endereco);
+    });
   }
 }
 
-// function onChangeDataPublicacaoPatente(dataPublicacao) {
-//   dataPublicacaoPatente = dataPublicacao;
-// }
+async function buscarEnderecoPorLatitudeLongitude(latitude, longitude){
+  const URL = `http://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+  
+  try {
+    const resultado = await fetch(URL);
+    const resultadoConvertidoParaJson = await resultado.json();
+
+    return converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resultadoConvertidoParaJson);
+  } catch (error) {
+    console.log("Erro ao buscar endereço usando latitude e longitude");
+  }
+}
+
+function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resultadoBuscaEnderecoPorLatitudeLongitude){
+  const {
+    road: rua,
+    municipality: municipalidade,
+    state_district: distritoEstadual,
+    state: estado,
+    "ISO3166-2-lvl4": identificaoPaisEstado,
+    region: regiao,
+    postcode: cep,
+    country: pais,
+    country_code: siglaPais,
+    city: cidade,
+    suburb: bairro
+  } = resultadoBuscaEnderecoPorLatitudeLongitude.address;
+
+  const siglaEstado = identificaoPaisEstado.split("-")[1];
+  
+  return {
+    rua,
+    cidade,
+    municipalidade,
+    distritoEstadual,
+    estado,
+    identificaoPaisEstado,
+    regiao,
+    cep,
+    pais,
+    siglaPais,
+    siglaEstado,
+    bairro
+  }
+}
+
+function preencherInformacoesDoEndereco(endereco){
+  const {
+    rua,
+    bairro,
+    cidade,
+    siglaEstado,
+    cep
+  } = endereco;
+
+  document.getElementById("validacaoLogradouroLocal").value = rua;
+  document.getElementById("validacaoNumeroLocal").value = "";
+  document.getElementById("validacaoComplementoLocal").value = "";
+  document.getElementById("validacaoBairroLocal").value = bairro;
+  document.getElementById("validacaoCidadeLocal").value = cidade;
+  document.getElementById("validacaoUFLocal").value = siglaEstado;
+  document.getElementById("validacaoCEPLocal").value = cep;
+
+  document.getElementById("validacaoLogradouroEvento").value = rua;
+  document.getElementById("validacaoNumeroEvento").value = "";
+  document.getElementById("validacaoComplementoEvento").value = "";
+  document.getElementById("validacaoBairroEvento").value = bairro;
+  document.getElementById("validacaoCidadeEvento").value = cidade;
+  document.getElementById("validacaoUFEvento").value = siglaEstado;
+  document.getElementById("validacaoCEPEvento").value = cep;
+}
+
 
 $(document).ready(() => {
   $("#validacaoCEPLocal").focusout(function () {
