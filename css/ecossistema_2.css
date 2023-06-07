@@ -809,3 +809,15 @@
   background: #fc6a38;
   color: white;
 }
+
+.modal-body-colaboradores dl {
+  padding-left: 1rem;
+}
+
+.modal-body-colaboradores dl dt {
+  font-size: 1rem;
+  color: #1b5438;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
