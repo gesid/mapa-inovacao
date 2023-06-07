@@ -8,19 +8,8 @@ const lngs = {
 
 $(function() {
     i18next
-        /**
-         * pluging do backend - carregado no html como i18nextHttpBackend.min.js
-         * aqui eu estou dizendo que ele será usado
-         * Para usá-lo basta que a gente tenha a seguinte estrutura de pastas:
-         * locales/lng_a_ser_usada/translation.json
-         * para cada idioma.    */
-        //.use(i18nextHttpBackend)
-        //.use(i18next-localstorage-backend)
         .init({
-
-            //Ver erros no console
             debug: true,
-            //Idioma que será o padrão.O primeiro a ser carregado
             fallbackLng:'pt',
             resources:{
                 pt:{
@@ -73,6 +62,26 @@ $(function() {
                         barraLateral:{
                             titulo: 'CATEGORIAS', 
                             comunidades: 'Comunidades',
+                            aceleradora: 'Aceleradora',
+                            catLocais: 'Catalisadoras Locais',
+                            comEMidia: 'Comunicacão e Mídia',
+                            coworking: 'Coworking',
+                            escolas: 'Escolas',
+                            espMakers: 'Espaços Makers',
+                            eventos: 'Eventos',
+                            fabApp: 'Fábrica de Aplicativos',
+                            gov: 'Governo',
+                            gEmpresas: 'Grandes Empresas',
+                            incubadoras: 'Incubadoras',
+                            iniUniversitarias: 'Iniciatias Universitárias',
+                            investidores: 'Investidores',
+                            nucInovacao: 'Núcleos de Inovação',
+                            parquesTec: 'Parques Tecnologicos',
+                            preAceleradoras: 'Pré Aceleradoras',
+                            propIntelectual: 'Propriedade Intelectual',
+                            mentoria: 'Mentoria',
+                            startup: 'Startup',
+                            patente: 'Patente'
                         },
                         cadastro:{
                             legenda: 'Clique no mapa para definir o endereço do sua instituição/evento',
@@ -80,6 +89,29 @@ $(function() {
                             marcador:{
                                 legenda: "Confirmar",
                                 btn: "Aqui!"
+                            },
+                            modalCadastro:{
+                                legenda: "Cadastrar Instituição/Evento",
+                                modalInstituicao:{
+                                    instituicao: "Instuição",
+                                    evento: "Evento",
+                                    nome: "Nome*",
+                                    site: "Site*",
+                                    tipoDeLocal: "Tipo de Local*",
+                                    latitude: "Latitude",
+                                    longitude: "Longitude",
+                                    cep: "CEP*",
+                                    logradouro: "Logradouro*",
+                                    numero:"Núumero*",
+                                    complemento: "Complemento",
+                                    bairro: "Bairro*",
+                                    cidade: "Cidade*",
+                                    uf: "UF*"
+                                },
+                                btn:{
+                                    fechar: "Fechar",
+                                    enviar: "Enviar"
+                                }
                             }
                         }
                     }
@@ -133,6 +165,26 @@ $(function() {
                         barraLateral:{
                             titulo: 'CATEGORIES',
                             comunidades: 'Communities',
+                            aceleradora: 'Startup accelerator',
+                            catLocais: 'Local Catalysts',
+                            comEMidia: 'Media and Communication',
+                            coworking: 'Coworking',
+                            escolas: 'Schools',
+                            espMakers: 'Makers Space',
+                            eventos: 'Events',
+                            fabApp: 'App Factory',
+                            gov: 'Government',
+                            gEmpresas: 'Big Companies',
+                            incubadoras: 'Business Incubators',
+                            iniUniversitarias: 'University Initiatives',
+                            investidores: 'Investors',
+                            nucInovacao: 'Innovation Center',
+                            parquesTec: 'Technology Parks',
+                            preAceleradoras: 'Pre-seed Startup',
+                            propIntelectual: 'Intellectual Properties',
+                            mentoria: 'Mentorship',
+                            startup: 'Startup',
+                            patente: 'Patent'
                         },
                         cadastro:{
                             legenda: 'Click on the map to define the address of your institution/event',
@@ -140,6 +192,29 @@ $(function() {
                             marcador:{
                                 legenda: "Confirm",
                                 btn: "Here!"
+                            },
+                            modalCadastro:{
+                                legenda: "Register Institution/Event",
+                                modalInstituicao:{
+                                    instituicao: "Intitution",
+                                    evento: "Events",
+                                    nome: "Name*",
+                                    site: "Website*",
+                                    tipoDeLocal: "Categorie*",
+                                    latitude: "Latitude",
+                                    longitude: "Longitude",
+                                    cep: "ZipCode*",
+                                    logradouro: "Street Address*",
+                                    numero:"House Number*",
+                                    complemento: "Complement",
+                                    bairro: "District*",
+                                    cidade: "City*",
+                                    uf: "Postal Abbr*"
+                                },
+                                btn:{
+                                    fechar: "Close",
+                                    enviar: "Send"
+                                }
                             }
                         }
                     }
@@ -148,48 +223,26 @@ $(function() {
             }
             
         }, (err, t) => {
-            //err -> erros
-            //t -> são as chaves de busca dos textos. Ex: "titulo": "Teste" - "titulo" seria o t
             if (err) console.log(err);
            
-            //utilizando o jquery com a biblioteca
             jqueryI18next.init(i18next, $, { useOptionsAttr: true });
 
-            //Preenchendo o Select de idiomas
             Object.keys(lngs).map((lng) => {
-                /* Criando a option do select para cada lingua do array lngs
-                 - recebe como parâmetros o texto e a valor do linguagem, que seria o indice 
-                 da lingua no array.
-                */
                 let optSelect = new Option(lngs[lng].nativeName, lng);
-                /**
-                 * Se o idioma do laço for o mesmo que esteja como principal no i18next, então
-                 * atribui-se o atributo selected ao option.
-                 */
                 if(lng === i18next.resolvedLanguage){
                     optSelect.setAttribute("selected", "selected");
                 }
                 console.log(optSelect)
-                /**Apensando a option ao select */
                 $('#languageSwitcher').append(optSelect);
             })
 
-            /**
-             * Realizando a mudança na tradução a partir da escolha da opção
-             */
             $('#languageSwitcher').change(() => {
-                /**
-                 * Recuperando o valor do option selecionado.
-                 */
                 let chooseLng = $(this).find("option:selected").attr('value');
-                /**Chamando a função do i18n para alterar para o idioma escolhido */
                 i18next.changeLanguage(chooseLng, () => {
-                    /**Recarregando o select */
                     $("body").localize()
                 })
             })
 
-            /**Recarregando a página */
             $("body").localize()
         })
 })  

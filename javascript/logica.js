@@ -127,9 +127,8 @@ function criarOpcaoComunidade(comunidades) {
   let imgLink = document.createElement("imgLink");
   //imgLink.src = componente.getImagemBarra()
   
-  //a.setAttribute("data-i18n", "barraLateral.comunidades");
   a.innerHTML = `<img style="height:36px; width:36px" src= "img/img-bl/27-comunidade.png">
-  Comunidades
+  <span data-i18n="barraLateral.comunidades">Comunidades</span>
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>`;
 
   a.setAttribute("data-tipo", "Comunidades");
@@ -143,10 +142,13 @@ function criarListaOpcoes(tipoClasse) {
   let a = template.content.querySelector("a");
   let imgLink = document.createElement("imgLink");
 
+  let tipoI18n = getTipoClasseI18n(tipoClasse.getNome());
+  let dataI18n = "barraLateral." + tipoI18n;
+
   imgLink.src = tipoClasse.getImagemBarra();
 
   a.innerHTML = `<img style="height:36px; width:36px" src= ${imgLink.src}>
-  ${tipoClasse.getNome()}
+  <span data-i18n="${dataI18n}"> ${tipoClasse.getNome()}</span>
   <span class="badge badge-secondary badge-pill ${
     tipoClasse.getNome() === "Patente" ? "contador-patentes" : ""
   }">${tipoClasse.getBadge()}</span>`;
@@ -159,6 +161,50 @@ function criarListaOpcoes(tipoClasse) {
   executarEventoKey();
 
   criarListaOpcoesMobile(tipoClasse);
+}
+
+//Função para retornar valor equivalente ao tipoClasse no i18n
+function getTipoClasseI18n(tipo){
+  if(tipo == 'Aceleradora')
+    return 'aceleradora'
+  else if(tipo == 'Catalisadores Locais')
+    return 'catLocais'
+  else if(tipo == 'Comunicação e Mídia')
+    return 'comEMidia'
+  else if(tipo == 'Coworking')
+    return 'coworking'
+  else if(tipo == 'Escolas')
+    return 'escolas'
+  else if(tipo == 'Espaços Makers')
+    return 'espMakers'
+  else if(tipo == 'Eventos')
+    return 'eventos'
+  else if(tipo == 'Fábrica de Aplicativos')
+    return 'fabApp'
+  else if(tipo == 'Governo')
+    return 'gov'
+  else if(tipo == 'Grandes Empresas')
+    return 'gEmpresas'
+  else if(tipo == 'Incubadoras')
+    return 'incubadoras'
+  else if(tipo == 'Iniciativas Universitárias')
+    return 'iniUniversitarias'
+  else if(tipo == 'Investidores')
+    return 'investidores'
+  else if(tipo == 'Núcleos de Inovação')
+    return 'nucInovacao'
+  else if(tipo == 'Parques Tecnológicos')
+    return 'parquesTec'
+  else if(tipo == 'Pré Aceleradoras')
+    return 'preAceleradoras'
+  else if(tipo == 'Propriedade Intelectual')
+    return 'propIntelectual'
+  else if(tipo == 'Mentoria')
+    return 'mentoria'
+  else if(tipo == 'Startup')
+    return 'startup'
+  else if(tipo == 'Patente')
+    return 'patente'
 }
 
 function filtroSelect(componente) {
@@ -969,9 +1015,9 @@ function selecionarLocal() {
         .addTo(map)
         //marker = L.marker(e.latlng)
         .bindPopup(
-          `<div class="row d-flex justify-content-center">
-    <h6 class="col-12 font-weight-bold">Confirmar</h6>
-    <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()" >Aqui!</button>
+          `<div class="row d-flex justify-content-center" id="divPopup">
+    <h6 class="col-12 font-weight-bold text-center" id="confirm">Confirmar</h6>
+    <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()" id="btn-popup">Aqui!</button>
     </div>`
         )
         .openPopup();
@@ -993,6 +1039,51 @@ function selecionarLocal() {
   } else {
     window.location.href = "login.html";
   }
+} 
+
+//permite a tradução do popup
+map.on('popupopen', async function(e) {
+
+  var marker = e.popup._source;
+  //await loadPopupTranslation()
+  atualizarTraducaoPopup()
+});
+
+/**Tradução do popup do cadastro */
+i18next.on('languageChanged', function(lng) {
+  atualizarTraducaoPopup();
+  atualizarTraducaoModalCadastro();
+})
+
+function atualizarTraducaoPopup(){
+  const DIVPOPUP = document.getElementById('divPopup')
+  if(DIVPOPUP){
+    document.getElementById('confirm').innerText = i18next.t("cadastro.marcador.legenda");
+    document.getElementById('btn-popup').innerText = i18next.t("cadastro.marcador.btn");
+  }
+}
+
+/** Tradução do modalCadastro */
+
+function atualizarTraducaoModalCadastro(){
+  document.getElementById('exampleModalLabel').innerText = i18next.t('cadastro.modalCadastro.legenda');
+  document.getElementById('local-tab').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.instituicao');
+  document.getElementById('evento-tab').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.evento');
+  document.getElementById('labelValidacaoNomeLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.nome');
+  document.getElementById('labelValidacaoSiteLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.site');
+  document.getElementById('labelvalidacaoTipoLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.tipoDeLocal');
+  document.getElementById('labelvalidacaoCep').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.cep');
+  document.getElementById('labelvalidacaoLogradouro').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.logradouro');
+  document.getElementById('labelvalidacaoNumero').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.numero');
+  document.getElementById('labelvalidacaoComplemento').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.complemento');
+  document.getElementById('labelvalidacaoBairro').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.bairro');
+  document.getElementById('labelvalidacaoCidade').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.cidade');
+  //document.getElementById('labelvalidacaoUF').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.uf');
+
+  //botões
+  document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('cadastro.modalCadastro.btn.fechar');
+  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('cadastro.modalCadastro.btn.enviar');
+
 }
 
 function chamarModalCadastro() {

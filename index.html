@@ -200,7 +200,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold">
+          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold" >
             Cadastrar Instituição/Evento
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="deletarMarcador()">
@@ -227,19 +227,19 @@
                 <!-- Inicio do Conteúdo do Cadastro de locais-->
                 <div class="form-row">
                   <div class="form-group col-md-4">
-                    <label for="validacaoNomeLocal">Nome*</label>
+                    <label for="validacaoNomeLocal" id="labelValidacaoNomeLocal">Nome*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="33"
-                      id="validacaoNomeLocal" placeholder="Nome" />
+                      id="validacaoNomeLocal" name="validacaoNomeLocal" placeholder="Nome" />
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="validacaoSiteLocal">Site*</label>
+                    <label for="validacaoSiteLocal" id="labelValidacaoSiteLocal">Site*</label>
                     <input class="form-control form-control" type="text" required="required" id="validacaoSiteLocal"
                       placeholder="Site" />
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="validacaoTipoLocal">Tipo de Local*</label>
+                    <label for="validacaoTipoLocal" id="labelvalidacaoTipoLocal">Tipo de Local*</label>
                     <select class="form-control form-control" id="validacaoTipoLocal" required="required"
                       placeholder="validacaoTipoLocal" onclick="dropdownStartup()">
                       <option value="1" selected disabled>
@@ -283,7 +283,7 @@
                   </div>
 
                   <div id="dropdownStartup" class="form-group col-md-4" style="display: none">
-                    <label for="validacaoTipoLocal">Classificação do Local*</label>
+                    <label for="validacaoTipoLocal" >Classificação do Local*</label>
                     <select class="form-control form-control" id="validacaoClassificacao" required="required"
                       placeholder="validacaoTipoLocal">
                       <option value="1" selected disabled>
@@ -312,19 +312,19 @@
                   <!-- linha4-->
 
                   <div class="form-group col-md-2">
-                    <label for="validacaoCEPLocal">CEP*</label>
+                    <label for="validacaoCEPLocal" id="labelvalidacaoCep">CEP*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="9"
                       id="validacaoCEPLocal" placeholder="CEP" />
                   </div>
 
                   <div class="form-group col-md-6">
-                    <label for="validacaoLogradouroLocal">Logradouro*</label>
+                    <label for="validacaoLogradouroLocal" id="labelvalidacaoLogradouro">Logradouro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
                       id="validacaoLogradouroLocal" placeholder="Logradouro" />
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="validacaoNumeroLocal">Número*</label>
+                    <label for="validacaoNumeroLocal" id="labelvalidacaoNumero">Número*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="5"
                       id="validacaoNumeroLocal" placeholder="Número" />
                   </div>
@@ -333,25 +333,25 @@
                 <div class="form-row">
                   <!-- linha5-->
                   <div class="form-group col-md-4">
-                    <label for="validacaoComplementoLocal">Complemento</label>
+                    <label for="validacaoComplementoLocal" id="labelvalidacaoComplemento">Complemento</label>
                     <input class="form-control form-control" type="text" id="validacaoComplementoLocal" maxlength="30"
                       placeholder="Complemento" />
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="validacaoBairroLocal">Bairro*</label>
+                    <label for="validacaoBairroLocal" id="labelvalidacaoBairro">Bairro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
                       id="validacaoBairroLocal" placeholder="Bairro" />
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label for="validacaoCidadeLocal">Cidade*</label>
+                    <label for="validacaoCidadeLocal" id="labelvalidacaoCidade">Cidade*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
                       id="validacaoCidadeLocal" placeholder="Cidade" />
                   </div>
 
                   <div class="form-group col-md-1">
-                    <label for="validacaoUFLocal">UF*</label>
+                    <label for="validacaoUFLocal" id="labelvalidacaoUF">UF*</label>
                     <select class="form-control form-control" required="required" id="validacaoUFLocal">
                       <option value="1" selected disabled>UF</option>
                       <option>AC</option>
@@ -540,11 +540,11 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn-cadastro1" data-dismiss="modal" onclick="deletarMarcador()">
-            Fechar
+          <button type="button" class="btn-cadastro1" data-dismiss="modal" onclick="deletarMarcador()" >
+            <span id="btn-fechar-modal-cadastro">Fechar</span>
           </button>
-          <button id="btn-enviar" type="button" class="btn-cadastro2" onclick="gravarFormulario()">
-            Enviar
+          <button id="btn-enviar" type="button" class="btn-cadastro2" onclick="gravarFormulario()" >
+            <span id="btn-enviar-modal-cadastro">Enviar</span>
           </button>
 
           <!--data-toggle="modal"
@@ -1292,6 +1292,7 @@
 
   <script src="javascript/segmentos-startups.js"></script>
   <script src="javascript/traducao/i18n-index.js" type="module"></script>
+  <script src="javascript/traducao/i18n-popup.js"></script>
 </body>
 
 </html>
