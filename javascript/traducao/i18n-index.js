@@ -56,15 +56,59 @@ $(function() {
                                 titulo: "PATENTES",
                                 subnavCadastro: "Cadastrar Patentes",
                                 subnavListar: "Listar Patentes"
+                            },
+                            cadastro:{
+                                legenda: 'Clique no mapa para definir o endereço do sua instituição/evento',
+                                btnLegenda: 'Cancelar',
+                                marcador:{
+                                    legenda: "Confirmar",
+                                    btn: "Aqui!"
+                                },
+                                modal:{
+                                    legenda: "Cadastrar Instituição/Evento",
+                                    modalInstituicao:{
+                                        label:{
+                                            instituicao: "Instuição",
+                                            evento: "Evento",
+                                            nome: "Nome*",
+                                            site: "Site*",
+                                            tipoDeLocal: "Tipo de Local*",
+                                            cep: "CEP*",
+                                            logradouro: "Logradouro*",
+                                            numero:"Número*",
+                                            complemento: "Complemento",
+                                            bairro: "Bairro*",
+                                            cidade: "Cidade*",
+                                            uf: "UF*"
+                                        },
+                                        placeholder:{
+                                            nome: "Nome",
+                                            site: "Site",
+                                            categoria: "Selecionar...",
+                                            logo: "Logo: (Tamanho sugerido: 80px x 80px)",
+                                            cep: "CEP",
+                                            logradouro: "Logradouro",
+                                            numero:"Número",
+                                            complemento: "Complemento",
+                                            bairro: "Bairro",
+                                            cidade: "Cidade",
+                                        }
+    
+                                    },
+                                    btn:{
+                                        fechar: "Fechar",
+                                        enviar: "Enviar"
+                                    }
+                                }
                             }
                     
                         },
-                        barraLateral:{
+                        categorias:{
                             titulo: 'CATEGORIAS', 
                             comunidades: 'Comunidades',
                             aceleradora: 'Aceleradora',
-                            catLocais: 'Catalisadoras Locais',
-                            comEMidia: 'Comunicacão e Mídia',
+                            catLocais: 'Catalisadores Locais',
+                            comEMidia: 'Comunicação e Mídia',
                             coworking: 'Coworking',
                             escolas: 'Escolas',
                             espMakers: 'Espaços Makers',
@@ -73,47 +117,17 @@ $(function() {
                             gov: 'Governo',
                             gEmpresas: 'Grandes Empresas',
                             incubadoras: 'Incubadoras',
-                            iniUniversitarias: 'Iniciatias Universitárias',
+                            iniUniversitarias: 'Iniciativas Universitárias',
                             investidores: 'Investidores',
                             nucInovacao: 'Núcleos de Inovação',
-                            parquesTec: 'Parques Tecnologicos',
+                            parquesTec: 'Parques Tecnológicos',
                             preAceleradoras: 'Pré Aceleradoras',
                             propIntelectual: 'Propriedade Intelectual',
                             mentoria: 'Mentoria',
                             startup: 'Startup',
                             patente: 'Patente'
                         },
-                        cadastro:{
-                            legenda: 'Clique no mapa para definir o endereço do sua instituição/evento',
-                            btnLegenda: 'Cancelar',
-                            marcador:{
-                                legenda: "Confirmar",
-                                btn: "Aqui!"
-                            },
-                            modalCadastro:{
-                                legenda: "Cadastrar Instituição/Evento",
-                                modalInstituicao:{
-                                    instituicao: "Instuição",
-                                    evento: "Evento",
-                                    nome: "Nome*",
-                                    site: "Site*",
-                                    tipoDeLocal: "Tipo de Local*",
-                                    latitude: "Latitude",
-                                    longitude: "Longitude",
-                                    cep: "CEP*",
-                                    logradouro: "Logradouro*",
-                                    numero:"Núumero*",
-                                    complemento: "Complemento",
-                                    bairro: "Bairro*",
-                                    cidade: "Cidade*",
-                                    uf: "UF*"
-                                },
-                                btn:{
-                                    fechar: "Fechar",
-                                    enviar: "Enviar"
-                                }
-                            }
-                        }
+                        
                     }
                 },
                 en:{
@@ -161,8 +175,51 @@ $(function() {
                                 "subnavCadastro": "Register Patents",
                                 "subnavListar": "List Patents"
                             },
+                            cadastro:{
+                                legenda: 'Click on the map to define the address of your institution/event',
+                                btnLegenda: 'Cancel',
+                                marcador:{
+                                    legenda: "Confirm",
+                                    btn: "Here!"
+                                },
+                                modal:{
+                                    legenda: "Register Institution/Event",
+                                    modalInstituicao:{
+                                        label:{
+                                            instituicao: "Intitution",
+                                            evento: "Events",
+                                            nome: "Name*",
+                                            site: "Website*",
+                                            tipoDeLocal: "Categorie*",
+                                            cep: "ZipCode*",
+                                            logradouro: "Street Address*",
+                                            numero:"House Number*",
+                                            complemento: "Complement",
+                                            bairro: "District*",
+                                            cidade: "City*",
+                                            uf: "State*"
+                                        },
+                                        placeholder:{
+                                            nome: "Name",
+                                            site: "website",
+                                            categoria: "Select...",
+                                            logo: "Logo: (Suggested size: 80px x 80px)",
+                                            cep: "ZipCode",
+                                            logradouro: "Street Address",
+                                            numero:"House Number",
+                                            complemento: "Complement",
+                                            bairro: "District",
+                                            cidade: "City",
+                                        }
+                                    },
+                                    btn:{
+                                        fechar: "Close",
+                                        enviar: "Send"
+                                    }
+                                }
+                            }
                         },
-                        barraLateral:{
+                        categorias:{
                             titulo: 'CATEGORIES',
                             comunidades: 'Communities',
                             aceleradora: 'Startup accelerator',
@@ -186,37 +243,7 @@ $(function() {
                             startup: 'Startup',
                             patente: 'Patent'
                         },
-                        cadastro:{
-                            legenda: 'Click on the map to define the address of your institution/event',
-                            btnLegenda: 'Cancel',
-                            marcador:{
-                                legenda: "Confirm",
-                                btn: "Here!"
-                            },
-                            modalCadastro:{
-                                legenda: "Register Institution/Event",
-                                modalInstituicao:{
-                                    instituicao: "Intitution",
-                                    evento: "Events",
-                                    nome: "Name*",
-                                    site: "Website*",
-                                    tipoDeLocal: "Categorie*",
-                                    latitude: "Latitude",
-                                    longitude: "Longitude",
-                                    cep: "ZipCode*",
-                                    logradouro: "Street Address*",
-                                    numero:"House Number*",
-                                    complemento: "Complement",
-                                    bairro: "District*",
-                                    cidade: "City*",
-                                    uf: "Postal Abbr*"
-                                },
-                                btn:{
-                                    fechar: "Close",
-                                    enviar: "Send"
-                                }
-                            }
-                        }
+                        
                     }
                 }
                 
@@ -232,7 +259,6 @@ $(function() {
                 if(lng === i18next.resolvedLanguage){
                     optSelect.setAttribute("selected", "selected");
                 }
-                console.log(optSelect)
                 $('#languageSwitcher').append(optSelect);
             })
 

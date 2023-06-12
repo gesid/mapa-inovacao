@@ -128,7 +128,7 @@ function criarOpcaoComunidade(comunidades) {
   //imgLink.src = componente.getImagemBarra()
   
   a.innerHTML = `<img style="height:36px; width:36px" src= "img/img-bl/27-comunidade.png">
-  <span data-i18n="barraLateral.comunidades">Comunidades</span>
+  <span data-i18n="categorias.comunidades">Comunidades</span>
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>`;
 
   a.setAttribute("data-tipo", "Comunidades");
@@ -143,7 +143,7 @@ function criarListaOpcoes(tipoClasse) {
   let imgLink = document.createElement("imgLink");
 
   let tipoI18n = getTipoClasseI18n(tipoClasse.getNome());
-  let dataI18n = "barraLateral." + tipoI18n;
+  let dataI18n = "categorias." + tipoI18n;
 
   imgLink.src = tipoClasse.getImagemBarra();
 
@@ -1058,32 +1058,61 @@ i18next.on('languageChanged', function(lng) {
 function atualizarTraducaoPopup(){
   const DIVPOPUP = document.getElementById('divPopup')
   if(DIVPOPUP){
-    document.getElementById('confirm').innerText = i18next.t("cadastro.marcador.legenda");
-    document.getElementById('btn-popup').innerText = i18next.t("cadastro.marcador.btn");
+    document.getElementById('confirm').innerText = i18next.t("navBar1.cadastro.marcador.legenda");
+    document.getElementById('btn-popup').innerText = i18next.t("navBar1.cadastro.marcador.btn");
   }
 }
 
 /** Tradução do modalCadastro */
 
 function atualizarTraducaoModalCadastro(){
-  document.getElementById('exampleModalLabel').innerText = i18next.t('cadastro.modalCadastro.legenda');
-  document.getElementById('local-tab').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.instituicao');
-  document.getElementById('evento-tab').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.evento');
-  document.getElementById('labelValidacaoNomeLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.nome');
-  document.getElementById('labelValidacaoSiteLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.site');
-  document.getElementById('labelvalidacaoTipoLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.tipoDeLocal');
-  document.getElementById('labelvalidacaoCep').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.cep');
-  document.getElementById('labelvalidacaoLogradouro').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.logradouro');
-  document.getElementById('labelvalidacaoNumero').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.numero');
-  document.getElementById('labelvalidacaoComplemento').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.complemento');
-  document.getElementById('labelvalidacaoBairro').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.bairro');
-  document.getElementById('labelvalidacaoCidade').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.cidade');
-  //document.getElementById('labelvalidacaoUF').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.uf');
+  document.getElementById('exampleModalLabel').innerText = i18next.t('navBar1.cadastro.modal.legenda');
+  document.getElementById('local-tab').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.instituicao');
+  document.getElementById('evento-tab').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.evento');
+  document.getElementById('labelValidacaoNomeLocal').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.nome');
+  document.getElementById('labelValidacaoSiteLocal').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.site');
+  document.getElementById('labelvalidacaoTipoLocal').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.tipoDeLocal');
+  document.getElementById('labelvalidacaoCep').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.cep');
+  document.getElementById('labelvalidacaoLogradouro').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.logradouro');
+  document.getElementById('labelvalidacaoNumero').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.numero');
+  document.getElementById('labelvalidacaoComplemento').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.complemento');
+  document.getElementById('labelvalidacaoBairro').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.bairro');
+  document.getElementById('labelvalidacaoCidade').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.cidade');
+  document.getElementById('labelvalidacaoUF').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.uf');
 
   //botões
-  document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('cadastro.modalCadastro.btn.fechar');
-  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('cadastro.modalCadastro.btn.enviar');
+  document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.fechar');
+  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar');
 
+
+  //placeholder
+  document.getElementsByName('inputNome')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.nome')
+  document.getElementsByName('inputSite')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.site')
+  
+  /**Inicio SELECT Tipo de local */
+  traducaoSelect()
+  /**Fim SELECT Tipo de local */
+
+  //O placeholder do input da logo é traduzido na função chamarModalCadastro()
+  document.getElementsByName('inputCep')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cep')
+  document.getElementsByName('inputLogradouro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logradouro')
+  document.getElementsByName('inputNumero')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.numero')
+  document.getElementsByName('inputComplemento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.complemento')
+  document.getElementsByName('inputBairro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.bairro')
+  document.getElementsByName('inputCidade')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cidade')
+}
+
+function traducaoSelect(){
+  let optionsTipoLocal = document.querySelector('#validacaoTipoLocal')
+  for(let i = 0; i < optionsTipoLocal.length; i++){
+    if(i == 0){
+      optionsTipoLocal[i].innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.categoria')
+    } else {
+      let classe = getTipoClasseI18n(optionsTipoLocal[i].innerText)
+      let texto = 'categorias.'+ classe
+      optionsTipoLocal[i].innerText = i18next.t(texto)
+    }
+  }
 }
 
 function chamarModalCadastro() {
@@ -1103,7 +1132,7 @@ function chamarModalCadastro() {
     document.getElementById("validacaoUFLocal").value = 1;
     document.getElementById("validacaoCEPLocal").value = "";
     document.getElementById("uploaderLabel1").innerHTML =
-      "Logo (Tamanho sugerido: 80 x 80 px)";
+      i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logo')
     document.getElementById("uploader1").value = "";
     uploader1SelectedFile = "";
 

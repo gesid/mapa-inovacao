@@ -229,19 +229,19 @@
                   <div class="form-group col-md-4">
                     <label for="validacaoNomeLocal" id="labelValidacaoNomeLocal">Nome*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="33"
-                      id="validacaoNomeLocal" name="validacaoNomeLocal" placeholder="Nome" />
+                      id="validacaoNomeLocal" name="inputNome" placeholder="Nome" />
                   </div>
 
                   <div class="form-group col-md-4">
                     <label for="validacaoSiteLocal" id="labelValidacaoSiteLocal">Site*</label>
                     <input class="form-control form-control" type="text" required="required" id="validacaoSiteLocal"
-                      placeholder="Site" />
+                    name="inputSite" placeholder="Site" />
                   </div>
 
                   <div class="form-group col-md-4">
                     <label for="validacaoTipoLocal" id="labelvalidacaoTipoLocal">Tipo de Local*</label>
                     <select class="form-control form-control" id="validacaoTipoLocal" required="required"
-                      placeholder="validacaoTipoLocal" onclick="dropdownStartup()">
+                       placeholder="validacaoTipoLocal" onclick="dropdownStartup()">
                       <option value="1" selected disabled>
                         Selecionar...
                       </option>
@@ -278,7 +278,7 @@
                 <div class="form-row">
                   <div class="form-group custom-file col-md-8">
                     <!-- linha2-->
-                    <input type="file" class="custom-file-input custom-file-input-lg" id="uploader1" />
+                    <input type="file" class="custom-file-input custom-file-input-lg" id="uploader1" name="inputLogo"/>
                     <label id="uploaderLabel1" class="custom-file-label" for="uploader1">Selecione a Logo*</label>
                   </div>
 
@@ -314,19 +314,19 @@
                   <div class="form-group col-md-2">
                     <label for="validacaoCEPLocal" id="labelvalidacaoCep">CEP*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="9"
-                      id="validacaoCEPLocal" placeholder="CEP" />
+                      id="validacaoCEPLocal" name="inputCep" placeholder="CEP" />
                   </div>
 
                   <div class="form-group col-md-6">
                     <label for="validacaoLogradouroLocal" id="labelvalidacaoLogradouro">Logradouro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoLogradouroLocal" placeholder="Logradouro" />
+                      id="validacaoLogradouroLocal" name="inputLogradouro" placeholder="Logradouro" />
                   </div>
 
                   <div class="form-group col-md-4">
                     <label for="validacaoNumeroLocal" id="labelvalidacaoNumero">Número*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="5"
-                      id="validacaoNumeroLocal" placeholder="Número" />
+                      id="validacaoNumeroLocal" name="inputNumero" placeholder="Número" />
                   </div>
                 </div>
 
@@ -335,19 +335,19 @@
                   <div class="form-group col-md-4">
                     <label for="validacaoComplementoLocal" id="labelvalidacaoComplemento">Complemento</label>
                     <input class="form-control form-control" type="text" id="validacaoComplementoLocal" maxlength="30"
-                      placeholder="Complemento" />
+                      name="inputComplemento" placeholder="Complemento" />
                   </div>
 
                   <div class="form-group col-md-4">
                     <label for="validacaoBairroLocal" id="labelvalidacaoBairro">Bairro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoBairroLocal" placeholder="Bairro" />
+                      id="validacaoBairroLocal" name="inputBairro" placeholder="Bairro" />
                   </div>
 
                   <div class="form-group col-md-3">
                     <label for="validacaoCidadeLocal" id="labelvalidacaoCidade">Cidade*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoCidadeLocal" placeholder="Cidade" />
+                      id="validacaoCidadeLocal" name="inputCidade" placeholder="Cidade" />
                   </div>
 
                   <div class="form-group col-md-1">
@@ -982,7 +982,7 @@
           <div class="d-flex align-items-center">
             <img id="img-categoria" style="height: 36px; width: 36px; margin-right: 20px"
               src="img/img-bl/01-aceleradora.png" alt="" />
-            <p id="nome-categoria" style="margin: 0" data-i18n="barraLateral.titulo">Categorias</p>
+            <p id="nome-categoria" style="margin: 0" data-i18n="categorias.titulo">Categorias</p>
           </div>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1085,7 +1085,7 @@
         <div id="div-menu-categoria">
           <div id="coluna-menu">
             <div id="coluna-menu-titulo" class="d-flex align-items-center">
-              <h5 id="texto-menu-titulo" data-i18n="barraLateral.titulo">CATEGORIAS</h5>
+              <h5 id="texto-menu-titulo" data-i18n="categorias.titulo">CATEGORIAS</h5>
 
               <!--Botão do Mobile-->
               <div id="botao-titulo-mobile" class="input-group-append">
@@ -1189,7 +1189,7 @@
           <div id="marcar_info" style="display: none">
             <div id="divMsg">
               <div class="d-flex justify-content-center">
-                <h6 class="textoAlerta" data-i18n="cadastro.legenda">
+                <h6 class="textoAlerta" data-i18n="navBar1.cadastro.legenda">
                   Clique no mapa para definir o endereço do sua
                   instituição/evento
                 </h6>
@@ -1198,7 +1198,7 @@
             <div id="divButton">
               <div class="d-flex justify-content-center">
                 <button id="map_button2" class="btn btn-submit btn-sm" style="font-weight: bold"
-                  data-i18n="cadastro.btnLegenda">
+                  data-i18n="navBar1.cadastro.btnLegenda">
                   Cancelar
                 </button>
               </div>
@@ -1292,7 +1292,6 @@
 
   <script src="javascript/segmentos-startups.js"></script>
   <script src="javascript/traducao/i18n-index.js" type="module"></script>
-  <script src="javascript/traducao/i18n-popup.js"></script>
 </body>
 
 </html>
