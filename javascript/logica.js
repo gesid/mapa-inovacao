@@ -1066,6 +1066,11 @@ function atualizarTraducaoPopup(){
 /** Tradução do modalCadastro */
 
 function atualizarTraducaoModalCadastro(){
+  traducaoModalInstituicao()
+  traducaoModalEventos()
+}
+
+function traducaoModalInstituicao(){
   document.getElementById('exampleModalLabel').innerText = i18next.t('navBar1.cadastro.modal.legenda');
   document.getElementById('local-tab').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.instituicao');
   document.getElementById('evento-tab').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.evento');
@@ -1079,6 +1084,7 @@ function atualizarTraducaoModalCadastro(){
   document.getElementById('labelvalidacaoBairro').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.bairro');
   document.getElementById('labelvalidacaoCidade').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.cidade');
   document.getElementById('labelvalidacaoUF').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.uf');
+  document.getElementById('labelValidacaoClassificaocao').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.startup');
 
   //botões
   document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.fechar');
@@ -1086,23 +1092,25 @@ function atualizarTraducaoModalCadastro(){
 
 
   //placeholder
-  document.getElementsByName('inputNome')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.nome')
-  document.getElementsByName('inputSite')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.site')
+  document.getElementsByName('inputNome')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.nome');
+  document.getElementsByName('inputSite')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.site');
   
   /**Inicio SELECT Tipo de local */
-  traducaoSelect()
+  traducaoSelectTipoLocal();
   /**Fim SELECT Tipo de local */
 
   //O placeholder do input da logo é traduzido na função chamarModalCadastro()
-  document.getElementsByName('inputCep')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cep')
-  document.getElementsByName('inputLogradouro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logradouro')
-  document.getElementsByName('inputNumero')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.numero')
-  document.getElementsByName('inputComplemento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.complemento')
-  document.getElementsByName('inputBairro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.bairro')
-  document.getElementsByName('inputCidade')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cidade')
+  document.getElementsByName('inputCep')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cep');
+  document.getElementsByName('inputLogradouro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logradouro');
+  document.getElementsByName('inputNumero')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.numero');
+  document.getElementsByName('inputComplemento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.complemento');
+  document.getElementsByName('inputBairro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.bairro');
+  document.getElementsByName('inputCidade')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cidade');
+  document.getElementById('validacaoClassificaocaoOption').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.startup');
+
 }
 
-function traducaoSelect(){
+function traducaoSelectTipoLocal(){
   let optionsTipoLocal = document.querySelector('#validacaoTipoLocal')
   for(let i = 0; i < optionsTipoLocal.length; i++){
     if(i == 0){
@@ -1111,6 +1119,53 @@ function traducaoSelect(){
       let classe = getTipoClasseI18n(optionsTipoLocal[i].innerText)
       let texto = 'categorias.'+ classe
       optionsTipoLocal[i].innerText = i18next.t(texto)
+    }
+  }
+}
+
+function traducaoModalEventos(){
+  document.getElementById('labelValidacaoNomeEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.nome');
+  document.getElementById('labelValidacaoSiteEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.site');
+  document.getElementById('labelValidacaoTipoEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.tipoDeLocal');
+  document.getElementById('labelAreaTextoEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.descricao');
+  document.getElementById('labelValidacaoCEPEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.cep');
+  document.getElementById('labelValidacaoLogradouroEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.logradouro');
+  document.getElementById('labelValidacaoNumeroEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.numero');
+  document.getElementById('labelValidacaoComplementoEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.complemento');
+  document.getElementById('labelValidacaoBairroEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.bairro');
+  document.getElementById('labelValidacaoCidadeEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.cidade');
+  document.getElementById('labelValidacaoUFEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.uf');
+
+
+  //placeholder
+  document.getElementsByName('inputNomeEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.nome');
+  document.getElementsByName('inputSiteEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.site');
+
+  traducaoSelectTipoDeEvento();
+
+  document.getElementsByName('inputCEPEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.cep');
+  document.getElementsByName('inputLogradouroEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.logradouro');
+  document.getElementsByName('inputNumeroEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.numero');
+  document.getElementsByName('inputComplementoEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.complemento');
+  document.getElementsByName('inputBairroEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.bairro');
+  document.getElementsByName('inputCidadeEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.cidade');
+
+}
+
+function traducaoSelectTipoDeEvento(){
+  let optionTipoEvento = document.querySelector('#validacaoTipoEvento')
+
+  for(let i = 0; i < optionTipoEvento.length; i++){
+    if(i == 0){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.label');
+    } else if (i == 1){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.empreendedorismo');
+    } else if (i == 2){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.tecnologia');
+    } else if (i == 3){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.inovacao');
+    } else if (i == 4){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.negocios');
     }
   }
 }
@@ -1148,7 +1203,7 @@ function chamarModalCadastro() {
     document.getElementById("validacaoUFEvento").value = 1;
     document.getElementById("validacaoCEPEvento").value = "";
     document.getElementById("uploaderLabel2").innerHTML =
-      "Logo (Tamanho sugerido: 80 x 80 px)";
+      i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.logo')
     document.getElementById("uploader2").value = "";
     document.getElementById("dtpicker").value = "";
     uploader2SelectedFile = "";

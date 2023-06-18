@@ -153,19 +153,19 @@
             </a>
           </li>
 
-          <!--Selecionador de Idioma-->
-          <li class="nav-item">
-            <select
-              name="language" 
-              id="languageSwitcher"
-              class="d-flex align-items-center justify-content-start nav-item-select-style texto-nav">
-            </select>
-          </li>
+          
 
         </ul>    
       </div>
 
-      <form id="btn-user" class="dropdownHeader">
+        <!--Selecionador de Idioma-->
+        <select
+            name="language" 
+            id="languageSwitcher"
+            class="d-flex align-items-center justify-content-start nav-item-select-style texto-nav">
+        </select>
+
+        <form id="btn-user" class="dropdownHeader">
         <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"></button>
       </form>
@@ -283,10 +283,10 @@
                   </div>
 
                   <div id="dropdownStartup" class="form-group col-md-4" style="display: none">
-                    <label for="validacaoTipoLocal" >Classificação do Local*</label>
+                    <label for="validacaoTipoLocal" id="labelValidacaoClassificaocao">Classificação do Local*</label>
                     <select class="form-control form-control" id="validacaoClassificacao" required="required"
                       placeholder="validacaoTipoLocal">
-                      <option value="1" selected disabled>
+                      <option value="1" selected disabled id="validacaoClassificaocaoOption">
                         Escolha o segmento da startup
                       </option>
                     </select>
@@ -395,19 +395,19 @@
                 <div class="form-row">
                   <!-- linha1-->
                   <div class="form-group col-3">
-                    <label for="validacaoNomeEvento">Nome*</label>
+                    <label for="validacaoNomeEvento" id="labelValidacaoNomeEvento">Nome*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="33"
-                      id="validacaoNomeEvento" placeholder="Nome" />
+                      id="validacaoNomeEvento" placeholder="Nome" name="inputNomeEvento"/>
                   </div>
 
                   <div class="form-group col-3">
-                    <label for="validacaoSiteEvento">Site*</label>
+                    <label for="validacaoSiteEvento"id="labelValidacaoSiteEvento">Site*</label>
                     <input class="form-control form-control" type="text" required="required" id="validacaoSiteEvento"
-                      placeholder="Site" />
+                      placeholder="Site"  name="inputSiteEvento"/>
                   </div>
 
                   <div class="form-group col-3">
-                    <label for="validacaoTipoEvento">Tipo de Evento*</label>
+                    <label for="validacaoTipoEvento" id="labelValidacaoTipoEvento">Tipo de Evento*</label>
                     <select class="form-control" id="validacaoTipoEvento" required="required">
                       <option value="1" selected disabled>
                         Selecionar...
@@ -422,14 +422,14 @@
                   <div class="form-group col-3 form-group custom-file" style="margin-top: 4.1%">
                     <input type="file" class="custom-file-input custom-file-input-lg" required="required"
                       id="uploader2" />
-                    <label id="uploaderLabel2" class="custom-file-label" for="uploader2">Imagem</label>
+                    <label id="uploaderLabel2" class="custom-file-label" for="uploader2" >Imagem</label>
                   </div>
                 </div>
 
                 <div class="form-row">
                   <!-- linha3-->
                   <div class="form-group col-6">
-                    <label for="areatextoEvento">Descrição*</label>
+                    <label for="areatextoEvento" id="labelAreaTextoEvento">Descrição*</label>
                     <textarea class="form-control" id="areatextoEvento" maxlength="250" rows="3"></textarea>
                   </div>
 
@@ -449,7 +449,7 @@
                       </div>
 
                       <div class="form-group col-md-6">
-                        <label for="validacaoLngEvento">Latitude</label>
+                        <label for="validacaoLngEvento">Longitude</label>
                         <input class="form-control form-control" type="text" required="required" id="validacaoLngEvento"
                           placeholder="Longitude" disabled="disabled" />
                       </div>
@@ -461,46 +461,46 @@
                   <!-- linha4-->
 
                   <div class="form-group col-md-2">
-                    <label for="validacaoCEPEvento">CEP*</label>
+                    <label for="validacaoCEPEvento" id="labelValidacaoCEPEvento">CEP*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="9"
-                      id="validacaoCEPEvento" placeholder="CEP" />
+                      id="validacaoCEPEvento" placeholder="CEP" name="inputCEPEvento"/>
                   </div>
 
                   <div class="form-group col-md-6">
-                    <label for="validacaoLogradouroEvento">Logradouro*</label>
+                    <label for="validacaoLogradouroEvento" id="labelValidacaoLogradouroEvento">Logradouro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoLogradouroEvento" placeholder="Logradouro" />
+                      id="validacaoLogradouroEvento" placeholder="Logradouro" name="inputLogradouroEvento"/>
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="validacaoNumeroEvento">Número*</label>
+                    <label for="validacaoNumeroEvento" id="labelValidacaoNumeroEvento">Número*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="5"
-                      id="validacaoNumeroEvento" placeholder="Número" />
+                      id="validacaoNumeroEvento" placeholder="Número" name="inputNumeroEvento"/>
                   </div>
                 </div>
 
                 <div class="form-row">
                   <!-- linha5-->
                   <div class="form-group col-md-4">
-                    <label for="validacaoComplementoEvento">Complemento</label>
+                    <label for="validacaoComplementoEvento" id="labelValidacaoComplementoEvento">Complemento</label>
                     <input class="form-control form-control" type="text" id="validacaoComplementoEvento" maxlength="30"
-                      placeholder="Complemento" />
+                      placeholder="Complemento" name="inputComplementoEvento"/>
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="validacaoBairroEvento">Bairro*</label>
+                    <label for="validacaoBairroEvento" id="labelValidacaoBairroEvento">Bairro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoBairroEvento" placeholder="Bairro" />
+                      id="validacaoBairroEvento" placeholder="Bairro" name="inputBairroEvento"/>
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label for="validacaoCidadeEvento">Cidade*</label>
+                    <label for="validacaoCidadeEvento" id="labelValidacaoCidadeEvento">Cidade*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoCidadeEvento" placeholder="Cidade" />
+                      id="validacaoCidadeEvento" placeholder="Cidade" name="inputCidadeEvento"/>
                   </div>
 
                   <div class="form-group col-md-1">
-                    <label for="validacaoUFEvento">UF*</label>
+                    <label for="validacaoUFEvento" id="labelValidacaoUFEvento">UF*</label>
                     <select class="form-control form-control" required="required" id="validacaoUFEvento">
                       <option value="1" selected disabled>UF</option>
                       <option>AC</option>

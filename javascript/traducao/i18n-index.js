@@ -2,8 +2,8 @@
 
 //array com os idiomas que serão usados
 const lngs = {
-    pt: { nativeName: "PORTUGUÊS"},
-    en: { nativeName: "INGLÊS"}
+    pt: { nativeName: "PT-BR"},
+    en: { nativeName: "EN-US"}
 }
 
 $(function() {
@@ -79,7 +79,8 @@ $(function() {
                                             complemento: "Complemento",
                                             bairro: "Bairro*",
                                             cidade: "Cidade*",
-                                            uf: "UF*"
+                                            uf: "UF*",
+                                            startup: "Classificação do Local*"
                                         },
                                         placeholder:{
                                             nome: "Nome",
@@ -92,6 +93,46 @@ $(function() {
                                             complemento: "Complemento",
                                             bairro: "Bairro",
                                             cidade: "Cidade",
+                                            startup: "Escolha o segmento da Startup*"
+                                        }
+    
+                                    },
+                                    modalEventos:{
+                                        label:{
+                                            instituicao: "Instuição",
+                                            evento: "Evento",
+                                            nome: "Nome*",
+                                            site: "Site*",
+                                            tipoDeLocal: "Tipo de Evento*",
+                                            descricao: "Descrição*",
+                                            cep: "CEP*",
+                                            logradouro: "Logradouro*",
+                                            numero:"Número*",
+                                            complemento: "Complemento",
+                                            bairro: "Bairro*",
+                                            cidade: "Cidade*",
+                                            uf: "UF*",
+                                            
+                                        },
+                                        placeholder:{
+                                            nome: "Nome",
+                                            site: "Site",
+                                            categoria: "Selecionar...",
+                                            logo: "Logo: (Tamanho sugerido: 80px x 80px)",
+                                            cep: "CEP",
+                                            logradouro: "Logradouro",
+                                            numero:"Número",
+                                            complemento: "Complemento",
+                                            bairro: "Bairro",
+                                            cidade: "Cidade",
+                                            select:{
+                                                label: "Selecionar...",
+                                                empreendedorismo: "Empreendedorismo",
+                                                tecnologia: "Tecnologia",
+                                                inovacao: "Inovação",
+                                                negocios: "Negócios",
+                                            }
+                                            
                                         }
     
                                     },
@@ -100,8 +141,12 @@ $(function() {
                                         enviar: "Enviar"
                                     }
                                 }
+                            },
+                            btnUser:{
+                                saudacao: "Olá, {{name}} !",
+                                perfil: "MEU PERFIL",
+                                sair: "SAIR"
                             }
-                    
                         },
                         categorias:{
                             titulo: 'CATEGORIAS', 
@@ -197,6 +242,37 @@ $(function() {
                                             complemento: "Complement",
                                             bairro: "District*",
                                             cidade: "City*",
+                                            uf: "State*",
+                                            startup: "Classification*"
+                                        },
+                                        placeholder:{
+                                            nome: "Name",
+                                            site: "website",
+                                            categoria: "Select...",
+                                            logo: "Logo: (Suggested size: 80px x 80px)",
+                                            cep: "ZipCode",
+                                            logradouro: "Street Address",
+                                            numero:"House Number",
+                                            complemento: "Complement",
+                                            bairro: "District",
+                                            cidade: "City",
+                                            startup: "Choose the startup segment"
+                                        }
+                                    },
+                                    modalEventos:{
+                                        label:{
+                                            instituicao: "Intitution",
+                                            evento: "Events",
+                                            nome: "Name*",
+                                            site: "Website*",
+                                            tipoDeLocal: "Event category*",
+                                            descricao: "Description*",
+                                            cep: "ZipCode*",
+                                            logradouro: "Street Address*",
+                                            numero:"House Number*",
+                                            complemento: "Complement",
+                                            bairro: "District*",
+                                            cidade: "City*",
                                             uf: "State*"
                                         },
                                         placeholder:{
@@ -210,13 +286,26 @@ $(function() {
                                             complemento: "Complement",
                                             bairro: "District",
                                             cidade: "City",
+                                            select:{
+                                                label: "Select...",
+                                                empreendedorismo: "Entrepreneurship",
+                                                tecnologia: "Technology",
+                                                inovacao: "Innovation",
+                                                negocios: "Business",
+                                            }
                                         }
                                     },
                                     btn:{
                                         fechar: "Close",
                                         enviar: "Send"
                                     }
-                                }
+                                },
+                                
+                            },
+                            btnUser:{
+                                saudacao: "Hello, {{name}} !",
+                                perfil: "MY PROFILE",
+                                sair: "LOGOUT"
                             }
                         },
                         categorias:{
