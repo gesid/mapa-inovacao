@@ -153,8 +153,6 @@
             </a>
           </li>
 
-          
-
         </ul>    
       </div>
 
@@ -801,7 +799,7 @@
       <div class="modal-content modalAgradecimento--dimensao">
         <div class="modal-header modalAgradecimento--header">
           <p class="modalAgradecimento--titulo" id="exampleModalLabel">
-            Recebemos a solitação de cadastro!
+            <span id="textoLegendaModalAgradecimento">Recebemos a solitação de cadastro!</span>
           </p>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="reload()">
             <span aria-hidden="true">&times;</span>
@@ -823,16 +821,19 @@
 
           <div class="modalAgradecimento--divB">
             <p id="instituicaoEvento" class="modalAgradecimento--conteudo">
-              <b>Obrigado por cadastrar sua instituição!</b>
+              <b id="instituicaoEventoAgradecimento">Obrigado por cadastrar sua instituição!</b>
             </p>
             <p id="instituicaoEventoTx2" class="modalAgradecimento--conteudo">
-              As informações estão
+              <span id="subTxt1">As informações estão</span>
               <b>
-                <font color="green">em análise</font>
-              </b>, em breve sua
-              instituição será adicionada ao mapa!
+                <font color="green" id="subTxt2">em análise</font>
+              </b>
+              <span id="subTxt3">
+                , em breve sua
+                instituição será adicionada ao mapa!
+              </span>
             </p>
-            <p class="modalAgradecimento--conteudo">
+            <p class="modalAgradecimento--conteudo" id="instituicaoEventoTx3">
               Caso ocorra algua pendência, informaremos por e-mail.
             </p>
           </div>
@@ -840,7 +841,7 @@
 
         <!--Fim do Conteudo-->
         <div class="modal-footer modalAgradecimento--footer">
-          <button id="" class="modalAgradecimento--btnFechar" type="button" onclick="reload()">
+          <button id="btn-modalAgradecimento" class="modalAgradecimento--btnFechar" type="button" onclick="reload()">
             Fechar
           </button>
         </div>

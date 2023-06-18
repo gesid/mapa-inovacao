@@ -645,9 +645,10 @@ function cartaoComunidadeMobile(entidade, nomeUser) {
   btn1.setAttribute("name", entidade.getMarkerKey());
   btn1.setAttribute("onclick", "exibirComunidade(this)");
   btn1.setAttribute("data-dismiss", "");
-
+  
   if (map.hasLayer(layerArray[entidade.getMarkerKey()])) {
     btn1.innerHTML = "Desativar do mapa";
+    
     btn1.setAttribute("Style", "background: #CF5B15;");
   } else {
     btn1.innerHTML = "Ativar no mapa";
@@ -1066,8 +1067,9 @@ function atualizarTraducaoPopup(){
 /** Tradução do modalCadastro */
 
 function atualizarTraducaoModalCadastro(){
-  traducaoModalInstituicao()
-  traducaoModalEventos()
+  traducaoModalInstituicao();
+  traducaoModalEventos();
+  traducaoModalAgradecimento();
 }
 
 function traducaoModalInstituicao(){
@@ -1168,6 +1170,24 @@ function traducaoSelectTipoDeEvento(){
       optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.negocios');
     }
   }
+}
+
+function traducaoModalAgradecimento(){
+  let txtTitulo = document.getElementById("textoLegendaModalAgradecimento");
+  let txtAgradecimento = document.getElementById("instituicaoEventoAgradecimento");
+  let txtAnalise1 = document.getElementById("subTxt1");
+  let txtAnalise2 = document.getElementById("subTxt2");
+  let txtAnalise3 = document.getElementById("subTxt3");
+  let txtPendencia = document.getElementById("instituicaoEventoTx3");
+  let btn = document.getElementById("btn-modalAgradecimento");
+
+  txtTitulo.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.legenda");
+  txtAgradecimento.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto1");
+  txtAnalise1.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto2.sub1");
+  txtAnalise2.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto2.sub2");
+  txtAnalise3.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto2.sub3");
+  txtPendencia.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto3");
+  btn.innerText = i18next.t("navBar1.cadastro.modal.btn.fechar");
 }
 
 function chamarModalCadastro() {

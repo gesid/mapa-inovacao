@@ -136,10 +136,21 @@ $(function() {
                                         }
     
                                     },
+                                    modalSolicitacao:{
+                                        legenda:"Recebemos a solitação de cadastro!",
+                                        texto1: "Obrigado por cadastrar sua instituição!",
+                                        texto2: {
+                                            sub1: "As informações estão ",
+                                            sub2: "em análise",
+                                            sub3: ", em breve sua instituição será adicionada ao mapa!"
+                                        },
+                                        texto3: "Caso ocorra algua pendência, informaremos por e-mail.",
+                                    },
                                     btn:{
                                         fechar: "Fechar",
                                         enviar: "Enviar"
                                     }
+
                                 }
                             },
                             btnUser:{
@@ -172,7 +183,14 @@ $(function() {
                             startup: 'Startup',
                             patente: 'Patente'
                         },
-                        
+                        barraLateral:{
+                            cards:{
+                                cardsComunidade:{
+                                    btnAtivar: "Ativar no mapa",
+                                    btnDesativar: "Desativar do mapa"
+                                }
+                            }
+                        }
                     }
                 },
                 en:{
@@ -295,6 +313,16 @@ $(function() {
                                             }
                                         }
                                     },
+                                    modalSolicitacao:{
+                                        legenda:"We received the registration request!",
+                                        texto1: "Thank you for registering your institution!",
+                                        texto2: {
+                                            sub1:"The informations are ",
+                                            sub2: "in analysis",
+                                            sub3: ", soon your institution will be added to the map!"
+                                        },
+                                        texto3: "If there is any pending, we will inform you by email.",
+                                    },
                                     btn:{
                                         fechar: "Close",
                                         enviar: "Send"
@@ -332,7 +360,14 @@ $(function() {
                             startup: 'Startup',
                             patente: 'Patent'
                         },
-                        
+                        barraLateral:{
+                            cards:{
+                                cardsComunidade:{
+                                    btnAtivar: "Activate on the map",
+                                    btnDesativar: "Desativar do mapa"
+                                }
+                            }
+                        }
                     }
                 }
                 
