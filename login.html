@@ -22,7 +22,10 @@
 
       gtag("config", "G-VEX6JVXGVX");
     </script>
-
+    <link
+     href="./css/seletor-idioma.css"
+     rel="stylesheet"
+    />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -49,6 +52,9 @@
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""
     ></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
 
     <script
       src="https://kit.fontawesome.com/16786d0779.js"
@@ -60,6 +66,7 @@
 
     <link rel="shortcut icon" href="img/favicon_2.png" />
     <title>Mapa do Ecossistema de Inovação Cearense</title>
+    
   </head>
 
   <body>
@@ -88,7 +95,7 @@
             <li class="nav-item">
               <a type="button" href="index.html" class="nav-item-style">
                 <i class="fas fa-map-marker-alt"> </i>
-                <p class="texto-nav">MAPA</p>
+                <p data-i18n="ecossistema.sectionHeader.mapa" class="texto-nav">MAPA</p>
               </a>
             </li>
 
@@ -99,7 +106,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-newspaper"></i>
-                <p class="texto-nav">ECOSSISTEMA</p>
+                <p data-i18n="ecossistema.sectionHeader.ecossistema2" class="texto-nav">ECOSSISTEMA</p>
               </a>
             </li>
 
@@ -112,7 +119,7 @@
                 data-target="#modalSobre"
               >
                 <i class="fas fa-chalkboard-teacher"> </i>
-                <p class="texto-nav">COMO UTILIZAR</p>
+                <p data-i18n="login.sectionHoldBar.comoUtilizar" class="texto-nav">COMO UTILIZAR</p>
               </a>
             </li>
 
@@ -139,7 +146,7 @@
                   aria-expanded="false"
                 >
                   <i class="fas fa-stamp"> </i>
-                  <p class="texto-nav">PATENTES</p>
+                  <p data-i18n="ecossistema.sectionHeader.patente" class="texto-nav">PATENTES</p>
                 </a>
 
                 <div
@@ -147,10 +154,10 @@
                   id="opcoesDropdownPatentes"
                   aria-labelledby="dropdownMenuLink"
                 >
-                  <a class="dropdown-item" href="cadastro-patente.html"
+                  <a data-i18n="ecossistema.sectionHeader.cadastrarPatente" class="dropdown-item" href="cadastro-patente.html"
                     >Cadastrar patente</a
                   >
-                  <a class="dropdown-item" href="patentes.html"
+                  <a data-i18n="ecossistema.sectionHeader.verListaPatente" class="dropdown-item" href="patentes.html"
                     >Ver lista de patentes</a
                   >
                 </div>
@@ -169,6 +176,14 @@
             </li>
           </ul>
         </div>
+
+        <li class="nav-item">
+          <select
+            name="language" 
+            id="languageSwitcher"
+            class="d-flex align-items-center justify-content-start nav-item-select-style texto-nav">
+          </select>
+        </li>
 
         <div class="empty-space"></div>
       </nav>
@@ -231,18 +246,19 @@
                   <label class="card-login-text" for="exampleInputEmail1"
                     >E-MAIL</label
                   >
-                  <input
+                  <input 
                     type="email"
                     class="card-login-form"
                     id="email_field"
                     aria-describedby="emailHelp"
-                    placeholder="Digite seu e-mail"
+                    placeholder= ""
+                    name="email_field"
                   />
                   <!--<small id="emailHelp" class="form-text text-muted">Nunca compartilhe seu email com ninguém.</small>-->
                 </div>
 
                 <div class="form-group">
-                  <label class="card-login-text" for="exampleInputPassword1"
+                  <label data-i18n="login.sectionHoldBar.senha2" class="card-login-text" for="exampleInputPassword1"
                     >SENHA</label
                   >
                   <input
@@ -250,9 +266,10 @@
                     class="card-login-form"
                     id="password_field"
                     placeholder="Digite sua senha"
+                    name="password_field"
                   />
                   <p>
-                    <a
+                    <a data-i18n="login.sectionHoldBar.esqueceu"
                       id="txtAjuda"
                       class="card-login-text"
                       href="cadastro.html"
@@ -261,8 +278,8 @@
                   </p>
                 </div>
 
-                <div class="d-flex justify-content-center">
-                  <button
+                <div  class="d-flex justify-content-center">
+                  <button data-i18n="login.sectionHoldBar.buttonEnter"
                     type="button"
                     class="btn-entrar"
                     data-local="enviar"
@@ -274,8 +291,8 @@
               </div>
 
               <small class="form-row d-flex justify-content-center">
-                <p class="" href="">Não possui cadastro?</p>
-                <a
+                <p data-i18n="login.sectionHoldBar.naoPossui" class="" href="">Não possui cadastro?</p>
+                <a data-i18n="login.sectionHoldBar.registro"
                   style="text-decoration: underline"
                   class="card-login-text ml-1"
                   href="cadastro.html"
@@ -308,34 +325,34 @@
         <div class="div-footer1">
           <ul>
             <li>
-              <a
+              <a data-i18n="ecossistema.sectionRodape.titulo"
                 id="email"
                 href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
               >
                 Para mais informações, fale conosco através do
                 mapainovacao@ufc.br</a
               >
-              <p class="div-footer-beta">Versão 0.2 (Beta)</p>
+              <p data-i18n="ecossistema.sectionRodape.descricao" class="div-footer-beta">Versão 0.2 (Beta)</p>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="div-footer2">
-        <a
+        <a data-i18n="ecossistema.sectionRodape.politicaPrivacidade"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
           target="_blank"
           class=""
           >POLÍTICAS DE PRIVACIDADE</a
         >
-        <a
+        <a data-i18n="ecossistema.sectionRodape.termoUso"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf"
           target="_blank"
           class=""
         >
           TERMOS DE USO</a
-        >
-        <a
+        > 
+        <a data-i18n="ecossistema.sectionRodape.termoConsentimento"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf"
           target="_blank"
           class=""
@@ -374,6 +391,8 @@
 
     <script src="javascript/login.js"></script>
     <script src="javascript/verificarUsuario.js"></script>
+
+    <script src="javascript/traducao/i18n-index.js" type="module"></script>
     <script>
       
     </script>
