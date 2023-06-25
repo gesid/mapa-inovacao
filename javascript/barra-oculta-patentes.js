@@ -24,13 +24,17 @@ function gerarHtmlPatenteListaOculta(patente) {
   const depositantes = gerarTextoDepositantesPatente(patente.depositantes);
 
   return `
-  <div class="card-patente-barra">
+  <div class="card-patente-barra" id="card-patente">
     <h5 class="card-patente-titulo">${patente.titulo}</h5>
     ${htmlDescricaoPatente}
 
     <div class="d-flex align-items-center justify-content-start info-patente mt-3">
       <i class="fas fa-user"></i>
-      <p class="mb-0 ml-2">Depositantes: ${depositantes}</p>
+      <p class="mb-0 ml-2">
+        <span id="patente-depositante" 
+          data-i18n="barraLateral.cards.cardsPatentes.depositantes">Depositantes</span>
+        : ${depositantes}
+      </p>
     </div>
 
     <div
@@ -38,7 +42,11 @@ function gerarHtmlPatenteListaOculta(patente) {
       class="d-flex align-items-center justify-content-start  info-patente"
     >
       <i class="fas fa-calendar-alt "></i>
-      <p class="mb-0 ml-2">Publicação - ${patente.dataPublicacao}</p>
+      <p class="mb-0 ml-2">
+        <span id="patente-publicacao" 
+          data-i18n="barraLateral.cards.cardsPatentes.publicacao">Publicação</span> 
+        - ${patente.dataPublicacao}
+      </p>
     </div>
 
     <div
@@ -46,7 +54,11 @@ function gerarHtmlPatenteListaOculta(patente) {
       class="d-flex align-items-center justify-content-start  info-patente"
     >
       <i class="fas fa-key"></i>
-      <p class="mb-0 ml-2">Nº de Pedido no INPI - ${patente.numeroPedidoInpi}</p>
+      <p class="mb-0 ml-2">
+        <span id="patente-numeroDoPedido" 
+          data-i18n="barraLateral.cards.cardsPatentes.numeroDoPedido">Nº de Pedido no INPI</span> 
+          - ${patente.numeroPedidoInpi}
+      </p>
     </div>
 
     <button 
@@ -59,11 +71,31 @@ function gerarHtmlPatenteListaOculta(patente) {
         mt-3
       "
     >
-      <a href="/patentes.html?key=${patente.keyFirebase}">Ver Mais Informações</a>
+      <a href="/patentes.html?key=${patente.keyFirebase}" 
+        id="patente-btnVerMais"
+        data-i18n="barraLateral.cards.cardsPatentes.btnVerMais">
+          Ver Mais Informações
+      </a>
     </button>
   </div>
   `;
 }
+
+/**Tradução card Patente */
+i18next.on('languageChanged', function(lng) {
+  const CARD_PATENTE = document.getElementById("card-patente");
+  if (CARD_PATENTE){
+    let depositante = document.getElementById("patente-depositante");
+    let publicacao = document.getElementById("patente-publicacao");
+    let numeroDoPedido = document.getElementById("patente-numeroDoPedido");
+    let btn = document.getElementById("patente-btnVerMais");
+
+    depositante.innerHTML = i18next.t("barraLateral.cards.cardsPatentes.depositantes");
+    publicacao.innerHTML = i18next.t("barraLateral.cards.cardsPatentes.publicacao");
+    numeroDoPedido.innerHTML = i18next.t("barraLateral.cards.cardsPatentes.numeroDoPedido");
+    btn.innerHTML = i18next.t("barraLateral.cards.cardsPatentes.btnVerMais");
+  }
+});
 
 function gerarHtmlDescricaoPatente(patente) {
   const partesDescricao = gerarDescricaoCompacta(patente.descricao);

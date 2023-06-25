@@ -230,7 +230,7 @@ async function chamaBarraOculta(componente) {
   const tipoSelecionado = componente.getAttribute("data-tipo");
   const listaOculta = document.getElementById("cartao");
   listaOculta.innerHTML = gerarTemplateCard();
-
+  console.log("componente", componente)
   //Abre a barra de cartões
   if (permissao === true) {
     permissao = false;
@@ -329,6 +329,12 @@ function filtroBusca(tipo) {
   }
 }
 
+/**Tradução barra de busca*/
+i18next.on('languageChanged', function(lng) {
+  const INPUT_BUSCA = document.getElementsByName("contBusca");
+  INPUT_BUSCA[0].placeholder = i18next.t("barraLateral.busca")
+})
+
 function verificarUsuarioEntidade(entidade) {
   usuariodao.buscar(entidade.getUserId()).then(function (usuario) {
     cartaoEntidade(entidade, usuario.getNome());
@@ -341,6 +347,7 @@ function cartaoEntidade(entidade, nomeUser) {
   let img = template.content.querySelector("img");
   let titulo = template.content.querySelector("#txt-titulo-card");
   let descricao = template.content.querySelector("#txt-descricao-card");
+  let txtMarcadoPor = template.content.querySelector("#txt-marcadopor");
   let criador = template.content.querySelector("#txt-marcadopor-nome");
   let btn1 = template.content.querySelector("#btn-card1");
   let btn2 = template.content.querySelector("#btn-card2");
@@ -359,12 +366,17 @@ function cartaoEntidade(entidade, nomeUser) {
   ${entidade.getUF()}, 
   ${entidade.getCEP()}`;
 
-  btn1.innerHTML = "Localização";
+  btn1.classList.add("cardEntidade-i18n");
+  btn2.classList.add("cardEntidade-i18n");
+  txtMarcadoPor.classList.add("cardEntidade-i18n");
+
+  btn1.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.btnLocalizacao'); 
+  txtMarcadoPor.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.txtMarcadoPor'); 
 
   if (entidade.tipo === "Patente") {
     btn2.classList.add("btn-oculto");
   } else {
-    btn2.innerHTML = "Visitar Site";
+    btn2.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.btnVisitarSite'); 
     btn2.setAttribute("href", entidade.getSite());
   }
 
@@ -379,6 +391,24 @@ function cartaoEntidade(entidade, nomeUser) {
   cartao.appendChild(document.importNode(template.content, true));
   permissao = true;
 }
+
+/**Tradução elementos cards Empresas */
+i18next.on('languageChanged', function(lng) {
+  const BOTOES_LOCALIZACAO_CARD_ENTIDADE = document.getElementsByClassName("cardEntidade-i18n");
+  const ARRAY_BOTOES_LOCALIZACAO_CARD_ENTIDADE = Array.from(BOTOES_LOCALIZACAO_CARD_ENTIDADE)
+
+  ARRAY_BOTOES_LOCALIZACAO_CARD_ENTIDADE.forEach(element => {
+    if(element.id == "btn-card1"){
+      element.innerText = i18next.t('barraLateral.cards.cardsEntidades.btnLocalizacao'); 
+    } 
+    else if(element.id == "btn-card2"){
+      element.innerText = i18next.t('barraLateral.cards.cardsEntidades.btnVisitarSite'); 
+    }
+    else if(element.id == "txt-marcadopor"){
+      element.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.txtMarcadoPor'); 
+    }
+  });
+})
 
 function filtroBuscaComunidade(tipo) {
   let valBarra = document.getElementById("contBusca").value; //Verificar se há algo na barra de busca
@@ -425,6 +455,7 @@ function cartaoComunidade(entidade, nomeUser) {
 
   btn1.innerHTML = "Ativar no mapa";
   btn2.innerHTML = "Visitar site";
+  console.log(btn1.innerHTML)
 
   criador.textContent = nomeUser;
   criador.setAttribute("href", "javascript:void(0)");
@@ -439,6 +470,7 @@ function cartaoComunidade(entidade, nomeUser) {
   cartao.appendChild(document.importNode(template.content, true));
   permissao = true;
 }
+
 
 function executarEventoKey() {
   //Reconhece o evento que foi clicado na página de eventos e da um zoom no marcador
@@ -648,7 +680,6 @@ function cartaoComunidadeMobile(entidade, nomeUser) {
   
   if (map.hasLayer(layerArray[entidade.getMarkerKey()])) {
     btn1.innerHTML = "Desativar do mapa";
-    
     btn1.setAttribute("Style", "background: #CF5B15;");
   } else {
     btn1.innerHTML = "Ativar no mapa";
@@ -1119,6 +1150,8 @@ function traducaoSelectTipoLocal(){
       optionsTipoLocal[i].innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.categoria')
     } else {
       let classe = getTipoClasseI18n(optionsTipoLocal[i].innerText)
+      //console.log('texto Option: ', optionsTipoLocal[i].innerText)
+      //console.log('classe: ', classe)
       let texto = 'categorias.'+ classe
       optionsTipoLocal[i].innerText = i18next.t(texto)
     }

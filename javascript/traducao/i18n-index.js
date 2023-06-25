@@ -184,10 +184,22 @@ $(function() {
                             patente: 'Patente'
                         },
                         barraLateral:{
+                            busca: "Buscar",
                             cards:{
                                 cardsComunidade:{
                                     btnAtivar: "Ativar no mapa",
                                     btnDesativar: "Desativar do mapa"
+                                },
+                                cardsEntidades:{
+                                    btnLocalizacao: "Localização",
+                                    btnVisitarSite: "Visitar Site",
+                                    txtMarcadoPor: "Marcado por:"
+                                },
+                                cardsPatentes:{
+                                    depositantes: "Depositantes",
+                                    publicacao:"Publicação",
+                                    numeroDoPedido: "Nº de Pedido no INPI",
+                                    btnVerMais: "Ver Mais Informações"
                                 }
                             }
                         }
@@ -361,10 +373,22 @@ $(function() {
                             patente: 'Patent'
                         },
                         barraLateral:{
+                            busca: "Search",
                             cards:{
                                 cardsComunidade:{
                                     btnAtivar: "Activate on the map",
                                     btnDesativar: "Desativar do mapa"
+                                },
+                                cardsEntidades:{
+                                    btnLocalizacao: "Localization",
+                                    btnVisitarSite: "Visit Website",
+                                    txtMarcadoPor: "Marked by:"
+                                },
+                                cardsPatentes:{
+                                    depositantes: "Applicant",
+                                    publicacao:"Publication Date",
+                                    numeroDoPedido: "INPI Application Number",
+                                    btnVerMais: "Show more information"
                                 }
                             }
                         }
