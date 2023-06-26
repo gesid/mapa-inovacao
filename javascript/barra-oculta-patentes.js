@@ -31,8 +31,7 @@ function gerarHtmlPatenteListaOculta(patente) {
     <div class="d-flex align-items-center justify-content-start info-patente mt-3">
       <i class="fas fa-user"></i>
       <p class="mb-0 ml-2">
-        <span id="patente-depositante" 
-          data-i18n="barraLateral.cards.cardsPatentes.depositantes">Depositantes</span>
+        <span id="patente-depositante">${i18next.t("barraLateral.cards.cardsPatentes.depositantes")}</span>
         : ${depositantes}
       </p>
     </div>
@@ -43,8 +42,7 @@ function gerarHtmlPatenteListaOculta(patente) {
     >
       <i class="fas fa-calendar-alt "></i>
       <p class="mb-0 ml-2">
-        <span id="patente-publicacao" 
-          data-i18n="barraLateral.cards.cardsPatentes.publicacao">Publicação</span> 
+        <span id="patente-publicacao">${i18next.t("barraLateral.cards.cardsPatentes.publicacao")}</span> 
         - ${patente.dataPublicacao}
       </p>
     </div>
@@ -55,8 +53,7 @@ function gerarHtmlPatenteListaOculta(patente) {
     >
       <i class="fas fa-key"></i>
       <p class="mb-0 ml-2">
-        <span id="patente-numeroDoPedido" 
-          data-i18n="barraLateral.cards.cardsPatentes.numeroDoPedido">Nº de Pedido no INPI</span> 
+        <span id="patente-numeroDoPedido">${i18next.t("barraLateral.cards.cardsPatentes.numeroDoPedido")}</span> 
           - ${patente.numeroPedidoInpi}
       </p>
     </div>
@@ -72,9 +69,8 @@ function gerarHtmlPatenteListaOculta(patente) {
       "
     >
       <a href="/patentes.html?key=${patente.keyFirebase}" 
-        id="patente-btnVerMais"
-        data-i18n="barraLateral.cards.cardsPatentes.btnVerMais">
-          Ver Mais Informações
+        id="patente-btnVerMais">
+        ${i18next.t("barraLateral.cards.cardsPatentes.btnVerMais")}
       </a>
     </button>
   </div>
@@ -115,7 +111,11 @@ function gerarHtmlDescricaoPatente(patente) {
           class="btn-manipular-visualizacao-desc"
         >
           <i class="fas fa-caret-down"> </i>
-          Ver mais
+          <span 
+            id="patente-ver-mais"
+            data-18n="barraLateral.cards.cardsPatentes.verMais">
+            Ver mais
+          </span>
         </button>
       </p>
 
@@ -131,7 +131,10 @@ function gerarHtmlDescricaoPatente(patente) {
           class="btn-manipular-visualizacao-desc"
         >
           <i class="fas fa-caret-up"> </i>
-          Ver menos
+          <span id="patente-ver-menos"
+            data-18n="barraLateral.cards.cardsPatentes.verMenos">
+            Ver menos
+          </span>
         </button>
       </p>
       
@@ -167,6 +170,18 @@ function gerarHtmlDescricaoPatente(patente) {
     
   </div>`;
 }
+
+/**Tradução card Patente */
+i18next.on('languageChanged', function(lng) {
+  const CARD_PATENTE = document.getElementById("card-patente");
+  if (CARD_PATENTE){
+   let btnVerMais = document.getElementById("patente-ver-mais");
+   let btnVerMenos = document.getElementById("patente-ver-menos");
+
+   btnVerMais.innerHTML = i18next.t("barraLateral.cards.cardsPatentes.verMais");
+   btnVerMenos.innerHTML = i18next.t("barraLateral.cards.cardsPatentes.verMenos");
+  }
+});
 
 function gerarDescricaoCompacta(descricaoPatente) {
   const partesDescricao = {

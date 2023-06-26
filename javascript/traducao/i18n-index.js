@@ -196,6 +196,8 @@ $(function() {
                                     txtMarcadoPor: "Marcado por:"
                                 },
                                 cardsPatentes:{
+                                    verMais: "Ver Mais",
+                                    verMenos: "Ver Menos",
                                     depositantes: "Depositantes",
                                     publicacao:"Publicação",
                                     numeroDoPedido: "Nº de Pedido no INPI",
@@ -385,6 +387,8 @@ $(function() {
                                     txtMarcadoPor: "Marked by:"
                                 },
                                 cardsPatentes:{
+                                    verMais: "Show More",
+                                    verMenos: "Show Less",
                                     depositantes: "Applicant",
                                     publicacao:"Publication Date",
                                     numeroDoPedido: "INPI Application Number",

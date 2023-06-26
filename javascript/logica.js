@@ -1147,15 +1147,56 @@ function traducaoSelectTipoLocal(){
   let optionsTipoLocal = document.querySelector('#validacaoTipoLocal')
   for(let i = 0; i < optionsTipoLocal.length; i++){
     if(i == 0){
-      optionsTipoLocal[i].innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.categoria')
+      optionsTipoLocal[i].innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.categoria');
     } else {
-      let classe = getTipoClasseI18n(optionsTipoLocal[i].innerText)
-      //console.log('texto Option: ', optionsTipoLocal[i].innerText)
-      //console.log('classe: ', classe)
-      let texto = 'categorias.'+ classe
-      optionsTipoLocal[i].innerText = i18next.t(texto)
+      let classe = getTipoClasseI18nSelectTipoLocal(i);
+      let texto = 'categorias.'+ classe;
+      optionsTipoLocal[i].innerText = i18next.t(texto);
     }
   }
+}
+
+function getTipoClasseI18nSelectTipoLocal(indice){
+  if(indice == 1)
+    return 'aceleradora';
+  else if(indice == 2)
+    return 'catLocais';
+  else if(indice == 3)
+    return 'comEMidia'
+  else if(indice == 4)
+    return 'coworking';
+  else if(indice == 5)
+    return 'escolas';
+  else if(indice == 6)
+    return 'espMakers';
+  else if(indice == 7)
+    return 'eventos';
+  else if(indice == 8)
+    return 'fabApp';
+  else if(indice == 9)
+    return 'gov';
+  else if(indice == 10)
+    return 'gEmpresas';
+  else if(indice == 11)
+    return 'incubadoras';
+  else if(indice == 12)
+    return 'iniUniversitarias';
+  else if(indice == 13)
+    return 'investidores';
+  else if(indice == 14)
+    return 'nucInovacao';
+  else if(indice == 15)
+    return 'parquesTec';
+  else if(indice == 16)
+    return 'preAceleradoras';
+  else if(indice == 17)
+    return 'propIntelectual';
+  else if(indice == 18)
+    return 'mentoria';
+  else if(indice == 19)
+    return 'startup';
+  else if(indice == 20)
+    return 'patente';
 }
 
 function traducaoModalEventos(){
