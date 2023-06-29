@@ -204,6 +204,10 @@ $(function() {
                                     btnVerMais: "Ver Mais Informações"
                                 }
                             }
+                        },
+                        popupBtnContainer:{
+                            btnVisitar: "Visitar Site",
+                            btnLink: "Link da Localização"
                         }
                     }
                 },
@@ -395,6 +399,10 @@ $(function() {
                                     btnVerMais: "Show more information"
                                 }
                             }
+                        },
+                        popupBtnContainer:{
+                            btnVisitar: "Visit Website",
+                            btnLink: "Location Link"
                         }
                     }
                 }
@@ -407,12 +415,16 @@ $(function() {
             jqueryI18next.init(i18next, $, { useOptionsAttr: true });
 
             Object.keys(lngs).map((lng) => {
-                let optSelect = new Option(lngs[lng].nativeName, lng);
+                //let optSelect = new Option(lngs[lng].nativeName, lng);
+                let optSelect = `<option value="${lng}" class="option-traducao">${lngs[lng].nativeName}</option>`;
+    
                 if(lng === i18next.resolvedLanguage){
-                    optSelect.setAttribute("selected", "selected");
+                    optSelect = `<option value="${lng}" class="option-traducao" selected="selected">${lngs[lng].nativeName}</option>`;
                 }
                 $('#languageSwitcher').append(optSelect);
+                console.log(optSelect)
             })
+
 
             $('#languageSwitcher').change(() => {
                 let chooseLng = $(this).find("option:selected").attr('value');

@@ -369,7 +369,7 @@ function cartaoEntidade(entidade, nomeUser) {
   btn1.classList.add("cardEntidade-i18n");
   btn2.classList.add("cardEntidade-i18n");
   txtMarcadoPor.classList.add("cardEntidade-i18n");
-
+  console.log(btn1)
   btn1.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.btnLocalizacao'); 
   txtMarcadoPor.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.txtMarcadoPor'); 
 
@@ -408,7 +408,7 @@ i18next.on('languageChanged', function(lng) {
       element.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.txtMarcadoPor'); 
     }
   });
-})
+});
 
 function filtroBuscaComunidade(tipo) {
   let valBarra = document.getElementById("contBusca").value; //Verificar se há algo na barra de busca
@@ -879,12 +879,42 @@ function gerarElementoPopup(entidade) {
     <p class="popupNome" style="margin: 0px"> ${entidade.getNome()} </p>
     <p class="popupTipo" style="margin: 0px"> ${entidade.getTipo()} </p>
     <div id=popupBtnContainer>
-      <a class="btnProp popupBtnConheca" style="color: #FC6A38;" href=" ${entidade.getSite()}" target='_blank'>Visitar Site</a>
-      <a class="btnProp popupBtnCompartilhar" style="color: white" data-key ="${entidade.getMarkerKey()}" onclick="criarURLCompartilhamento(this)" title="Compartilhar">Link da Localização</i></a>
+      <a class="btnProp popupBtnConheca i18n-popupContainer-btnVisitar" 
+        style="color: #FC6A38;" href=" ${entidade.getSite()}" 
+        target='_blank' data-i18n="popupBtnContainer.btnVisitar">${i18next.t("popupBtnContainer.btnVisitar")}</a>
+
+      <a class="btnProp popupBtnCompartilhar i18n-popupContainer-btnLink"
+        style="color: white" data-key ="${entidade.getMarkerKey()}" 
+        onclick="criarURLCompartilhamento(this)" 
+        title="Compartilhar" data-i18n="popupBtnContainer.btnLink">Link da Localização</i></a>
       ${btnVerPatentes}
     </div>
   </div>`;
 }
+
+/**Tradução popup container*/
+map.on('popupopen', async function(e) {
+  const POPUP_CONTAINER = document.getElementById("popupContainer");
+  if(POPUP_CONTAINER){
+    const BOTOES_VISITAR = document.getElementsByClassName("i18n-popupContainer-btnVisitar");
+    const BOTOES_LINK = document.getElementsByClassName("i18n-popupContainer-btnLink");
+
+    const ARRAY_BOTOES_VISITAR = Array.from(BOTOES_VISITAR);
+    const ARRAY_BOTOES_LINK = Array.from(BOTOES_LINK);
+    
+
+    ARRAY_BOTOES_VISITAR.forEach((btn) =>{
+      btn.innerHTML = i18next.t("popupBtnContainer.btnVisitar");
+    })
+
+    ARRAY_BOTOES_LINK.forEach((btn) =>{
+      btn.innerHTML = i18next.t("popupBtnContainer.btnLink");
+    })
+  }
+  
+});
+
+
 
 function criarURLCompartilhamento(componente) {
   //alert(componente.getAttribute("data-key"))
@@ -1542,3 +1572,5 @@ $(document).ready(() => {
     }
   });
 });
+
+
