@@ -208,6 +208,9 @@ $(function() {
                         popupBtnContainer:{
                             btnVisitar: "Visitar Site",
                             btnLink: "Link da Localização"
+                        },
+                        modalCookies:{
+                            texto: "Este site utiliza cookies para a sua melhor experiência. Consulte nossa Política de Privacidade para saber mais sobre como usamos e cuidamos dos seus dados. Ao continuar navegando, você concorda automaticamente com os termos apresentados."
                         }
                     }
                 },
@@ -403,6 +406,9 @@ $(function() {
                         popupBtnContainer:{
                             btnVisitar: "Visit Website",
                             btnLink: "Location Link"
+                        },
+                        modalCookies:{
+                            texto: "This website uses cookies for your best experience. View our Privacy Policy to learn more about how we use and care for your data. As you continue browsing, you automatically agree to the terms presented."
                         }
                     }
                 }

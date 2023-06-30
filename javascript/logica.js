@@ -165,6 +165,7 @@ function criarListaOpcoes(tipoClasse) {
 
 //Função para retornar valor equivalente ao tipoClasse no i18n
 function getTipoClasseI18n(tipo){
+  
   if(tipo == 'Aceleradora')
     return 'aceleradora'
   else if(tipo == 'Catalisadores Locais')
@@ -511,9 +512,9 @@ function criarOpcaoComunidadeMobile(comunidades) {
   let imgLink = document.createElement("imgLink");
   //imgLink.src = componente.getImagemBarra()
 
-  a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center">
+  a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center" id="div-comunidades-mobile">
   <img style="height:36px; width:36px" src= "img/img-bl/27-comunidade.png">
-  Comunidades
+  ${i18next.t("categorias.comunidades")}
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>
   </div>
   <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
@@ -547,6 +548,17 @@ function criarListaOpcoesMobile(tipoClasse) {
   executarEventoKey();
 
   executarShareEvent();
+}
+
+i18next.on('languageChanged', function(lng) {
+  
+});
+
+function atualizarTraducaoCriaOpcaoComunidadeMobile(){
+  const DIV_COMUNIDADE_MOBILE = document.getElementById("div-comunidades-mobile");
+  if(DIV_COMUNIDADE_MOBILE){
+    console.log("Sim")
+  }
 }
 
 //Criando modal de cartões mobile
@@ -868,6 +880,9 @@ function gerarElementoPopup(entidade) {
   let imgPop = document.createElement("imgPop");
   imgPop.src = entidade.getURL();
 
+  let tipo = getTipoClasseI18n(entidade.getTipo());
+  let traducao_tipo = "categorias." + tipo; 
+
   const btnVerPatentes =
     entidade.getTotalPatentes() > 0
       ? `<a class="btnProp popupBtnVerPatentes" style="color: white" data-key="${entidade.getMarkerKey()}" onclick="mostrarModalListagemPatentes(this)">Ver patentes</a>`
@@ -877,11 +892,11 @@ function gerarElementoPopup(entidade) {
   <div id="popupContainer">
     <img class="popupImg" src="${imgPop.src}"></img> 
     <p class="popupNome" style="margin: 0px"> ${entidade.getNome()} </p>
-    <p class="popupTipo" style="margin: 0px"> ${entidade.getTipo()} </p>
+    <p class="popupTipo i18n-popupContainer-tipo" style="margin: 0px data-i18n="${traducao_tipo}">${entidade.getTipo()} </p>
     <div id=popupBtnContainer>
       <a class="btnProp popupBtnConheca i18n-popupContainer-btnVisitar" 
         style="color: #FC6A38;" href=" ${entidade.getSite()}" 
-        target='_blank' data-i18n="popupBtnContainer.btnVisitar">${i18next.t("popupBtnContainer.btnVisitar")}</a>
+        target='_blank' data-i18n="popupBtnContainer.btnVisitar">Visitar Site</a>
 
       <a class="btnProp popupBtnCompartilhar i18n-popupContainer-btnLink"
         style="color: white" data-key ="${entidade.getMarkerKey()}" 
@@ -898,23 +913,29 @@ map.on('popupopen', async function(e) {
   if(POPUP_CONTAINER){
     const BOTOES_VISITAR = document.getElementsByClassName("i18n-popupContainer-btnVisitar");
     const BOTOES_LINK = document.getElementsByClassName("i18n-popupContainer-btnLink");
+    const TXT_TIPOS = document.getElementsByClassName("i18n-popupContainer-tipo");
+    //console.log(TXT_TIPOS[0].innerHTML)
 
     const ARRAY_BOTOES_VISITAR = Array.from(BOTOES_VISITAR);
     const ARRAY_BOTOES_LINK = Array.from(BOTOES_LINK);
-    
+    const ARRAY_TXT_TIPOS = Array.from(TXT_TIPOS);
 
     ARRAY_BOTOES_VISITAR.forEach((btn) =>{
-      btn.innerHTML = i18next.t("popupBtnContainer.btnVisitar");
-    })
+      btn.innerText = i18next.t("popupBtnContainer.btnVisitar");
+    });
 
     ARRAY_BOTOES_LINK.forEach((btn) =>{
-      btn.innerHTML = i18next.t("popupBtnContainer.btnLink");
+      btn.innerText = i18next.t("popupBtnContainer.btnLink");
+    });
+
+    ARRAY_TXT_TIPOS.forEach((label) => {
+      let tipo = getTipoClasseI18n(label.innerText);
+      let traducao_tipo = "categorias." + tipo; 
+      label.innerText = i18next.t(traducao_tipo);
     })
   }
   
 });
-
-
 
 function criarURLCompartilhamento(componente) {
   //alert(componente.getAttribute("data-key"))
