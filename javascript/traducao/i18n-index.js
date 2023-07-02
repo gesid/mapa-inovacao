@@ -161,6 +161,7 @@ $(function() {
                         },
                         categorias:{
                             titulo: 'CATEGORIAS', 
+                            tituloMobile: 'Categorias',
                             comunidades: 'Comunidades',
                             aceleradora: 'Aceleradora',
                             catLocais: 'Catalisadores Locais',
@@ -188,7 +189,9 @@ $(function() {
                             cards:{
                                 cardsComunidade:{
                                     btnAtivar: "Ativar no mapa",
-                                    btnDesativar: "Desativar do mapa"
+                                    btnDesativar: "Desativar do mapa",
+                                    btnVisitar: "Visitar Site",
+                                    txtMarcadoPor: "Marcado por:"
                                 },
                                 cardsEntidades:{
                                     btnLocalizacao: "Localização",
@@ -211,7 +214,10 @@ $(function() {
                         },
                         modalCookies:{
                             texto: "Este site utiliza cookies para a sua melhor experiência. Consulte nossa Política de Privacidade para saber mais sobre como usamos e cuidamos dos seus dados. Ao continuar navegando, você concorda automaticamente com os termos apresentados."
-                        }
+                        },
+                        modalCategoriaMobile:{
+                            btnIrParaOMapa: "Ir para o mapa"
+                        },
                     }
                 },
                 en:{
@@ -359,6 +365,7 @@ $(function() {
                         },
                         categorias:{
                             titulo: 'CATEGORIES',
+                            tituloMobile: 'Categories',
                             comunidades: 'Communities',
                             aceleradora: 'Startup accelerator',
                             catLocais: 'Local Catalysts',
@@ -385,8 +392,10 @@ $(function() {
                             busca: "Search",
                             cards:{
                                 cardsComunidade:{
-                                    btnAtivar: "Activate on the map",
-                                    btnDesativar: "Desativar do mapa"
+                                    btnAtivar: "Enable on map",
+                                    btnDesativar: "Disable on map",
+                                    btnVisitar: "Visit Website",
+                                    txtMarcadoPor: "Marked by:"
                                 },
                                 cardsEntidades:{
                                     btnLocalizacao: "Localization",
@@ -409,7 +418,10 @@ $(function() {
                         },
                         modalCookies:{
                             texto: "This website uses cookies for your best experience. View our Privacy Policy to learn more about how we use and care for your data. As you continue browsing, you automatically agree to the terms presented."
-                        }
+                        },
+                        modalCategoriaMobile:{
+                            btnIrParaOMapa: "Return to the map"
+                        },
                     }
                 }
                 

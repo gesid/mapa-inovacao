@@ -120,6 +120,7 @@ function OpcaoComunidade() {
 }
 
 function criarOpcaoComunidade(comunidades) {
+  console.log(comunidades)
   // Cria botão de comunidade
   let template = document.querySelector("#listaTipo");
   let listaOpcoes = document.querySelector("#listaOpcoes");
@@ -134,6 +135,35 @@ function criarOpcaoComunidade(comunidades) {
   a.setAttribute("data-tipo", "Comunidades");
   listaOpcoes.appendChild(document.importNode(template.content, true));
 }
+
+/**Tradução card Comunidade*/
+i18next.on('languageChanged', function(lng) {
+  const DIV_CARTAO_COMUNIDADE = document.getElementById("divImagemCartao");
+  
+  if(DIV_CARTAO_COMUNIDADE){
+    const BTN_ATIVAR_DESATIVAR = document.querySelectorAll(".texto-btn-card1");
+    const BTN_VISITAR = document.querySelectorAll(".texto-btn-card2");
+    const TXT_MARCARDOPOR = document.querySelectorAll("#txt-marcadopor");
+    
+    BTN_ATIVAR_DESATIVAR.forEach((element) => {
+      if(element.innerText == "Ativar no mapa"){
+        element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnAtivar");
+      } else{
+        element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnDesativar");
+      }
+    });
+
+    BTN_VISITAR.forEach((element) => {
+      element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnVisitar");
+    });
+
+    TXT_MARCARDOPOR.forEach((element) => {
+      element.innerText = i18next.t("barraLateral.cards.cardsComunidade.txtMarcadoPor");
+    });
+    
+  }
+  
+});
 
 function criarListaOpcoes(tipoClasse) {
   // Cria lista da bara lateral
@@ -231,7 +261,7 @@ async function chamaBarraOculta(componente) {
   const tipoSelecionado = componente.getAttribute("data-tipo");
   const listaOculta = document.getElementById("cartao");
   listaOculta.innerHTML = gerarTemplateCard();
-  console.log("componente", componente)
+  
   //Abre a barra de cartões
   if (permissao === true) {
     permissao = false;
@@ -456,7 +486,6 @@ function cartaoComunidade(entidade, nomeUser) {
 
   btn1.innerHTML = "Ativar no mapa";
   btn2.innerHTML = "Visitar site";
-  console.log(btn1.innerHTML)
 
   criador.textContent = nomeUser;
   criador.setAttribute("href", "javascript:void(0)");
@@ -514,7 +543,7 @@ function criarOpcaoComunidadeMobile(comunidades) {
 
   a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center" id="div-comunidades-mobile">
   <img style="height:36px; width:36px" src= "img/img-bl/27-comunidade.png">
-  ${i18next.t("categorias.comunidades")}
+  <span data-i18n="categorias.comunidades">Comunidades</span>
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>
   </div>
   <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
@@ -532,9 +561,12 @@ function criarListaOpcoesMobile(tipoClasse) {
 
   imgLink.src = tipoClasse.getImagemBarra();
 
+  let tipoI18n = getTipoClasseI18n(tipoClasse.getNome());
+  let dataI18n = "categorias." + tipoI18n;
+
   a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center">
-  <img style="height:36px; width:36px" src= ${imgLink.src}>
-  ${tipoClasse.getNome()}
+  <img style="height:36px; width:36px" src= ${imgLink.src} >
+  <span data-i18n="${dataI18n}">${tipoClasse.getNome()}</span>
   <span class="badge badge-secondary badge-pill">${tipoClasse.getBadge()}</span>
   </div> 
   <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
@@ -550,16 +582,6 @@ function criarListaOpcoesMobile(tipoClasse) {
   executarShareEvent();
 }
 
-i18next.on('languageChanged', function(lng) {
-  
-});
-
-function atualizarTraducaoCriaOpcaoComunidadeMobile(){
-  const DIV_COMUNIDADE_MOBILE = document.getElementById("div-comunidades-mobile");
-  if(DIV_COMUNIDADE_MOBILE){
-    console.log("Sim")
-  }
-}
 
 //Criando modal de cartões mobile
 function chamarModalCard(componente) {
@@ -571,18 +593,23 @@ function chamarModalCard(componente) {
       document
         .getElementById("img-categoria")
         .setAttribute("src", "img/img-bl/27-comunidade.png");
-      document.getElementById("nome-categoria").innerHTML = "Comunidades";
+      document.getElementById("nome-categoria").innerHTML = i18next.t("categorias.comunidades");
       break;
     }
 
     if (
       ecossistema[contAux].getNome() == componente.getAttribute("data-tipo")
     ) {
+      /**Elementos de traducao */
+      let tipoI18n = getTipoClasseI18n( ecossistema[contAux].getNome());
+      let dataI18n = "categorias." + tipoI18n;
+
       document
         .getElementById("img-categoria")
         .setAttribute("src", ecossistema[contAux].getImagemBarra());
       document.getElementById("nome-categoria").innerHTML =
-        ecossistema[contAux].getNome();
+        i18next.t(dataI18n);
+        
       break;
     }
     contAux = contAux + 1;
@@ -618,6 +645,7 @@ function cartaoEntidadeMobile(entidade, nomeUser) {
   let img = template.content.querySelector("img");
   let titulo = template.content.querySelector("#txt-titulo-card");
   let descricao = template.content.querySelector("#txt-descricao-card");
+  let txtMarcadoPor = template.content.querySelector("#txt-marcadopor");
   let criador = template.content.querySelector("#txt-marcadopor-nome");
   let btn1 = template.content.querySelector("#btn-card1");
   let btn2 = template.content.querySelector("#btn-card2");
@@ -636,13 +664,15 @@ function cartaoEntidadeMobile(entidade, nomeUser) {
   ${entidade.getUF()}, 
   ${entidade.getCEP()}`;
 
-  btn1.innerHTML = "Localização";
-  btn2.innerHTML = "Visitar Site";
+  btn1.innerHTML = i18next.t("barraLateral.cards.cardsEntidades.btnLocalizacao");
+  btn2.innerHTML = i18next.t("barraLateral.cards.cardsEntidades.btnVisitarSite");
 
   btn2.setAttribute("href", entidade.getSite());
   btn1.setAttribute("data-key", entidade.getMarkerKey());
   btn1.setAttribute("onclick", "zoomMarcador(this)");
   btn1.setAttribute("data-dismiss", "modal");
+
+  txtMarcadoPor.innerText = i18next.t("barraLateral.cards.cardsEntidades.txtMarcadoPor");
 
   criador.textContent = nomeUser;
   criador.setAttribute("href", "javascript:void(0)");
@@ -672,6 +702,7 @@ function cartaoComunidadeMobile(entidade, nomeUser) {
   let img = template.content.querySelector("img");
   let titulo = template.content.querySelector("#txt-titulo-card");
   let descricao = template.content.querySelector("#txt-descricao-card");
+  let txtMarcadoPor = template.content.querySelector("#txt-marcadopor");
   let criador = template.content.querySelector("#txt-marcadopor-nome");
   let btn1 = template.content.querySelector("#btn-card1");
   let btn2 = template.content.querySelector("#btn-card2");
@@ -691,14 +722,15 @@ function cartaoComunidadeMobile(entidade, nomeUser) {
   btn1.setAttribute("data-dismiss", "");
   
   if (map.hasLayer(layerArray[entidade.getMarkerKey()])) {
-    btn1.innerHTML = "Desativar do mapa";
+    btn1.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnDesativar");
     btn1.setAttribute("Style", "background: #CF5B15;");
   } else {
-    btn1.innerHTML = "Ativar no mapa";
+    btn1.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnAtivar");
     btn1.setAttribute("Style", "background: #FC6A38;");
   }
 
-  btn2.innerHTML = "Visitar site";
+  btn2.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnVisitar");
+  txtMarcadoPor.innerText = i18next.t("barraLateral.cards.cardsEntidades.txtMarcadoPor");
 
   criador.textContent = nomeUser;
   criador.setAttribute("href", "javascript:void(0)");
