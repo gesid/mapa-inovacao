@@ -14,11 +14,12 @@ $(function() {
             resources:{
                 pt:{
                     translation:{
-                        navBar2:{
+                        /**Precisa ser navBar1 por conta que o btnUser é padrão para várias telas */
+                        navBar1:{
                             navMap: "MAPA",
                             navEcossistema: "ECOSSISTEMA",
                             navTutorial:{
-                                titulo: "COMO UTILIZAR",
+                                titulo: "TUTORIAL",
                                 subtitulo: "Colaborar é muito simples! Veja no vídeo abaixo como funciona:"
                             },
                             navEventos: "EVENTOS",
@@ -27,30 +28,15 @@ $(function() {
                                 subnavCadastro: "Cadastrar Patentes",
                                 subnavListar: "Listar Patentes"
                             },
+                            btnUser:{
+                                saudacao: "Olá, {{name}} !",
+                                perfil: "MEU PERFIL",
+                                sair: "SAIR"
+                            }
                         },
-                        cadastro:{
-                            titulo: "CADASTRO",
-                            labels:{
-                                nomeCompleto: "NOME COMPLETO",
-                                senha: "SENHA",
-                                repetirSenha: "REPETIR SENHA",
-                                termos:{
-                                    incioDoTexto: "Li e concordo com  os",
-                                    termoDeUso: "Termos de Uso",
-                                    politica: "Política de Privacidade",
-                                    e: "e",
-                                    termoDeConsentimento: "Termo de Consentimento"
-                                },
-                                possuiCadastro: "Já possui cadastro?",
-                                facaLogin: "Faça o login"
-                            },
-                            placeholders:{
-                                nomeCompleto: "Digite seu nome",
-                                email: "Digite seu e-mail",
-                                senha: "Digite sua senha",
-                                repetirSenha: "Digite novamente sua senha"
-                            },
-                            btn: "CADASTRAR"
+                        modalFaleConosco:{
+                            txtFaleConosco: "Fale Conosco",
+                            txtReportar: "Reportar Bugs/Melhorias"
                         },
                         footer:{
                             texto: "Para mais informações, fale conosco através do mapainovacao@ufc.br",
@@ -64,7 +50,7 @@ $(function() {
                 },
                 en:{
                     translation:{
-                        navBar2:{
+                        navBar1:{
                             navMap: "MAP",
                             navEcossistema: "ABOUT US",
                             navTutorial:{
@@ -77,30 +63,15 @@ $(function() {
                                 "subnavCadastro": "Register Patents",
                                 "subnavListar": "List Patents"
                             },
+                            btnUser:{
+                                saudacao: "Hello, {{name}} !",
+                                perfil: "MY PROFILE",
+                                sair: "LOGOUT"
+                            }
                         },
-                        cadastro:{
-                            titulo: "CREATE YOUR ACCOUNT",
-                            labels:{
-                                nomeCompleto: "FULL NAME",
-                                senha: "PASSWORD",
-                                repetirSenha: "REPEAT PASSWORD",
-                                termos:{
-                                    incioDoTexto: "Read and agree with the",
-                                    termoDeUso: "Terms of Use",
-                                    politica: "Privacy Policy",
-                                    e: "and",
-                                    termoDeConsentimento: "Terms of Consent"
-                                },
-                                possuiCadastro: "Already have an account?",
-                                facaLogin: "Log in"
-                            },
-                            placeholders:{
-                                nomeCompleto: "Enter your name",
-                                email: "Enter your email",
-                                senha: "Enter your password",
-                                repetirSenha: "Enter your password again"
-                            },
-                            btn: "SING UP"
+                        modalFaleConosco:{
+                            txtFaleConosco: "Contact us",
+                            txtReportar: "Report Bugs/Improvements"
                         },
                         footer:{
                             texto: "For more informations, contact us through mapainovaocao@ufc.br",
