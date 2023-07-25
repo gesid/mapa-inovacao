@@ -8,6 +8,7 @@ const lngs = {
 
 $(function() {
     i18next
+        .use(i18nextBrowserLanguageDetector)
         .init({
             debug: true,
             fallbackLng:'pt',

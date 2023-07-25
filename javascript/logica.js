@@ -129,7 +129,7 @@ function criarOpcaoComunidade(comunidades) {
   //imgLink.src = componente.getImagemBarra()
   
   a.innerHTML = `<img style="height:36px; width:36px" src= "img/img-bl/27-comunidade.png">
-  <span data-i18n="categorias.comunidades">Comunidades</span>
+  <span data-i18n="categorias.comunidades">${i18next.t("categorias.comunidades")}</span>
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>`;
 
   a.setAttribute("data-tipo", "Comunidades");
@@ -178,7 +178,7 @@ function criarListaOpcoes(tipoClasse) {
   imgLink.src = tipoClasse.getImagemBarra();
 
   a.innerHTML = `<img style="height:36px; width:36px" src= ${imgLink.src}>
-  <span data-i18n="${dataI18n}"> ${tipoClasse.getNome()}</span>
+  <span data-i18n="${dataI18n}"> ${i18next.t(dataI18n)}</span>
   <span class="badge badge-secondary badge-pill ${
     tipoClasse.getNome() === "Patente" ? "contador-patentes" : ""
   }">${tipoClasse.getBadge()}</span>`;

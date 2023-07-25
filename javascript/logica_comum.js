@@ -10,28 +10,30 @@ firebase.auth().onAuthStateChanged(function (user) {
         "btn-user"
       ).innerHTML = `<button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Olá, ${nome[0].toUpperCase()}!
+        ${i18next.t("navBar1.btnUser.saudacao", {name: nome[0].toUpperCase()})}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
         <a class="dropdown-item-list d-flex align-items-center justify-content-start" 
         type="button" data-key="${user.uid}" onclick="telaUsuario(this)">
           <i class="fas fa-user-circle icon-prop-usuario"></i>
-          <p class="texto-usuario" data-i18n="navBar1.btnUser.perfil">MEU PERFIL</p>
+          <p class="texto-usuario" data-i18n="navBar1.btnUser.perfil">${i18next.t("navBar1.btnUser.perfil")}</p>
         </a>
 
         <a class="dropdown-item-list d-flex align-items-center justify-content-start" type="button" onclick="gerenciarEntradaSaida()">
           <i class="fas fa-sign-in-alt icon-prop-usuario"></i>
-          <p class="texto-usuario" data-i18n="navBar1.btnUser.sair">SAIR</p>
+          <p class="texto-usuario" data-i18n="navBar1.btnUser.sair">${i18next.t("navBar1.btnUser.sair")}</p>
         </a>
       </div>`;
 
       localStorage.setItem("usuarioLogadoKey", user.uid);
 
-      /**Realiza a tradução do texto da saudação */
+      i18next.reloadResources();
+      /**Realiza a tradução do texto da saudação*/ 
       i18next.on('languageChanged', function(lng){
-        document.getElementById('dropdownMenu2').innerText = i18next.t("navBar1.btnUser.saudacao", {name: nome[0].toUpperCase()})
-      })
+        document.getElementById('dropdownMenu2').innerText = i18next.t("navBar1.btnUser.saudacao", {name: nome[0].toUpperCase()});
+      });
+
     });
   } else {
     localStorage.removeItem("usuarioLogadoKey");

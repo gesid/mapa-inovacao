@@ -8,6 +8,7 @@ const lngs = {
 
 $(function() {
     i18next
+        .use(i18nextBrowserLanguageDetector)
         .init({
             debug: true,
             fallbackLng:'pt',
@@ -99,7 +100,7 @@ $(function() {
                 }
                 $('#languageSwitcher').append(optSelect);
                 console.log(optSelect)
-            })
+            });
 
 
             $('#languageSwitcher').change(() => {
@@ -107,8 +108,9 @@ $(function() {
                 i18next.changeLanguage(chooseLng, () => {
                     $("body").localize()
                 })
-            })
+            });
 
             $("body").localize()
         })
+
 })  
