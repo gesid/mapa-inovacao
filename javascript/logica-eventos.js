@@ -102,6 +102,8 @@ function criarCartoesEventos(evento) {
   listaEventos.appendChild(document.importNode(template.content, true));
 }
 
+
+
 /*function telaUsuario(componente) {
   let status = $("#log").attr("data-status");
   if (status === "logado") {

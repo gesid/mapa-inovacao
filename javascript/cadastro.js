@@ -73,3 +73,12 @@ function enviar_verificação() {
 			window.location.href = "login.html"
 		})
 }
+
+/**Tradução placeholders */
+i18next.on('languageChanged', function(lng) {
+	const INPUTS = document.getElementsByClassName("card-login-form");
+	INPUTS[0].placeholder = i18next.t("cadastro.placeholders.nomeCompleto");
+	INPUTS[1].placeholder = i18next.t("cadastro.placeholders.email");
+	INPUTS[2].placeholder = i18next.t("cadastro.placeholders.senha");
+	INPUTS[3].placeholder = i18next.t("cadastro.placeholders.repetirSenha");	
+});
