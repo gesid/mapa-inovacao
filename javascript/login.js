@@ -81,11 +81,11 @@ function usuarioAdmin(email) {
 }
 
 i18next.on('languageChanged', function(lng) {
-  traducaoLogin();
-  traducaoSenha();
+  traducaoPlaceholderEmail();
+  traducaoPlaceholderSenha();
 })
 
-function traducaoLogin() {
+function traducaoPlaceholderEmail() {
  let placeholderchange =  document.getElementsByName("email_field")[0]
  console.log(i18next.t("login.sectionHoldBar.holdBar1"))
   if (placeholderchange) {
@@ -93,7 +93,7 @@ function traducaoLogin() {
   }
 }
 
-function traducaoSenha() {
+function traducaoPlaceholderSenha() {
   let placeholderchange =  document.getElementsByName("password_field")[0]
   console.log(i18next.t("login.sectionHoldBar.senha"))
    if (placeholderchange) {
