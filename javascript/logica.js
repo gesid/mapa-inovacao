@@ -120,6 +120,7 @@ function OpcaoComunidade() {
 }
 
 function criarOpcaoComunidade(comunidades) {
+  console.log(comunidades)
   // Cria botão de comunidade
   let template = document.querySelector("#listaTipo");
   let listaOpcoes = document.querySelector("#listaOpcoes");
@@ -128,12 +129,41 @@ function criarOpcaoComunidade(comunidades) {
   //imgLink.src = componente.getImagemBarra()
   
   a.innerHTML = `<img style="height:36px; width:36px" src= "img/img-bl/27-comunidade.png">
-  <span data-i18n="barraLateral.comunidades">Comunidades</span>
+  <span data-i18n="categorias.comunidades">${i18next.t("categorias.comunidades")}</span>
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>`;
 
   a.setAttribute("data-tipo", "Comunidades");
   listaOpcoes.appendChild(document.importNode(template.content, true));
 }
+
+/**Tradução card Comunidade*/
+i18next.on('languageChanged', function(lng) {
+  const DIV_CARTAO_COMUNIDADE = document.getElementById("divImagemCartao");
+  
+  if(DIV_CARTAO_COMUNIDADE){
+    const BTN_ATIVAR_DESATIVAR = document.querySelectorAll(".texto-btn-card1");
+    const BTN_VISITAR = document.querySelectorAll(".texto-btn-card2");
+    const TXT_MARCARDOPOR = document.querySelectorAll("#txt-marcadopor");
+    
+    BTN_ATIVAR_DESATIVAR.forEach((element) => {
+      if(element.innerText == "Ativar no mapa"){
+        element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnAtivar");
+      } else{
+        element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnDesativar");
+      }
+    });
+
+    BTN_VISITAR.forEach((element) => {
+      element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnVisitar");
+    });
+
+    TXT_MARCARDOPOR.forEach((element) => {
+      element.innerText = i18next.t("barraLateral.cards.cardsComunidade.txtMarcadoPor");
+    });
+    
+  }
+  
+});
 
 function criarListaOpcoes(tipoClasse) {
   // Cria lista da bara lateral
@@ -143,12 +173,12 @@ function criarListaOpcoes(tipoClasse) {
   let imgLink = document.createElement("imgLink");
 
   let tipoI18n = getTipoClasseI18n(tipoClasse.getNome());
-  let dataI18n = "barraLateral." + tipoI18n;
+  let dataI18n = "categorias." + tipoI18n;
 
   imgLink.src = tipoClasse.getImagemBarra();
 
   a.innerHTML = `<img style="height:36px; width:36px" src= ${imgLink.src}>
-  <span data-i18n="${dataI18n}"> ${tipoClasse.getNome()}</span>
+  <span data-i18n="${dataI18n}"> ${i18next.t(dataI18n)}</span>
   <span class="badge badge-secondary badge-pill ${
     tipoClasse.getNome() === "Patente" ? "contador-patentes" : ""
   }">${tipoClasse.getBadge()}</span>`;
@@ -165,6 +195,7 @@ function criarListaOpcoes(tipoClasse) {
 
 //Função para retornar valor equivalente ao tipoClasse no i18n
 function getTipoClasseI18n(tipo){
+  
   if(tipo == 'Aceleradora')
     return 'aceleradora'
   else if(tipo == 'Catalisadores Locais')
@@ -230,7 +261,7 @@ async function chamaBarraOculta(componente) {
   const tipoSelecionado = componente.getAttribute("data-tipo");
   const listaOculta = document.getElementById("cartao");
   listaOculta.innerHTML = gerarTemplateCard();
-
+  
   //Abre a barra de cartões
   if (permissao === true) {
     permissao = false;
@@ -329,6 +360,12 @@ function filtroBusca(tipo) {
   }
 }
 
+/**Tradução barra de busca*/
+i18next.on('languageChanged', function(lng) {
+  const INPUT_BUSCA = document.getElementsByName("contBusca");
+  INPUT_BUSCA[0].placeholder = i18next.t("barraLateral.busca")
+})
+
 function verificarUsuarioEntidade(entidade) {
   usuariodao.buscar(entidade.getUserId()).then(function (usuario) {
     cartaoEntidade(entidade, usuario.getNome());
@@ -341,6 +378,7 @@ function cartaoEntidade(entidade, nomeUser) {
   let img = template.content.querySelector("img");
   let titulo = template.content.querySelector("#txt-titulo-card");
   let descricao = template.content.querySelector("#txt-descricao-card");
+  let txtMarcadoPor = template.content.querySelector("#txt-marcadopor");
   let criador = template.content.querySelector("#txt-marcadopor-nome");
   let btn1 = template.content.querySelector("#btn-card1");
   let btn2 = template.content.querySelector("#btn-card2");
@@ -359,12 +397,17 @@ function cartaoEntidade(entidade, nomeUser) {
   ${entidade.getUF()}, 
   ${entidade.getCEP()}`;
 
-  btn1.innerHTML = "Localização";
+  btn1.classList.add("cardEntidade-i18n");
+  btn2.classList.add("cardEntidade-i18n");
+  txtMarcadoPor.classList.add("cardEntidade-i18n");
+  console.log(btn1)
+  btn1.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.btnLocalizacao'); 
+  txtMarcadoPor.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.txtMarcadoPor'); 
 
   if (entidade.tipo === "Patente") {
     btn2.classList.add("btn-oculto");
   } else {
-    btn2.innerHTML = "Visitar Site";
+    btn2.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.btnVisitarSite'); 
     btn2.setAttribute("href", entidade.getSite());
   }
 
@@ -379,6 +422,24 @@ function cartaoEntidade(entidade, nomeUser) {
   cartao.appendChild(document.importNode(template.content, true));
   permissao = true;
 }
+
+/**Tradução elementos cards Empresas */
+i18next.on('languageChanged', function(lng) {
+  const BOTOES_LOCALIZACAO_CARD_ENTIDADE = document.getElementsByClassName("cardEntidade-i18n");
+  const ARRAY_BOTOES_LOCALIZACAO_CARD_ENTIDADE = Array.from(BOTOES_LOCALIZACAO_CARD_ENTIDADE)
+
+  ARRAY_BOTOES_LOCALIZACAO_CARD_ENTIDADE.forEach(element => {
+    if(element.id == "btn-card1"){
+      element.innerText = i18next.t('barraLateral.cards.cardsEntidades.btnLocalizacao'); 
+    } 
+    else if(element.id == "btn-card2"){
+      element.innerText = i18next.t('barraLateral.cards.cardsEntidades.btnVisitarSite'); 
+    }
+    else if(element.id == "txt-marcadopor"){
+      element.innerHTML = i18next.t('barraLateral.cards.cardsEntidades.txtMarcadoPor'); 
+    }
+  });
+});
 
 function filtroBuscaComunidade(tipo) {
   let valBarra = document.getElementById("contBusca").value; //Verificar se há algo na barra de busca
@@ -440,6 +501,7 @@ function cartaoComunidade(entidade, nomeUser) {
   permissao = true;
 }
 
+
 function executarEventoKey() {
   //Reconhece o evento que foi clicado na página de eventos e da um zoom no marcador
   if (localStorage.getItem("eventoMarker")) {
@@ -479,9 +541,9 @@ function criarOpcaoComunidadeMobile(comunidades) {
   let imgLink = document.createElement("imgLink");
   //imgLink.src = componente.getImagemBarra()
 
-  a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center">
+  a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center" id="div-comunidades-mobile">
   <img style="height:36px; width:36px" src= "img/img-bl/27-comunidade.png">
-  Comunidades
+  <span data-i18n="categorias.comunidades">Comunidades</span>
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>
   </div>
   <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
@@ -499,9 +561,12 @@ function criarListaOpcoesMobile(tipoClasse) {
 
   imgLink.src = tipoClasse.getImagemBarra();
 
+  let tipoI18n = getTipoClasseI18n(tipoClasse.getNome());
+  let dataI18n = "categorias." + tipoI18n;
+
   a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center">
-  <img style="height:36px; width:36px" src= ${imgLink.src}>
-  ${tipoClasse.getNome()}
+  <img style="height:36px; width:36px" src= ${imgLink.src} >
+  <span data-i18n="${dataI18n}">${tipoClasse.getNome()}</span>
   <span class="badge badge-secondary badge-pill">${tipoClasse.getBadge()}</span>
   </div> 
   <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
@@ -517,6 +582,7 @@ function criarListaOpcoesMobile(tipoClasse) {
   executarShareEvent();
 }
 
+
 //Criando modal de cartões mobile
 function chamarModalCard(componente) {
   //Abre o modal de cartões
@@ -527,18 +593,23 @@ function chamarModalCard(componente) {
       document
         .getElementById("img-categoria")
         .setAttribute("src", "img/img-bl/27-comunidade.png");
-      document.getElementById("nome-categoria").innerHTML = "Comunidades";
+      document.getElementById("nome-categoria").innerHTML = i18next.t("categorias.comunidades");
       break;
     }
 
     if (
       ecossistema[contAux].getNome() == componente.getAttribute("data-tipo")
     ) {
+      /**Elementos de traducao */
+      let tipoI18n = getTipoClasseI18n( ecossistema[contAux].getNome());
+      let dataI18n = "categorias." + tipoI18n;
+
       document
         .getElementById("img-categoria")
         .setAttribute("src", ecossistema[contAux].getImagemBarra());
       document.getElementById("nome-categoria").innerHTML =
-        ecossistema[contAux].getNome();
+        i18next.t(dataI18n);
+        
       break;
     }
     contAux = contAux + 1;
@@ -574,6 +645,7 @@ function cartaoEntidadeMobile(entidade, nomeUser) {
   let img = template.content.querySelector("img");
   let titulo = template.content.querySelector("#txt-titulo-card");
   let descricao = template.content.querySelector("#txt-descricao-card");
+  let txtMarcadoPor = template.content.querySelector("#txt-marcadopor");
   let criador = template.content.querySelector("#txt-marcadopor-nome");
   let btn1 = template.content.querySelector("#btn-card1");
   let btn2 = template.content.querySelector("#btn-card2");
@@ -592,13 +664,15 @@ function cartaoEntidadeMobile(entidade, nomeUser) {
   ${entidade.getUF()}, 
   ${entidade.getCEP()}`;
 
-  btn1.innerHTML = "Localização";
-  btn2.innerHTML = "Visitar Site";
+  btn1.innerHTML = i18next.t("barraLateral.cards.cardsEntidades.btnLocalizacao");
+  btn2.innerHTML = i18next.t("barraLateral.cards.cardsEntidades.btnVisitarSite");
 
   btn2.setAttribute("href", entidade.getSite());
   btn1.setAttribute("data-key", entidade.getMarkerKey());
   btn1.setAttribute("onclick", "zoomMarcador(this)");
   btn1.setAttribute("data-dismiss", "modal");
+
+  txtMarcadoPor.innerText = i18next.t("barraLateral.cards.cardsEntidades.txtMarcadoPor");
 
   criador.textContent = nomeUser;
   criador.setAttribute("href", "javascript:void(0)");
@@ -628,6 +702,7 @@ function cartaoComunidadeMobile(entidade, nomeUser) {
   let img = template.content.querySelector("img");
   let titulo = template.content.querySelector("#txt-titulo-card");
   let descricao = template.content.querySelector("#txt-descricao-card");
+  let txtMarcadoPor = template.content.querySelector("#txt-marcadopor");
   let criador = template.content.querySelector("#txt-marcadopor-nome");
   let btn1 = template.content.querySelector("#btn-card1");
   let btn2 = template.content.querySelector("#btn-card2");
@@ -645,16 +720,17 @@ function cartaoComunidadeMobile(entidade, nomeUser) {
   btn1.setAttribute("name", entidade.getMarkerKey());
   btn1.setAttribute("onclick", "exibirComunidade(this)");
   btn1.setAttribute("data-dismiss", "");
-
+  
   if (map.hasLayer(layerArray[entidade.getMarkerKey()])) {
-    btn1.innerHTML = "Desativar do mapa";
+    btn1.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnDesativar");
     btn1.setAttribute("Style", "background: #CF5B15;");
   } else {
-    btn1.innerHTML = "Ativar no mapa";
+    btn1.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnAtivar");
     btn1.setAttribute("Style", "background: #FC6A38;");
   }
 
-  btn2.innerHTML = "Visitar site";
+  btn2.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnVisitar");
+  txtMarcadoPor.innerText = i18next.t("barraLateral.cards.cardsEntidades.txtMarcadoPor");
 
   criador.textContent = nomeUser;
   criador.setAttribute("href", "javascript:void(0)");
@@ -836,6 +912,9 @@ function gerarElementoPopup(entidade) {
   let imgPop = document.createElement("imgPop");
   imgPop.src = entidade.getURL();
 
+  let tipo = getTipoClasseI18n(entidade.getTipo());
+  let traducao_tipo = "categorias." + tipo; 
+
   const btnVerPatentes =
     entidade.getTotalPatentes() > 0
       ? `<a class="btnProp popupBtnVerPatentes" style="color: white" data-key="${entidade.getMarkerKey()}" onclick="mostrarModalListagemPatentes(this)">Ver patentes</a>`
@@ -845,14 +924,50 @@ function gerarElementoPopup(entidade) {
   <div id="popupContainer">
     <img class="popupImg" src="${imgPop.src}"></img> 
     <p class="popupNome" style="margin: 0px"> ${entidade.getNome()} </p>
-    <p class="popupTipo" style="margin: 0px"> ${entidade.getTipo()} </p>
+    <p class="popupTipo i18n-popupContainer-tipo" style="margin: 0px data-i18n="${traducao_tipo}">${entidade.getTipo()} </p>
     <div id=popupBtnContainer>
-      <a class="btnProp popupBtnConheca" style="color: #FC6A38;" href=" ${entidade.getSite()}" target='_blank'>Visitar Site</a>
-      <a class="btnProp popupBtnCompartilhar" style="color: white" data-key ="${entidade.getMarkerKey()}" onclick="criarURLCompartilhamento(this)" title="Compartilhar">Link da Localização</i></a>
+      <a class="btnProp popupBtnConheca i18n-popupContainer-btnVisitar" 
+        style="color: #FC6A38;" href=" ${entidade.getSite()}" 
+        target='_blank' data-i18n="popupBtnContainer.btnVisitar">Visitar Site</a>
+
+      <a class="btnProp popupBtnCompartilhar i18n-popupContainer-btnLink"
+        style="color: white" data-key ="${entidade.getMarkerKey()}" 
+        onclick="criarURLCompartilhamento(this)" 
+        title="Compartilhar" data-i18n="popupBtnContainer.btnLink">Link da Localização</i></a>
       ${btnVerPatentes}
     </div>
   </div>`;
 }
+
+/**Tradução popup container*/
+map.on('popupopen', async function(e) {
+  const POPUP_CONTAINER = document.getElementById("popupContainer");
+  if(POPUP_CONTAINER){
+    const BOTOES_VISITAR = document.getElementsByClassName("i18n-popupContainer-btnVisitar");
+    const BOTOES_LINK = document.getElementsByClassName("i18n-popupContainer-btnLink");
+    const TXT_TIPOS = document.getElementsByClassName("i18n-popupContainer-tipo");
+    //console.log(TXT_TIPOS[0].innerHTML)
+
+    const ARRAY_BOTOES_VISITAR = Array.from(BOTOES_VISITAR);
+    const ARRAY_BOTOES_LINK = Array.from(BOTOES_LINK);
+    const ARRAY_TXT_TIPOS = Array.from(TXT_TIPOS);
+
+    ARRAY_BOTOES_VISITAR.forEach((btn) =>{
+      btn.innerText = i18next.t("popupBtnContainer.btnVisitar");
+    });
+
+    ARRAY_BOTOES_LINK.forEach((btn) =>{
+      btn.innerText = i18next.t("popupBtnContainer.btnLink");
+    });
+
+    ARRAY_TXT_TIPOS.forEach((label) => {
+      let tipo = getTipoClasseI18n(label.innerText);
+      let traducao_tipo = "categorias." + tipo; 
+      label.innerText = i18next.t(traducao_tipo);
+    })
+  }
+  
+});
 
 function criarURLCompartilhamento(componente) {
   //alert(componente.getAttribute("data-key"))
@@ -1009,32 +1124,28 @@ function selecionarLocal() {
     map.on("click", function (e) {
       if (marker) {
         map.removeLayer(marker);
-        //escolhaLayer.clearLayers();
       }
+
       marker = L.marker(e.latlng)
         .addTo(map)
-        //marker = L.marker(e.latlng)
         .bindPopup(
           `<div class="row d-flex justify-content-center" id="divPopup">
-    <h6 class="col-12 font-weight-bold text-center" id="confirm">Confirmar</h6>
-    <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()" id="btn-popup">Aqui!</button>
-    </div>`
+              <h6 class="col-12 font-weight-bold text-center" id="confirm">Confirmar</h6>
+              <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()" id="btn-popup">Aqui!</button>
+          </div>`
         )
         .openPopup();
-      //escolhaLayer.addLayer(marker).addTo(map);
-
-      //marker = L.marker([latitude, longitude]).addTo(mymap);
 
       lat = e.latlng.lat;
       lng = e.latlng.lng;
+
       document.getElementById("validacaoLatLocal").value = lat;
       document.getElementById("validacaoLngLocal").value = lng;
 
       document.getElementById("validacaoLatEvento").value = lat;
       document.getElementById("validacaoLngEvento").value = lng;
 
-      document.getElementById("validacaoLatPatente").value = lat;
-      document.getElementById("validacaoLngPatente").value = lng;
+
     });
   } else {
     window.location.href = "login.html";
@@ -1058,32 +1169,178 @@ i18next.on('languageChanged', function(lng) {
 function atualizarTraducaoPopup(){
   const DIVPOPUP = document.getElementById('divPopup')
   if(DIVPOPUP){
-    document.getElementById('confirm').innerText = i18next.t("cadastro.marcador.legenda");
-    document.getElementById('btn-popup').innerText = i18next.t("cadastro.marcador.btn");
+    document.getElementById('confirm').innerText = i18next.t("navBar1.cadastro.marcador.legenda");
+    document.getElementById('btn-popup').innerText = i18next.t("navBar1.cadastro.marcador.btn");
   }
 }
 
 /** Tradução do modalCadastro */
 
 function atualizarTraducaoModalCadastro(){
-  document.getElementById('exampleModalLabel').innerText = i18next.t('cadastro.modalCadastro.legenda');
-  document.getElementById('local-tab').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.instituicao');
-  document.getElementById('evento-tab').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.evento');
-  document.getElementById('labelValidacaoNomeLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.nome');
-  document.getElementById('labelValidacaoSiteLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.site');
-  document.getElementById('labelvalidacaoTipoLocal').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.tipoDeLocal');
-  document.getElementById('labelvalidacaoCep').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.cep');
-  document.getElementById('labelvalidacaoLogradouro').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.logradouro');
-  document.getElementById('labelvalidacaoNumero').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.numero');
-  document.getElementById('labelvalidacaoComplemento').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.complemento');
-  document.getElementById('labelvalidacaoBairro').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.bairro');
-  document.getElementById('labelvalidacaoCidade').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.cidade');
-  //document.getElementById('labelvalidacaoUF').innerText = i18next.t('cadastro.modalCadastro.modalInstituicao.uf');
+  traducaoModalInstituicao();
+  traducaoModalEventos();
+  traducaoModalAgradecimento();
+}
+
+function traducaoModalInstituicao(){
+  document.getElementById('exampleModalLabel').innerText = i18next.t('navBar1.cadastro.modal.legenda');
+  document.getElementById('local-tab').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.instituicao');
+  document.getElementById('evento-tab').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.evento');
+  document.getElementById('labelValidacaoNomeLocal').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.nome');
+  document.getElementById('labelValidacaoSiteLocal').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.site');
+  document.getElementById('labelvalidacaoTipoLocal').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.tipoDeLocal');
+  document.getElementById('labelvalidacaoCep').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.cep');
+  document.getElementById('labelvalidacaoLogradouro').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.logradouro');
+  document.getElementById('labelvalidacaoNumero').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.numero');
+  document.getElementById('labelvalidacaoComplemento').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.complemento');
+  document.getElementById('labelvalidacaoBairro').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.bairro');
+  document.getElementById('labelvalidacaoCidade').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.cidade');
+  document.getElementById('labelvalidacaoUF').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.uf');
+  document.getElementById('labelValidacaoClassificaocao').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.startup');
 
   //botões
-  document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('cadastro.modalCadastro.btn.fechar');
-  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('cadastro.modalCadastro.btn.enviar');
+  document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.fechar');
+  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar');
 
+
+  //placeholder
+  document.getElementsByName('inputNome')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.nome');
+  document.getElementsByName('inputSite')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.site');
+  
+  /**Inicio SELECT Tipo de local */
+  traducaoSelectTipoLocal();
+  /**Fim SELECT Tipo de local */
+
+  //O placeholder do input da logo é traduzido na função chamarModalCadastro()
+  document.getElementsByName('inputCep')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cep');
+  document.getElementsByName('inputLogradouro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logradouro');
+  document.getElementsByName('inputNumero')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.numero');
+  document.getElementsByName('inputComplemento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.complemento');
+  document.getElementsByName('inputBairro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.bairro');
+  document.getElementsByName('inputCidade')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cidade');
+  document.getElementById('validacaoClassificaocaoOption').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.startup');
+
+}
+
+function traducaoSelectTipoLocal(){
+  let optionsTipoLocal = document.querySelector('#validacaoTipoLocal')
+  for(let i = 0; i < optionsTipoLocal.length; i++){
+    if(i == 0){
+      optionsTipoLocal[i].innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.categoria');
+    } else {
+      let classe = getTipoClasseI18nSelectTipoLocal(i);
+      let texto = 'categorias.'+ classe;
+      optionsTipoLocal[i].innerText = i18next.t(texto);
+    }
+  }
+}
+
+function getTipoClasseI18nSelectTipoLocal(indice){
+  if(indice == 1)
+    return 'aceleradora';
+  else if(indice == 2)
+    return 'catLocais';
+  else if(indice == 3)
+    return 'comEMidia'
+  else if(indice == 4)
+    return 'coworking';
+  else if(indice == 5)
+    return 'escolas';
+  else if(indice == 6)
+    return 'espMakers';
+  else if(indice == 7)
+    return 'eventos';
+  else if(indice == 8)
+    return 'fabApp';
+  else if(indice == 9)
+    return 'gov';
+  else if(indice == 10)
+    return 'gEmpresas';
+  else if(indice == 11)
+    return 'incubadoras';
+  else if(indice == 12)
+    return 'iniUniversitarias';
+  else if(indice == 13)
+    return 'investidores';
+  else if(indice == 14)
+    return 'nucInovacao';
+  else if(indice == 15)
+    return 'parquesTec';
+  else if(indice == 16)
+    return 'preAceleradoras';
+  else if(indice == 17)
+    return 'propIntelectual';
+  else if(indice == 18)
+    return 'mentoria';
+  else if(indice == 19)
+    return 'startup';
+  else if(indice == 20)
+    return 'patente';
+}
+
+function traducaoModalEventos(){
+  document.getElementById('labelValidacaoNomeEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.nome');
+  document.getElementById('labelValidacaoSiteEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.site');
+  document.getElementById('labelValidacaoTipoEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.tipoDeLocal');
+  document.getElementById('labelAreaTextoEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.descricao');
+  document.getElementById('labelValidacaoCEPEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.cep');
+  document.getElementById('labelValidacaoLogradouroEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.logradouro');
+  document.getElementById('labelValidacaoNumeroEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.numero');
+  document.getElementById('labelValidacaoComplementoEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.complemento');
+  document.getElementById('labelValidacaoBairroEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.bairro');
+  document.getElementById('labelValidacaoCidadeEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.cidade');
+  document.getElementById('labelValidacaoUFEvento').innerText = i18next.t('navBar1.cadastro.modal.modalEventos.label.uf');
+
+
+  //placeholder
+  document.getElementsByName('inputNomeEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.nome');
+  document.getElementsByName('inputSiteEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.site');
+
+  traducaoSelectTipoDeEvento();
+
+  document.getElementsByName('inputCEPEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.cep');
+  document.getElementsByName('inputLogradouroEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.logradouro');
+  document.getElementsByName('inputNumeroEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.numero');
+  document.getElementsByName('inputComplementoEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.complemento');
+  document.getElementsByName('inputBairroEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.bairro');
+  document.getElementsByName('inputCidadeEvento')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.cidade');
+
+}
+
+function traducaoSelectTipoDeEvento(){
+  let optionTipoEvento = document.querySelector('#validacaoTipoEvento')
+
+  for(let i = 0; i < optionTipoEvento.length; i++){
+    if(i == 0){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.label');
+    } else if (i == 1){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.empreendedorismo');
+    } else if (i == 2){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.tecnologia');
+    } else if (i == 3){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.inovacao');
+    } else if (i == 4){
+      optionTipoEvento[i].innerText = i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.select.negocios');
+    }
+  }
+}
+
+function traducaoModalAgradecimento(){
+  let txtTitulo = document.getElementById("textoLegendaModalAgradecimento");
+  let txtAgradecimento = document.getElementById("instituicaoEventoAgradecimento");
+  let txtAnalise1 = document.getElementById("subTxt1");
+  let txtAnalise2 = document.getElementById("subTxt2");
+  let txtAnalise3 = document.getElementById("subTxt3");
+  let txtPendencia = document.getElementById("instituicaoEventoTx3");
+  let btn = document.getElementById("btn-modalAgradecimento");
+
+  txtTitulo.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.legenda");
+  txtAgradecimento.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto1");
+  txtAnalise1.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto2.sub1");
+  txtAnalise2.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto2.sub2");
+  txtAnalise3.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto2.sub3");
+  txtPendencia.innerText = i18next.t("navBar1.cadastro.modal.modalSolicitacao.texto3");
+  btn.innerText = i18next.t("navBar1.cadastro.modal.btn.fechar");
 }
 
 function chamarModalCadastro() {
@@ -1091,6 +1348,7 @@ function chamarModalCadastro() {
     alert("Selecione um local no mapa");
   } else {
     map.off("click");
+
 
     document.getElementById("validacaoNomeLocal").value = "";
     document.getElementById("validacaoSiteLocal").value = "";
@@ -1103,7 +1361,7 @@ function chamarModalCadastro() {
     document.getElementById("validacaoUFLocal").value = 1;
     document.getElementById("validacaoCEPLocal").value = "";
     document.getElementById("uploaderLabel1").innerHTML =
-      "Logo (Tamanho sugerido: 80 x 80 px)";
+      i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logo')
     document.getElementById("uploader1").value = "";
     uploader1SelectedFile = "";
 
@@ -1119,7 +1377,7 @@ function chamarModalCadastro() {
     document.getElementById("validacaoUFEvento").value = 1;
     document.getElementById("validacaoCEPEvento").value = "";
     document.getElementById("uploaderLabel2").innerHTML =
-      "Logo (Tamanho sugerido: 80 x 80 px)";
+      i18next.t('navBar1.cadastro.modal.modalEventos.placeholder.logo')
     document.getElementById("uploader2").value = "";
     document.getElementById("dtpicker").value = "";
     uploader2SelectedFile = "";
@@ -1127,12 +1385,88 @@ function chamarModalCadastro() {
     $("#ModalCadastro").modal("show");
 
     $("#marcar_info").attr("style", "display: none;");
+
+    const latitudeDoLocalSelecionado = document.getElementById("validacaoLatLocal").value;
+    const longitudeDoLocalSelecionado = document.getElementById("validacaoLngLocal").value;
+
+    buscarEnderecoPorLatitudeLongitude(latitudeDoLocalSelecionado, longitudeDoLocalSelecionado).then((endereco) => {
+      preencherInformacoesDoEndereco(endereco);
+    });
   }
 }
 
-// function onChangeDataPublicacaoPatente(dataPublicacao) {
-//   dataPublicacaoPatente = dataPublicacao;
-// }
+async function buscarEnderecoPorLatitudeLongitude(latitude, longitude){
+  const URL = `http://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+  
+  try {
+    const resultado = await fetch(URL);
+    const resultadoConvertidoParaJson = await resultado.json();
+
+    return converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resultadoConvertidoParaJson);
+  } catch (error) {
+    console.log("Erro ao buscar endereço usando latitude e longitude");
+  }
+}
+
+function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resultadoBuscaEnderecoPorLatitudeLongitude){
+  const {
+    road: rua,
+    municipality: municipalidade,
+    state_district: distritoEstadual,
+    state: estado,
+    "ISO3166-2-lvl4": identificaoPaisEstado,
+    region: regiao,
+    postcode: cep,
+    country: pais,
+    country_code: siglaPais,
+    city: cidade,
+    suburb: bairro
+  } = resultadoBuscaEnderecoPorLatitudeLongitude.address;
+
+  const siglaEstado = identificaoPaisEstado.split("-")[1];
+  
+  return {
+    rua,
+    cidade,
+    municipalidade,
+    distritoEstadual,
+    estado,
+    identificaoPaisEstado,
+    regiao,
+    cep,
+    pais,
+    siglaPais,
+    siglaEstado,
+    bairro
+  }
+}
+
+function preencherInformacoesDoEndereco(endereco){
+  const {
+    rua,
+    bairro,
+    cidade,
+    siglaEstado,
+    cep
+  } = endereco;
+
+  document.getElementById("validacaoLogradouroLocal").value = rua;
+  document.getElementById("validacaoNumeroLocal").value = "";
+  document.getElementById("validacaoComplementoLocal").value = "";
+  document.getElementById("validacaoBairroLocal").value = bairro;
+  document.getElementById("validacaoCidadeLocal").value = cidade;
+  document.getElementById("validacaoUFLocal").value = siglaEstado;
+  document.getElementById("validacaoCEPLocal").value = cep;
+
+  document.getElementById("validacaoLogradouroEvento").value = rua;
+  document.getElementById("validacaoNumeroEvento").value = "";
+  document.getElementById("validacaoComplementoEvento").value = "";
+  document.getElementById("validacaoBairroEvento").value = bairro;
+  document.getElementById("validacaoCidadeEvento").value = cidade;
+  document.getElementById("validacaoUFEvento").value = siglaEstado;
+  document.getElementById("validacaoCEPEvento").value = cep;
+}
+
 
 $(document).ready(() => {
   $("#validacaoCEPLocal").focusout(function () {
@@ -1364,3 +1698,5 @@ $(document).ready(() => {
     }
   });
 });
+
+

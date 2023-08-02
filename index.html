@@ -44,7 +44,7 @@
   <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.2/i18nextHttpBackend.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
 
   <!-- Necessários para o timedatpicker  -->
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
@@ -153,22 +153,22 @@
             </a>
           </li>
 
-          <!--Selecionador de Idioma-->
-          <li class="nav-item">
-            <select
-              name="language" 
-              id="languageSwitcher"
-              class="d-flex align-items-center justify-content-start nav-item-select-style texto-nav">
-            </select>
-          </li>
-
         </ul>    
       </div>
 
-      <form id="btn-user" class="dropdownHeader">
+        <!--Selecionador de Idioma-->
+        <form id="btn-select-traducao" class="dropdownHeader"></form>
+          <select
+            name="language" 
+            id="languageSwitcher"
+            class="btn-traducao-dropdown-header">
+          </select>
+        </form>
+        
+        <form id="btn-user" class="dropdownHeader">
         <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"></button>
-      </form>
+        </form>
     </nav>
   </header>
   <!--Fim do cabeçalho-->
@@ -229,19 +229,19 @@
                   <div class="form-group col-md-4">
                     <label for="validacaoNomeLocal" id="labelValidacaoNomeLocal">Nome*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="33"
-                      id="validacaoNomeLocal" name="validacaoNomeLocal" placeholder="Nome" />
+                      id="validacaoNomeLocal" name="inputNome" placeholder="Nome" />
                   </div>
 
                   <div class="form-group col-md-4">
                     <label for="validacaoSiteLocal" id="labelValidacaoSiteLocal">Site*</label>
                     <input class="form-control form-control" type="text" required="required" id="validacaoSiteLocal"
-                      placeholder="Site" />
+                    name="inputSite" placeholder="Site" />
                   </div>
 
                   <div class="form-group col-md-4">
                     <label for="validacaoTipoLocal" id="labelvalidacaoTipoLocal">Tipo de Local*</label>
                     <select class="form-control form-control" id="validacaoTipoLocal" required="required"
-                      placeholder="validacaoTipoLocal" onclick="dropdownStartup()">
+                       placeholder="validacaoTipoLocal" onclick="dropdownStartup()">
                       <option value="1" selected disabled>
                         Selecionar...
                       </option>
@@ -278,15 +278,15 @@
                 <div class="form-row">
                   <div class="form-group custom-file col-md-8">
                     <!-- linha2-->
-                    <input type="file" class="custom-file-input custom-file-input-lg" id="uploader1" />
+                    <input type="file" class="custom-file-input custom-file-input-lg" id="uploader1" name="inputLogo"/>
                     <label id="uploaderLabel1" class="custom-file-label" for="uploader1">Selecione a Logo*</label>
                   </div>
 
                   <div id="dropdownStartup" class="form-group col-md-4" style="display: none">
-                    <label for="validacaoTipoLocal" >Classificação do Local*</label>
+                    <label for="validacaoTipoLocal" id="labelValidacaoClassificaocao">Classificação do Local*</label>
                     <select class="form-control form-control" id="validacaoClassificacao" required="required"
                       placeholder="validacaoTipoLocal">
-                      <option value="1" selected disabled>
+                      <option value="1" selected disabled id="validacaoClassificaocaoOption">
                         Escolha o segmento da startup
                       </option>
                     </select>
@@ -314,19 +314,19 @@
                   <div class="form-group col-md-2">
                     <label for="validacaoCEPLocal" id="labelvalidacaoCep">CEP*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="9"
-                      id="validacaoCEPLocal" placeholder="CEP" />
+                      id="validacaoCEPLocal" name="inputCep" placeholder="CEP" />
                   </div>
 
                   <div class="form-group col-md-6">
                     <label for="validacaoLogradouroLocal" id="labelvalidacaoLogradouro">Logradouro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoLogradouroLocal" placeholder="Logradouro" />
+                      id="validacaoLogradouroLocal" name="inputLogradouro" placeholder="Logradouro" />
                   </div>
 
                   <div class="form-group col-md-4">
                     <label for="validacaoNumeroLocal" id="labelvalidacaoNumero">Número*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="5"
-                      id="validacaoNumeroLocal" placeholder="Número" />
+                      id="validacaoNumeroLocal" name="inputNumero" placeholder="Número" />
                   </div>
                 </div>
 
@@ -335,19 +335,19 @@
                   <div class="form-group col-md-4">
                     <label for="validacaoComplementoLocal" id="labelvalidacaoComplemento">Complemento</label>
                     <input class="form-control form-control" type="text" id="validacaoComplementoLocal" maxlength="30"
-                      placeholder="Complemento" />
+                      name="inputComplemento" placeholder="Complemento" />
                   </div>
 
                   <div class="form-group col-md-4">
                     <label for="validacaoBairroLocal" id="labelvalidacaoBairro">Bairro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoBairroLocal" placeholder="Bairro" />
+                      id="validacaoBairroLocal" name="inputBairro" placeholder="Bairro" />
                   </div>
 
                   <div class="form-group col-md-3">
                     <label for="validacaoCidadeLocal" id="labelvalidacaoCidade">Cidade*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoCidadeLocal" placeholder="Cidade" />
+                      id="validacaoCidadeLocal" name="inputCidade" placeholder="Cidade" />
                   </div>
 
                   <div class="form-group col-md-1">
@@ -395,19 +395,19 @@
                 <div class="form-row">
                   <!-- linha1-->
                   <div class="form-group col-3">
-                    <label for="validacaoNomeEvento">Nome*</label>
+                    <label for="validacaoNomeEvento" id="labelValidacaoNomeEvento">Nome*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="33"
-                      id="validacaoNomeEvento" placeholder="Nome" />
+                      id="validacaoNomeEvento" placeholder="Nome" name="inputNomeEvento"/>
                   </div>
 
                   <div class="form-group col-3">
-                    <label for="validacaoSiteEvento">Site*</label>
+                    <label for="validacaoSiteEvento"id="labelValidacaoSiteEvento">Site*</label>
                     <input class="form-control form-control" type="text" required="required" id="validacaoSiteEvento"
-                      placeholder="Site" />
+                      placeholder="Site"  name="inputSiteEvento"/>
                   </div>
 
                   <div class="form-group col-3">
-                    <label for="validacaoTipoEvento">Tipo de Evento*</label>
+                    <label for="validacaoTipoEvento" id="labelValidacaoTipoEvento">Tipo de Evento*</label>
                     <select class="form-control" id="validacaoTipoEvento" required="required">
                       <option value="1" selected disabled>
                         Selecionar...
@@ -422,14 +422,14 @@
                   <div class="form-group col-3 form-group custom-file" style="margin-top: 4.1%">
                     <input type="file" class="custom-file-input custom-file-input-lg" required="required"
                       id="uploader2" />
-                    <label id="uploaderLabel2" class="custom-file-label" for="uploader2">Imagem</label>
+                    <label id="uploaderLabel2" class="custom-file-label" for="uploader2" >Imagem</label>
                   </div>
                 </div>
 
                 <div class="form-row">
                   <!-- linha3-->
                   <div class="form-group col-6">
-                    <label for="areatextoEvento">Descrição*</label>
+                    <label for="areatextoEvento" id="labelAreaTextoEvento">Descrição*</label>
                     <textarea class="form-control" id="areatextoEvento" maxlength="250" rows="3"></textarea>
                   </div>
 
@@ -449,7 +449,7 @@
                       </div>
 
                       <div class="form-group col-md-6">
-                        <label for="validacaoLngEvento">Latitude</label>
+                        <label for="validacaoLngEvento">Longitude</label>
                         <input class="form-control form-control" type="text" required="required" id="validacaoLngEvento"
                           placeholder="Longitude" disabled="disabled" />
                       </div>
@@ -461,46 +461,46 @@
                   <!-- linha4-->
 
                   <div class="form-group col-md-2">
-                    <label for="validacaoCEPEvento">CEP*</label>
+                    <label for="validacaoCEPEvento" id="labelValidacaoCEPEvento">CEP*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="9"
-                      id="validacaoCEPEvento" placeholder="CEP" />
+                      id="validacaoCEPEvento" placeholder="CEP" name="inputCEPEvento"/>
                   </div>
 
                   <div class="form-group col-md-6">
-                    <label for="validacaoLogradouroEvento">Logradouro*</label>
+                    <label for="validacaoLogradouroEvento" id="labelValidacaoLogradouroEvento">Logradouro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoLogradouroEvento" placeholder="Logradouro" />
+                      id="validacaoLogradouroEvento" placeholder="Logradouro" name="inputLogradouroEvento"/>
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="validacaoNumeroEvento">Número*</label>
+                    <label for="validacaoNumeroEvento" id="labelValidacaoNumeroEvento">Número*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="5"
-                      id="validacaoNumeroEvento" placeholder="Número" />
+                      id="validacaoNumeroEvento" placeholder="Número" name="inputNumeroEvento"/>
                   </div>
                 </div>
 
                 <div class="form-row">
                   <!-- linha5-->
                   <div class="form-group col-md-4">
-                    <label for="validacaoComplementoEvento">Complemento</label>
+                    <label for="validacaoComplementoEvento" id="labelValidacaoComplementoEvento">Complemento</label>
                     <input class="form-control form-control" type="text" id="validacaoComplementoEvento" maxlength="30"
-                      placeholder="Complemento" />
+                      placeholder="Complemento" name="inputComplementoEvento"/>
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label for="validacaoBairroEvento">Bairro*</label>
+                    <label for="validacaoBairroEvento" id="labelValidacaoBairroEvento">Bairro*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoBairroEvento" placeholder="Bairro" />
+                      id="validacaoBairroEvento" placeholder="Bairro" name="inputBairroEvento"/>
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label for="validacaoCidadeEvento">Cidade*</label>
+                    <label for="validacaoCidadeEvento" id="labelValidacaoCidadeEvento">Cidade*</label>
                     <input class="form-control form-control" type="text" required="required" maxlength="30"
-                      id="validacaoCidadeEvento" placeholder="Cidade" />
+                      id="validacaoCidadeEvento" placeholder="Cidade" name="inputCidadeEvento"/>
                   </div>
 
                   <div class="form-group col-md-1">
-                    <label for="validacaoUFEvento">UF*</label>
+                    <label for="validacaoUFEvento" id="labelValidacaoUFEvento">UF*</label>
                     <select class="form-control form-control" required="required" id="validacaoUFEvento">
                       <option value="1" selected disabled>UF</option>
                       <option>AC</option>
@@ -801,7 +801,7 @@
       <div class="modal-content modalAgradecimento--dimensao">
         <div class="modal-header modalAgradecimento--header">
           <p class="modalAgradecimento--titulo" id="exampleModalLabel">
-            Recebemos a solitação de cadastro!
+            <span id="textoLegendaModalAgradecimento">Recebemos a solitação de cadastro!</span>
           </p>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="reload()">
             <span aria-hidden="true">&times;</span>
@@ -823,16 +823,19 @@
 
           <div class="modalAgradecimento--divB">
             <p id="instituicaoEvento" class="modalAgradecimento--conteudo">
-              <b>Obrigado por cadastrar sua instituição!</b>
+              <b id="instituicaoEventoAgradecimento">Obrigado por cadastrar sua instituição!</b>
             </p>
             <p id="instituicaoEventoTx2" class="modalAgradecimento--conteudo">
-              As informações estão
+              <span id="subTxt1">As informações estão</span>
               <b>
-                <font color="green">em análise</font>
-              </b>, em breve sua
-              instituição será adicionada ao mapa!
+                <font color="green" id="subTxt2">em análise</font>
+              </b>
+              <span id="subTxt3">
+                , em breve sua
+                instituição será adicionada ao mapa!
+              </span>
             </p>
-            <p class="modalAgradecimento--conteudo">
+            <p class="modalAgradecimento--conteudo" id="instituicaoEventoTx3">
               Caso ocorra algua pendência, informaremos por e-mail.
             </p>
           </div>
@@ -840,7 +843,7 @@
 
         <!--Fim do Conteudo-->
         <div class="modal-footer modalAgradecimento--footer">
-          <button id="" class="modalAgradecimento--btnFechar" type="button" onclick="reload()">
+          <button id="btn-modalAgradecimento" class="modalAgradecimento--btnFechar" type="button" onclick="reload()">
             Fechar
           </button>
         </div>
@@ -944,7 +947,7 @@
     <div class="modal-dialog modal-dialog-mobile modal-dialog-scrollable" role="document">
       <div class="modal-content modal-content-mobile">
         <div class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center">
-          <p id="titulo-modal">Categorias</p>
+          <p id="titulo-modal" data-i18n="categorias.tituloMobile">Categorias</p>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -965,7 +968,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn-categoria-mobile" data-dismiss="modal">
+          <button type="button" class="btn-categoria-mobile" data-dismiss="modal" data-i18n="modalCategoriaMobile.btnIrParaOMapa">
             Ir para o mapa
           </button>
         </div>
@@ -982,7 +985,7 @@
           <div class="d-flex align-items-center">
             <img id="img-categoria" style="height: 36px; width: 36px; margin-right: 20px"
               src="img/img-bl/01-aceleradora.png" alt="" />
-            <p id="nome-categoria" style="margin: 0" data-i18n="barraLateral.titulo">Categorias</p>
+            <p id="nome-categoria" style="margin: 0" data-i18n="categorias.titulo">Categorias</p>
           </div>
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1040,10 +1043,10 @@
           <button type="button" class="btn-categoria-mobile2" data-dismiss="modal" data-toggle="modal"
             data-target="#modalCategoriaMobile">
             <i class="fas fa-angle-left" style="padding-right: 20px; padding-left: 5px"></i>
-            Categorias
+            <span data-i18n="categorias.tituloMobile">Categorias</span>
           </button>
           <button type="button" class="btn-categoria-mobile" data-dismiss="modal">
-            Ir para o mapa
+            <span data-i18n="modalCategoriaMobile.btnIrParaOMapa">Ir para o mapa</span>
           </button>
         </div>
       </div>
@@ -1085,7 +1088,7 @@
         <div id="div-menu-categoria">
           <div id="coluna-menu">
             <div id="coluna-menu-titulo" class="d-flex align-items-center">
-              <h5 id="texto-menu-titulo" data-i18n="barraLateral.titulo">CATEGORIAS</h5>
+              <h5 id="texto-menu-titulo" data-i18n="categorias.titulo">CATEGORIAS</h5>
 
               <!--Botão do Mobile-->
               <div id="botao-titulo-mobile" class="input-group-append">
@@ -1119,7 +1122,7 @@
               <form class="form-inline" onsubmit="return false">
                 <div class="input-group">
                   <input id="contBusca" class="form-control" type="search" placeholder="Buscar" aria-label="Search"
-                    aria-describedby="basic-addon2" />
+                    aria-describedby="basic-addon2" name="contBusca"/>
 
                   <div class="input-group-append">
                     <a id="botaoBusca" href="javascript:void(0)" class="btn btn-orange" type="submit"
@@ -1189,7 +1192,7 @@
           <div id="marcar_info" style="display: none">
             <div id="divMsg">
               <div class="d-flex justify-content-center">
-                <h6 class="textoAlerta" data-i18n="cadastro.legenda">
+                <h6 class="textoAlerta" data-i18n="navBar1.cadastro.legenda">
                   Clique no mapa para definir o endereço do sua
                   instituição/evento
                 </h6>
@@ -1198,7 +1201,7 @@
             <div id="divButton">
               <div class="d-flex justify-content-center">
                 <button id="map_button2" class="btn btn-submit btn-sm" style="font-weight: bold"
-                  data-i18n="cadastro.btnLegenda">
+                  data-i18n="navBar1.cadastro.btnLegenda">
                   Cancelar
                 </button>
               </div>
@@ -1214,7 +1217,7 @@
           <div class="textoBotao">
             <div>
               <p class="title-cookies">Cookies</p>
-              <p class="msg-cookies">
+              <p class="msg-cookies" data-i18n="modalCookies.texto">
                 Este site utiliza cookies para a sua melhor experiência.
                 Consulte nossa Política de Privacidade para saber mais sobre
                 como usamos e cuidamos dos seus dados. Ao continuar navegando,
@@ -1292,7 +1295,6 @@
 
   <script src="javascript/segmentos-startups.js"></script>
   <script src="javascript/traducao/i18n-index.js" type="module"></script>
-  <script src="javascript/traducao/i18n-popup.js"></script>
 </body>
 
 </html>
