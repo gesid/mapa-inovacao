@@ -452,6 +452,7 @@ $(function() {
                 })
             })
 
-            $("body").localize()
-        })
-})  
+      $("body").localize();
+    }
+  );
+});

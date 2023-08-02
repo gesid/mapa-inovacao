@@ -366,3 +366,24 @@ function verificarUsuarioLogado() {
     location.href = "login.html";
   }
 }
+
+i18next.on('languageChanged', function(lng) {
+  traducaoDoPlaceHolderBarraBuscaPatentes();
+  traducaoDoPlaceHolderPatentes();
+})
+
+function traducaoDoPlaceHolderBarraBuscaPatentes() {
+  let placeholderchange = document.getElementsByName("form-control")[0]
+  console.log(i18next.t("patentsRegister.sectionPatentsRegister.patentPlaceholder"))
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("patentsRegister.sectionPatentsRegister.patentPlaceholder")
+   }
+ }
+
+ function traducaoDoPlaceHolderPatentes() {
+  let placeholderchange = document.getElementsByName("form-control2")[0]
+  console.log(i18next.t("patentsRegister.menu.sectionHeader.placeholder2"))
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("patentsRegister.menu.sectionHeader.placeholder2")
+   }
+ }
