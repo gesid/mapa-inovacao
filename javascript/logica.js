@@ -120,7 +120,24 @@ function OpcaoComunidade() {
     criarOpcaoComunidadeMobile(comunidades);
   });
 }
+function criarOpcaoRegiaoMobile(regioes) {
+  // Cria botão de comunidade
+  let template = document.querySelector("#listaTipoMobile");
+  let listaOpcoes = document.querySelector("#listaOpcoesMobile");
+  let a = template.content.querySelector("a");
+  let imgLink = document.createElement("imgLink");
+  //imgLink.src = componente.getImagemBarra()
 
+  a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center">
+  <img style="height:36px; width:36px" src= "img/img-bl/31-regiao.png">
+  regioes
+  <span class="badge badge-secondary badge-pill">${regioes.length}</span>
+  </div>
+  <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
+
+  a.setAttribute("data-tipo", "Regioes");
+  listaOpcoes.appendChild(document.importNode(template.content, true));
+}
 function criarOpcaoComunidade(comunidades) {
   // Cria botão de comunidade
   let template = document.querySelector("#listaTipo");
@@ -141,6 +158,7 @@ function opcaoRegiao() {
   regiaoDao.varredura().then(function (regiao) {
     console.log(regiao);
     criarOpcaoRegiao(regiao);
+    criarOpcaoRegiaoMobile(regiao);
   });
 }
 
@@ -515,7 +533,11 @@ function OpcaoComunidadeMobile() {
     criarOpcaoComunidadeMobile(comunidades);
   });
 }
-
+function opcaoRegiaoMobile() {
+  regiaoDao.varredura().then(function (regiao) {
+    criarOpcaoRegiaoMobile(regiao);
+  });
+}
 function criarOpcaoComunidadeMobile(comunidades) {
   // Cria botão de comunidade
   let template = document.querySelector("#listaTipoMobile");
@@ -565,7 +587,7 @@ function criarListaOpcoesMobile(tipoClasse) {
 //Criando modal de cartões mobile
 function chamarModalCard(componente) {
   //Abre o modal de cartões
-
+  console.log(componente);
   contAux = 0;
   while (contAux <= ecossistema.length) {
     if ("Comunidades" == componente.getAttribute("data-tipo")) {
@@ -575,7 +597,13 @@ function chamarModalCard(componente) {
       document.getElementById("nome-categoria").innerHTML = "Comunidades";
       break;
     }
-
+    if ("Regioes" == componente.getAttribute("data-tipo")) {
+      document
+        .getElementById("img-categoria")
+        .setAttribute("src", "img/img-bl/31-regiao.png");
+      document.getElementById("nome-categoria").innerHTML = "Regioes";
+      break;
+    }
     if (
       ecossistema[contAux].getNome() == componente.getAttribute("data-tipo")
     ) {
@@ -590,10 +618,11 @@ function chamarModalCard(componente) {
   }
 
   $(".template-cartao").remove();
-
-  if (componente.getAttribute("data-tipo") != "Comunidades") {
+  if (componente.getAttribute("data-tipo") == "Regioes") {
+    filtroBuscaRegiaoMobile(componente.getAttribute("data-tipo"));
+  } else if (componente.getAttribute("data-tipo") != "Comunidades") {
     filtroBuscaMobile(componente.getAttribute("data-tipo")); //exibe os cartões do tipo de opção selecionada
-  } else {
+  } else if (componente.getAttribute("data-tipo") == "Comunidades") {
     filtroBuscaComunidadeMobile(componente.getAttribute("data-tipo"));
   }
 }
@@ -660,10 +689,19 @@ function filtroBuscaComunidadeMobile(tipo) {
     comunidade.forEach(verificarUsuarioComunidadeMobile);
   });
 }
-
+function filtroBuscaRegiaoMobile(tipo) {
+  regiaoDao.varredura().then(function (regiao) {
+    regiao.forEach(verificarUsuarioRegiaoMobile);
+  });
+}
 function verificarUsuarioComunidadeMobile(comunidade) {
   usuariodao.buscar(comunidade.getUserId()).then(function (usuario) {
     cartaoComunidadeMobile(comunidade, usuario.getNome());
+  });
+}
+function verificarUsuarioRegiaoMobile(regiao) {
+  usuariodao.buscar(regiao.getUserId()).then(function (usuario) {
+    cartaoRegiaoMobile(regiao, usuario.getNome());
   });
 }
 
@@ -689,6 +727,54 @@ function cartaoComunidadeMobile(entidade, nomeUser) {
   btn1.setAttribute("data-key", entidade.getMarkerKey());
   btn1.setAttribute("name", entidade.getMarkerKey());
   btn1.setAttribute("onclick", "exibirComunidade(this)");
+  btn1.setAttribute("data-dismiss", "");
+
+  if (map.hasLayer(layerArray[entidade.getMarkerKey()])) {
+    btn1.innerHTML = "Desativar do mapa";
+    btn1.setAttribute("Style", "background: #CF5B15;");
+  } else {
+    btn1.innerHTML = "Ativar no mapa";
+    btn1.setAttribute("Style", "background: #FC6A38;");
+  }
+
+  btn2.innerHTML = "Visitar site";
+
+  criador.textContent = nomeUser;
+  criador.setAttribute("href", "javascript:void(0)");
+  criador.setAttribute("data-key", entidade.getUserId());
+  criador.setAttribute("onclick", "telaUsuario(this)");
+
+  /*
+  p[1].innerHTML = `<small class="font-weight-bold" href="">Marcado por: </small>
+  <small><a class="ml-1" href="javascript:void(0)" data-key="${entidade.getUserId()}" onclick="telaUsuario(this)">${nomeUser}</a></small>`
+  */
+
+  cartao.appendChild(document.importNode(template.content, true));
+  permissao = true;
+}
+
+function cartaoRegiaoMobile(entidade, nomeUser) {
+  let template = document.querySelector("#cartaoEmpresaMobile");
+  let cartao = document.querySelector("#cartaoMobile");
+  let img = template.content.querySelector("img");
+  let titulo = template.content.querySelector("#txt-titulo-card");
+  let descricao = template.content.querySelector("#txt-descricao-card");
+  let criador = template.content.querySelector("#txt-marcadopor-nome");
+  let btn1 = template.content.querySelector("#btn-card1");
+  let btn2 = template.content.querySelector("#btn-card2");
+
+  let imgCartao = document.createElement("imgCartao");
+  imgCartao.src = entidade.getURL();
+
+  img.setAttribute("src", imgCartao.src);
+
+  titulo.textContent = entidade.getNome();
+  descricao.textContent = `${entidade.getDescricao()}`;
+
+  btn2.setAttribute("href", entidade.getSite());
+  btn1.setAttribute("data-key", entidade.getMarkerKey());
+  btn1.setAttribute("name", entidade.getMarkerKey());
+  btn1.setAttribute("onclick", "exibirRegiao(this)");
   btn1.setAttribute("data-dismiss", "");
 
   if (map.hasLayer(layerArray[entidade.getMarkerKey()])) {
