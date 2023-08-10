@@ -25,6 +25,7 @@ const storage = firebase.storage();
 let entidadedao = new entidadeDAO();
 let eventodao = new eventoDAO();
 let comunidadedao = new comunidadeDAO();
+let regiaoDao = new RegiaoDao();
 
 let markerIcon = L.Icon.extend({
   options: {
@@ -90,6 +91,7 @@ ecossistema.push(new Startups());
 ecossistema.push(new CategoriaPatente());
 
 OpcaoComunidade();
+opcaoRegiao();
 //OpcaoComunidadeMobile()
 
 entidadedao.varredura().then(function (entidade) {
@@ -135,6 +137,29 @@ function criarOpcaoComunidade(comunidades) {
   listaOpcoes.appendChild(document.importNode(template.content, true));
 }
 
+function opcaoRegiao() {
+  regiaoDao.varredura().then(function (regiao) {
+    console.log(regiao);
+    criarOpcaoRegiao(regiao);
+  });
+}
+
+function criarOpcaoRegiao(comunidades) {
+  // Cria botão de comunidade
+  let template = document.querySelector("#listaTipo");
+  let listaOpcoes = document.querySelector("#listaOpcoes");
+  let a = template.content.querySelector("a");
+  let imgLink = document.createElement("imgLink");
+  //imgLink.src = componente.getImagemBarra()
+
+  a.innerHTML = `<img style="height:36px; width:36px" src= "img/img-bl/31-regiao.png">
+  Regiões
+  <span class="badge badge-secondary badge-pill">${comunidades.length}</span>`;
+
+  a.setAttribute("data-tipo", "Regiao");
+  listaOpcoes.appendChild(document.importNode(template.content, true));
+}
+
 function criarListaOpcoes(tipoClasse) {
   // Cria lista da bara lateral
   let template = document.querySelector("#listaTipo");
@@ -176,6 +201,10 @@ function filtroSelect(componente) {
     return;
   }
 
+  if (tipoListagem === "Regiao") {
+    filtroBuscaRegiao(textoBuscado);
+    return;
+  }
   filtroBusca(tipoListagem);
 }
 //Criando a barra lateral
@@ -205,7 +234,10 @@ async function chamaBarraOculta(componente) {
     if (tipoSelecionado === "Patente") {
       await mostrarPatentesListaOculta();
     }
-
+    if (tipoSelecionado === "Regiao") {
+      filtroBuscaRegiao(tipoSelecionado);
+      return;
+    }
     filtroBusca(tipoSelecionado); //exibe os cartões do tipo de opção selecionada
   }
 }
@@ -347,10 +379,70 @@ function filtroBuscaComunidade(tipo) {
   }
 }
 
+function filtroBuscaRegiao(tipo) {
+  let valBarra = document.getElementById("contBusca").value; //Verificar se há algo na barra de busca
+
+  if (valBarra != "") {
+    regiaoDao.buscarPorNome(valBarra).then(function (comunidade) {
+      verificarUsuarioRegiao(comunidade);
+    });
+  } else {
+    regiaoDao.varredura().then(function (regiao) {
+      regiao.forEach(verificarUsuarioRegiao);
+    });
+  }
+}
+
 function verificarUsuarioComunidade(comunidade) {
   usuariodao.buscar(comunidade.getUserId()).then(function (usuario) {
     cartaoComunidade(comunidade, usuario.getNome());
   });
+}
+
+function verificarUsuarioRegiao(regiao) {
+  usuariodao.buscar(regiao.getUserId()).then(function (usuario) {
+    cartaoRegiao(regiao, usuario.getNome());
+  });
+}
+
+function cartaoRegiao(entidade, nomeUser) {
+  let template = document.querySelector("#cartaoEmpresa");
+  let cartao = document.querySelector("#cartao");
+  let img = template.content.querySelector("img");
+  let titulo = template.content.querySelector("#txt-titulo-card");
+  let descricao = template.content.querySelector("#txt-descricao-card");
+  let criador = template.content.querySelector("#txt-marcadopor-nome");
+  let btn1 = template.content.querySelector("#btn-card1");
+  let btn2 = template.content.querySelector("#btn-card2");
+
+  let imgCartao = document.createElement("imgCartao");
+  imgCartao.src = entidade.getURL();
+
+  img.setAttribute("src", imgCartao.src);
+
+  titulo.textContent = entidade.getNome();
+  descricao.textContent = `${entidade.getDescricao()}`;
+
+  btn2.setAttribute("href", entidade.getSite());
+  btn1.setAttribute("data-key", entidade.getMarkerKey());
+  btn1.setAttribute("name", entidade.getMarkerKey());
+  btn1.setAttribute("onclick", "exibirRegiao(this)");
+
+  btn1.innerHTML = "Ativar no mapa";
+  btn2.innerHTML = "Visitar site";
+
+  criador.textContent = nomeUser;
+  criador.setAttribute("href", "javascript:void(0)");
+  criador.setAttribute("data-key", entidade.getUserId());
+  criador.setAttribute("onclick", "telaUsuario(this)");
+
+  /*
+  p[1].innerHTML = `<small class="font-weight-bold" href="">Marcado por: </small>
+  <small><a class="ml-1" href="javascript:void(0)" data-key="${entidade.getUserId()}" onclick="telaUsuario(this)">${nomeUser}</a></small>`
+  */
+
+  cartao.appendChild(document.importNode(template.content, true));
+  permissao = true;
 }
 
 function cartaoComunidade(entidade, nomeUser) {
@@ -982,8 +1074,6 @@ function selecionarLocal() {
 
       document.getElementById("validacaoLatEvento").value = lat;
       document.getElementById("validacaoLngEvento").value = lng;
-
-
     });
   } else {
     window.location.href = "login.html";
@@ -995,7 +1085,6 @@ function chamarModalCadastro() {
     alert("Selecione um local no mapa");
   } else {
     map.off("click");
-
 
     document.getElementById("validacaoNomeLocal").value = "";
     document.getElementById("validacaoSiteLocal").value = "";
@@ -1033,29 +1122,38 @@ function chamarModalCadastro() {
 
     $("#marcar_info").attr("style", "display: none;");
 
-    const latitudeDoLocalSelecionado = document.getElementById("validacaoLatLocal").value;
-    const longitudeDoLocalSelecionado = document.getElementById("validacaoLngLocal").value;
+    const latitudeDoLocalSelecionado =
+      document.getElementById("validacaoLatLocal").value;
+    const longitudeDoLocalSelecionado =
+      document.getElementById("validacaoLngLocal").value;
 
-    buscarEnderecoPorLatitudeLongitude(latitudeDoLocalSelecionado, longitudeDoLocalSelecionado).then((endereco) => {
+    buscarEnderecoPorLatitudeLongitude(
+      latitudeDoLocalSelecionado,
+      longitudeDoLocalSelecionado
+    ).then((endereco) => {
       preencherInformacoesDoEndereco(endereco);
     });
   }
 }
 
-async function buscarEnderecoPorLatitudeLongitude(latitude, longitude){
+async function buscarEnderecoPorLatitudeLongitude(latitude, longitude) {
   const URL = `http://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-  
+
   try {
     const resultado = await fetch(URL);
     const resultadoConvertidoParaJson = await resultado.json();
 
-    return converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resultadoConvertidoParaJson);
+    return converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(
+      resultadoConvertidoParaJson
+    );
   } catch (error) {
     console.log("Erro ao buscar endereço usando latitude e longitude");
   }
 }
 
-function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resultadoBuscaEnderecoPorLatitudeLongitude){
+function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(
+  resultadoBuscaEnderecoPorLatitudeLongitude
+) {
   const {
     road: rua,
     municipality: municipalidade,
@@ -1067,11 +1165,11 @@ function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resul
     country: pais,
     country_code: siglaPais,
     city: cidade,
-    suburb: bairro
+    suburb: bairro,
   } = resultadoBuscaEnderecoPorLatitudeLongitude.address;
 
   const siglaEstado = identificaoPaisEstado.split("-")[1];
-  
+
   return {
     rua,
     cidade,
@@ -1084,18 +1182,12 @@ function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resul
     pais,
     siglaPais,
     siglaEstado,
-    bairro
-  }
+    bairro,
+  };
 }
 
-function preencherInformacoesDoEndereco(endereco){
-  const {
-    rua,
-    bairro,
-    cidade,
-    siglaEstado,
-    cep
-  } = endereco;
+function preencherInformacoesDoEndereco(endereco) {
+  const { rua, bairro, cidade, siglaEstado, cep } = endereco;
 
   document.getElementById("validacaoLogradouroLocal").value = rua;
   document.getElementById("validacaoNumeroLocal").value = "";
@@ -1113,7 +1205,6 @@ function preencherInformacoesDoEndereco(endereco){
   document.getElementById("validacaoUFEvento").value = siglaEstado;
   document.getElementById("validacaoCEPEvento").value = cep;
 }
-
 
 $(document).ready(() => {
   $("#validacaoCEPLocal").focusout(function () {
