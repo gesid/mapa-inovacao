@@ -43,6 +43,12 @@ const lngs = {
                    comoUtilizar: "COMO UTILIZAR"
                 }
               },
+              alert:{
+                  usuarioOuSenhaIncorretos: "Usuário e/ou senha incorretos",
+                  loginRealizadoComSucesso: "Login realizado com sucesso",
+                  emailNaoValidado: "E-mail não validado! Verifique sua caixa de e-mail.",
+                  voceEstaDeslogado: "Você está deslogado"
+              },
             },
           },
           en: {
@@ -77,6 +83,12 @@ const lngs = {
                    comoUtilizar: "HOW TO USE"
                 }
               },
+              alert:{
+                  usuarioOuSenhaIncorretos: "Incorrect username and/or password.",
+                  loginRealizadoComSucesso: "Login successful",
+                  emailNaoValidado: "E-mail not validated! Check your email box.",
+                  voceEstaDeslogado: "You're logged out."
+              }
             },
           },
         },
