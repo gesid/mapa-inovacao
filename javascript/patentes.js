@@ -44,11 +44,28 @@ async function filtrarPatentesPorTipoBusca() {
 async function selecionarTipoBusca(opcaoBuscaSelecionada) {
   tipoBuscaSelecionado = opcaoBuscaSelecionada.getAttribute("data-texto");
   const tipoBuscaLabel = opcaoBuscaSelecionada.getAttribute("data-label");
+  refBarraBuscaMobile.setAttribute("tipo-barra", tipoBuscaLabel);
+  console.log(refBarraBuscaMobile)
 
-  const rotuloBarraBusca = `Tipo de Busca: por ${tipoBuscaLabel}`;
+  let tipoBuscaLabelTraducao = traducaoTipoBuscaLabel(tipoBuscaLabel);
+  let labelPreTipo = i18next.t("patents.sectionPatents.barraDeBusca.labelPreTitulo");
+
+  const rotuloBarraBusca = `${labelPreTipo} ${tipoBuscaLabelTraducao}`;
   refBarraBuscaMobile.setAttribute("placeholder", rotuloBarraBusca);
 
   // refBarraBuscaDesktop.setAttribute("placeholder", rotuloBarraBusca);
+}
+
+function traducaoTipoBuscaLabel(label){
+  if(label == "título"){
+    return i18next.t("patents.sectionPatents.barraDeBusca.tipo.titulo");
+  } 
+  else if(label == "depositante"){
+    return i18next.t("patents.sectionPatents.barraDeBusca.tipo.depositante");
+  }
+  else if(label == "seção"){
+    return i18next.t("patents.sectionPatents.barraDeBusca.tipo.secao");
+  }
 }
 
 async function filtrarPatentes(tipoBusca, palavraChave) {
@@ -144,14 +161,21 @@ function findGetParameter(parameterName) {
   return result;
 }
 
+/**Tradução placeholder barra de busca */
 i18next.on('languageChanged', function(lng) {
   traducaoDoPlaceHolderBarraBuscaPatentesMobile();
 })
 
 function traducaoDoPlaceHolderBarraBuscaPatentesMobile() {
-  let placeholderchange =  document.getElementsByName("barraBuscaPatentesMobile")[0]
-  console.log(i18next.t("patents.sectionPatents.barraDeBuscaPatentes"))
-   if (placeholderchange) {
-     placeholderchange.placeholder = i18next.t("patents.sectionPatents.barraDeBuscaPatentes")
-   }
+  let tipoBarra = refBarraBuscaMobile.getAttribute("tipo-barra");
+  let placeholderBuscaPatentes =  document.getElementsByName("barraBuscaPatentesMobile")[0];
+  if (tipoBarra == "título") {
+    placeholderBuscaPatentes.placeholder = i18next.t("patents.sectionPatents.barraDeBusca.labelPlaceholderCompleta.titulo");
+  }
+  else if(tipoBarra == "depositante"){
+    placeholderBuscaPatentes.placeholder = i18next.t("patents.sectionPatents.barraDeBusca.labelPlaceholderCompleta.depositante");
+  }
+  else if(tipoBarra == "seção"){
+    placeholderBuscaPatentes.placeholder = i18next.t("patents.sectionPatents.barraDeBusca.labelPlaceholderCompleta.secao");
+  }
  }

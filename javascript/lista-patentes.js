@@ -169,7 +169,7 @@ function gerarHtmlDescricaoPatente(patente) {
         class="btn-manipular-visualizacao-desc "
       >
         <i class="fas fa-caret-down"> </i>
-        Ver mais
+        <span data-i18n="patents.sectionPatents.botaoVerMais">Ver mais</span>
       </button>
     </p>
 
@@ -184,7 +184,7 @@ function gerarHtmlDescricaoPatente(patente) {
         class="btn-manipular-visualizacao-desc btn-escondido"
       >
         <i class="fas fa-caret-up"> </i>
-        Ver menos
+        <span data-i18n="patents.sectionPatents.botaoVerMenos">Ver menos</span>
       </button>
     </p>
     
