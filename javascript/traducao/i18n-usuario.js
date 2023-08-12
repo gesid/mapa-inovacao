@@ -46,7 +46,9 @@ $(function() {
                             termoDeUso: "TERMOS DE USO",
                             termoDeConsentimento: "TERMOS DE CONSENTIMENTO"
                         },
-
+                        alert:{
+                            voceEstaDeslogado: "Você está deslogado." ,
+                        }
                     }
                 },
                 en:{
@@ -80,6 +82,9 @@ $(function() {
                             polica: "PRIVACY POLICY",
                             termoDeUso: "TERMS OF USE",
                             termoDeConsentimento: "TERMS OF CONSENT"
+                        },
+                        alert:{
+                            voceEstaDeslogado: "You're logged out.",
                         }
                     }
                 }

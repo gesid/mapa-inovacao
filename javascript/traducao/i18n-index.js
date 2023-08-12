@@ -219,6 +219,10 @@ $(function() {
                         modalCategoriaMobile:{
                             btnIrParaOMapa: "Ir para o mapa"
                         },
+                        alert:{
+                            cepInvalidoCadastro: "CEP inválido.",
+                            voceEstaDeslogado: "Você está deslogado."   
+                        }
                     }
                 },
                 en:{
@@ -346,10 +350,10 @@ $(function() {
                                         texto1: "Thank you for registering your institution!",
                                         texto2: {
                                             sub1:"The informations are ",
-                                            sub2: "in analysis",
+                                            sub2: "under analysis",
                                             sub3: ", soon your institution will be added to the map!"
                                         },
-                                        texto3: "If there is any pending, we will inform you by email.",
+                                        texto3: "If there are any problems, we will inform you by email.",
                                     },
                                     btn:{
                                         fechar: "Close",
@@ -423,6 +427,10 @@ $(function() {
                         modalCategoriaMobile:{
                             btnIrParaOMapa: "Return to the map"
                         },
+                        alert:{
+                            cepInvalidoCadastro: "Zipcode invalid",
+                            voceEstaDeslogado: "You're logged out."
+                        }
                     }
                 }
                 

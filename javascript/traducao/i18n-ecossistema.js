@@ -66,6 +66,9 @@ const lngs = {
                   termoConsentimento: "TERMOS DE CONSENTIMENTO"
                 },
               },
+              alert:{
+                voceEstaDeslogado: "Você está deslogado." ,
+              }
             },
           },
           en: {
@@ -122,6 +125,9 @@ const lngs = {
                   termoConsentimento: "TERMS OF CONSENT"
                 },
               },
+              alert:{
+                voceEstaDeslogado: "You're logged out.",
+              }
             },
           },
         },

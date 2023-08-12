@@ -43,7 +43,10 @@ const lngs = {
                       botaoSiteDoEvento: "Site do Evento",
                       botaoVerNoMapa: "Ver no mapa"
                     }
-                  },
+              },
+              alert:{
+                voceEstaDeslogado: "Você está deslogado." ,
+              }
             },
           },
           en: {
@@ -78,7 +81,10 @@ const lngs = {
                         botaoSiteDoEvento: "Event website",
                         botaoVerNoMapa: "See on Map"
                     }
-                  },
+              },
+              alert:{
+                voceEstaDeslogado: "You're logged out.",
+              }
             },
           },
         },

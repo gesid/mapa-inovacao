@@ -1130,8 +1130,12 @@ function selecionarLocal() {
         .addTo(map)
         .bindPopup(
           `<div class="row d-flex justify-content-center" id="divPopup">
-              <h6 class="col-12 font-weight-bold text-center" id="confirm">Confirmar</h6>
-              <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()" id="btn-popup">Aqui!</button>
+              <h6 class="col-12 font-weight-bold text-center">
+                <span id="confirm">${i18next.t("navBar1.cadastro.marcador.legenda")}</span>
+              </h6>
+              <button class="btn btn-submit btn-sm font-weight-bold" onclick="chamarModalCadastro()">
+                <span id="btn-popup">${i18next.t("navBar1.cadastro.marcador.btn")}</span>
+              </button>
           </div>`
         )
         .openPopup();
@@ -1491,7 +1495,7 @@ $(document).ready(() => {
         }
       });
     function cepLocalInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPLocal").val("");
     }
   });
@@ -1518,7 +1522,7 @@ $(document).ready(() => {
         }
       });
     function cepEventoInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPEvento").val("");
     }
   });
@@ -1545,7 +1549,7 @@ $(document).ready(() => {
         }
       });
     function cepEventoInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPEvento").val("");
     }
   });
