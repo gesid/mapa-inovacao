@@ -26,8 +26,8 @@ const lngs = {
                 navEventos: "EVENTOS",
                 navPatentes:{
                     titulo: "PATENTES",
-                    subnavCadastro: "Cadastrar Patentes",
-                    subnavListar: "Ver lista de Patentes"
+                    subnavCadastro: "Cadastrar patente",
+                    subnavListar: "Ver lista de patentes"
                 },
                 btnUser:{
                     saudacao: "Olá, {{name}} !",

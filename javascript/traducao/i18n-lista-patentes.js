@@ -7,7 +7,9 @@ const lngs = {
   };
   
   $(function () {
-    i18next.init(
+    i18next
+    .use(i18nextBrowserLanguageDetector)
+    .init(
       {
         debug: true,
         fallbackLng: "pt",
@@ -18,7 +20,7 @@ const lngs = {
                     sectionHeader:{
                       mapa: "MAPA",
                       ecossistema2: "ECOSSISTEMA",
-                      tutorial: "TUTORIAL",
+                      tutorial: "COMO UTILIZAR",
                       eventos: "EVENTOS",
                       patente: "PATENTE",
                       cadastrarPatente: "Cadastrar patente",

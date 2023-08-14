@@ -8,6 +8,7 @@ const lngs = {
 
 $(function() {
     i18next
+        .use(i18nextBrowserLanguageDetector)
         .init({
             debug: true,
             fallbackLng:'pt',
@@ -24,8 +25,8 @@ $(function() {
                             navEventos: "EVENTOS",
                             navPatentes:{
                                 titulo: "PATENTES",
-                                subnavCadastro: "Cadastrar Patentes",
-                                subnavListar: "Listar Patentes"
+                                subnavCadastro: "Cadastrar patente",
+                                subnavListar: "Ver lista de patentes"
                             },
                         },
                         cadastro:{

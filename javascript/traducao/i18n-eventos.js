@@ -18,14 +18,14 @@ const lngs = {
                 navMap: "MAPA",
                 navEcossistema: "ECOSSISTEMA",
                 navTutorial:{
-                  titulo: "TUTORIAL",
+                  titulo: "COMO UTILIZAR",
                   subtitulo: "Colaborar é muito simples! Veja no vídeo abaixo como funciona:"
                 },
                 navEventos: "EVENTOS",
                 navPatentes:{
                   titulo: "PATENTES",
-                  subnavCadastro: "Cadastrar Patentes",
-                  subnavListar: "Listar Patentes"
+                  subnavCadastro: "Cadastrar patente",
+                  subnavListar: "Ver lista de patentes"
                 },
                 btnUser:{
                   saudacao: "Olá, {{name}} !",
@@ -42,14 +42,14 @@ const lngs = {
               },  
               events: {
                 sectionEvents: {
-                barraDeBusca: "Tipo de Busca: por nome",
-                botaoBusca: "Buscar",
-                tituloEvent: "PRÓXIMOS EVENTOS",
-                toggleDown: "Tipo de busca",
-                porNomeToggleDown: "Por nome",
-                porCategoriaToggleDown: "Por categoria",
-                botaoSiteDoEvento: "Site do Evento",
-                botaoVerNoMapa: "Ver no mapa"
+                  barraDeBusca: "Tipo de Busca: por nome",
+                  botaoBusca: "Buscar",
+                  tituloEvent: "PRÓXIMOS EVENTOS",
+                  toggleDown: "Tipo de busca",
+                  porNomeToggleDown: "Por nome",
+                  porCategoriaToggleDown: "Por categoria",
+                  botaoSiteDoEvento: "Site do Evento",
+                  botaoVerNoMapa: "Ver no mapa"
                 }
               },
               alert:{
@@ -98,7 +98,7 @@ const lngs = {
                   sectionEvents: {
                     barraDeBusca: "Search Type: by name",
                     botaoBusca: "Search",
-                    tituloEvento: "UPCOMING EVENTS",
+                    tituloEvent: "UPCOMING EVENTS",
                     tituloPatente: "PATENTS",
                     toggleDown: "Search Type",
                     porNomeToggleDown: "By name",

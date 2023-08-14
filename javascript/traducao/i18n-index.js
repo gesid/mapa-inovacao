@@ -55,8 +55,8 @@ $(function() {
                             navEventos: "EVENTOS",
                             navPatentes:{
                                 titulo: "PATENTES",
-                                subnavCadastro: "Cadastrar Patentes",
-                                subnavListar: "Listar Patentes"
+                                subnavCadastro: "Cadastrar patente",
+                                subnavListar: "Ver lista de patentes"
                             },
                             cadastro:{
                                 legenda: 'Clique no mapa para definir o endereço do sua instituição/evento',

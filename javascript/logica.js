@@ -1182,6 +1182,8 @@ function atualizarTraducaoPopup(){
 
 function atualizarTraducaoModalCadastro(){
   traducaoModalInstituicao();
+  traducaoSelectTipoLocal();
+  traducaoPlaceholderModalInsittuicao();
   traducaoModalEventos();
   traducaoModalAgradecimento();
 }
@@ -1204,17 +1206,13 @@ function traducaoModalInstituicao(){
 
   //botões
   document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.fechar');
-  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar');
+  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar')
 
+}
 
-  //placeholder
+function traducaoPlaceholderModalInsittuicao(){
   document.getElementsByName('inputNome')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.nome');
   document.getElementsByName('inputSite')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.site');
-  
-  /**Inicio SELECT Tipo de local */
-  traducaoSelectTipoLocal();
-  /**Fim SELECT Tipo de local */
-
   //O placeholder do input da logo é traduzido na função chamarModalCadastro()
   document.getElementsByName('inputCep')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cep');
   document.getElementsByName('inputLogradouro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logradouro');
@@ -1223,7 +1221,6 @@ function traducaoModalInstituicao(){
   document.getElementsByName('inputBairro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.bairro');
   document.getElementsByName('inputCidade')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cidade');
   document.getElementById('validacaoClassificaocaoOption').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.startup');
-
 }
 
 function traducaoSelectTipoLocal(){
