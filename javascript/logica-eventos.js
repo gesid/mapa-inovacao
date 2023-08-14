@@ -110,7 +110,6 @@ i18next.on('languageChanged', function(lng) {
 
 function traducaoDoPlaceHolderBarraBuscaMobile() {
   let placeholderchange =  document.getElementsByName("barraBuscaMobile")[0]
-  console.log(i18next.t("events.sectionEvents.barraDeBusca"))
    if (placeholderchange) {
      placeholderchange.placeholder = i18next.t("events.sectionEvents.barraDeBusca")
    }

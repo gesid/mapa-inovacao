@@ -14,35 +14,43 @@ const lngs = {
         resources: {
           pt: {
             translation: {
-                ecossistema: {
-                    sectionHeader:{
-                      mapa: "MAPA",
-                      ecossistema2: "ECOSSISTEMA",
-                      tutorial: "TUTORIAL",
-                      eventos: "EVENTOS",
-                      patente: "PATENTE",
-                      cadastrarPatente: "Cadastrar patente",
-                      verListaPatente: "Ver lista de patentes"
-                    },
-                    sectionRodape: {
-                        titulo: "Para mais informações, fale conosco através do mapainovacao@ufc.br",
-                        descricao: "Versão 0.2 (Beta)",
-                        politicaPrivacidade: "TERMOS DE PRIVACIDADE",
-                        termoUso: "TERMOS DE USO",
-                        termoConsentimento: "TERMOS DE CONSENTIMENTO"
-                      },
-                },  
-                events: {
-                    sectionEvents: {
-                      barraDeBusca: "Tipo de Busca: por nome",
-                      botaoBusca: "Buscar",
-                      tituloEvent: "PRÓXIMOS EVENTOS",
-                      toggleDown: "Search Type",
-                      porNomeToggleDown: "Por nome",
-                      porCategoriaToggleDown: "Por categoria",
-                      botaoSiteDoEvento: "Site do Evento",
-                      botaoVerNoMapa: "Ver no mapa"
-                    }
+              navBar1:{
+                navMap: "MAPA",
+                navEcossistema: "ECOSSISTEMA",
+                navTutorial:{
+                  titulo: "TUTORIAL",
+                  subtitulo: "Colaborar é muito simples! Veja no vídeo abaixo como funciona:"
+                },
+                navEventos: "EVENTOS",
+                navPatentes:{
+                  titulo: "PATENTES",
+                  subnavCadastro: "Cadastrar Patentes",
+                  subnavListar: "Listar Patentes"
+                },
+                btnUser:{
+                  saudacao: "Olá, {{name}} !",
+                  perfil: "MEU PERFIL",
+                  sair: "SAIR"
+                }
+              },
+              sectionRodape: {
+                titulo: "Para mais informações, fale conosco através do mapainovacao@ufc.br",
+                descricao: "Versão 0.2 (Beta)",
+                politicaPrivacidade: "TERMOS DE PRIVACIDADE",
+                termoUso: "TERMOS DE USO",
+                termoConsentimento: "TERMOS DE CONSENTIMENTO"
+              },  
+              events: {
+                sectionEvents: {
+                barraDeBusca: "Tipo de Busca: por nome",
+                botaoBusca: "Buscar",
+                tituloEvent: "PRÓXIMOS EVENTOS",
+                toggleDown: "Tipo de busca",
+                porNomeToggleDown: "Por nome",
+                porCategoriaToggleDown: "Por categoria",
+                botaoSiteDoEvento: "Site do Evento",
+                botaoVerNoMapa: "Ver no mapa"
+                }
               },
               alert:{
                 voceEstaDeslogado: "Você está deslogado." ,
@@ -51,36 +59,53 @@ const lngs = {
           },
           en: {
             translation: {
-                ecossistema: {
-                    sectionHeader:{
+                /*sectionHeader:{
                       mapa: "MAP",
                       ecossistema2: "ECOSYSTEM",
-                      tutorial: "TUTORIAL",
+                      comoUtilizar: "TUTORIAL",
                       eventos: "EVENTS",
                       patente: "PATENT",
                       cadastrarPatente: "Register patent",
                       verListaPatente: "View list of patents"
-                    },
-                    sectionRodape: {
-                        titulo: "For more information, contact us through of mapainovacao@ufc.br",
-                        descricao: "Version 0.2 (Beta)",
-                        politicaPrivacidade: "PRIVACY POLICIES",
-                        termoUso: "TERMS OF USE",
-                        termoConsentimento: "TERMS OF CONSENT"
-                      },
+                    }*/
+              navBar1:{
+                navMap: "MAP",
+                navEcossistema: "ABOUT US",
+                navTutorial:{
+                  titulo: "TUTORIAL",
+                  subtitulo: "It is very simple to collaborate! Watch the video bellow to see how it works:"
                 },
-                events: {
-                    sectionEvents: {
-                        barraDeBusca: "Search Type: by name",
-                        botaoBusca: "Search",
-                        tituloEvento: "NEXT EVENTS",
-                        tituloPatente: "PATENTS",
-                        toggleDown: "Search Type",
-                        porNomeToggleDown: "By name",
-                        porCategoriaToggleDown: "By Category",
-                        botaoSiteDoEvento: "Event website",
-                        botaoVerNoMapa: "See on Map"
-                    }
+                navEventos: "EVENTS",
+                navPatentes:{
+                  titulo: "PATENTS",
+                  subnavCadastro: "Register Patents",
+                  subnavListar: "List Patents"
+                },
+                btnUser:{
+                  saudacao: "Hello, {{name}} !",
+                  perfil: "MY PROFILE",
+                  sair: "LOGOUT"
+                }
+              },
+              sectionRodape: {
+                titulo: "For more information, contact us through of mapainovacao@ufc.br",
+                descricao: "Version 0.2 (Beta)",
+                politicaPrivacidade: "PRIVACY POLICIES",
+                termoUso: "TERMS OF USE",
+                termoConsentimento: "TERMS OF CONSENT"
+              },
+              events: {
+                  sectionEvents: {
+                    barraDeBusca: "Search Type: by name",
+                    botaoBusca: "Search",
+                    tituloEvento: "UPCOMING EVENTS",
+                    tituloPatente: "PATENTS",
+                    toggleDown: "Search Type",
+                    porNomeToggleDown: "By name",
+                    porCategoriaToggleDown: "By Category",
+                    botaoSiteDoEvento: "Event website",
+                    botaoVerNoMapa: "View on Map"
+                  }
               },
               alert:{
                 voceEstaDeslogado: "You're logged out.",
