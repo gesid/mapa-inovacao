@@ -2,8 +2,8 @@
 
 //array com os idiomas que serão usados
 const lngs = {
-    pt: { nativeName: "PORTUGUÊS" },
-    en: { nativeName: "INGLÊS" },
+    pt: { nativeName: "PT-BR" },
+    en: { nativeName: "EN-US" },
   };
   
   $(function () {
@@ -21,6 +21,8 @@ const lngs = {
                       tutorial: "TUTORIAL",
                       eventos: "EVENTOS",
                       patente: "PATENTE",
+                      comoUtilizar: "COMO UTILIZAR",
+                      comoUtilizar2: "Colaborar é muito simples! Veja no vídeo abaixo como funciona: ",
                       cadastrarPatente: "Cadastrar patente",
                       verListaPatente: "Ver lista de patentes"
                     },
@@ -44,6 +46,13 @@ const lngs = {
                       botaoVerNoMapa: "Ver no mapa"
                     }
                   },
+                  navBar1: {
+                    btnUser: {
+                      saudacao: "Olá, {{name}} !",
+                      perfil: "MEU PERFIL",
+                      sair: "SAIR"
+                    }
+                  },
             },
           },
           en: {
@@ -55,6 +64,8 @@ const lngs = {
                       tutorial: "TUTORIAL",
                       eventos: "EVENTS",
                       patente: "PATENT",
+                      comoUtilizar: "TUTORIAL",
+                      comoUtilizar2: "It is very simple to collaborate! Watch the video bellow to see how it works: ",
                       cadastrarPatente: "Register patent",
                       verListaPatente: "View list of patents"
                     },
@@ -77,6 +88,13 @@ const lngs = {
                         porCategoriaToggleDown: "By Category",
                         botaoSiteDoEvento: "Event website",
                         botaoVerNoMapa: "See on Map"
+                    }
+                  },
+                  navBar1: {
+                    btnUser: {
+                      saudacao: "Hello, {{name}} !",
+                      perfil: "MY PROFILE",
+                      sair: "LOGGOUT"
                     }
                   },
             },

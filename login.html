@@ -130,7 +130,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-theater-masks"> </i>
-                <p class="texto-nav">TUTORIAL</p>
+                <p data-i18n="ecossistema.sectionHeader.eventos" class="texto-nav">EVENTOS</p>
               </a>
             </li>
 
@@ -174,15 +174,16 @@
                 <p class="texto-nav">DASHBOARD</p>
               </a>
             </li>
-            <li class="nav-item">
-              <select
-                name="language" 
-                id="languageSwitcher"
-                class="d-flex align-items-center justify-content-start nav-item-select-style texto-nav">
-              </select>
-            </li>
           </ul>
         </div>
+
+        <form id="btn-select-traducao" class="dropdownHeader"></form>
+          <select
+            name="language" 
+            id="languageSwitcher"
+            class="btn-traducao-dropdown-header">
+          </select>
+        </form>
 
        
 

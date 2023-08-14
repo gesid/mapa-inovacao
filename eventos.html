@@ -127,7 +127,7 @@
                 data-target="#modalSobre"
               >
                 <i class="fas fa-chalkboard-teacher"> </i>
-                <p data-i18n="login.sectionHoldBar.comoUtilizar" class="texto-nav">COMO UTILIZAR</p>
+                <p data-i18n="ecossistema.sectionHeader.comoUtilizar" class="texto-nav">COMO UTILIZAR</p>
               </a>
             </li>
 
@@ -183,15 +183,15 @@
                 <p class="texto-nav">DASHBOARD</p>
               </a>
             </li>
-            <li class="nav-item">
-              <select
-                name="language" 
-                id="languageSwitcher"
-                class="d-flex align-items-center justify-content-start nav-item-select-style texto-nav">
-              </select>
-            </li>
           </ul>
         </div>
+        <form id="btn-select-traducao" class="dropdownHeader"></form>
+          <select
+            name="language" 
+            id="languageSwitcher"
+            class="btn-traducao-dropdown-header">
+          </select>
+        </form>
   
         <form class="form-inline" onsubmit="return false">
           <div id="form-pc" class="input-group buscaHeader">
@@ -335,7 +335,7 @@
           <div
             class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
           >
-            <p id="titulo-modal">
+            <p data-i18n="ecossistema.sectionHeader.comoUtilizar2" id="titulo-modal">
               Colaborar é muito simples! Veja no vídeo abaixo como funciona:
             </p>
             <button

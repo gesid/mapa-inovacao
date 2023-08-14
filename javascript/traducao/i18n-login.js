@@ -2,8 +2,8 @@
 
 //array com os idiomas que serão usados
 const lngs = {
-    pt: { nativeName: "PORTUGUÊS" },
-    en: { nativeName: "INGLÊS" },
+    pt: { nativeName: "PT-BR" },
+    en: { nativeName: "EN-US" },
   };
   
   $(function () {
@@ -18,7 +18,7 @@ const lngs = {
                     sectionHeader:{
                       mapa: "MAPA",
                       ecossistema2: "ECOSSISTEMA",
-                      tutorial: "TUTORIAL",
+                      tutorial: "TUTORIA",
                       eventos: "EVENTOS",
                       patente: "PATENTE",
                       cadastrarPatente: "Cadastrar patente",
@@ -51,7 +51,6 @@ const lngs = {
                     sectionHeader:{
                       mapa: "MAP",
                       ecossistema2: "ECOSYSTEM",
-                      tutorial: "TUTORIAL",
                       eventos: "EVENTS",
                       patente: "PATENT",
                       cadastrarPatente: "Register patent",
@@ -74,7 +73,7 @@ const lngs = {
                    naoPossui: "Don't have a registration?",
                    registro: "Register",
                    buttonEnter: "ENTER",
-                   comoUtilizar: "HOW TO USE"
+                   comoUtilizar: "TUTORIAL"
                 }
               },
             },

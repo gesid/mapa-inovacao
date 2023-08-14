@@ -2,8 +2,8 @@
 
 //array com os idiomas que serão usados
 const lngs = {
-  pt: { nativeName: "PORTUGUÊS" },
-  en: { nativeName: "INGLÊS" },
+  pt: { nativeName: "PT-BR" },
+  en: { nativeName: "EN-US" },
 };
 
 $(function () {
@@ -83,6 +83,13 @@ $(function () {
                 },
               },
             },
+            navBar1: {
+              btnUser: {
+                saudacao: "Olá, {{name}} !",
+                perfil: "MEU PERFIL",
+                sair: "SAIR"
+              }
+            },
         },
       },
           en: {
@@ -155,6 +162,13 @@ $(function () {
                     termoConsentimento: "TERMS OF CONSENT"
                   },
               },
+              },
+              navBar1: {
+                btnUser: {
+                  saudacao: "Hello, {{name}} !",
+                  perfil: "MY PROFILE",
+                  sair: "LOGGOUT"
+                }
               },
           },
         },
