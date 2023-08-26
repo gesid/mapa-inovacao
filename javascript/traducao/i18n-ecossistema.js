@@ -86,6 +86,10 @@ const lngs = {
               },
               sectionDesenvolvimento2: {
                 titulo: "ORGANIZAÇÕES DOS NOSSOS COLABORADORES",
+                imagemProjetoOnMouseOut: "img/sec3-projeto-min.png",
+                imagemProjetoOnMouseOver:  "img/sec3-projeto-hover-min.png",
+                imagemVideoOnMouseOut: "img/sec3-video-min.png",
+                imagemVideoOnMouseOver:  "img/sec3-video-hover-min.png",
               },
               sectionModalNossosColaboradores:{
                 titulo: "Nossos Colaboradores",
@@ -177,8 +181,8 @@ const lngs = {
                     ", providing to all that are interested in the Ceará community an overview of the innovation ecosystem thought an",
                   descricaoParte12:
                     "interactive and collaborative map.",
-                  },
-                  sectionDesenvolvimento: {
+                },
+                sectionDesenvolvimento: {
                     titulo: "Development",
                     descricaoParte1: "This project (currently in version 0.2 Beta) assumes its evolution and maintenance as a",
                     descricaoParte2:
@@ -187,15 +191,19 @@ const lngs = {
                       "originally under the ",
                     linkColaboradores: 'Meet our collaborators',
                     saibaMais: 'Learn more about the Cearense Innovation Ecosystem Map project:'
-                  },
-                  sectionDesenvolvimento2: {
+                },
+                sectionDesenvolvimento2: {
                     titulo: "ORGANIZATIONS OF OUR COLLABORATORS",
-                  },
-                  sectionModalNossosColaboradores:{
+                    imagemProjetoOnMouseOut: "img/sec3-projeto-min-en.png",
+                    imagemProjetoOnMouseOver:  "img/sec3-projeto-hover-min-en.png",
+                    imagemVideoOnMouseOut: "img/sec3-video-min-en.png",
+                    imagemVideoOnMouseOver:  "img/sec3-video-hover-min-en.png",
+                },
+                sectionModalNossosColaboradores:{
                     titulo: "Our Collaborators",
                     subtitulo: "Maintainers",
-                    btn: "Close"
-                  },
+                    btn: "Close",
+                },
                   sectionReferencias: {
                     titulo: "References",
                     descricao: "As support material for the categorization of agents that are part of this ecosystem, it was used the document “Mapeamento do Ambiente de Incentivo ao Empreendedorismo no Ceará” elaborated by the Innovation Institute, organized by Moisés Santos. In addition, we also used the “Mapeamento de Atores” from the",
