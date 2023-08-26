@@ -143,3 +143,15 @@ function findGetParameter(parameterName) {
     });
   return result;
 }
+
+i18next.on('languageChanged', function(lng) {
+  traducaoDoPlaceHolderBarraBuscaPatentesMobile();
+})
+
+function traducaoDoPlaceHolderBarraBuscaPatentesMobile() {
+  let placeholderchange =  document.getElementsByName("barraBuscaPatentesMobile")[0]
+  console.log(i18next.t("patents.sectionPatents.barraDeBuscaPatentes"))
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("patents.sectionPatents.barraDeBuscaPatentes")
+   }
+ }

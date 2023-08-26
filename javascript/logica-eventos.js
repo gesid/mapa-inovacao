@@ -33,9 +33,10 @@ function escolhaBusca(escolha) {
     .getElementById("barraBusca")
     .setAttribute(
       "placeholder",
-      `Tipo de Busca: por ${escolha.getAttribute("data-texto")}`
+     `Tipo de Busca: by ${escolha.getAttribute("data-texto")}`
     );
 }
+
 
 function filtroBusca() {
   $(".card-remove").remove();
@@ -101,6 +102,20 @@ function criarCartoesEventos(evento) {
 
   listaEventos.appendChild(document.importNode(template.content, true));
 }
+
+
+i18next.on('languageChanged', function(lng) {
+  traducaoDoPlaceHolderBarraBuscaMobile();
+})
+
+function traducaoDoPlaceHolderBarraBuscaMobile() {
+  let placeholderchange =  document.getElementsByName("barraBuscaMobile")[0]
+  console.log(i18next.t("events.sectionEvents.barraDeBusca"))
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("events.sectionEvents.barraDeBusca")
+   }
+ }
+ 
 
 /*function telaUsuario(componente) {
   let status = $("#log").attr("data-status");
