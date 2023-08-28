@@ -131,29 +131,29 @@ const lngs = {
           },
         },
       },
-      (err, t) => {
-        if (err) console.log(err);
-  
-        jqueryI18next.init(i18next, $, { useOptionsAttr: true });
-  
-        Object.keys(lngs).map((lng) => {
-          let optSelect = new Option(lngs[lng].nativeName, lng);
-          if (lng === i18next.resolvedLanguage) {
-            optSelect.setAttribute("selected", "selected");
-          }
-          console.log(optSelect);
-          $("#languageSwitcher").append(optSelect);
+    },
+    (err, t) => {
+      if (err) console.log(err);
+
+      jqueryI18next.init(i18next, $, { useOptionsAttr: true });
+
+      Object.keys(lngs).map((lng) => {
+        let optSelect = new Option(lngs[lng].nativeName, lng);
+        if (lng === i18next.resolvedLanguage) {
+          optSelect.setAttribute("selected", "selected");
+        }
+        console.log(optSelect);
+        $("#languageSwitcher").append(optSelect);
+      });
+
+      $("#languageSwitcher").change(() => {
+        let chooseLng = $(this).find("option:selected").attr("value");
+        i18next.changeLanguage(chooseLng, () => {
+          $("body").localize();
         });
-  
-        $("#languageSwitcher").change(() => {
-          let chooseLng = $(this).find("option:selected").attr("value");
-          i18next.changeLanguage(chooseLng, () => {
-            $("body").localize();
-          });
-        });
-  
-        $("body").localize();
-      }
-    );
-  });
-  
+      });
+
+      $("body").localize();
+    }
+  );
+});

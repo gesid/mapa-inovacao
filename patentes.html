@@ -173,10 +173,10 @@
                   id="opcoesDropdownPatentes"
                   aria-labelledby="dropdownMenuLink"
                 >
-                  <a class="dropdown-item" href="./cadastro-patente.html"
+                  <a data-i18n="ecossistema.sectionHeader.cadastrarPatente" class="dropdown-item" href="./cadastro-patente.html"
                     >Cadastrar patente</a
                   >
-                  <a class="dropdown-item" href="./patentes.html"
+                  <a data-i18n="ecossistema.sectionHeader.verListaPatente" class="dropdown-item" href="./patentes.html"
                     >Ver lista de patentes</a
                   >
                 </div>
@@ -193,13 +193,15 @@
                 <p class="texto-nav">DASHBOARD</p>
               </a>
             </li>
-            <select
-            name="language" 
-            id="languageSwitcher"
-            class="d-flex align-items-center justify-content-start nav-item-select-style texto-nav">
-          </select>
           </ul>
         </div>
+        <form id="btn-select-traducao" class="dropdownHeader"></form>
+        <select
+          name="language" 
+          id="languageSwitcher"
+          class="btn-traducao-dropdown-header">
+        </select>
+      </form>
 
         <div id="menu-nav" class="collapse navbar-collapse">
           <ul class="navbar-nav btnNav"></ul>

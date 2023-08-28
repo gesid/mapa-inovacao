@@ -2,8 +2,8 @@
 
 //array com os idiomas que serão usados
 const lngs = {
-    pt: { nativeName: "PORTUGUÊS" },
-    en: { nativeName: "INGLÊS" },
+    pt: { nativeName: "PT-BR" },
+    en: { nativeName: "EN-US" },
   };
   
   $(function () {
@@ -67,6 +67,8 @@ const lngs = {
                       comoUtilizar: "TUTORIAL",
                       eventos: "EVENTS",
                       patente: "PATENT",
+                      comoUtilizar: "TUTORIAL",
+                      comoUtilizar2: "It is very simple to collaborate! Watch the video bellow to see how it works: ",
                       cadastrarPatente: "Register patent",
                       verListaPatente: "View list of patents"
                     }*/

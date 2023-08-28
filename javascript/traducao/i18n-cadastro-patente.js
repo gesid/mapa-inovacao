@@ -2,8 +2,8 @@
 
 //array com os idiomas que serão usados
 const lngs = {
-  pt: { nativeName: "PORTUGUÊS" },
-  en: { nativeName: "INGLÊS" },
+  pt: { nativeName: "PT-BR" },
+  en: { nativeName: "EN-US" },
 };
 
 $(function () {

@@ -25,7 +25,7 @@ firebase.auth().onAuthStateChanged(function (user) {
           <p class="texto-usuario" data-i18n="navBar1.btnUser.sair">${i18next.t("navBar1.btnUser.sair")}</p>
         </a>
       </div>`;
-
+        console.log(`${i18next.t("navBar1.btnUser.saudacao")}`)
       localStorage.setItem("usuarioLogadoKey", user.uid);
 
       i18next.reloadResources();
