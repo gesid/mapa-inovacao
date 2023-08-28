@@ -20,7 +20,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 			displayName: nome,
 		}).then(function () {
 
-			alert("Usuário cadastrado com sucesso")
+			alert(i18next.t("alert.usuarioCadastradoComSucesso"))
 			usuariodao.salvar(nome, email);
 
 			enviar_verificação()
@@ -29,7 +29,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 			//window.location.href = "index.html";
 
 		}).catch(function (error) {
-			alert("Erro ao cadastrar usuário")
+			alert(i18next.t("alert.erroAoCadrastrarUsuario"))
 		})
 	} else {
 	}
@@ -48,9 +48,9 @@ function cadastro() {
 
 			usuariodao.cadastrar(email, password)
 
-		} else { alert("É necessário ler os termos e aceita-los para realizar o cadastro") }
+		} else { alert(i18next.t("alert.lerOsTermosParaCadastro")) }
 
-	} else { alert("As senhas estão diferentes") }
+	} else { alert(i18next.t("alert.asSenhasSaoDiferentes")) }
 
 	
 }
@@ -60,7 +60,7 @@ function enviar_verificação() {
 		.then(() => {
 			// Email verification sent!
 
-			window.alert("E-mail de verificação enviado");
+			window.alert(i18next.t("alert.emailDeVerificacaoEnviado"));
 
 		}).catch((error) => {
 

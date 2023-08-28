@@ -27,8 +27,11 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
+  
+  <!-- I18next JS -->
   <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
 
 
   <!-- Necessários para o timedatpicker  -->
@@ -258,24 +261,73 @@
                 <option data-i18n="patentsRegister.menu.sectionHeader.titulo" value="NAO_SELECIONADO" selected disabled>
                   Selecionar...
                 </option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.aceleradora">Aceleradora</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.catalisadoresLocais">Catalisadores Locais</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.comunicacaoEmidia">Comunicação e Mídia</option>
-                <option>Coworking</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.escolas">Escolas</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.espaçosMakers">Espaços Makers</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.eventos">Eventos</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.fabricaDeAplicativos">Fábrica de Aplicativos</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.grandesEmpresas">Grandes Empresas</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.incubadoras">Incubadoras</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.iniciativasUniversitarias">Iniciativas Universitárias</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.investidores">Investidores</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.nucleosDeInovacao">Núcleos de Inovação</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.parquesTecnologicos">Parques Tecnológicos</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.preAceleradoras">Pré Aceleradoras</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.propriedadeIntelectual">Propriedade Intelectual</option>
-                <option data-i18n="patentsRegister.menu.sectionHeader.mentoria">Mentoria</option>
-                <option>Startup</option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.aceleradora" 
+                  value="Aceleradora">
+                  Aceleradora
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.catalisadoresLocais" 
+                  value="Catalisadores Locais">
+                  Catalisadores Locais
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.comunicacaoEmidia" 
+                  value="Comunicação e Mídia">
+                  Comunicação e Mídia
+                </option>
+                <option value="Coworking">
+                  Coworking
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.escolas" 
+                  value="Escolas">
+                  Escolas
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.espaçosMakers" 
+                  value="Espaços Makers">
+                  Espaços Makers
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.eventos" 
+                  value="Eventos">
+                  Eventos
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.fabricaDeAplicativos" 
+                  value="Fábrica de Aplicativos">
+                  Fábrica de Aplicativos
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.grandesEmpresas" 
+                  value="Grandes Empresas">
+                  Grandes Empresas
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.incubadoras" 
+                  value="Incubadoras">
+                  Incubadoras
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.iniciativasUniversitarias" 
+                  value="Iniciativas Universitárias">
+                  Iniciativas Universitárias
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.investidores" 
+                  value="Investidores">
+                  Investidores</option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.nucleosDeInovacao" 
+                  value="Núcleos de Inovação">
+                  Núcleos de Inovação
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.parquesTecnologicos" 
+                  value="Parques Tecnológicos">
+                  Parques Tecnológicos
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.preAceleradoras" 
+                  value="Pré Aceleradoras">
+                  Pré Aceleradoras
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.propriedadeIntelectual" 
+                  value="Propriedade Intelectual">
+                  Propriedade Intelectual
+                </option>
+                <option data-i18n="patentsRegister.menu.sectionHeader.mentoria" 
+                  value="Mentoria">
+                  Mentoria
+                </option>
+                <option value="Startup">Startup</option>
               </select>
             </div>
 
@@ -339,12 +391,16 @@
               <p id="instituicaoEvento" class="modalAgradecimento--conteudo">
                 <b data-i18n="patentsRegister.menu.sectionHeader.alertaObrigado" >Obrigado por cadastrar sua patente!</b>
               </p>
-              <p data-i18n="patentsRegister.menu.sectionHeader.alertaInfo" id="instituicaoEventoTx2" class="modalAgradecimento--conteudo">
-                As informações estão
-                <b data-i18n="patentsRegister.menu.sectionHeader.alertaEmBreve">
-                  <font data-i18n="patentsRegister.menu.sectionHeader.alertaEmAnalise" color="green">em análise</font>
-                </b>, em breve sua
-                patente será associada aos depositantes no mapa!
+              <p id="instituicaoEventoTx2" class="modalAgradecimento--conteudo">
+                <span data-i18n="patentsRegister.menu.sectionHeader.alertaInfo" >
+                  As informações estão
+                </span>
+                <b>
+                  <font color="green" data-i18n="patentsRegister.menu.sectionHeader.alertaEmAnalise">
+                    em análise
+                  </font>  
+                </b>
+                <span data-i18n="patentsRegister.menu.sectionHeader.alertaEmBreve">, em breve sua patente será associada aos depositantes no mapa!</span>
               </p>
               <p data-i18n="patentsRegister.menu.sectionHeader.alertaCasoOcorra" class="modalAgradecimento--conteudo">
                 Caso ocorra alguma pendência, informaremos por e-mail.

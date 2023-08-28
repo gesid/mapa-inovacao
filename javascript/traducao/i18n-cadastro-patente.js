@@ -7,7 +7,9 @@ const lngs = {
 };
 
 $(function () {
-  i18next.init(
+  i18next
+    .use(i18nextBrowserLanguageDetector)
+    .init(
     {
       debug: true,
       fallbackLng: "pt",
@@ -47,7 +49,7 @@ $(function () {
                   depositante: "Depositantes*",
                   classificacaoDepositante: "Classificação do Depositante*",
                   depositante2: "Depositante*",
-                  depositanteObs: "Nenhum depositante adicionada...",
+                  depositanteObs: "Nenhum depositante adicionado...",
                   botaoCadastrar: "Cadastrar Patente",
                   titulo: 'Selecionar...',
                   aceleradora: 'Aceleradora',
@@ -69,7 +71,7 @@ $(function () {
                   alertaObrigado: "Obrigado por cadastrar sua patente!",
                   alertaInfo: "As informações estão",
                   alertaEmAnalise: "em análise",
-                  alertaEmBreve: "em breve sua patente será associada aos depositantes no mapa!",
+                  alertaEmBreve: ", em breve sua patente será associada aos depositantes no mapa!",
                   alertaCasoOcorra: "Caso ocorra alguma pendência, informaremos por e-mail.",
                   alertaSolicitacao: "Recebemos a solitação de cadastro!",
                   botaoFechar: "Fechar"
@@ -83,13 +85,16 @@ $(function () {
                 },
               },
             },
-            navBar1: {
-              btnUser: {
-                saudacao: "Olá, {{name}} !",
-                perfil: "MEU PERFIL",
-                sair: "SAIR"
-              }
+            alert:{
+              voceEstaDeslogado: "Você está deslogado." ,
+              naoExisteNenhumaentidadeCadastrada: "Não existe nenhuma entidade cadastrada nesta categoria.",
+              esteDepositanteJaFoiSelecionado: "Este depositante já foi selecionado.",
             },
+            error:{
+              preenchaTodasAsInformacaoObrigatorias: "Preencha todas as informações obrigatórias", 
+              selecionePeloMenosUmaSecao: "Selecione pelo menos uma seção para a patente",
+              selecionePeloMenusUmDepositante: "Selecione pelo menos um depositante da patente",
+            }
         },
       },
           en: {
@@ -147,10 +152,10 @@ $(function () {
                     propriedadeIntelectual: 'Intellectual Properties',
                     mentoria: 'Mentorship',
                     alertaObrigado: "Thank you for registering your patent!",
-                    alertaInfo: "The information is",
-                    alertaEmAnalise: "under review",
-                    alertaEmBreve: "soon yours patent will be associated with depositors on the map!",
-                    alertaCasoOcorra: "If there is any delay, we will inform you by email.",
+                    alertaInfo: "The information are",
+                    alertaEmAnalise: "under analysis",
+                    alertaEmBreve: ", soon your patent will be associated with applicants on the map!",
+                    alertaCasoOcorra: "If there are any problems, we will inform you by email.",
                     alertaSolicitacao: "We received the registration request!",
                     botaoFechar: "Close"
                   },
@@ -161,16 +166,19 @@ $(function () {
                     termoUso: "TERMS OF USE",
                     termoConsentimento: "TERMS OF CONSENT"
                   },
+                },
               },
+              alert:{
+                voceEstaDeslogado: "You're logged out.",
+                naoExisteNenhumaentidadeCadastrada: "There is no entity registered in this category.",
+                esteDepositanteJaFoiSelecionado: "This depositor has already been selected.",
               },
-              navBar1: {
-                btnUser: {
-                  saudacao: "Hello, {{name}} !",
-                  perfil: "MY PROFILE",
-                  sair: "LOGGOUT"
-                }
-              },
-          },
+              error:{
+                preenchaTodasAsInformacaoObrigatorias: "Fill in all required information",
+                selecionePeloMenosUmaSecao: "Select at least one section for the patent",
+                selecionePeloMenusUmDepositante: "Select at least one patent applicant"
+              }
+            },
         },
       },
     },

@@ -20,14 +20,14 @@ $(function() {
                             navMap: "MAPA",
                             navEcossistema: "ECOSSISTEMA",
                             navTutorial:{
-                                titulo: "TUTORIAL",
+                                titulo: "COMO UTILIZAR",
                                 subtitulo: "Colaborar é muito simples! Veja no vídeo abaixo como funciona:"
                             },
                             navEventos: "EVENTOS",
                             navPatentes:{
                                 titulo: "PATENTES",
-                                subnavCadastro: "Cadastrar Patentes",
-                                subnavListar: "Listar Patentes"
+                                subnavCadastro: "Cadastrar patente",
+                                subnavListar: "Ver lista de patentes"
                             },
                             btnUser:{
                                 saudacao: "Olá, {{name}} !",
@@ -46,7 +46,9 @@ $(function() {
                             termoDeUso: "TERMOS DE USO",
                             termoDeConsentimento: "TERMOS DE CONSENTIMENTO"
                         },
-
+                        alert:{
+                            voceEstaDeslogado: "Você está deslogado." ,
+                        }
                     }
                 },
                 en:{
@@ -60,9 +62,9 @@ $(function() {
                             },
                             navEventos: "EVENTS",
                             navPatentes:{
-                                "titulo": "PATENTS",
-                                "subnavCadastro": "Register Patents",
-                                "subnavListar": "List Patents"
+                                titulo: "PATENTS",
+                                subnavCadastro: "Register Patents",
+                                subnavListar: "List Patents"
                             },
                             btnUser:{
                                 saudacao: "Hello, {{name}} !",
@@ -80,6 +82,9 @@ $(function() {
                             polica: "PRIVACY POLICY",
                             termoDeUso: "TERMS OF USE",
                             termoDeConsentimento: "TERMS OF CONSENT"
+                        },
+                        alert:{
+                            voceEstaDeslogado: "You're logged out.",
                         }
                     }
                 }

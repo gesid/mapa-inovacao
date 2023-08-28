@@ -81,6 +81,7 @@ function criarCartoesEventos(evento) {
   let datahorario = template.content.querySelector("#data-horario-evento");
   let endereco = template.content.querySelector("#endereco-evento");
   let btn = template.content.querySelectorAll("a");
+  let btn_text = template.content.querySelectorAll("a > p");
 
   let imgLink = document.createElement("imgLink");
   imgLink.src = evento.getURL();
@@ -96,21 +97,26 @@ function criarCartoesEventos(evento) {
   }
 
   endereco.textContent = `${evento.getLogradouro()}, ${evento.getNumero()}, ${textoComplemento} ${evento.getBairro()},  ${evento.getCidade()}, ${evento.getUF()}, ${evento.getCEP()}`;
+  
+  /**tradução textos */
+  btn_text[0].textContent = i18next.t("events.sectionEvents.botaoVerNoMapa");
+  btn_text[1].textContent = i18next.t("events.sectionEvents.botaoSiteDoEvento");
+  
   btn[0].setAttribute("data-key", evento.getMarkerKey());
-
+  
   btn[1].setAttribute("href", "https://" + evento.getSite());
 
   listaEventos.appendChild(document.importNode(template.content, true));
 }
 
 
+/**Tradução */
 i18next.on('languageChanged', function(lng) {
   traducaoDoPlaceHolderBarraBuscaMobile();
 })
 
 function traducaoDoPlaceHolderBarraBuscaMobile() {
   let placeholderchange =  document.getElementsByName("barraBuscaMobile")[0]
-  console.log(i18next.t("events.sectionEvents.barraDeBusca"))
    if (placeholderchange) {
      placeholderchange.placeholder = i18next.t("events.sectionEvents.barraDeBusca")
    }

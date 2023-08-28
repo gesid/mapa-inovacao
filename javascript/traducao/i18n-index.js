@@ -55,8 +55,8 @@ $(function() {
                             navEventos: "EVENTOS",
                             navPatentes:{
                                 titulo: "PATENTES",
-                                subnavCadastro: "Cadastrar Patentes",
-                                subnavListar: "Listar Patentes"
+                                subnavCadastro: "Cadastrar patente",
+                                subnavListar: "Ver lista de patentes"
                             },
                             cadastro:{
                                 legenda: 'Clique no mapa para definir o endereço do sua instituição/evento',
@@ -219,6 +219,10 @@ $(function() {
                         modalCategoriaMobile:{
                             btnIrParaOMapa: "Ir para o mapa"
                         },
+                        alert:{
+                            cepInvalidoCadastro: "CEP inválido.",
+                            voceEstaDeslogado: "Você está deslogado."   
+                        }
                     }
                 },
                 en:{
@@ -234,7 +238,7 @@ $(function() {
                                 subtitulo:"Category filters",
                                 checkboxs:{
                                     check0: "All",
-                                    check1: "Startup accelerator",
+                                    check1: "Startup Accelerator",
                                     check2: "Media and Communication",
                                     check3: "Schools",
                                     check4: "Events", 
@@ -281,7 +285,7 @@ $(function() {
                                             evento: "Events",
                                             nome: "Name*",
                                             site: "Website*",
-                                            tipoDeLocal: "Categorie*",
+                                            tipoDeLocal: "Category*",
                                             cep: "ZipCode*",
                                             logradouro: "Street Address*",
                                             numero:"House Number*",
@@ -346,10 +350,10 @@ $(function() {
                                         texto1: "Thank you for registering your institution!",
                                         texto2: {
                                             sub1:"The informations are ",
-                                            sub2: "in analysis",
+                                            sub2: "under analysis",
                                             sub3: ", soon your institution will be added to the map!"
                                         },
-                                        texto3: "If there is any pending, we will inform you by email.",
+                                        texto3: "If there are any problems, we will inform you by email.",
                                     },
                                     btn:{
                                         fechar: "Close",
@@ -368,7 +372,7 @@ $(function() {
                             titulo: 'CATEGORIES',
                             tituloMobile: 'Categories',
                             comunidades: 'Communities',
-                            aceleradora: 'Startup accelerator',
+                            aceleradora: 'Startup Accelerator',
                             catLocais: 'Local Catalysts',
                             comEMidia: 'Media and Communication',
                             coworking: 'Coworking',
@@ -423,6 +427,10 @@ $(function() {
                         modalCategoriaMobile:{
                             btnIrParaOMapa: "Return to the map"
                         },
+                        alert:{
+                            cepInvalidoCadastro: "Zipcode invalid",
+                            voceEstaDeslogado: "You're logged out."
+                        }
                     }
                 }
                 

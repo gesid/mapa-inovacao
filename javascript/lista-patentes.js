@@ -53,7 +53,9 @@ function gerarHtmlPatenteLista(patente) {
             >
               <i class="fas fa-calendar-alt" style="font-size: 16px"></i>
               <p id="endereco-evento" style="font-size: 11px" class="m-0">
-                <span data-i18n="patents.sectionPatents.publicacoesCard">Publicação</span> - ${patente.dataPublicacao}
+                <span data-i18n="patents.sectionPatents.publicacoesCard">
+                  ${i18next.t("patents.sectionPatents.publicacoesCard")}
+                </span> - ${patente.dataPublicacao}
               </p>
             </div>
             <div
@@ -62,7 +64,9 @@ function gerarHtmlPatenteLista(patente) {
             >
               <i class="fas fa-key" style="font-size: 16px"></i>
               <p id="endereco-evento" style="font-size: 11px" class="m-0">
-                <span data-i18n="patents.sectionPatents.numeroCard">Nº de Pedido no INPI</span> - ${patente.numeroPedidoInpi}
+                <span data-i18n="patents.sectionPatents.numeroCard">
+                  ${i18next.t("patents.sectionPatents.numeroCard")}
+                </span> - ${patente.numeroPedidoInpi}
               </p>
             </div>
           </div>
@@ -83,7 +87,9 @@ function gerarHtmlPatenteLista(patente) {
 function gerarHtmlSecoes(secoes) {
   return `
     <div class="mt-4">
-      <p data-i18n="patents.sectionPatents.secoesCard" class="m-0 titulo-secoes">Seções: </p>
+      <p data-i18n="patents.sectionPatents.secoesCard" class="m-0 titulo-secoes">
+        ${i18next.t("patents.sectionPatents.secoesCard")} 
+      </p>
 
         <div class="ml-1">
           ${secoes
@@ -97,7 +103,12 @@ function gerarHtmlSecoes(secoes) {
 function gerarHtmlClassificacoes(classificacoes) {
   return `
   <div class="mt-2">
-    <p class="m-0 label-classificacoes"><span data-i18n="patents.sectionPatents.classificacoesCard">Classificações: </span><span class="classificacoes"> ${classificacoes}</span></p>
+    <p class="m-0 label-classificacoes">
+      <span data-i18n="patents.sectionPatents.classificacoesCard">
+        ${i18next.t("patents.sectionPatents.classificacoesCard")} 
+      </span>
+      <span class="classificacoes"> ${classificacoes}</span>
+    </p>
   </div>  
   `;
 }
@@ -112,7 +123,9 @@ function gerarHtmlDepositantes(depositantes) {
   >
     <i class="fas fa-user" style="font-size: 16px"></i>
     <p id="data-horario-evento" style="font-size: 12px">
-      <span data-i18n="patents.sectionPatents.depositantesCard">Depositantes </span> - ${nomeDepositantes}
+      <span data-i18n="patents.sectionPatents.depositantesCard"> 
+        ${i18next.t("patents.sectionPatents.depositantesCard")} 
+      </span> - ${nomeDepositantes}
     </p>
   </div>`;
 }
@@ -134,7 +147,9 @@ function gerarHtmlDescricaoPatente(patente) {
           class="btn-manipular-visualizacao-desc"
         >
           <i class="fas fa-caret-down"> </i>
-          <span data-i18n="patents.sectionPatents.botaoVerMais">Ver mais</span>
+          <span data-i18n="patents.sectionPatents.botaoVerMais">
+            ${i18next.t("patents.sectionPatents.botaoVerMais")}
+          </span>
         </button>
       </p>
 
@@ -144,12 +159,14 @@ function gerarHtmlDescricaoPatente(patente) {
         class="descricao-patente descricao-patente-escondida m-0"
       >
         ${partesDescricao.descricaoCompleta}
-        <button data-i18n="patents.sectionPatents.botaoVerMenos"
+        <button
           data-btn-esconder-desc-id=${idPatente}
           class="btn-manipular-visualizacao-desc"
         >
           <i class="fas fa-caret-up"> </i>
-          <span data-i18n="patents.sectionPatents.botaoVerMenos">Ver menos</span>
+          <span data-i18n="patents.sectionPatents.botaoVerMenos">
+            ${i18next.t("patents.sectionPatents.botaoVerMenos")}
+          </span>
         </button>
       </p>
       
@@ -169,7 +186,9 @@ function gerarHtmlDescricaoPatente(patente) {
         class="btn-manipular-visualizacao-desc "
       >
         <i class="fas fa-caret-down"> </i>
-        Ver mais
+        <span data-i18n="patents.sectionPatents.botaoVerMais">
+          ${i18next.t("patents.sectionPatents.botaoVerMais")}
+        </span>
       </button>
     </p>
 
@@ -184,7 +203,9 @@ function gerarHtmlDescricaoPatente(patente) {
         class="btn-manipular-visualizacao-desc btn-escondido"
       >
         <i class="fas fa-caret-up"> </i>
-        Ver menos
+        <span data-i18n="patents.sectionPatents.botaoVerMenos">
+          ${i18next.t("patents.sectionPatents.botaoVerMenos")}
+        </span>
       </button>
     </p>
     
@@ -220,7 +241,15 @@ function gerarBtnsVerDepositantesMapa(depositantes) {
           target="_blank"
           data-key="${depositante.id}"
         >
-          <p class="texto-btn-evento1"><span data-i18n="patents.sectionPatents.botaoDepositante">Ver</span> ${index + 1}º <span data-i18n="patents.sectionPatents.botaoDepositante2">depositante no mapa</span></p>
+          <p class="texto-btn-evento1">
+            <span data-i18n="patents.sectionPatents.botaoDepositante">
+              ${i18next.t("patents.sectionPatents.botaoDepositante")}
+            </span> 
+            ${index + 1}º 
+            <span data-i18n="patents.sectionPatents.botaoDepositante2">
+              ${i18next.t("patents.sectionPatents.botaoDepositante2")}
+            </span>
+          </p>
         </a>
         `;
     })

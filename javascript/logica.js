@@ -25,6 +25,7 @@ const storage = firebase.storage();
 let entidadedao = new entidadeDAO();
 let eventodao = new eventoDAO();
 let comunidadedao = new comunidadeDAO();
+let regiaoDao = new RegiaoDao();
 
 let markerIcon = L.Icon.extend({
   options: {
@@ -90,6 +91,7 @@ ecossistema.push(new Startups());
 ecossistema.push(new CategoriaPatente());
 
 OpcaoComunidade();
+opcaoRegiao();
 //OpcaoComunidadeMobile()
 
 entidadedao.varredura().then(function (entidade) {
@@ -118,7 +120,24 @@ function OpcaoComunidade() {
     criarOpcaoComunidadeMobile(comunidades);
   });
 }
+function criarOpcaoRegiaoMobile(regioes) {
+  // Cria botão de comunidade
+  let template = document.querySelector("#listaTipoMobile");
+  let listaOpcoes = document.querySelector("#listaOpcoesMobile");
+  let a = template.content.querySelector("a");
+  let imgLink = document.createElement("imgLink");
+  //imgLink.src = componente.getImagemBarra()
 
+  a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center">
+  <img style="height:36px; width:36px" src= "img/img-bl/31-regiao.png">
+  regioes
+  <span class="badge badge-secondary badge-pill">${regioes.length}</span>
+  </div>
+  <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
+
+  a.setAttribute("data-tipo", "Regioes");
+  listaOpcoes.appendChild(document.importNode(template.content, true));
+}
 function criarOpcaoComunidade(comunidades) {
   console.log(comunidades)
   // Cria botão de comunidade
@@ -136,34 +155,32 @@ function criarOpcaoComunidade(comunidades) {
   listaOpcoes.appendChild(document.importNode(template.content, true));
 }
 
-/**Tradução card Comunidade*/
-i18next.on('languageChanged', function(lng) {
-  const DIV_CARTAO_COMUNIDADE = document.getElementById("divImagemCartao");
-  
-  if(DIV_CARTAO_COMUNIDADE){
-    const BTN_ATIVAR_DESATIVAR = document.querySelectorAll(".texto-btn-card1");
-    const BTN_VISITAR = document.querySelectorAll(".texto-btn-card2");
-    const TXT_MARCARDOPOR = document.querySelectorAll("#txt-marcadopor");
-    
-    BTN_ATIVAR_DESATIVAR.forEach((element) => {
-      if(element.innerText == "Ativar no mapa"){
-        element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnAtivar");
-      } else{
-        element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnDesativar");
-      }
-    });
 
-    BTN_VISITAR.forEach((element) => {
-      element.innerText = i18next.t("barraLateral.cards.cardsComunidade.btnVisitar");
-    });
+function opcaoRegiao() {
+  regiaoDao.varredura().then(function (regiao) {
+    console.log(regiao);
+    criarOpcaoRegiao(regiao);
+    criarOpcaoRegiaoMobile(regiao);
+  });
+}
 
-    TXT_MARCARDOPOR.forEach((element) => {
-      element.innerText = i18next.t("barraLateral.cards.cardsComunidade.txtMarcadoPor");
-    });
-    
-  }
-  
-});
+function criarOpcaoRegiao(comunidades) {
+  // Cria botão de comunidade
+  let template = document.querySelector("#listaTipo");
+  let listaOpcoes = document.querySelector("#listaOpcoes");
+  let a = template.content.querySelector("a");
+  let imgLink = document.createElement("imgLink");
+  //imgLink.src = componente.getImagemBarra()
+
+  a.innerHTML = `<img style="height:36px; width:36px" src= "img/img-bl/31-regiao.png">
+  Regiões
+  <span class="badge badge-secondary badge-pill">${comunidades.length}</span>`;
+
+  a.setAttribute("data-tipo", "Regiao");
+  listaOpcoes.appendChild(document.importNode(template.content, true));
+}
+
+
 
 function criarListaOpcoes(tipoClasse) {
   // Cria lista da bara lateral
@@ -254,6 +271,10 @@ function filtroSelect(componente) {
     return;
   }
 
+  if (tipoListagem === "Regiao") {
+    filtroBuscaRegiao(textoBuscado);
+    return;
+  }
   filtroBusca(tipoListagem);
 }
 //Criando a barra lateral
@@ -283,7 +304,10 @@ async function chamaBarraOculta(componente) {
     if (tipoSelecionado === "Patente") {
       await mostrarPatentesListaOculta();
     }
-
+    if (tipoSelecionado === "Regiao") {
+      filtroBuscaRegiao(tipoSelecionado);
+      return;
+    }
     filtroBusca(tipoSelecionado); //exibe os cartões do tipo de opção selecionada
   }
 }
@@ -455,10 +479,70 @@ function filtroBuscaComunidade(tipo) {
   }
 }
 
+function filtroBuscaRegiao(tipo) {
+  let valBarra = document.getElementById("contBusca").value; //Verificar se há algo na barra de busca
+
+  if (valBarra != "") {
+    regiaoDao.buscarPorNome(valBarra).then(function (comunidade) {
+      verificarUsuarioRegiao(comunidade);
+    });
+  } else {
+    regiaoDao.varredura().then(function (regiao) {
+      regiao.forEach(verificarUsuarioRegiao);
+    });
+  }
+}
+
 function verificarUsuarioComunidade(comunidade) {
   usuariodao.buscar(comunidade.getUserId()).then(function (usuario) {
     cartaoComunidade(comunidade, usuario.getNome());
   });
+}
+
+function verificarUsuarioRegiao(regiao) {
+  usuariodao.buscar(regiao.getUserId()).then(function (usuario) {
+    cartaoRegiao(regiao, usuario.getNome());
+  });
+}
+
+function cartaoRegiao(entidade, nomeUser) {
+  let template = document.querySelector("#cartaoEmpresa");
+  let cartao = document.querySelector("#cartao");
+  let img = template.content.querySelector("img");
+  let titulo = template.content.querySelector("#txt-titulo-card");
+  let descricao = template.content.querySelector("#txt-descricao-card");
+  let criador = template.content.querySelector("#txt-marcadopor-nome");
+  let btn1 = template.content.querySelector("#btn-card1");
+  let btn2 = template.content.querySelector("#btn-card2");
+
+  let imgCartao = document.createElement("imgCartao");
+  imgCartao.src = entidade.getURL();
+
+  img.setAttribute("src", imgCartao.src);
+
+  titulo.textContent = entidade.getNome();
+  descricao.textContent = `${entidade.getDescricao()}`;
+
+  btn2.setAttribute("href", entidade.getSite());
+  btn1.setAttribute("data-key", entidade.getMarkerKey());
+  btn1.setAttribute("name", entidade.getMarkerKey());
+  btn1.setAttribute("onclick", "exibirRegiao(this)");
+
+  btn1.innerHTML = "Ativar no mapa";
+  btn2.innerHTML = "Visitar site";
+
+  criador.textContent = nomeUser;
+  criador.setAttribute("href", "javascript:void(0)");
+  criador.setAttribute("data-key", entidade.getUserId());
+  criador.setAttribute("onclick", "telaUsuario(this)");
+
+  /*
+  p[1].innerHTML = `<small class="font-weight-bold" href="">Marcado por: </small>
+  <small><a class="ml-1" href="javascript:void(0)" data-key="${entidade.getUserId()}" onclick="telaUsuario(this)">${nomeUser}</a></small>`
+  */
+
+  cartao.appendChild(document.importNode(template.content, true));
+  permissao = true;
 }
 
 function cartaoComunidade(entidade, nomeUser) {
@@ -532,7 +616,11 @@ function OpcaoComunidadeMobile() {
     criarOpcaoComunidadeMobile(comunidades);
   });
 }
-
+function opcaoRegiaoMobile() {
+  regiaoDao.varredura().then(function (regiao) {
+    criarOpcaoRegiaoMobile(regiao);
+  });
+}
 function criarOpcaoComunidadeMobile(comunidades) {
   // Cria botão de comunidade
   let template = document.querySelector("#listaTipoMobile");
@@ -586,7 +674,7 @@ function criarListaOpcoesMobile(tipoClasse) {
 //Criando modal de cartões mobile
 function chamarModalCard(componente) {
   //Abre o modal de cartões
-
+  console.log(componente);
   contAux = 0;
   while (contAux <= ecossistema.length) {
     if ("Comunidades" == componente.getAttribute("data-tipo")) {
@@ -596,7 +684,13 @@ function chamarModalCard(componente) {
       document.getElementById("nome-categoria").innerHTML = i18next.t("categorias.comunidades");
       break;
     }
-
+    if ("Regioes" == componente.getAttribute("data-tipo")) {
+      document
+        .getElementById("img-categoria")
+        .setAttribute("src", "img/img-bl/31-regiao.png");
+      document.getElementById("nome-categoria").innerHTML = "Regioes";
+      break;
+    }
     if (
       ecossistema[contAux].getNome() == componente.getAttribute("data-tipo")
     ) {
@@ -616,10 +710,11 @@ function chamarModalCard(componente) {
   }
 
   $(".template-cartao").remove();
-
-  if (componente.getAttribute("data-tipo") != "Comunidades") {
+  if (componente.getAttribute("data-tipo") == "Regioes") {
+    filtroBuscaRegiaoMobile(componente.getAttribute("data-tipo"));
+  } else if (componente.getAttribute("data-tipo") != "Comunidades") {
     filtroBuscaMobile(componente.getAttribute("data-tipo")); //exibe os cartões do tipo de opção selecionada
-  } else {
+  } else if (componente.getAttribute("data-tipo") == "Comunidades") {
     filtroBuscaComunidadeMobile(componente.getAttribute("data-tipo"));
   }
 }
@@ -689,10 +784,19 @@ function filtroBuscaComunidadeMobile(tipo) {
     comunidade.forEach(verificarUsuarioComunidadeMobile);
   });
 }
-
+function filtroBuscaRegiaoMobile(tipo) {
+  regiaoDao.varredura().then(function (regiao) {
+    regiao.forEach(verificarUsuarioRegiaoMobile);
+  });
+}
 function verificarUsuarioComunidadeMobile(comunidade) {
   usuariodao.buscar(comunidade.getUserId()).then(function (usuario) {
     cartaoComunidadeMobile(comunidade, usuario.getNome());
+  });
+}
+function verificarUsuarioRegiaoMobile(regiao) {
+  usuariodao.buscar(regiao.getUserId()).then(function (usuario) {
+    cartaoRegiaoMobile(regiao, usuario.getNome());
   });
 }
 
@@ -731,6 +835,54 @@ function cartaoComunidadeMobile(entidade, nomeUser) {
 
   btn2.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnVisitar");
   txtMarcadoPor.innerText = i18next.t("barraLateral.cards.cardsEntidades.txtMarcadoPor");
+
+  criador.textContent = nomeUser;
+  criador.setAttribute("href", "javascript:void(0)");
+  criador.setAttribute("data-key", entidade.getUserId());
+  criador.setAttribute("onclick", "telaUsuario(this)");
+
+  /*
+  p[1].innerHTML = `<small class="font-weight-bold" href="">Marcado por: </small>
+  <small><a class="ml-1" href="javascript:void(0)" data-key="${entidade.getUserId()}" onclick="telaUsuario(this)">${nomeUser}</a></small>`
+  */
+
+  cartao.appendChild(document.importNode(template.content, true));
+  permissao = true;
+}
+
+function cartaoRegiaoMobile(entidade, nomeUser) {
+  let template = document.querySelector("#cartaoEmpresaMobile");
+  let cartao = document.querySelector("#cartaoMobile");
+  let img = template.content.querySelector("img");
+  let titulo = template.content.querySelector("#txt-titulo-card");
+  let descricao = template.content.querySelector("#txt-descricao-card");
+  let criador = template.content.querySelector("#txt-marcadopor-nome");
+  let btn1 = template.content.querySelector("#btn-card1");
+  let btn2 = template.content.querySelector("#btn-card2");
+
+  let imgCartao = document.createElement("imgCartao");
+  imgCartao.src = entidade.getURL();
+
+  img.setAttribute("src", imgCartao.src);
+
+  titulo.textContent = entidade.getNome();
+  descricao.textContent = `${entidade.getDescricao()}`;
+
+  btn2.setAttribute("href", entidade.getSite());
+  btn1.setAttribute("data-key", entidade.getMarkerKey());
+  btn1.setAttribute("name", entidade.getMarkerKey());
+  btn1.setAttribute("onclick", "exibirRegiao(this)");
+  btn1.setAttribute("data-dismiss", "");
+
+  if (map.hasLayer(layerArray[entidade.getMarkerKey()])) {
+    btn1.innerHTML = "Desativar do mapa";
+    btn1.setAttribute("Style", "background: #CF5B15;");
+  } else {
+    btn1.innerHTML = "Ativar no mapa";
+    btn1.setAttribute("Style", "background: #FC6A38;");
+  }
+
+  btn2.innerHTML = "Visitar site";
 
   criador.textContent = nomeUser;
   criador.setAttribute("href", "javascript:void(0)");
@@ -1130,8 +1282,12 @@ function selecionarLocal() {
         .addTo(map)
         .bindPopup(
           `<div class="row d-flex justify-content-center" id="divPopup">
-              <h6 class="col-12 font-weight-bold text-center" id="confirm">Confirmar</h6>
-              <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()" id="btn-popup">Aqui!</button>
+              <h6 class="col-12 font-weight-bold text-center">
+                <span id="confirm">${i18next.t("navBar1.cadastro.marcador.legenda")}</span>
+              </h6>
+              <button class="btn btn-submit btn-sm font-weight-bold" onclick="chamarModalCadastro()">
+                <span id="btn-popup">${i18next.t("navBar1.cadastro.marcador.btn")}</span>
+              </button>
           </div>`
         )
         .openPopup();
@@ -1144,8 +1300,6 @@ function selecionarLocal() {
 
       document.getElementById("validacaoLatEvento").value = lat;
       document.getElementById("validacaoLngEvento").value = lng;
-
-
     });
   } else {
     window.location.href = "login.html";
@@ -1178,6 +1332,8 @@ function atualizarTraducaoPopup(){
 
 function atualizarTraducaoModalCadastro(){
   traducaoModalInstituicao();
+  traducaoSelectTipoLocal();
+  traducaoPlaceholderModalInsittuicao();
   traducaoModalEventos();
   traducaoModalAgradecimento();
 }
@@ -1200,17 +1356,13 @@ function traducaoModalInstituicao(){
 
   //botões
   document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.fechar');
-  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar');
+  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar')
 
+}
 
-  //placeholder
+function traducaoPlaceholderModalInsittuicao(){
   document.getElementsByName('inputNome')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.nome');
   document.getElementsByName('inputSite')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.site');
-  
-  /**Inicio SELECT Tipo de local */
-  traducaoSelectTipoLocal();
-  /**Fim SELECT Tipo de local */
-
   //O placeholder do input da logo é traduzido na função chamarModalCadastro()
   document.getElementsByName('inputCep')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cep');
   document.getElementsByName('inputLogradouro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logradouro');
@@ -1219,7 +1371,6 @@ function traducaoModalInstituicao(){
   document.getElementsByName('inputBairro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.bairro');
   document.getElementsByName('inputCidade')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cidade');
   document.getElementById('validacaoClassificaocaoOption').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.startup');
-
 }
 
 function traducaoSelectTipoLocal(){
@@ -1349,7 +1500,6 @@ function chamarModalCadastro() {
   } else {
     map.off("click");
 
-
     document.getElementById("validacaoNomeLocal").value = "";
     document.getElementById("validacaoSiteLocal").value = "";
     document.getElementById("validacaoTipoLocal").value = 1;
@@ -1386,29 +1536,38 @@ function chamarModalCadastro() {
 
     $("#marcar_info").attr("style", "display: none;");
 
-    const latitudeDoLocalSelecionado = document.getElementById("validacaoLatLocal").value;
-    const longitudeDoLocalSelecionado = document.getElementById("validacaoLngLocal").value;
+    const latitudeDoLocalSelecionado =
+      document.getElementById("validacaoLatLocal").value;
+    const longitudeDoLocalSelecionado =
+      document.getElementById("validacaoLngLocal").value;
 
-    buscarEnderecoPorLatitudeLongitude(latitudeDoLocalSelecionado, longitudeDoLocalSelecionado).then((endereco) => {
+    buscarEnderecoPorLatitudeLongitude(
+      latitudeDoLocalSelecionado,
+      longitudeDoLocalSelecionado
+    ).then((endereco) => {
       preencherInformacoesDoEndereco(endereco);
     });
   }
 }
 
-async function buscarEnderecoPorLatitudeLongitude(latitude, longitude){
+async function buscarEnderecoPorLatitudeLongitude(latitude, longitude) {
   const URL = `http://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-  
+
   try {
     const resultado = await fetch(URL);
     const resultadoConvertidoParaJson = await resultado.json();
 
-    return converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resultadoConvertidoParaJson);
+    return converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(
+      resultadoConvertidoParaJson
+    );
   } catch (error) {
     console.log("Erro ao buscar endereço usando latitude e longitude");
   }
 }
 
-function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resultadoBuscaEnderecoPorLatitudeLongitude){
+function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(
+  resultadoBuscaEnderecoPorLatitudeLongitude
+) {
   const {
     road: rua,
     municipality: municipalidade,
@@ -1420,11 +1579,11 @@ function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resul
     country: pais,
     country_code: siglaPais,
     city: cidade,
-    suburb: bairro
+    suburb: bairro,
   } = resultadoBuscaEnderecoPorLatitudeLongitude.address;
 
   const siglaEstado = identificaoPaisEstado.split("-")[1];
-  
+
   return {
     rua,
     cidade,
@@ -1437,18 +1596,12 @@ function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(resul
     pais,
     siglaPais,
     siglaEstado,
-    bairro
-  }
+    bairro,
+  };
 }
 
-function preencherInformacoesDoEndereco(endereco){
-  const {
-    rua,
-    bairro,
-    cidade,
-    siglaEstado,
-    cep
-  } = endereco;
+function preencherInformacoesDoEndereco(endereco) {
+  const { rua, bairro, cidade, siglaEstado, cep } = endereco;
 
   document.getElementById("validacaoLogradouroLocal").value = rua;
   document.getElementById("validacaoNumeroLocal").value = "";
@@ -1466,7 +1619,6 @@ function preencherInformacoesDoEndereco(endereco){
   document.getElementById("validacaoUFEvento").value = siglaEstado;
   document.getElementById("validacaoCEPEvento").value = cep;
 }
-
 
 $(document).ready(() => {
   $("#validacaoCEPLocal").focusout(function () {
@@ -1491,7 +1643,7 @@ $(document).ready(() => {
         }
       });
     function cepLocalInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPLocal").val("");
     }
   });
@@ -1518,7 +1670,7 @@ $(document).ready(() => {
         }
       });
     function cepEventoInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPEvento").val("");
     }
   });
@@ -1545,7 +1697,7 @@ $(document).ready(() => {
         }
       });
     function cepEventoInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPEvento").val("");
     }
   });

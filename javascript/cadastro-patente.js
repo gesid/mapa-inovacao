@@ -34,7 +34,7 @@ const selectOpcoesDepositante = document.getElementById(
 
 selectTipoDepositate.onchange = async function (event) {
   const tipoEntidadeSelecionado = event.target.value;
-
+  console.log(event.target.value)
   if (
     tipoEntidadeSelecionado !== "NAO_SELECIONADO" &&
     tipoEntidadeSelecionado
@@ -53,7 +53,8 @@ function limparSelectOpcoesDepositante() {
 
   const opcaoPadrao = document.createElement("option");
   opcaoPadrao.value = "NAO_SELECIONADO";
-  opcaoPadrao.innerText = "Selecionar...";
+  opcaoPadrao.setAttribute("id", "opcaoPadrao");
+  opcaoPadrao.innerText = i18next.t("patentsRegister.menu.sectionHeader.titulo");
 
   selectOpcoesDepositante.appendChild(opcaoPadrao);
   selectOpcoesDepositante.value = "NAO_SELECIONADO";
@@ -65,7 +66,7 @@ async function adicionarOpcoesDepositantesSelect(tipoEntidadeSelecionado) {
   );
 
   if (depositantesCarregados.length === 0) {
-    alert("Não existe nenhuma entidade cadastrada nesta categoria");
+    alert(i18next.t("alert.naoExisteNenhumaentidadeCadastrada"));
     desabilitarSelectOpcoesDepositante();
     return;
   }
@@ -111,7 +112,7 @@ function addNovoDepositanteSelecionado(idDepositante) {
   );
 
   if (depositanteJaSelecionado) {
-    alert("Este depositante já foi selecionado");
+    alert(i18next.t("alert.esteDepositanteJaFoiSelecionado"));
     limparSelecaoDepositantes();
     return;
   }
@@ -206,7 +207,7 @@ function atualizarListaDepositantesSelecionados(
   }
 
   containerCardsDepositante.innerHTML =
-    "<p>Nenhum depositante adicionado...</p>";
+    `<p>${i18next.t("patentsRegister.menu.sectionHeader.depositanteObs")}</p>`;
 }
 
 const btnSalvarPatente = document.getElementById("btnSalvarPatente");
@@ -266,16 +267,16 @@ function validarDadosPatente(dadosPatente) {
       propertyKey !== "depositantes" &&
       !dadosPatente[propertyKey]
     ) {
-      throw new Error("Preencha todas as informações obrigatórias");
+      throw new Error(i18next.t("error.preenchaTodasAsInformacaoObrigatorias"));
     }
   });
 
   if (dadosPatente.secoes.length === 0) {
-    throw new Error("Selecione pelo menos uma seção para a patente");
+    throw new Error(i18next.t("error.selecionePeloMenosUmaSecao"));
   }
 
   if (dadosPatente.depositantes.length === 0) {
-    throw new Error("Selecione pelo menos um depositante da patente");
+    throw new Error(i18next.t("error.selecionePeloMenusUmDepositante"));
   }
 }
 
@@ -350,7 +351,7 @@ function limparDepositantesSelecionados() {
   );
 
   containerCardsDepositante.innerHTML =
-    "<p>Nenhum depositante adicionado...</p>";
+    `<p>${i18next.t("patentsRegister.menu.sectionHeader.depositanteObs")}</p>`;
 }
 
 document.onreadystatechange = function () {
@@ -367,23 +368,31 @@ function verificarUsuarioLogado() {
   }
 }
 
+/**Tradução */
 i18next.on('languageChanged', function(lng) {
   traducaoDoPlaceHolderBarraBuscaPatentes();
   traducaoDoPlaceHolderPatentes();
+  traducaoOpcaoPadraoOpcoesDepositante();
 })
 
 function traducaoDoPlaceHolderBarraBuscaPatentes() {
   let placeholderchange = document.getElementsByName("form-control")[0]
-  console.log(i18next.t("patentsRegister.sectionPatentsRegister.patentPlaceholder"))
-   if (placeholderchange) {
+  if (placeholderchange) {
      placeholderchange.placeholder = i18next.t("patentsRegister.sectionPatentsRegister.patentPlaceholder")
    }
  }
 
  function traducaoDoPlaceHolderPatentes() {
   let placeholderchange = document.getElementsByName("form-control2")[0]
-  console.log(i18next.t("patentsRegister.menu.sectionHeader.placeholder2"))
-   if (placeholderchange) {
+  if (placeholderchange) {
      placeholderchange.placeholder = i18next.t("patentsRegister.menu.sectionHeader.placeholder2")
    }
+ }
+
+ function traducaoOpcaoPadraoOpcoesDepositante(){
+    let opcaoPadrao = document.getElementById("opcaoPadrao");
+
+    if(opcaoPadrao != null){
+      opcaoPadrao.innerText = i18next.t("patentsRegister.menu.sectionHeader.titulo");
+    }
  }

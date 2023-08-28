@@ -11,16 +11,15 @@ function login() {
     .catch(function (error) {
       // Handle Errors here.
       var errorCode = error.code;
-      var errorMessage = "Usuário e/ou senha icorretos";
-
+      var errorMessage = i18next.t("alert.usuarioOuSenhaIncorretos");
       window.alert("Error: " + errorMessage);
     })
     .then(() => {
       if (firebase.auth().currentUser.emailVerified) {
-        window.alert("Login realizado com sucesso");
+        window.alert(i18next.t("alert.loginRealizadoComSucesso"));
         usuarioAdmin(userEmail);
       } else {
-        window.alert("E-mail não validado! Verifique sua caixa de e-mail.");
+        window.alert(i18next.t("alert.emailNaoValidado"));
         firebase.auth().signOut();
       }
     });
@@ -55,7 +54,7 @@ function gerenciarEntradaSaida() {
     document.getElementById("btn-user").getAttribute("data-status") === "logado"
   ) {
     logout();
-    alert("Você está deslogado");
+    alert(i18next.t("alert.voceEstaDeslogado"));
   } else {
     window.location.href = "login.html";
   }
@@ -79,24 +78,3 @@ function usuarioAdmin(email) {
       }
     });
 }
-
-i18next.on('languageChanged', function(lng) {
-  traducaoPlaceholderEmail();
-  traducaoPlaceholderSenha();
-})
-
-function traducaoPlaceholderEmail() {
- let placeholderchange =  document.getElementsByName("email_field")[0]
- console.log(i18next.t("login.sectionHoldBar.holdBar1"))
-  if (placeholderchange) {
-    placeholderchange.placeholder = i18next.t("login.sectionHoldBar.holdBar1")
-  }
-}
-
-function traducaoPlaceholderSenha() {
-  let placeholderchange =  document.getElementsByName("password_field")[0]
-  console.log(i18next.t("login.sectionHoldBar.senha"))
-   if (placeholderchange) {
-     placeholderchange.placeholder = i18next.t("login.sectionHoldBar.holdBar2")
-   }
- }

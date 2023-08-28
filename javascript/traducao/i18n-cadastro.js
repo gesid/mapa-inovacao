@@ -8,6 +8,7 @@ const lngs = {
 
 $(function() {
     i18next
+        .use(i18nextBrowserLanguageDetector)
         .init({
             debug: true,
             fallbackLng:'pt',
@@ -24,8 +25,8 @@ $(function() {
                             navEventos: "EVENTOS",
                             navPatentes:{
                                 titulo: "PATENTES",
-                                subnavCadastro: "Cadastrar Patentes",
-                                subnavListar: "Listar Patentes"
+                                subnavCadastro: "Cadastrar patente",
+                                subnavListar: "Ver lista de patentes"
                             },
                         },
                         cadastro:{
@@ -59,7 +60,14 @@ $(function() {
                             termoDeUso: "TERMOS DE USO",
                             termoDeConsentimento: "TERMOS DE CONSENTIMENTO"
                         },
-
+                        alert:{
+                            voceEstaDeslogado: "Você está deslogado.",
+                            usuarioCadastradoComSucesso: "Usuário cadastrado com sucesso",
+                            erroAoCadrastrarUsuario: "Erro ao cadastrar usuário",
+                            lerOsTermosParaCadastro: "É necessário ler os termos e aceita-los para realizar o cadastro",
+                            asSenhasSaoDiferentes: "As senhas estão diferentes",
+                            emailDeVerificacaoEnviado: "E-mail de verificação enviado"
+                        }
                     }
                 },
                 en:{
@@ -108,6 +116,14 @@ $(function() {
                             polica: "PRIVACY POLICY",
                             termoDeUso: "TERMS OF USE",
                             termoDeConsentimento: "TERMS OF CONSENT"
+                        },
+                        alert:{
+                            voceEstaDeslogado: "You're logged out.",
+                            usuarioCadastradoComSucesso: "User successfully registered",
+                            erroAoCadrastrarUsuario: "Error registering user.",
+                            lerOsTermosParaCadastro: "It is necessary to read the terms and accept them in order to register.",
+                            asSenhasSaoDiferentes: "Passwords are different",
+                            emailDeVerificacaoEnviado: "Verification email sent."
                         }
                     }
                 }
