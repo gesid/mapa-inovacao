@@ -2,6 +2,26 @@ const database = firebase.database();
 const storage = firebase.storage();
 //Objeto DAO
 
+/**Tradução imagens */
+i18next.on('languageChanged', function(lng){
+  traducaoImagemProjeto();
+  traducaoImagemVideo();
+});
+
+function traducaoImagemProjeto(){
+  let imagem = document.getElementById("img5-prop");
+  imagem.setAttribute("src", `${i18next.t("sectionDesenvolvimento2.imagemProjetoOnMouseOut")}`);
+  imagem.setAttribute("onmouseout", `this.src = '${i18next.t("sectionDesenvolvimento2.imagemProjetoOnMouseOut")}';`);
+  imagem.setAttribute("onmouseover", `this.src = '${i18next.t("sectionDesenvolvimento2.imagemProjetoOnMouseOver")}';`);
+}
+
+function traducaoImagemVideo(){
+  let imagem = document.getElementById("img6-prop");
+  imagem.setAttribute("src", `${i18next.t("sectionDesenvolvimento2.imagemVideoOnMouseOut")}`);
+  imagem.setAttribute("onmouseout", `this.src = '${i18next.t("sectionDesenvolvimento2.imagemVideoOnMouseOut")}';`);
+  imagem.setAttribute("onmouseover", `this.src = '${i18next.t("sectionDesenvolvimento2.imagemVideoOnMouseOver")}';`);
+}
+
 
 /////////MAIN//////////////////
 

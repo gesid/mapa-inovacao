@@ -53,8 +53,10 @@
       crossorigin=""
     ></script>
     
+    <!--Tradução i18nextJS-->
     <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
 
     <script
       src="https://kit.fontawesome.com/16786d0779.js"
@@ -95,7 +97,7 @@
             <li class="nav-item">
               <a type="button" href="index.html" class="nav-item-style">
                 <i class="fas fa-map-marker-alt"> </i>
-                <p data-i18n="ecossistema.sectionHeader.mapa" class="texto-nav">MAPA</p>
+                <p data-i18n="navBar1.navMap" class="texto-nav">MAPA</p>
               </a>
             </li>
 
@@ -106,7 +108,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-newspaper"></i>
-                <p data-i18n="ecossistema.sectionHeader.ecossistema2" class="texto-nav">ECOSSISTEMA</p>
+                <p data-i18n="navBar1.navEcossistema" class="texto-nav">ECOSSISTEMA</p>
               </a>
             </li>
 
@@ -119,7 +121,7 @@
                 data-target="#modalSobre"
               >
                 <i class="fas fa-chalkboard-teacher"> </i>
-                <p data-i18n="login.sectionHoldBar.comoUtilizar" class="texto-nav">COMO UTILIZAR</p>
+                <p data-i18n="navBar1.navTutorial.titulo" class="texto-nav">COMO UTILIZAR</p>
               </a>
             </li>
 
@@ -130,7 +132,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-theater-masks"> </i>
-                <p class="texto-nav">TUTORIAL</p>
+                <p data-i18n="navBar1.navEventos" class="texto-nav">EVENTOS</p>
               </a>
             </li>
 
@@ -146,7 +148,7 @@
                   aria-expanded="false"
                 >
                   <i class="fas fa-stamp"> </i>
-                  <p data-i18n="ecossistema.sectionHeader.patente" class="texto-nav">PATENTES</p>
+                  <p data-i18n="navBar1.navPatentes.titulo" class="texto-nav">PATENTES</p>
                 </a>
 
                 <div
@@ -154,10 +156,10 @@
                   id="opcoesDropdownPatentes"
                   aria-labelledby="dropdownMenuLink"
                 >
-                  <a data-i18n="ecossistema.sectionHeader.cadastrarPatente" class="dropdown-item" href="cadastro-patente.html"
+                  <a data-i18n="navBar1.navPatentes.subnavCadastro" class="dropdown-item" href="cadastro-patente.html"
                     >Cadastrar patente</a
                   >
-                  <a data-i18n="ecossistema.sectionHeader.verListaPatente" class="dropdown-item" href="patentes.html"
+                  <a data-i18n="navBar1.navPatentes.subnavListar" class="dropdown-item" href="patentes.html"
                     >Ver lista de patentes</a
                   >
                 </div>
@@ -207,7 +209,7 @@
           <div
             class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
           >
-            <p id="titulo-modal">
+            <p data-i18n="navBar1.navTutorial.subtitulo" id="titulo-modal">
               Colaborar é muito simples! Veja no vídeo abaixo como funciona:
             </p>
             <button
@@ -394,6 +396,7 @@
     <script src="javascript/verificarUsuario.js"></script>
 
     <script src="javascript/traducao/i18n-login.js" type="module"></script>
+    <script src="javascript/traducao/traducao-login.js"></script>
     <script>
       
     </script>

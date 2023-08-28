@@ -79,8 +79,10 @@
     <script src="dao/usuariodao.js"></script>
     <script src="dao/PatenteDAO.js"></script>
 
+    <!--tradução i18nextJS-->
     <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
 
     <link rel="shortcut icon" href="img/favicon_2.png" />
     <title>Mapa do Ecossistema de Inovação Cearense</title>
@@ -229,6 +231,7 @@
             placeholder="Tipo de Busca: por título"
             aria-label="Buscar..."
             aria-describedby="basic-addon2"
+            tipo-barra="título"
           />
           <div class="input-group-append">
             <button data-i18n="patents.sectionPatents.botaoBusca" 

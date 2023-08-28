@@ -7,7 +7,9 @@ const lngs = {
   };
   
   $(function () {
-    i18next.init(
+    i18next
+    .use(i18nextBrowserLanguageDetector)
+    .init(
       {
         debug: true,
         fallbackLng: "pt",
@@ -18,7 +20,7 @@ const lngs = {
                     sectionHeader:{
                       mapa: "MAPA",
                       ecossistema2: "ECOSSISTEMA",
-                      tutorial: "TUTORIAL",
+                      tutorial: "COMO UTILIZAR",
                       eventos: "EVENTOS",
                       patente: "PATENTE",
                       cadastrarPatente: "Cadastrar patente",
@@ -34,7 +36,19 @@ const lngs = {
                 },  
                 patents: {
                     sectionPatents: {
-                        barraDeBuscaPatentes: "Tipo de busca: por título",
+                        barraDeBusca:{
+                          labelPreTitulo: "Tipo de busca: por",
+                          tipo:{
+                            titulo: "título",
+                            depositante: "depositante",
+                            secao: "seção"
+                          },
+                          labelPlaceholderCompleta:{
+                            titulo: "Tipo de busca: por título",
+                            depositante: "Tipo de busca: por depositante",
+                            secao: "Tipo de busca: por seção",
+                          },
+                        },
                         botaoBusca: "Buscar",
                         tituloPatente: "PATENTES",
                         toggleDown: "Tipo de busca",
@@ -51,6 +65,9 @@ const lngs = {
                         publicacoesCard: "Publicações",
                         numeroCard: "Nº de Pedido no INPI"   
                     }
+                  },
+                  alert:{
+                    voceEstaDeslogado: "Você está deslogado." ,
                   }
             },
           },
@@ -75,8 +92,20 @@ const lngs = {
                       },
                 },
                 patents: {
-                    sectionPatents: {
-                    barraDeBuscaPatentes: "Search Type: by title",
+                  sectionPatents: {
+                    barraDeBusca:{
+                      labelPreTitulo: "Search Type: by",
+                      tipo:{
+                        titulo: "title",
+                        depositante: "applicant",
+                        secao: "section"
+                      },
+                      labelPlaceholderCompleta:{
+                        titulo: "Search Type: by title",
+                        depositante: "Search Type: by applicant",
+                        secao: "Search Type: by section",
+                      },
+                    },
                     botaoBusca: "Search",
                     tituloPatente: "PATENTS",
                     toggleDown: "Search Type",
@@ -84,8 +113,8 @@ const lngs = {
                     porDepositanteToggleDown: "By Depositor",
                     porSecaoToggleDown: "By Section",
                     botaoSiteDoEvento: "Event website",
-                    botaoVerMais: "See more",
-                    botaoVerMenos: "See less",
+                    botaoVerMais: "Show more",
+                    botaoVerMenos: "Show less",
                     botaoDepositante: "See",
                     botaoDepositante2: "depositor on the map",
                     secoesCard: "Sections:",
@@ -94,6 +123,9 @@ const lngs = {
                     publicacoesCard: "Publications",
                     numeroCard: "INPI Application No"                
                 }
+              },
+              alert:{
+                voceEstaDeslogado: "You're logged out.",
               }
             },
           },

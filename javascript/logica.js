@@ -1282,8 +1282,12 @@ function selecionarLocal() {
         .addTo(map)
         .bindPopup(
           `<div class="row d-flex justify-content-center" id="divPopup">
-              <h6 class="col-12 font-weight-bold text-center" id="confirm">Confirmar</h6>
-              <button class="btn btn-submit btn-sm col-6 font-weight-bold" onclick="chamarModalCadastro()" id="btn-popup">Aqui!</button>
+              <h6 class="col-12 font-weight-bold text-center">
+                <span id="confirm">${i18next.t("navBar1.cadastro.marcador.legenda")}</span>
+              </h6>
+              <button class="btn btn-submit btn-sm font-weight-bold" onclick="chamarModalCadastro()">
+                <span id="btn-popup">${i18next.t("navBar1.cadastro.marcador.btn")}</span>
+              </button>
           </div>`
         )
         .openPopup();
@@ -1328,6 +1332,8 @@ function atualizarTraducaoPopup(){
 
 function atualizarTraducaoModalCadastro(){
   traducaoModalInstituicao();
+  traducaoSelectTipoLocal();
+  traducaoPlaceholderModalInsittuicao();
   traducaoModalEventos();
   traducaoModalAgradecimento();
 }
@@ -1350,17 +1356,13 @@ function traducaoModalInstituicao(){
 
   //botões
   document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.fechar');
-  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar');
+  document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar')
 
+}
 
-  //placeholder
+function traducaoPlaceholderModalInsittuicao(){
   document.getElementsByName('inputNome')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.nome');
   document.getElementsByName('inputSite')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.site');
-  
-  /**Inicio SELECT Tipo de local */
-  traducaoSelectTipoLocal();
-  /**Fim SELECT Tipo de local */
-
   //O placeholder do input da logo é traduzido na função chamarModalCadastro()
   document.getElementsByName('inputCep')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cep');
   document.getElementsByName('inputLogradouro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.logradouro');
@@ -1369,7 +1371,6 @@ function traducaoModalInstituicao(){
   document.getElementsByName('inputBairro')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.bairro');
   document.getElementsByName('inputCidade')[0].placeholder = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.cidade');
   document.getElementById('validacaoClassificaocaoOption').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.startup');
-
 }
 
 function traducaoSelectTipoLocal(){
@@ -1642,7 +1643,7 @@ $(document).ready(() => {
         }
       });
     function cepLocalInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPLocal").val("");
     }
   });
@@ -1669,7 +1670,7 @@ $(document).ready(() => {
         }
       });
     function cepEventoInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPEvento").val("");
     }
   });
@@ -1696,7 +1697,7 @@ $(document).ready(() => {
         }
       });
     function cepEventoInvalido() {
-      alert("CEP Inválido");
+      alert(i18next.t("alert.cepInvalidoCadastro"));
       $("#validacaoCEPEvento").val("");
     }
   });
