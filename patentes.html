@@ -114,7 +114,9 @@
             <li class="nav-item">
               <a type="button" href="index.html" class="nav-item-style">
                 <i class="fas fa-map-marker-alt"> </i>
-                <p data-i18n="ecossistema.sectionHeader.mapa" class="texto-nav">MAPA</p>
+                <p data-i18n="navBar1.navMap" class="texto-nav">
+                  MAPA
+                </p>
               </a>
             </li>
 
@@ -125,7 +127,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-newspaper"></i>
-                <p data-i18n="ecossistema.sectionHeader.ecossistema2" class="texto-nav">ECOSSISTEMA</p>
+                <p data-i18n="navBar1.navEcossistema" class="texto-nav">ECOSSISTEMA</p>
               </a>
             </li>
 
@@ -138,7 +140,7 @@
                 data-target="#modalSobre"
               >
                 <i class="fas fa-chalkboard-teacher"> </i>
-                <p data-i18n="ecossistema.sectionHeader.tutorial" class="texto-nav">COMO UTILIZAR</p>
+                <p data-i18n="navBar1.navTutorial.titulo" class="texto-nav">COMO UTILIZAR</p>
               </a>
             </li>
 
@@ -149,7 +151,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-theater-masks"> </i>
-                <p data-i18n="ecossistema.sectionHeader.eventos" class="texto-nav">EVENTOS</p>
+                <p data-i18n="navBar1.navEventos" class="texto-nav">EVENTOS</p>
               </a>
             </li>
 
@@ -165,7 +167,7 @@
                   aria-expanded="false"
                 >
                   <i class="fas fa-stamp"> </i>
-                  <p data-i18n="patents.sectionPatents.tituloPatente" class="texto-nav">PATENTES</p>
+                  <p data-i18n="navBar1.navPatentes.titulo" class="texto-nav">PATENTES</p>
                 </a>
 
                 <div
@@ -173,10 +175,10 @@
                   id="opcoesDropdownPatentes"
                   aria-labelledby="dropdownMenuLink"
                 >
-                  <a data-i18n="ecossistema.sectionHeader.cadastrarPatente" class="dropdown-item" href="./cadastro-patente.html"
+                  <a data-i18n="navBar1.navPatentes.subnavCadastro" class="dropdown-item" href="./cadastro-patente.html"
                     >Cadastrar patente</a
                   >
-                  <a data-i18n="ecossistema.sectionHeader.verListaPatente" class="dropdown-item" href="./patentes.html"
+                  <a data-i18n="navBar1.navPatentes.subnavListar" class="dropdown-item" href="./patentes.html"
                     >Ver lista de patentes</a
                   >
                 </div>
@@ -195,12 +197,15 @@
             </li>
           </ul>
         </div>
-        <form id="btn-select-traducao" class="dropdownHeader"></form>
-        <select
-          name="language" 
-          id="languageSwitcher"
-          class="btn-traducao-dropdown-header">
-        </select>
+
+        <form id="btn-select-traducao" class="dropdownHeader">
+          <select
+            name="language" 
+            id="languageSwitcher"
+            class="btn-traducao-dropdown-header">
+          </select>
+        </form>
+
       </form>
 
         <div id="menu-nav" class="collapse navbar-collapse">
@@ -236,12 +241,14 @@
             tipo-barra="título"
           />
           <div class="input-group-append">
-            <button data-i18n="patents.sectionPatents.botaoBusca" 
+            <button
               class="btn btn-busca font-weight-bold"
               type="button"
               onclick="filtrarPatentesPorTipoBusca()"
             >
-              Buscar
+              <span data-i18n="patents.sectionPatents.barraDeBusca.botaoBusca" >
+                Buscar
+              </span>
             </button>
             <button
               type="button"
@@ -333,11 +340,13 @@
       <!--Barra do título da página-->
       <div class="d-flex justify-content-center">
         <div id="barra-title">
-          <p data-i18n="patents.sectionPatents.tituloPatente"
+          <p
             id="barra-text-title"
             class="d-flex align-items-center justify-content-center"
           >
-            PATENTES
+            <span data-i18n="patents.sectionPatents.tituloPatente">
+              PATENTES
+            </span>
           </p>
         </div>
       </div>
@@ -350,34 +359,34 @@
         <div class="div-footer1">
           <ul>
             <li>
-              <a data-i18n="ecossistema.sectionRodape.titulo"
+              <a data-i18n="sectionRodape.titulo"
                 id="email"
                 href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
               >
                 Para mais informações, fale conosco através do
                 mapainovacao@ufc.br</a
               >
-              <p data-i18n="ecossistema.sectionRodape.descricao" class="div-footer-beta">Versão 0.2 (Beta)</p>
+              <p data-i18n="sectionRodape.descricao" class="div-footer-beta">Versão 0.2 (Beta)</p>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="div-footer2">
-        <a data-i18n="ecossistema.sectionRodape.politicaPrivacidade"
+        <a data-i18n="sectionRodape.politicaPrivacidade"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
           target="_blank"
           class=""
           >POLÍTICAS DE PRIVACIDADE</a
         >
-        <a data-i18n="ecossistema.sectionRodape.termoUso"
+        <a data-i18n="sectionRodape.termoUso"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf"
           target="_blank"
           class=""
         >
           TERMOS DE USO</
         >
-        <a data-i18n="ecossistema.sectionRodape.termoConsentimento"
+        <a data-i18n="sectionRodape.termoConsentimento"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf"
           target="_blank"
           class=""
