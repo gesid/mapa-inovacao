@@ -90,7 +90,7 @@ $(function () {
               navEventos: "EVENTS",
               navPatentes:{
                 titulo: "PATENTS",
-                subnavCadastro: "Register patents",
+                subnavCadastro: "Register patent",
                 subnavListar: "View list of patents"
               },
               btnUser:{

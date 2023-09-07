@@ -61,17 +61,6 @@ const lngs = {
           },
           en: {
             translation: {
-                /*sectionHeader:{
-                      mapa: "MAP",
-                      ecossistema2: "ECOSYSTEM",
-                      comoUtilizar: "TUTORIAL",
-                      eventos: "EVENTS",
-                      patente: "PATENT",
-                      comoUtilizar: "TUTORIAL",
-                      comoUtilizar2: "It is very simple to collaborate! Watch the video bellow to see how it works: ",
-                      cadastrarPatente: "Register patent",
-                      verListaPatente: "View list of patents"
-                    }*/
               navBar1:{
                 navMap: "MAP",
                 navEcossistema: "ABOUT US",
@@ -82,8 +71,8 @@ const lngs = {
                 navEventos: "EVENTS",
                 navPatentes:{
                   titulo: "PATENTS",
-                  subnavCadastro: "Register Patents",
-                  subnavListar: "List Patents"
+                  subnavCadastro: "Register patent",
+                  subnavListar: "View list of patents"
                 },
                 btnUser:{
                   saudacao: "Hello, {{name}} !",

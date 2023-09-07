@@ -267,8 +267,8 @@ $(function() {
                             navEventos: "EVENTS",
                             navPatentes:{
                                 "titulo": "PATENTS",
-                                "subnavCadastro": "Register Patents",
-                                "subnavListar": "List Patents"
+                                "subnavCadastro": "Register patent",
+                                "subnavListar": "View list of patents"
                             },
                             cadastro:{
                                 legenda: 'Click on the map to define the address of your institution/event',
