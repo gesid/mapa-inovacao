@@ -160,15 +160,15 @@ $(function () {
         }
         $('#languageSwitcher').append(optSelect);
         console.log(optSelect)
-    })
+      })
 
 
-    $('#languageSwitcher').change(() => {
-        let chooseLng = $(this).find("option:selected").attr('value');
-        i18next.changeLanguage(chooseLng, () => {
-            $("body").localize()
-        })
-    })
+      $('#languageSwitcher').change(() => {
+          let chooseLng = $(this).find("option:selected").attr('value');
+          i18next.changeLanguage(chooseLng, () => {
+              $("body").localize()
+          })
+      })
 
       $("body").localize();
     }
