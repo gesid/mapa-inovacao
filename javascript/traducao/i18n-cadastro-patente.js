@@ -16,6 +16,13 @@ $(function () {
       resources: {
         pt: {
           translation: {
+            navBar1:{
+              btnUser:{
+                saudacao: "Olá, {{name}} !",
+                perfil: "MEU PERFIL",
+                sair: "SAIR"
+              }
+            },
             patentsRegister: {
               sectionPatentsRegister: {
                 tituloPatente: "Título da Patente*",
@@ -26,7 +33,7 @@ $(function () {
                   mapa: "MAPA",
                   ecossistema2: "ECOSSISTEMA",
                   tutorial: "TUTORIAL",
-                  eventos: "EVENTOS",
+                  navEventos: "EVENTOS",
                   patente: "PATENTE",
                   cadastrarPatente: "Cadastrar patente",
                   verListaPatente: "Ver lista de patentes",
@@ -98,7 +105,14 @@ $(function () {
         },
       },
           en: {
-            translation: {        
+            translation: {  
+              navBar1:{
+                btnUser:{
+                  saudacao: "Hello, {{name}} !",
+                    perfil: "MY PROFILE",
+                    sair: "LOGOUT"
+                }
+              },      
               patentsRegister: {
                 sectionPatentsRegister: {
                   tituloPatente: "Patent Title*",
@@ -107,9 +121,9 @@ $(function () {
                 menu: {
                   sectionHeader:{
                     mapa: "MAP",
-                    ecossistema2: "ECOSYSTEM",
+                    ecossistema2: "ABOUT US",
                     tutorial: "TUTORIAL",
-                    eventos: "EVENTS",
+                    navEventos: "EVENTS",
                     patente: "PATENT",
                     cadastrarPatente: "Register patent",
                     verListaPatente: "View list of patents",
