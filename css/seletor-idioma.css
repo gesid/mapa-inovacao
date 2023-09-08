@@ -1,0 +1,9 @@
+#languageSwitcher {
+    background-color: #00833a;
+    color: white;
+    border-left-style: solid;
+    border-width: 1px;
+    border-color: #fc6a38;
+    /**padding-left: 0px;*/
+    padding: 0px 7px;
+  }

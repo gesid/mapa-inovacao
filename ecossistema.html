@@ -24,6 +24,12 @@
     </script>
 
     <!-- Bootstrap CSS -->
+
+    <link
+      href="./css/seletor-idioma.css"
+      rel="stylesheet"
+    />
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -43,6 +49,11 @@
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
       crossorigin=""
     />
+
+    <!--Import da biblioteca de traducao-->
+    <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
 
     <script
       src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
@@ -89,18 +100,18 @@
 
         <!--Navegação-->
         <div id="menu-nav" class="collapse navbar-collapse">
-          <ul class="navbar-nav btnNav">
+          <ol class="navbar-nav btnNav">
             <li class="nav-item">
               <a type="button" href="index.html" class="nav-item-style">
                 <i class="fas fa-map-marker-alt"> </i>
-                <p class="texto-nav">MAPA</p>
+                <p data-i18n="navBar1.navMap" class="texto-nav">MAPA</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a type="button" href="ecossistema.html" class="nav-item-style">
                 <i class="fas fa-newspaper"></i>
-                <p class="texto-nav">ECOSSISTEMA</p>
+                <p data-i18n="navBar1.navEcossistema" class="texto-nav">ECOSSISTEMA</p>
               </a>
             </li>
 
@@ -113,14 +124,14 @@
                 data-target="#modalSobre"
               >
                 <i class="fas fa-chalkboard-teacher"></i>
-                <p class="texto-nav">TUTORIAL</p>
+                <p data-i18n="navBar1.navTutorial.titulo" class="texto-nav">TUTORIAL</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a type="button" href="eventos.html" class="nav-item-style">
                 <i class="fas fa-theater-masks"> </i>
-                <p class="texto-nav">EVENTOS</p>
+                <p data-i18n="navBar1.navEventos" class="texto-nav">EVENTOS</p>
               </a>
             </li>
 
@@ -136,7 +147,7 @@
                   aria-expanded="false"
                 >
                   <i class="fas fa-stamp"> </i>
-                  <p class="texto-nav">PATENTES</p>
+                  <p data-i18n="navBar1.navPatentes.titulo" class="texto-nav">PATENTES</p>
                 </a>
 
                 <div
@@ -144,10 +155,10 @@
                   id="opcoesDropdownPatentes"
                   aria-labelledby="dropdownMenuLink"
                 >
-                  <a class="dropdown-item" href="./cadastro-patente.html"
+                  <a data-i18n="navBar1.navPatentes.subnavCadastro" class="dropdown-item" href="./cadastro-patente.html"
                     >Cadastrar patente</a
                   >
-                  <a class="dropdown-item" href="./patentes.html"
+                  <a data-i18n="navBar1.navPatentes.subnavListar" class="dropdown-item" href="./patentes.html"
                     >Ver lista de patentes</a
                   >
                 </div>
@@ -164,8 +175,16 @@
                 <p class="texto-nav">DASHBOARD</p>
               </a>
             </li>
-          </ul>
+          </ol>
+      
         </div>
+        <form id="btn-select-traducao" class="dropdownHeader"></form>
+          <select
+            name="language" 
+            id="languageSwitcher"
+            class="btn-traducao-dropdown-header">
+          </select>
+        </form>
 
         <form id="btn-user" class="dropdownHeader">
           <button
@@ -197,7 +216,7 @@
           <div
             class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
           >
-            <p id="titulo-modal">
+            <p id="titulo-modal" data-i18n="navBar1.navTutorial.subtitulo">
               Colaborar é muito simples! Veja no vídeo abaixo como funciona:
             </p>
             <button
@@ -236,6 +255,7 @@
               class="modal-title"
               id="exampleModalLabel"
               style="font-weight: bold"
+              data-i18n="sectionModalNossosColaboradores.titulo"
             >
               Nossos Colaboradores
             </h5>
@@ -251,7 +271,7 @@
           <!--Inicio do Conteudo-->
           <div class="modal-body-colaboradores">
             <dl>
-              <dt>Mantenedores</dt>
+              <dt data-i18n="sectionModalNossosColaboradores.subtitulo">Mantenedores</dt>
 
               <dd>
                 <b>Allysson Allex Araújo</b> (Universidade Federal do Ceará)
@@ -326,8 +346,9 @@
               class="texto-btn-filtro"
               type="button"
               data-dismiss="modal"
+              
             >
-              Fechar
+              <span data-i18n="sectionModalNossosColaboradores.btn">Fechar</span>
             </button>
           </div>
         </div>
@@ -402,44 +423,85 @@
             <!--<img id="img-logo" src="img\logos\logo-svg.svg">-->
             <!--<div>-->
           </div>
-
+          
           <div id="divisao2" class="d-flex align-items-center">
             <div id="divisao2-right">
               <div id="divisao2-right-top">
-                <p class="topicos-ecossistema">MOTIVAÇÃO</p>
+                <p data-i18n="sectionMotivacao.titulo" class="topicos-ecossistema">MOTIVAÇÃO</p>
                 <p class="textos-ecossistema">
-                  No Ceará existem várias
-                  <b>iniciativas de inovação tecnológica</b> surgindo em
-                  diversas regiões do estado. Dentre os principais ecossistemas
-                  de inovação existentes, pode-se destacar o ecossistema de
-                  Fortaleza, o Rapadura Valley, e o ecossistema do Cariri, o
-                  Kariri Valley, porém também existem outras iniciativas
-                  surgindo em outras regiões do estado, como o ecossistema de
-                  Sobral, de Quixadá, de Crateús, entre outros. Na região
-                  nordeste, o ecossistema cearense concentra 16% das startups
-                  ativas, sendo o terceiro maior da região. Constata-se, assim,
-                  a oportunidade em prover uma solução intrinsecamente
-                  <b>colaborativa, open source e de abrangência estadual</b>
-                  para geovisualização dos agentes que compõem o ecossistema
-                  cearense, tendo em vista o potencial em aproximar os agentes
-                  envolvidos e, consequentemente, catalisar parcerias inovadoras
-                  no estado.
+                  <span 
+                    data-i18n="sectionMotivacao.descricaoParte1"
+                  >
+                    No Ceará existem várias
+                  </span>
+                  <b 
+                    data-i18n="sectionMotivacao.descricaoParte2"
+                  >
+                    iniciativas de inovação tecnológica
+                  </b> 
+                  <span 
+                    data-i18n="sectionMotivacao.descricaoParte3"
+                  >
+                    surgindo em diversas regiões do estado. Dentre os principais 
+                    ecossistemas de inovação existentes, pode-se destacar o ecossistema de
+                    Fortaleza, o Rapadura Valley, e o ecossistema do Cariri, o
+                    Kariri Valley, porém também existem outras iniciativas
+                    surgindo em outras regiões do estado, como o ecossistema de
+                    Sobral, de Quixadá, de Crateús, entre outros. Na região
+                    nordeste, o ecossistema cearense concentra 16% das startups
+                    ativas, sendo o terceiro maior da região. Constata-se, assim,
+                    a oportunidade em prover uma solução intrinsecamente
+                  </span>
+                  <b 
+                    data-i18n="sectionMotivacao.descricaoParte4"
+                  >
+                    colaborativa, open source e de abrangência estadual
+                  </b>
+                  <span 
+                    data-i18n="sectionMotivacao.descricaoParte5"
+                  >
+                    para geovisualização dos agentes que compõem o ecossistema
+                    cearense, tendo em vista o potencial em aproximar os agentes
+                    envolvidos e, consequentemente, catalisar parcerias inovadoras
+                    no estado.
+                  </span>
                 </p>
               </div>
 
               <div id="divisao2-right-bot">
-                <p class="topicos-ecossistema">PROPOSTA</p>
+                <p data-i18n="sectionProposta.titulo" class="topicos-ecossistema">PROPOSTA</p>
                 <p class="textos-ecossistema">
-                  Sob o escopo de um projeto de extensão da Universidade Federal
-                  do Ceará (UFC), o
-                  <b>Mapa do Ecossistema de Inovação Cearense</b> é uma
-                  plataforma <b>colaborativa</b>, tanto do ponto de vista do
-                  desenvolvimento, quanto do seu uso, que objetiva reunir de
-                  forma integrada informações sobre <b>entidades, eventos</b> e
-                  <b>patentes</b>, proporcionando a todos que tem interesse na
-                  comunidade cearense uma visão geral do ecossistema de inovação
-                  por meio de um
-                  <b>mapa interativo e colaborativo.</b>
+                  <span data-i18n="sectionProposta.descricaoParte1">
+                    Sob o escopo de um projeto de extensão da Universidade Federal
+                    do Ceará (UFC), o
+                  </span>
+                  <b data-i18n="sectionProposta.descricaoParte2">
+                    Mapa do Ecossistema de Inovação Cearense
+                  </b>
+                  <span data-i18n="sectionProposta.descricaoParte3"> 
+                    é uma
+                  </span>
+                  <span data-i18n="sectionProposta.descricaoParte4">
+                    plataforma
+                  </span>
+                  <b data-i18n="sectionProposta.descricaoParte5">
+                    colaborativa
+                  </b>
+                  <span data-i18n="sectionProposta.descricaoParte6"></span>
+                  <span data-i18n="sectionProposta.descricaoParte7">
+                    , tanto do ponto de vista do
+                    desenvolvimento, quanto do seu uso, que objetiva reunir de
+                    forma integrada informações sobre 
+                  </span>
+                  <b data-i18n="sectionProposta.descricaoParte8">entidades, eventos</b> 
+                  <span data-i18n="sectionProposta.descricaoParte9">e</span>
+                  <b data-i18n="sectionProposta.descricaoParte10">patentes</b>
+                  <span data-i18n="sectionProposta.descricaoParte11">
+                    , proporcionando a todos que tem interesse na
+                    comunidade cearense uma visão geral do ecossistema de inovação
+                    por meio de um
+                  </span>
+                  <b data-i18n="sectionProposta.descricaoParte12">mapa interativo e colaborativo.</b>
                 </p>
               </div>
             </div>
@@ -456,12 +518,14 @@
 
             <div id="divisao3-left">
               <div id="divisao3-left-top">
-                <p class="topicos-ecossistema">DESENVOLVIMENTO</p>
+                <p data-i18n="sectionDesenvolvimento.titulo" class="topicos-ecossistema">DESENVOLVIMENTO</p>
                 <p class="textos-ecossistema">
-                  Este projeto (atualmente em versão 0.2 Beta) pressupõe sua
+                  <span data-i18n="sectionDesenvolvimento.descricaoParte1">
+                    Este projeto (atualmente em versão 0.2 Beta) pressupõe sua
                   evolução e manutenção como uma iniciativa
-                  <b>colaborativa, open source e sem fins lucrativos</b>,
-                  inicialmente sob a
+                  </span>
+                  <b data-i18n="sectionDesenvolvimento.descricaoParte2">colaborativa, open source e sem fins lucrativos</b>,
+                  <span data-i18n="sectionDesenvolvimento.descricaoParte3">inicialmente sob a</span>
                   <a
                     href="https://opensource.org/licenses/MIT"
                     target="_blank"
@@ -471,7 +535,7 @@
                 </p>
 
                 <p class="textos-colaboradores">
-                  <a
+                  <a data-i18n="sectionDesenvolvimento.linkColaboradores" 
                     type="button"
                     href="javascript:void(0)"
                     data-toggle="modal"
@@ -482,7 +546,7 @@
               </div>
               <div id="divisao3-left-bot">
                 <div id="divisao3-left-bot-top">
-                  <p class="textos-ecossistema">
+                  <p data-i18n="sectionDesenvolvimento.saibaMais" class="textos-ecossistema">
                     <br />Saiba mais sobre o projeto
                     <b>Mapa do Ecossistema de Inovação Cearense:</b>
                   </p>
@@ -528,7 +592,7 @@
 
           <div id="divisao4">
             <div class="d-flex align-items-center justify-content-center">
-              <p class="topicos-ecossistema">
+              <p data-i18n="sectionDesenvolvimento2.titulo" class="topicos-ecossistema">
                 ORGANIZAÇÕES DOS NOSSOS COLABORADORES
               </p>
             </div>
@@ -717,35 +781,37 @@
 
           <div id="divisao5" class="d-flex align-items-center">
             <div id="divisao5-right">
-              <p class="topicos-ecossistema">REFERÊNCIAS</p>
-              <p class="textos-ecossistema">
+              <p data-i18n="sectionReferencias.titulo" class="topicos-ecossistema">REFERÊNCIAS</p>
+              <p style="display: inline;" data-i18n="sectionReferencias.descricao" class="textos-ecossistema">
                 Como material de apoio para a realização da categorização dos
                 agentes que fazem parte deste ecossistema, foi utilizado o
                 documento "Mapeamento do Ambiente de Incentivo ao
                 Empreendedorismo no Ceará" elaborado pelo Instituto de Inovação,
                 organizado por Moisés Santos. Além disso, utilizamos também o
-                Mapeamento de Atores da
-                <a
+                Mapeamento de Atores da</p>
+                <a data-i18n="sectionReferencias.linkAssociacao"
                   href="https://abstartups.com.br/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  >Associação Brasileira de Startups (Abstartups)</a
-                >. Para as demarcações das comunidades existentes no mapa, foi
-                utilizado o material do
-                <a
+                  >Associação Brasileira de Startups (Abstartups).</a>
+                 
+                <p style="display: inline;" data-i18n="sectionReferencias.continuacaoDescricao">Para as demarcações das comunidades existentes no mapa, foi
+                  utilizado o material do</p>
+                <a data-i18n="sectionReferencias.linkSebrae"
                   href="https://www.sebrae.com.br/sites/PortalSebrae/ufs/ce/institucional/atuacao-sebrae-no-ceara,039c6c20d354e410VgnVCM1000003b74010aRCRD"
                   target="_blank"
                   rel="noopener noreferrer"
                   >Sebrae/CE</a
-                >. Dentre as diversas iniciativas de mapeamento do ecossistema
+                >. <p data-i18n="sectionReferencias.continuacaoDescricao2" style="display: inline;" >Dentre as diversas iniciativas de mapeamento do ecossistema
                 local que são encontradas no Brasil, pode-se destacar três
                 referências os quais serviram de inspiração para o
                 desenvolvimento deste projeto:
               </p>
               <ul class="lista-textos-ecossistema">
                 <li>
-                  Mapa da inovação de Minas Gerais, desenvolvido pelo
-                  <a
+                  <p style="display: inline;" data-i18n="sectionReferencias.primeiroItem" >Mapa da inovação de Minas Gerais, desenvolvido pelo</p>
+                
+                  <a data-i18n="sectionReferencias.linkPrimeiroItem"
                     href="http://www.simi.org.br/mapa"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -753,18 +819,22 @@
                   >;
                 </li>
                 <li>
+                  <p style="display: inline;" data-i18n="sectionReferencias.segundoItem">
                   Mapa do ecossistema de inovação de Santa Catarina, mapeado
                   pela
-                  <a
+                </p>
+                  <a style="display: inline;" data-i18n="sectionReferencias.linkSegundoItem"
                     href="https://via.ufsc.br/mapas-da-via/"
                     target="_blank"
                     rel="noopener noreferrer"
                     >VIA</a
-                  >; e
+                  >; <p style="display: inline;" data-i18n="sectionReferencias.linkSegundoItem2">e</p>
                 </li>
                 <li>
+                  <p style="display: inline;" data-i18n="sectionReferencias.terceiroItem" >
                   Mapa do ecossistema de inovação de Alagoas, desenvolvido pela
-                  <a
+                  </p>  
+                  <a style="display: inline;" data-i18n="sectionReferencias.link.TerceiroItem"
                     href="http://mapainovacao.secti.al.gov.br/"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -787,34 +857,34 @@
           <div class="div-footer1">
             <ul>
               <li>
-                <a
+                <a data-i18n="sectionRodape.titulo"
                   id="email"
                   href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
                 >
                   Para mais informações, fale conosco através do
                   mapainovacao@ufc.br</a
                 >
-                <p class="div-footer-beta">Versão 0.2 (Beta)</p>
+                <p data-i18n="sectionRodape.descricao" class="div-footer-beta">Versão 0.2 (Beta)</p>
               </li>
             </ul>
           </div>
         </div>
 
         <div class="div-footer2">
-          <a
+          <a data-i18n="sectionRodape.politicaPrivacidade"
             href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
             target="_blank"
             class=""
             >POLÍTICAS DE PRIVACIDADE</a
           >
-          <a
+          <a data-i18n="sectionRodape.termoUso"
             href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf"
             target="_blank"
             class=""
           >
             TERMOS DE USO</a
           >
-          <a
+          <a data-i18n="sectionRodape.termoConsentimento"
             href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf"
             target="_blank"
             class=""
@@ -859,5 +929,8 @@
     <script src="javascript/login.js"></script>
 
     <script src="javascript/modal.js"></script>
+
+    <script src="javascript/traducao/i18n-ecossistema.js" type="module"></script>
+
   </body>
 </html>

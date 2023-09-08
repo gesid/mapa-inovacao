@@ -50,6 +50,11 @@
       crossorigin=""
     ></script>
 
+    <!--Tradução i18nextJS-->
+    <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
+
     <script
       src="https://kit.fontawesome.com/16786d0779.js"
       crossorigin="anonymous"
@@ -67,6 +72,10 @@
     <script src="dao/usuariodao.js"></script>
 
     <link rel="shortcut icon" href="img/favicon_2.png" />
+    <link
+     href="./css/seletor-idioma.css"
+     rel="stylesheet"
+    />
     <title>Mapa do Ecossistema de Inovação Cearense</title>
   </head>
 
@@ -96,7 +105,7 @@
             <li class="nav-item">
               <a type="button" href="index.html" class="nav-item-style">
                 <i class="fas fa-map-marker-alt"> </i>
-                <p class="texto-nav">MAPA</p>
+                <p data-i18n="navBar1.navMap" class="texto-nav">MAPA</p>
               </a>
             </li>
 
@@ -107,7 +116,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-newspaper"></i>
-                <p class="texto-nav">ECOSSISTEMA</p>
+                <p data-i18n="navBar1.navEcossistema" class="texto-nav">ECOSSISTEMA</p>
               </a>
             </li>
 
@@ -120,7 +129,7 @@
                 data-target="#modalSobre"
               >
                 <i class="fas fa-chalkboard-teacher"> </i>
-                <p class="texto-nav">COMO UTILIZAR</p>
+                <p data-i18n="ecossistema.sectionHeader.comoUtilizar" class="texto-nav">COMO UTILIZAR</p>
               </a>
             </li>
 
@@ -131,9 +140,10 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-theater-masks"> </i>
-                <p class="texto-nav">EVENTOS</p>
+                <p data-i18n="navBar1.navEventos" class="texto-nav">EVENTOS</p>
               </a>
             </li>
+
 
             <li class="nav-item">
               <div class="dropdown show">
@@ -147,7 +157,7 @@
                   aria-expanded="false"
                 >
                   <i class="fas fa-stamp"> </i>
-                  <p class="texto-nav">PATENTES</p>
+                  <p data-i18n="navBar1.navPatentes.titulo" class="texto-nav">PATENTES</p>
                 </a>
 
                 <div
@@ -155,10 +165,12 @@
                   id="opcoesDropdownPatentes"
                   aria-labelledby="dropdownMenuLink"
                 >
-                  <a class="dropdown-item" href="./cadastro-patente.html"
-                    >Cadastrar patente</a
+                  <a class="dropdown-item" href="./cadastro-patente.html">
+                    <span data-i18n="navBar1.navPatentes.subnavCadastro" >
+                      Cadastrar patente
+                    </span></a
                   >
-                  <a class="dropdown-item" href="./patentes.html"
+                  <a data-i18n="navBar1.navPatentes.subnavListar" class="dropdown-item" href="./patentes.html"
                     >Ver lista de patentes</a
                   >
                 </div>
@@ -177,24 +189,33 @@
             </li>
           </ul>
         </div>
-
+        <form id="btn-select-traducao" class="dropdownHeader"></form>
+          <select
+            name="language" 
+            id="languageSwitcher"
+            class="btn-traducao-dropdown-header">
+          </select>
+        </form>
+  
         <form class="form-inline" onsubmit="return false">
           <div id="form-pc" class="input-group buscaHeader">
             <input
               id="barraBusca"
+              name="barraBuscaInput"
               type="text"
               class="form-control"
-              placeholder="Tipo de Busca: por nome"
+              placeholder="Tipo de busca: por nome asdasd"
               aria-label="Buscar..."
               aria-describedby="basic-addon2"
             />
             <div class="input-group-append">
-              <button
+              <button 
                 class="btn btn-busca font-weight-bold"
                 type="button"
                 onclick="filtroBusca()"
-              >
+              ><span data-i18n="events.sectionEvents.botaoBusca"> 
                 Buscar
+              </span>
               </button>
               <button
                 type="button"
@@ -207,7 +228,9 @@
               </button>
 
               <div class="dropdown-menu">
-                <a class="dropdown-item disabled" href="#">Tipo de busca</a>
+                <a  data-i18n="events.sectionEvents.toggleDown" class="dropdown-item disabled" href="#">
+                  Tipo de busca
+                </a>
                 <div class="dropdown-divider"></div>
                 <a
                   class="dropdown-item"
@@ -244,26 +267,28 @@
     </header>
 
     <!--Barra Mobile-->
+
     <div id="barraMobile">
       <form id="form-mobile" class="form-inline" onsubmit="return false">
         <div class="input-group busca-principal">
           <input
-            id="barraBusca"
+            id="barraBuscaMobile"
+            name="barraBuscaMobile"
             type="text"
             class="form-control"
-            placeholder="Tipo de Busca: por nome"
+            placeholder="Tipo de busca: por nome"
             aria-label="Buscar..."
             aria-describedby="basic-addon2"
           />
           <div class="input-group-append">
-            <button
+            <button data-i18n="events.sectionEvents.botaoBusca"
               class="btn btn-busca font-weight-bold"
               type="button"
               onclick="filtroBusca()"
             >
               Buscar
             </button>
-            <button
+            <button 
               type="button"
               class="btn btn-busca-dropdown dropdown-toggle dropdown-toggle-split"
               data-toggle="dropdown"
@@ -274,9 +299,9 @@
             </button>
 
             <div class="dropdown-menu">
-              <a class="dropdown-item disabled" href="#">Tipo de busca</a>
+              <a  data-i18n="events.sectionEvents.toggleDown" class="dropdown-item disabled" href="#">Tipo de busca</a>
               <div class="dropdown-divider"></div>
-              <a
+              <a data-i18n="events.sectionEvents.porNomeToggleDown"
                 class="dropdown-item"
                 href="#"
                 data-tipo="Nome"
@@ -284,7 +309,7 @@
                 onclick="escolhaBusca(this)"
                 >Por nome</a
               >
-              <a
+              <a data-i18n="events.sectionEvents.porCategoriaToggleDown"
                 class="dropdown-item"
                 href="#"
                 data-tipo="Subtipo"
@@ -297,6 +322,7 @@
         </div>
       </form>
     </div>
+  
 
     <!-- Modal Como Utilizar -->
     <div
@@ -315,7 +341,8 @@
           <div
             class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
           >
-            <p id="titulo-modal">
+
+            <p data-i18n="ecossistema.sectionHeader.comoUtilizar2" id="titulo-modal">
               Colaborar é muito simples! Veja no vídeo abaixo como funciona:
             </p>
             <button
@@ -342,11 +369,10 @@
       <!--Barra do título da página-->
       <div class="d-flex justify-content-center">
         <div id="barra-title">
-          <p
-            id="barra-text-title"
+          <p id="barra-text-title"
             class="d-flex align-items-center justify-content-center"
           >
-            PRÓXIMOS EVENTOS
+            <span data-i18n="events.sectionEvents.tituloEvent" >PRÓXIMOS EVENTOS</span> 
           </p>
         </div>
       </div>
@@ -401,23 +427,33 @@
                       id="conteudo-evento-B"
                       class="d-flex align-items-end texto-btn-evento1"
                     >
-                      <a
+                      <a 
                         id="btn-evento1"
                         class="d-flex align-items-center justify-content-center"
                         href="index.html"
                         target="_blank"
                         onclick="passarEventoKey(this)"
                       >
-                        <p class="texto-btn-evento1">Ver no mapa</p>
+                        <p data-i18n="events.sectionEvents.botaoVerNoMapa" 
+                          class="texto-btn-evento1"
+                          id="btn-ver-no-mapa"
+                        >
+                            Ver no mapa
+                        </p>
                       </a>
 
-                      <a
+                      <a 
                         id="btn-evento2"
                         class="d-flex align-items-center justify-content-center"
                         href="index.html"
                         target="_blank"
                       >
-                        <p class="texto-btn-evento2">Site do evento</p>
+                        <p data-i18n="events.sectionEvents.botaoSiteDoEvento" 
+                          class="texto-btn-evento2"
+                          id="btn-site-do-evento"
+                        >
+                          Site do evento
+                        </p>
                       </a>
                     </div>
                   </div>
@@ -434,34 +470,34 @@
         <div class="div-footer1">
           <ul>
             <li>
-              <a
+              <a data-i18n="sectionRodape.titulo"
                 id="email"
                 href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
               >
                 Para mais informações, fale conosco através do
                 mapainovacao@ufc.br</a
               >
-              <p class="div-footer-beta">Versão 0.2 (Beta)</p>
+              <p data-i18n="sectionRodape.descricao" class="div-footer-beta">Versão 0.2 (Beta)</p>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="div-footer2">
-        <a
+        <a data-i18n="sectionRodape.politicaPrivacidade"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
           target="_blank"
           class=""
           >POLÍTICAS DE PRIVACIDADE</a
         >
-        <a
+        <a data-i18n="sectionRodape.termoUso"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf"
           target="_blank"
           class=""
         >
           TERMOS DE USO</a
         >
-        <a
+        <a data-i18n="sectionRodape.termoConsentimento"
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf"
           target="_blank"
           class=""
@@ -505,5 +541,7 @@
     <script src="javascript/login.js"></script>
 
     <script src="javascript/modal.js"></script>
+
+    <script src="javascript/traducao/i18n-eventos.js" type="module"></script>
   </body>
 </html>
