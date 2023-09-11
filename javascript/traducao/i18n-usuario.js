@@ -63,8 +63,8 @@ $(function() {
                             navEventos: "EVENTS",
                             navPatentes:{
                                 titulo: "PATENTS",
-                                subnavCadastro: "Register Patents",
-                                subnavListar: "List Patents"
+                                subnavCadastro: "Register patent",
+                                subnavListar: "View list of patents"
                             },
                             btnUser:{
                                 saudacao: "Hello, {{name}} !",
