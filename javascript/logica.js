@@ -1379,6 +1379,7 @@ function traducaoSelectTipoLocal(){
     if(i == 0){
       optionsTipoLocal[i].innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.placeholder.categoria');
     } else {
+      console.log(getTipoClasseI18nSelectTipoLocal(i))
       let classe = getTipoClasseI18nSelectTipoLocal(i);
       let texto = 'categorias.'+ classe;
       optionsTipoLocal[i].innerText = i18next.t(texto);
@@ -1404,29 +1405,25 @@ function getTipoClasseI18nSelectTipoLocal(indice){
   else if(indice == 8)
     return 'fabApp';
   else if(indice == 9)
-    return 'gov';
-  else if(indice == 10)
     return 'gEmpresas';
-  else if(indice == 11)
+  else if(indice == 10)
     return 'incubadoras';
-  else if(indice == 12)
+  else if(indice == 11)
     return 'iniUniversitarias';
-  else if(indice == 13)
+  else if(indice == 12)
     return 'investidores';
-  else if(indice == 14)
+  else if(indice == 13)
     return 'nucInovacao';
-  else if(indice == 15)
+  else if(indice == 14)
     return 'parquesTec';
-  else if(indice == 16)
+  else if(indice == 15)
     return 'preAceleradoras';
-  else if(indice == 17)
+  else if(indice == 16)
     return 'propIntelectual';
-  else if(indice == 18)
+  else if(indice == 17)
     return 'mentoria';
-  else if(indice == 19)
+  else if(indice == 18)
     return 'startup';
-  else if(indice == 20)
-    return 'patente';
 }
 
 function traducaoModalEventos(){
