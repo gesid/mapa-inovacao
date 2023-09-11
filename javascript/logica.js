@@ -1582,24 +1582,24 @@ function converterObjetoBuscaEnderecoPorLatitudeLongitudeParaFormatoPadrao(
   const siglaEstado = identificaoPaisEstado.split("-")[1];
 
   return {
-    rua,
-    cidade,
+    rua:  rua || "",
+    cidade: cidade || "",
     municipalidade,
     distritoEstadual,
     estado,
     identificaoPaisEstado,
     regiao,
-    cep,
+    cep: cep || "",
     pais,
     siglaPais,
     siglaEstado,
-    bairro,
+    bairro: bairro || "",
   };
 }
 
 function preencherInformacoesDoEndereco(endereco) {
   const { rua, bairro, cidade, siglaEstado, cep } = endereco;
-
+  
   document.getElementById("validacaoLogradouroLocal").value = rua;
   document.getElementById("validacaoNumeroLocal").value = "";
   document.getElementById("validacaoComplementoLocal").value = "";
