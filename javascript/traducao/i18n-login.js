@@ -75,8 +75,8 @@ const lngs = {
                   navEventos: "EVENTS",
                   navPatentes:{
                       titulo: "PATENTS",
-                      subnavCadastro: "Register Patents",
-                      subnavListar: "List Patents"
+                      subnavCadastro: "Register patent",
+                      subnavListar: "View list of patents"
                   },
                   btnUser:{
                       saudacao: "Hello, {{name}} !",
@@ -120,19 +120,22 @@ const lngs = {
         jqueryI18next.init(i18next, $, { useOptionsAttr: true });
   
         Object.keys(lngs).map((lng) => {
-          let optSelect = new Option(lngs[lng].nativeName, lng);
-          if (lng === i18next.resolvedLanguage) {
-            optSelect.setAttribute("selected", "selected");
+          //let optSelect = new Option(lngs[lng].nativeName, lng);
+          let optSelect = `<option value="${lng}" class="option-traducao">${lngs[lng].nativeName}</option>`;
+  
+          if(lng === i18next.resolvedLanguage){
+              optSelect = `<option value="${lng}" class="option-traducao" selected="selected">${lngs[lng].nativeName}</option>`;
           }
-          //console.log(optSelect);
-          $("#languageSwitcher").append(optSelect);
+          $('#languageSwitcher').append(optSelect);
+          console.log(optSelect)
         });
   
-        $("#languageSwitcher").change(() => {
-          let chooseLng = $(this).find("option:selected").attr("value");
-          i18next.changeLanguage(chooseLng, () => {
-            $("body").localize();
-          });
+  
+        $('#languageSwitcher').change(() => {
+            let chooseLng = $(this).find("option:selected").attr('value');
+            i18next.changeLanguage(chooseLng, () => {
+                $("body").localize()
+            })
         });
   
         $("body").localize();

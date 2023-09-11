@@ -16,6 +16,13 @@ $(function () {
       resources: {
         pt: {
           translation: {
+            navBar1:{
+              btnUser:{
+                saudacao: "Olá, {{name}} !",
+                perfil: "MEU PERFIL",
+                sair: "SAIR"
+              }
+            },
             patentsRegister: {
               sectionPatentsRegister: {
                 tituloPatente: "Título da Patente*",
@@ -26,7 +33,7 @@ $(function () {
                   mapa: "MAPA",
                   ecossistema2: "ECOSSISTEMA",
                   tutorial: "TUTORIAL",
-                  eventos: "EVENTOS",
+                  navEventos: "EVENTOS",
                   patente: "PATENTE",
                   cadastrarPatente: "Cadastrar patente",
                   verListaPatente: "Ver lista de patentes",
@@ -98,7 +105,14 @@ $(function () {
         },
       },
           en: {
-            translation: {        
+            translation: {  
+              navBar1:{
+                btnUser:{
+                  saudacao: "Hello, {{name}} !",
+                    perfil: "MY PROFILE",
+                    sair: "LOGOUT"
+                }
+              },      
               patentsRegister: {
                 sectionPatentsRegister: {
                   tituloPatente: "Patent Title*",
@@ -107,9 +121,9 @@ $(function () {
                 menu: {
                   sectionHeader:{
                     mapa: "MAP",
-                    ecossistema2: "ECOSYSTEM",
+                    ecossistema2: "ABOUT US",
                     tutorial: "TUTORIAL",
-                    eventos: "EVENTS",
+                    navEventos: "EVENTS",
                     patente: "PATENT",
                     cadastrarPatente: "Register patent",
                     verListaPatente: "View list of patents",
@@ -188,20 +202,23 @@ $(function () {
       jqueryI18next.init(i18next, $, { useOptionsAttr: true });
 
       Object.keys(lngs).map((lng) => {
-        let optSelect = new Option(lngs[lng].nativeName, lng);
-        if (lng === i18next.resolvedLanguage) {
-          optSelect.setAttribute("selected", "selected");
-        }
-        console.log(optSelect);
-        $("#languageSwitcher").append(optSelect);
-      });
+        //let optSelect = new Option(lngs[lng].nativeName, lng);
+        let optSelect = `<option value="${lng}" class="option-traducao">${lngs[lng].nativeName}</option>`;
 
-      $("#languageSwitcher").change(() => {
-        let chooseLng = $(this).find("option:selected").attr("value");
-        i18next.changeLanguage(chooseLng, () => {
-          $("body").localize();
-        });
-      });
+        if(lng === i18next.resolvedLanguage){
+            optSelect = `<option value="${lng}" class="option-traducao" selected="selected">${lngs[lng].nativeName}</option>`;
+        }
+        $('#languageSwitcher').append(optSelect);
+        console.log(optSelect)
+      })
+
+
+      $('#languageSwitcher').change(() => {
+          let chooseLng = $(this).find("option:selected").attr('value');
+          i18next.changeLanguage(chooseLng, () => {
+              $("body").localize()
+          })
+      })
 
       $("body").localize();
     }
