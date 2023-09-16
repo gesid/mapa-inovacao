@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Firebase Setup  -->
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+    <script src="javascript/config.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-VEX6JVXGVX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-VEX6JVXGVX");
+    </script>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+
+    <script
+      src="https://kit.fontawesome.com/16786d0779.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/paginastartup.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css" />
+    <link rel="stylesheet" type="text/css" href="css/lista-patentes.css" />
+    
+    
+    <script src="model/evento.js"></script>
+  
+    <script src="model/usuario.js"></script>
+    <script src="model/Patente.js"></script>
+
+    <script src="dao/eventodao.js"></script>
+
+    <script src="dao/usuariodao.js"></script>
+    <script src="dao/PatenteDAO.js"></script>
+
+    <link rel="shortcut icon" href="img/favicon_2.png" />
+    <title>Mapa do Ecossistema de Inovação Cearense</title>
+    <style>
+      #dropdown{
+        position: absolute !important;
+        left: -89px !important;
+        right: 190px !important;
+        top: 10px !important;
+     
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
+        <!--Logo -->
+        <a href="index.html"
+          ><img class="logo" src="img\logos\logo-svg.svg"
+        /></a>
+
+        <!--Menu Hamburguer-->
+        <button
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#menu-nav"
+          aria-controls="#menu-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!--Navegação-->
+        <div id="menu-nav" class="collapse navbar-collapse">
+          <ul id="lista-nav" class="navbar-nav btnNav">
+            <li class="nav-item">
+              <a type="button" href="index.html" class="nav-item-style">
+                <i class="fas fa-map-marker-alt"> </i>
+                <p class="texto-nav">MAPA</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                type="button"
+                href="ecossistema.html"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-newspaper"></i>
+                <p class="texto-nav">ECOSSISTEMA</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                type="button"
+                href="javascript:void(0)"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+                data-toggle="modal"
+                data-target="#modalSobre"
+              >
+                <i class="fas fa-chalkboard-teacher"> </i>
+                <p class="texto-nav">COMO UTILIZAR</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                type="button"
+                href="eventos.html"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-theater-masks"> </i>
+                <p class="texto-nav">EVENTOS</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <div class="dropdown show">
+                <a
+                  class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style"
+                  href="#"
+                  role="button"
+                  id="dropDownNavPatente"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-stamp"> </i>
+                  <p class="texto-nav">PATENTES</p>
+                </a>
+
+                <div
+                  class="dropdown-menu"
+                  id="opcoesDropdownPatentes"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="./cadastro-patente.html"
+                    >Cadastrar patente</a
+                  >
+                  <a class="dropdown-item" href="./patentes.html"
+                    >Ver lista de patentes</a
+                  >
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a
+                type="button"
+                href="dashboard.html"
+                class="d-flex align-items-center justify-content-start nav-item-style"
+              >
+                <i class="fas fa-chart-pie"></i>
+                <p class="texto-nav">DASHBOARD</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div id="menu-nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav btnNav"></ul>
+          <form class="form-inline" onsubmit="return false">
+            <div id="btn-user" class="dropdownHeader">
+              <button
+                class="btn-dropdown-header dropdown-toggle"
+                type="button"
+                id="dropdownMenu2"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              ></button>
+            </div>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <!--Barra Mobile-->
+    <div id="barraMobile">
+      <form id="form-mobile" class="form-inline" onsubmit="return false">
+        <div class="input-group buscaHeader">
+          <input
+            id="barraBuscaStartupMobile"
+            type="text"
+            class="form-control"
+            placeholder="Busca: Por título ex: Agenda Edu"
+            aria-label="Buscar..."
+            aria-describedby="basic-addon2"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-busca font-weight-bold"
+              type="button"
+              onclick="filtrarStartupPorTipoBusca()"
+            >
+              Buscar
+            </button>
+            <button
+              type="button"
+              class="btn btn-busca-dropdown dropdown-toggle dropdown-toggle-split"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+
+            <div class="dropdown-menu">
+              <a class="dropdown-item disabled" href="#">Tipo de busca</a>
+              <div class="dropdown-divider"></div>
+              <a
+              class="dropdown-item"
+              href="#"
+              data-tipo="Título"
+              data-texto="título"
+              data-label="título"
+              onclick="selecionarTipoBuscaStartup(this)"
+              >Por título</a
+            >
+             
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="Classificacao"
+                data-texto="classificação"
+                data-label="classificacao"
+                onclick="selecionarTipoBuscaStartup(this)"
+                >Por classificação</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="fase"
+                data-texto="fase"
+                data-label="fase"
+                onclick="selecionarTipoBuscaStartup(this)"
+                >Por fase</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="publico"
+                data-texto="Publico alvo"
+                data-label="publico"
+                onclick="selecionarTipoBuscaStartup(this)"
+                >Por público alvo</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                data-tipo="modelo de receitas"
+                data-texto="modelo de receitas"
+                data-label="modelo de receitas"
+                onclick="selecionarTipoBuscaStartup(this)"
+                >Por modelo de receitas</a
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal Como Utilizar -->
+    <div
+      class="modal fade"
+      id="modalSobre"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalScrollableTitle"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-utilizar modal-dialog-scrollable"
+        role="document"
+      >
+        <div class="modal-content modal-content-utilizar">
+          <div
+            class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
+          >
+            <p id="título-modal">
+              Colaborar é muito simples! Veja no vídeo abaixo como funciona:
+            </p>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div
+              id="localVideo"
+              class="d-flex align-items-center justify-content-center modal-video"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    
+      <!-- Modal de Atualização -->
+    <div
+      class="modal fade bd-example-modal-lg"
+      id="ModalAtualizacao"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLabel"
+              style="font-weight: bold"
+            >
+              Atualizar informação
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onclick="deletarMarcador()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            
+
+            <div class="tab-content mt-3" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <form>
+                  <!-- Inicio do Conteúdo do Cadastro de locais-->
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="validacaoNomeLocal">Nome*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="33"
+                        id="nomeAtt"
+                        placeholder="Nome"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="validacaoSiteLocal">Site*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="siteAtt"
+                        placeholder="Site"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-2">
+                      <label for="validacaoTipoLocal">Tipo de Local*</label>
+                      <select
+                        class="form-control form-control"
+                        id="tipoAtt"
+                        required="required"
+                        placeholder="validacaoTipoLocal"
+                        onclick=""
+                      >
+                        <option value="1" selected disabled>
+                          Selecionar...
+                        </option>
+                        <option value="Aceleradora">Aceleradora</option>
+                        <!--<option>Advogados</option>-->
+                        <option value="Catalisadores Locais">Catalisadores Locais</option>
+                        <option value="Comunicação e Mídia">Comunicação e Mídia</option>
+                        <!--<option>Conexão com Mercado</option>-->
+                        <!--<option>Conteúdo</option>-->
+                        <option value="Coworking">Coworking</option>
+                        <!--<option>Créditos</option>-->
+                        <!--<option>Editais</option>-->
+                        <option value="Escolas">Escolas</option>
+                        <option value="Espaços Makers">Espaços Makers</option>
+                        <option value="Eventos">Eventos</option>
+                        <option value="Fábrica de Aplicativos">Fábrica de Aplicativos</option>
+                        <!--<option>Governo</option>-->
+                        <option value="Grandes Empresas">Grandes Empresas</option>
+                        <option value="Incubadoras">Incubadoras</option>
+                        <option value="Iniciativas Universitárias">Iniciativas Universitárias</option>
+                        <option value="Investidores">Investidores</option>
+                        <!--<option>Missões de Negócios</option>-->
+                        <option value="Núcleos de Inovação">Núcleos de Inovação</option>
+                        <option value="Parques Tecnológicos">Parques Tecnológicos</option>
+                        <option value="Pré Aceleradoras">Pré Aceleradoras</option>
+                        <option value="Propriedade Intelectual">Propriedade Intelectual</option>
+                        <!--<option>Provedores de Serviços</option>-->
+                        <option value="Mentoria">Mentoria</option>
+                        <option value="Startup">Startup</option>
+                      </select>
+                    </div>
+                    <div class="form-group custom-file col-md-4" style="margin-top: 30px;">
+                      <input
+                        type="file"
+                        class="custom-file-input custom-file-input-lg"
+                        id="imageAtt"
+                      />
+                      <label
+                        id="uploaderLabelImage"
+                        class="custom-file-label"
+                        for="imageAtt"
+                        >Selecione a Logo*</label
+                      >
+                    </div>
+                  </div>
+                    
+                  <div class="form-row">
+                  
+                    <div
+                      id="dropdownStartupAtt"
+                      class="form-group col-md-3"
+                      style="display: none"
+                    >
+                      <label for="validacaoTipoLocal"
+                        >Classificação*</label
+                      >
+                      <select
+                        class="form-control form-control"
+                        id="validacaoClassificacao"
+                        required="required"
+                        placeholder="validacaoTipoLocal"
+                      >
+                        <option value="1" selected disabled>
+                          Escolha o segmento da startup
+                        </option>
+                      </select>
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                      <label>Modelo De Receitas*</label>
+                      <select
+                      class="form-control form-control"
+                      id="modeloReceitaAtt"
+                      required="required"
+                      placeholder="modeloReceitaAtt"
+                      onclick=""
+                      >
+                        <option value="1" selected disabled>
+                          Selecionar... 
+                      <option value="Venda Direta">Venda direta</option>
+                      <option value="Serviço sob Demanda">Serviço sob Demanda</option>
+                      <option value="Afiliados">Afiliados</option>
+                      <option value="Licenciamento">Licenciamento</option>
+                      <option value="Assinaturas">Assinaturas</option>
+                      <option value="Freemium">Freemium</option>
+                      <option value="Advertising (Propraganda)">Advertising (Propraganda)</option>
+                        </option>
+                       
+                      </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label>Público Alvo*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                    
+                        id="publicoAlvoAtt"
+                        placeholder="Público Alvo"
+                      />
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Maturidade*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="maturidadeAtt"
+                        placeholder="Maturidade"
+                      />
+                    </div>
+                   </div>
+                
+
+                  <div class="form-row" style="margin-top: 7px">
+                    <!-- linha3-->
+                    <div class="form-group col-md-3">
+                      <label>Fase*</label>
+                      <select
+                      class="form-control form-control"
+                      id="faseAtt"
+                      required="required"
+                      placeholder="faseAtt"
+                      onclick=""
+                    >
+                      <option value="1" selected disabled>
+                        Selecionar...
+                      </option> <option value="Ideação">Ideação</option>
+                      <option value="Validação">Validação</option>
+                      <option value="Operação">Operação</option>
+                      <option value="Tração">Tração</option>
+                      <option value="Scale-up">Scale-up</option>
+                    </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoLatLocal">Latitude</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="latitudeAtt"
+                        placeholder="Latitude"
+                        disabled="disabled"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoLngLocal">Longitude</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="longitudeAtt"
+                        placeholder="Longitude"
+                        disabled="disabled"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <!-- linha4-->
+
+                    <div class="form-group col-md-2">
+                      <label for="validacaoCEPLocal">CEP*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="9"
+                        id="CepAtt"
+                        placeholder="CEP"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLogradouroLocal">Logradouro*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="longradouroAtt"
+                        placeholder="Logradouro"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoNumeroLocal">Número*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="5"
+                        id="numeroAtt"
+                        placeholder="Número"
+                      />
+                    </div>
+                  </div>
+                  
+
+                  <div class="form-row">
+                    <!-- linha5-->
+                    <div class="form-group col-md-4">
+                      <label for="validacaoComplementoLocal">Complemento</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        id="complementoAtt"
+                        maxlength="30"
+                        placeholder="Complemento"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoBairroLocal">Bairro*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="bairroAtt"
+                        placeholder="Bairro"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="validacaoCidadeLocal">Cidade*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="cidadeAtt"
+                        placeholder="Cidade"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-1">
+                      <label for="validacaoUFLocal">UF*</label>
+                      <select
+                        class="form-control form-control"
+                        required="required"
+                        id="UFAtt"
+                      >
+                        <option value="1" selected disabled>UF</option>
+                        <option>AC</option>
+                        <option>AL</option>
+                        <option>AP</option>
+                        <option>AM</option>
+                        <option>BA</option>
+                        <option value="CE">CE</option>
+                        <option>DF</option>
+                        <option>ES</option>
+                        <option>GO</option>
+                        <option>MA</option>
+                        <option>MT</option>
+                        <option>MS</option>
+                        <option>MG</option>
+                        <option>PA</option>
+                        <option>PB</option>
+                        <option>PR</option>
+                        <option>PE</option>
+                        <option>PI</option>
+                        <option>RJ</option>
+                        <option>RN</option>
+                        <option>RS</option>
+                        <option>RO</option>
+                        <option>RR</option>
+                        <option>SC</option>
+                        <option>SP</option>
+                        <option>SE</option>
+                        <option>TO</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!---Inicio do Conteudo-->
+                </form>
+                <!---Fim do Conteudo-->
+              </div>
+
+              <div
+                class="tab-pane fade"
+                id="profile"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
+                <form>
+                  <!---Inicio do Conteudo dos Eventos-->
+                  <div class="form-row">
+                    <!-- linha1-->
+                    <div class="form-group col-3">
+                      <label for="validacaoNomeEvento">Nome*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="33"
+                        id="validacaoNomeEvento"
+                        placeholder="Nome"
+                      />
+                    </div>
+
+                    <div class="form-group col-3">
+                      <label for="validacaoSiteEvento">Site*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        id="validacaoSiteEvento"
+                        placeholder="Site"
+                      />
+                    </div>
+
+                    <div class="form-group col-3">
+                      <label for="validacaoTipoEvento">Tipo de Evento*</label>
+                      <select
+                        class="form-control"
+                        id="validacaoTipoEvento"
+                        required="required"
+                      >
+                        <option value="1" selected disabled>
+                          Selecionar...
+                        </option>
+                        <option>Empreendedorismo</option>
+                        <option>Tecnologia</option>
+                        <option>Inovação</option>
+                        <option>Negócios</option>
+                      </select>
+                    </div>
+
+                    <div
+                      class="form-group col-3 form-group custom-file"
+                      style="margin-top: 4.1%"
+                    >
+                      <input
+                        type="file"
+                        class="custom-file-input custom-file-input-lg"
+                        required="required"
+                        id="uploader2"
+                      />
+                      <label
+                        id="uploaderLabel2"
+                        class="custom-file-label"
+                        for="uploader2"
+                        >Imagem</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <!-- linha3-->
+                    <div class="form-group col-6">
+                      <label for="areatextoEvento">Descrição*</label>
+                      <textarea
+                        class="form-control"
+                        id="areatextoEvento"
+                        maxlength="250"
+                        rows="3"
+                      ></textarea>
+                    </div>
+
+                    <div class="form-group col-6" style="margin-top: 3%">
+                      <div
+                        class="input-group date"
+                        id="datetimepicker1"
+                        data-target-input="nearest"
+                      >
+                        <input
+                          id="dtpicker"
+                          type="text"
+                          class="form-control datetimepicker-input"
+                          required="required"
+                          data-target="#datetimepicker1"
+                        />
+                        <span
+                          class="input-group-text"
+                          data-target="#datetimepicker1"
+                          data-toggle="datetimepicker"
+                        >
+                          <span class="fa fa-calendar"></span
+                        ></span>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="validacaoLatEvento">Latitude</label>
+                          <input
+                            class="form-control form-control"
+                            type="text"
+                            required="required"
+                            id="validacaoLatEvento"
+                            placeholder="Latitude"
+                            disabled="disabled"
+                          />
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="validacaoLngEvento">Latitude</label>
+                          <input
+                            class="form-control form-control"
+                            type="text"
+                            required="required"
+                            id="validacaoLngEvento"
+                            placeholder="Longitude"
+                            disabled="disabled"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <!-- linha4-->
+
+                    <div class="form-group col-md-2">
+                      <label for="validacaoCEPEvento">CEP*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="9"
+                        id="validacaoCEPEvento"
+                        placeholder="CEP"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="validacaoLogradouroEvento">Logradouro*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoLogradouroEvento"
+                        placeholder="Logradouro"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoNumeroEvento">Número*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="5"
+                        id="validacaoNumeroEvento"
+                        placeholder="Número"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <!-- linha5-->
+                    <div class="form-group col-md-4">
+                      <label for="validacaoComplementoEvento"
+                        >Complemento</label
+                      >
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        id="validacaoComplementoEvento"
+                        maxlength="30"
+                        placeholder="Complemento"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="validacaoBairroEvento">Bairro*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoBairroEvento"
+                        placeholder="Bairro"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="validacaoCidadeEvento">Cidade*</label>
+                      <input
+                        class="form-control form-control"
+                        type="text"
+                        required="required"
+                        maxlength="30"
+                        id="validacaoCidadeEvento"
+                        placeholder="Cidade"
+                      />
+                    </div>
+
+                    <div class="form-group col-md-1">
+                      <label for="validacaoUFEvento">UF*</label>
+                      <select
+                        class="form-control form-control"
+                        required="required"
+                        id="validacaoUFEvento"
+                      >
+                        <option value="1" selected disabled>UF</option>
+                        <option>AC</option>
+                        <option>AL</option>
+                        <option>AP</option>
+                        <option>AM</option>
+                        <option>BA</option>
+                        <option>CE</option>
+                        <option>DF</option>
+                        <option>ES</option>
+                        <option>GO</option>
+                        <option>MA</option>
+                        <option>MT</option>
+                        <option>MS</option>
+                        <option>MG</option>
+                        <option>PA</option>
+                        <option>PB</option>
+                        <option>PR</option>
+                        <option>PE</option>
+                        <option>PI</option>
+                        <option>RJ</option>
+                        <option>RN</option>
+                        <option>RS</option>
+                        <option>RO</option>
+                        <option>RR</option>
+                        <option>SC</option>
+                        <option>SP</option>
+                        <option>SE</option>
+                        <option>TO</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+                <!---Fim do Conteudo-->
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn-att2"
+              data-dismiss="modal"
+            
+            >
+              Cancelar
+            </button>
+            <button
+              id="btn-enviarAtt"
+              type="button"
+              class="btn-att"
+         
+            >
+            Confirmar
+            </button>
+
+            <!--data-toggle="modal"
+          data-target="#modalAgradecimento"-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="main">
+      <!--Barra do título da página-->
+      <div class="d-flex justify-content-center">
+        <div id="barra-title">
+          <p
+            id="barra-text-title"
+            class="d-flex align-items-center justify-content-center"
+          >
+            PAINEL DE STARTUPS
+          </p>
+        </div>
+      </div>
+
+      <div id="lista-startup">
+        <div class="row d-flex justify-content-center" style="margin-left: 5rem;">
+           
+           
+                <div class="row col-md-10 col-md-pull-2" id="listaDeStartup">
+                   
+                  
+                  
+                  
+                
+              
+        
+            
+             
+                
+              </div>
+          </div>
+
+          
+        </div>
+      </main>
+      <ul class="pagination d-flex justify-content-center" id="selecionadorPagina" onclick="">
+        <li id="anterior" onclick="anteriorPa()"><a style="cursor: pointer;" >«</a></li>
+        
+        <li id="proximo"><a style="cursor: pointer;" >»</a></li>
+      </ul>
+
+    <footer class="footerstyle footer">
+      <div class="prefooter">
+        <div class="div-footer1">
+          <ul>
+            <li>
+              <a
+                id="email"
+                href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
+              >
+                Para mais informações, fale conosco através do
+                mapainovacao@ufc.br</a
+              >
+              <p class="div-footer-beta">Versão 0.2 (Beta)</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="div-footer2">
+        <a
+          href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
+          target="_blank"
+          class=""
+          >POLÍTICAS DE PRIVACIDADE</a
+        >
+        <a
+          href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf"
+          target="_blank"
+          class=""
+        >
+          TERMOS DE USO</a
+        >
+        <a
+          href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf"
+          target="_blank"
+          class=""
+        >
+          TERMOS DE CONSENTIMENTO</a
+        >
+      </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="javascript/logica_comum.js"></script>
+    <script src="javascript/login.js"></script>
+    <script src="javascript/modal.js"></script>
+    <script src="javascript/lista-startup.js"></script>
+    <script src="javascript/traducao/i18n-index.js" type="module"></script>
+ 
+  </body>
+</html>
