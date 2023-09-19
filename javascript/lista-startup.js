@@ -197,12 +197,15 @@ function adiconarStartupNoCard(startup) {
             <img class="card-img-center" src="${startup.startup.URL}" alt="Card image cap"  style="width: 65px;height: 65px;">  
         </div>
         
-          <div class="row" style=" width:100px; margin-left: 25%;justify-content:center; ">
-            <div class="row" style="justify-content:center;"> 
-            <div class="card-title">${startup.startup.Nome}</div>
+        
+        <div class="row" style="width: 100px; margin-left: 25%; display: flex; flex-direction: column; align-items: center;">
+        <div class="row" style="display: flex; flex-direction: column; align-items: center;"> 
+            <div class="card-title" style="white-space: nowrap;">${startup.startup.Nome}</div>
             <div class="classificao">${startup.startup.Classificacao}</div>
-            </div>
-          </div>
+        </div>
+    </div>
+    
+
 
             <div class="row" style="justify-content:center;">
                 
@@ -224,33 +227,54 @@ function adiconarStartupNoCard(startup) {
             <img src= "./img/atualizar.png" class = "imgPop" style="margin-top: 1px"/>
           
 
-           
-         
-         
-        <div class="dropdown-menu bg-white" id="dropdown" style="width: 13rem; height:10rem;">
-          
+            <div class="dropdown-menu bg-white" id="dropdown" style="width: 13rem; height: auto;">
             <div class="card-body">
-            <div class="row" style="margin-left:5px">
-
-            <div class="">
-            <p class="card-text" style="font-size: 13px;font-size: 400;font-size:10px;"><img src="img/site-startup.PNG" class="card-img-left" alt="" style="width: 25px;height: 20px;">  ${startup.startup.Site}</p>
-            </div>
-                 
-            <div class="">
-            <p class="card-text" style="font-size: 13px;font-weight: 400;font-size:10px;"><img src="img/público.png" class="card-img-left" alt="" style="width: 25px;height: 25px;">  Publico alvo: ${startup.startup.Publico} </p>
-            </div>
-
-            <div class="">
-            <p class="card-text" style="font-size: 13px;font-weight: 400;font-size:10px;"><img src="img/fase.png" class="card-img-left" alt="" style="width: 25px;height: 25px;">  Fase: ${startup.startup.Fase} </p>
-            </div>
-
-            <div class="">
-            <p class="card-text" style="font-size: 13px;font-weight: 400; font-size:10px;"><img src="img/modelo.png" class="card-img-left" alt=""style="width: 24px;height: 25px;">  Modelo de receitas: ${startup.startup.Receitas} </p>
-            </div>
-
-            
+                <div class="row" style="margin-left: 5px; display: flex; align-items: center;">
+                    <div style="margin-right: 5px;">
+                        <img src="img/site-startup.PNG" class="card-img-left" alt="" style="width: 25px; height: 20px;">
+                    </div>
+                    <div>
+                        <p class="card-text" style="font-size: 10px; font-weight: 400;">
+                            ${startup.startup.Site}
+                        </p>
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 5px; display: flex; align-items: center;">
+                    <div style="margin-right: 5px;">
+                        <img src="img/público.png" class="card-img-left" alt="" style="width: 25px; height: 25px;">
+                    </div>
+                    <div>
+                        <p class="card-text" style="font-size: 10px; font-weight: 400;">
+                            Publico alvo: ${startup.startup.Publico}
+                        </p>
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 5px; display: flex; align-items: center;">
+                    <div style="margin-right: 5px;">
+                        <img src="img/fase.png" class="card-img-left" alt="" style="width: 25px; height: 25px;">
+                    </div>
+                    <div>
+                        <p class="card-text" style="font-size: 10px; font-weight: 400;">
+                            Fase: ${startup.startup.Fase}
+                        </p>
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 5px; display: flex; align-items: center;">
+                    <div style="margin-right: 5px;">
+                        <img src="img/modelo.png" class="card-img-left" alt="" style="width: 24px; height: 25px;">
+                    </div>
+                    <div>
+                        <p class="card-text" style="font-size: 10px; font-weight: 400;">
+                            Modelo de receitas: ${startup.startup.Receitas}
+                        </p>
+                    </div>
+                </div>
            
-          
+       
+        
+         
+         
+      
         </div>
         </div>
         
@@ -333,10 +357,10 @@ function atualizarStartup(startup) {
   const UFAtt = document.querySelector("#UFAtt");
   const publicoAlvoAtt = document.querySelector("#publicoAlvoAtt");
   const modeloReceitaAtt = document.querySelector("#modeloReceitaAtt");
-  const maturidadeAtt = document.querySelector("#maturidadeAtt");
+ 
   const faseAtt = document.querySelector("#faseAtt");
   const imageAtt = document.querySelector("#imageAtt");
-  const dropdownStartupAtt = document.getElementById("dropdownStartupAtt");
+  const classificacaoAtt = document.getElementById("classificacaoAtt");
   let chave = startup.getAttribute("data-key");
 
   $("#imageAtt").on("change", function (event) {
@@ -355,9 +379,9 @@ function atualizarStartup(startup) {
           siteInput.value = element.val().Site;
           tipoInput.value = element.val().Tipo;
 
-          if (element.val().Tipo == "Startup") {
+        
             dropdownStartupAtt.style.display = "block";
-          }
+        
           latitudeAtt.value = element.val().Latitude;
           longitudeAtt.value = element.val().Longitude;
           CepAtt.value = element.val().CEP;
@@ -366,8 +390,8 @@ function atualizarStartup(startup) {
           complementoAtt.value = element.val().Complemento;
           bairroAtt.value = element.val().Bairro;
           publicoAlvoAtt.value = element.val().Publico || "";
+          classificacaoAtt.value = element.val().Classificacao;
           faseAtt.value = element.val().Fase || "1";
-          maturidadeAtt.value = element.val().Maturidade || "";
           modeloReceitaAtt.value = element.val().Receitas || "1";
           cidadeAtt.value = element.val().Cidade;
           UFAtt.value = element.val().UF;
@@ -381,7 +405,7 @@ function atualizarStartup(startup) {
               CEP: CepAtt.value,
               Fase: faseAtt.value,
               Publico: publicoAlvoAtt.value,
-              Maturidade: maturidadeAtt.value,
+              Classificacao : classificacaoAtt.value,
               Modelo: modeloReceitaAtt.value,
               Logradouro: longradouroAtt.value,
               Numero: numeroAtt.value,

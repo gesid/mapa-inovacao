@@ -15,7 +15,9 @@
     height: 5px;
     font-size: 12px;
     font-weight: bold;
+   
 }
+
 .card-body{
    padding: 5px;
    justify-content: center;
