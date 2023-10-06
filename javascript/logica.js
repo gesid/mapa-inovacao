@@ -512,6 +512,7 @@ function cartaoRegiao(entidade, nomeUser) {
   let titulo = template.content.querySelector("#txt-titulo-card");
   let descricao = template.content.querySelector("#txt-descricao-card");
   let criador = template.content.querySelector("#txt-marcadopor-nome");
+  let txtMarcadoPor = template.content.querySelector("#txt-marcadopor");
   let btn1 = template.content.querySelector("#btn-card1");
   let btn2 = template.content.querySelector("#btn-card2");
 
@@ -528,8 +529,13 @@ function cartaoRegiao(entidade, nomeUser) {
   btn1.setAttribute("name", entidade.getMarkerKey());
   btn1.setAttribute("onclick", "exibirRegiao(this)");
 
-  btn1.innerHTML = "Ativar no mapa";
-  btn2.innerHTML = "Visitar site";
+  btn1.classList.add("cardRegiao-i18n");
+  btn2.classList.add("cardRegiao-i18n");
+  txtMarcadoPor.classList.add("cardRegiao-i18n");
+
+  btn1.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnAtivar");
+  btn2.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnVisitar");
+  txtMarcadoPor.innerHTML = i18next.t('barraLateral.cards.cardsComunidade.txtMarcadoPor'); 
 
   criador.textContent = nomeUser;
   criador.setAttribute("href", "javascript:void(0)");
@@ -544,6 +550,24 @@ function cartaoRegiao(entidade, nomeUser) {
   cartao.appendChild(document.importNode(template.content, true));
   permissao = true;
 }
+
+/**Tradução elementos cards Regiões */
+i18next.on('languageChanged', function(lng) {
+  const BOTOES_LOCALIZACAO_CARD_REGIAO = document.getElementsByClassName("cardRegiao-i18n");
+  const ARRAY_BOTOES_LOCALIZACAO_CARD_REGIAO = Array.from(BOTOES_LOCALIZACAO_CARD_REGIAO)
+
+  ARRAY_BOTOES_LOCALIZACAO_CARD_REGIAO.forEach(element => {
+    if(element.id == "btn-card1"){
+      element.innerText = i18next.t('barraLateral.cards.cardsComunidade.btnAtivar'); 
+    } 
+    else if(element.id == "btn-card2"){
+      element.innerText = i18next.t('barraLateral.cards.cardsComunidade.btnVisitar'); 
+    }
+    else if(element.id == "txt-marcadopor"){
+      element.innerHTML = i18next.t('barraLateral.cards.cardsComunidade.txtMarcadoPor'); 
+    }
+  });
+});
 
 function cartaoComunidade(entidade, nomeUser) {
   let template = document.querySelector("#cartaoEmpresa");
@@ -571,7 +595,7 @@ function cartaoComunidade(entidade, nomeUser) {
 
   btn1.classList.add("cardComunidade-i18n");
   btn2.classList.add("cardComunidade-i18n");
-  txtMarcadoPor.classList.add("cardEntidade-i18n");
+  txtMarcadoPor.classList.add("cardComunidade-i18n");
 
   btn1.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnAtivar");
   btn2.innerHTML = i18next.t("barraLateral.cards.cardsComunidade.btnVisitar");
@@ -591,7 +615,7 @@ function cartaoComunidade(entidade, nomeUser) {
   permissao = true;
 }
 
-/**Tradução elementos cards Empresas */
+/**Tradução elementos cards Comunidades */
 i18next.on('languageChanged', function(lng) {
   const BOTOES_LOCALIZACAO_CARD_COMUNIDADE = document.getElementsByClassName("cardComunidade-i18n");
   const ARRAY_BOTOES_LOCALIZACAO_CARD_COMUNIDADE = Array.from(BOTOES_LOCALIZACAO_CARD_COMUNIDADE)
