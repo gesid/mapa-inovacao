@@ -15,7 +15,40 @@
   <link rel="stylesheet" href="css/dashboard/theme.css" />
   <link rel="stylesheet" href="css/dashboard/dashboard.css" />
   <link rel="stylesheet" href="css/footer-component.css" />
-
+  <style>
+    .table td{
+      padding-left: 25px !important;
+    }
+    .paginacao{
+      color: black;
+      cursor: pointer;
+    }
+    .selecionado{
+      background-color: #019267;
+      color: white;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+    .ajudaSvg{
+      margin-bottom: 10px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    #barraDashboard{
+      display: flex;
+      align-items: center;
+     justify-content: center;
+      width: 95vw;
+      height: 50px;
+      background-color: rgba(27, 84, 56, 1);
+      border-radius: 6px;
+     margin-bottom: 15.2px;
+     color: white;
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+     font-size: 20px;
+     font-weight: bold;
+    }
+  </style>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
@@ -41,242 +74,361 @@
 </head>
 
 <body class="bg-light">
-  <div id="db-wrapper" class="toggled">
-    <!-- navbar vertical -->
-    <!-- Page content -->
-    <div id="page-content">
-      <div>
-        <header>
-          <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
-            <!--Logo -->
-            <a href="index.html"><img class="logo" src="img/logos/logo-svg.svg" /></a>
+    <header>
+        <nav id="barra_nav" class="navbar navbar-expand-xl navbar-dark">
+          <!--Logo -->
+          <a href="index.html"><img class="logo" src="img/logos/logo-svg.svg" /></a>
 
-            <!--Menu Hamburguer-->
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#menu-nav" aria-controls="#menu-nav"
-              aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+          <!--Menu Hamburguer-->
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#menu-nav" aria-controls="#menu-nav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-            <!--Navegação-->
-            <div id="menu-nav" class="collapse navbar-collapse navbar">
-              <ul id="lista-nav" class="navbar-nav btnNav">
-                <li class="nav-item">
-                  <a type="button" href="index.html" class="nav-item-style">
-                    <i class="fas fa-map-marker-alt"> </i>
-                    <p class="texto-nav">MAPA</p>
+          <!--Navegação-->
+          <div id="menu-nav" class="collapse navbar-collapse navbar">
+            <ul id="lista-nav" class="navbar-nav btnNav">
+              <li class="nav-item">
+                <a type="button" href="index.html" class="nav-item-style">
+                  <i class="fas fa-map-marker-alt"> </i>
+                  <p class="texto-nav">MAPA</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a type="button" href="ecossistema.html"
+                  class="d-flex align-items-center justify-content-start nav-item-style">
+                  <i class="fas fa-newspaper"></i>
+                  <p class="texto-nav">ECOSSISTEMA</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a type="button" href="eventos.html"
+                  class="d-flex align-items-center justify-content-start nav-item-style">
+                  <i class="fas fa-theater-masks"> </i>
+                  <p class="texto-nav">EVENTOS</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <div class="dropdown show">
+                  <a class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style" href="#"
+                    role="button" id="dropDownNavPatente" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fas fa-stamp"> </i>
+                    <p class="texto-nav">PATENTES</p>
                   </a>
-                </li>
 
-                <li class="nav-item">
-                  <a type="button" href="ecossistema.html"
-                    class="d-flex align-items-center justify-content-start nav-item-style">
-                    <i class="fas fa-newspaper"></i>
-                    <p class="texto-nav">ECOSSISTEMA</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a type="button" href="eventos.html"
-                    class="d-flex align-items-center justify-content-start nav-item-style">
-                    <i class="fas fa-theater-masks"> </i>
-                    <p class="texto-nav">EVENTOS</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <div class="dropdown show">
-                    <a class="dropdown-toggle d-flex align-items-center justify-content-start nav-item-style" href="#"
-                      role="button" id="dropDownNavPatente" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="fas fa-stamp"> </i>
-                      <p class="texto-nav">PATENTES</p>
-                    </a>
-
-                    <div class="dropdown-menu" id="opcoesDropdownPatentes" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="./cadastro-patente.html">Cadastrar patente</a>
-                      <a class="dropdown-item" href="./patentes.html">Ver lista de patentes</a>
-                    </div>
+                  <div class="dropdown-menu" id="opcoesDropdownPatentes" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="./cadastro-patente.html">Cadastrar patente</a>
+                    <a class="dropdown-item" href="./patentes.html">Ver lista de patentes</a>
                   </div>
-                </li>
+                </div>
+              </li>
 
-                <li class="nav-item">
-                  <a type="button" href="dashboard.html"
-                    class="d-flex align-items-center justify-content-start nav-item-style">
-                    <i class="fas fa-chart-pie"></i>
-                    <p class="texto-nav">DASHBOARD</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
+              <li class="nav-item">
+                <a type="button" href="dashboard.html"
+                  class="d-flex align-items-center justify-content-start nav-item-style">
+                  <i class="fas fa-chart-pie"></i>
+                  <p class="texto-nav">DASHBOARD</p>
+                </a>
+              </li>
+            </ul>
+          </div>
 
-            <form id="btn-user" class="dropdownHeader">
-              <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-            </form>
-          </nav>
-        </header>
+          <form id="btn-user" class="dropdownHeader">
+            <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          </form>
+        </nav>
+      </header>
+      <div class="d-flex justify-content-center pt-5 pb-20" >
+        <div class="" id="barraDashboard"> Dashboard do Mapa do Ecossistema de Inovação Cearense</div>
       </div>
-      <!-- Container fluid -->
-      <div class="barra pt-10 pb-21"></div>
-      <div class="container-fluid mt-n22 px-6">
-        <!-- row  -->
-        <div class="row mt-6">
-          <div class="col-md-12 col-12">
-            <div class="card">
-              <!-- card header  -->
-              <div class="card-header bg-white py-4">
-                <h4 class="mb-0">Categorias de entidades</h4>
-              </div>
-              <!-- table  -->
-              <div class="table-responsive">
-                <table class="table text-nowrap mb-0" id="categoria">
-                  <thead class="table-light">
-                    <tr>
-                      <th></th>
-                      <th>Nome</th>
+     
+        <div class="container-fluid mt-n22 px-6">
+            <div class="row mt-6" >
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0" >
+                    <div class="card" style="border-radius: 20px;">
+                        <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
+                            <h4 class="mb-0" style="display: inline">
+                                Regiões por categoria
+                              </h4>
 
-                      <th>Total</th>
+                              <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalregioes" >
+                              <select class="float-right" style="border-radius: 10px;padding: 5px;width: 160px;" id="selectRegioesPorCategoria">
+                                <option selected value="Todas">Todas as categorias</option>
+                                <option value="Aceleradora">Aceleradora</option>
+                                <option value="Catalisadores">Catalisadores Locais</option>
+
+                                <option value="Comunicação">Comunicação e Mídia</option>
+                                <option value="Coworking">Coworking</option>
+                                <option value="Startup">Startup</option>
+                                <option value="Escolas">Escolas</option>
+                                <option value="Fábrica de Aplicativos">
+                                  Fábrica de Aplicativos
+                                </option>
+                                <option value="Grandes Empresas">Grandes Empresas</option>
+                                <option value="Incubadoras">Incubadoras</option>
+                                <option value="Iniciativas Universitárias">
+                                  Iniciativas Universitárias
+                                </option>
+                                <option value="Investidores">Investidores</option>
+                                <option value="Núcleos de Inovação">
+                                  Núcleos de Inovação
+                                </option>
+                                <option value="Parques Tecnológicos">
+                                  Parques Tecnológicos
+                                </option>
+                                <option value="Propriedade Intelectual">
+                                  Propriedade Intelectual
+                                </option>
+                                <option value="Mentoria">Mentoria</option>
+                                <option value="Pré Aceleradoras">Pré Aceleradoras</option>
+                              </select>
+                        </div>
+                        <div class="card-body">
+                            <div id="graficoRegioesCategoria" style="height: 300px"></div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0" >
+                    <div class="card" style="border-radius: 20px;">
+                        <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
+                            <h4 class="mb-0" style="display: inline">
+                                Comunidades por Categorias
+                              </h4>
+                              <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalComunidadesPorCategoria">
+                              <select class="float-right" style="border-radius: 10px;padding: 5px;width: 160px;" id="selectComunidadesPorRegiao">
+                                <option selected value="Todas">Todas as categorias</option>
+                                <option value="Aceleradora">Aceleradora</option>
+                                <option value="Catalisadores">Catalisadores Locais</option>
+
+                                <option value="Comunicação">Comunicação e Mídia</option>
+                                <option value="Coworking">Coworking</option>
+                                <option value="Startup">Startup</option>
+                                <option value="Escolas">Escolas</option>
+                                <option value="Fábrica de Aplicativos">
+                                  Fábrica de Aplicativos
+                                </option>
+                                <option value="Grandes Empresas">Grandes Empresas</option>
+                                <option value="Incubadoras">Incubadoras</option>
+                                <option value="Iniciativas Universitárias">
+                                  Iniciativas Universitárias
+                                </option>
+                                <option value="Investidores">Investidores</option>
+                                <option value="Núcleos de Inovação">
+                                  Núcleos de Inovação
+                                </option>
+                                <option value="Parques Tecnológicos">
+                                  Parques Tecnológicos
+                                </option>
+                                <option value="Propriedade Intelectual">
+                                  Propriedade Intelectual
+                                </option>
+                                <option value="Mentoria">Mentoria</option>
+                                <option value="Pré Aceleradoras">Pré Aceleradoras</option>
+                              </select>
+                        </div>
+                        <div class="card-body">
+                            <div id="graficoComunidadesPorCategoria" style="height: 300px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-6">
+              <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
+                <div class="card" style="border-radius: 20px;">
+                  <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
+                       <h4 class="mb-0" style="display: inline">
+                          Categorias de Entidade
+                        </h4>
+                        <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalCategoriasDeEntidadeGrafico">
+                        <select style="border-radius: 10px;padding: 5px;width: 160px;float: right;" id="selectCategoriasDeEntidade">
+                          <option value="Todas">Todas as regiões</option>
+                          <option value="Cariri">Cariri</option>
+                          <option value="Fortaleza">Fortaleza</option>
+                          <option value="Regional Norte">Região Norte</option>
+                          <option value="Sertão de Crateús">Sertão de Crateús</option>
+                          <option value="Sertão Central">Sertão Central</option>
+                          <option value="Chapada da Ibiapaba">
+                            Chapada da Ibiapara
+                          </option>
+                          <option value="Metropolitano">Metropolitano</option>
+                          <option value="Jaguaribe">Jaguaribe</option>
+                          <option value="Centro Sul">Centro Sul</option>
+                          <option value="Maciço do Baturité">
+                            Maciço do Baturité
+                          </option>
+                          <option value="Itapipoca">Itapipoca</option>
+                          <option value="Litoral Leste">Litoral Leste</option>
+                        </select>
+                  </div>
+                  <div class="card-body">
+                      <div id="graficoCategoriasDeEntidade" style="height: 300px"></div>
+
+                  </div>
+              </div>
+              </div>
+                <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
+                  <div class="card" style="border-radius: 20px;">
+                    <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
+                      <h4 class="mb-0" style="display: inline">
+                        Quantitativo de entidades por categoria
+
+                        </h4>
+                        <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalCategoriasDeEntidadeLista">
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table text-nowrap mb-0" id="categoria" >
+                      <thead class="" style="background-color: #f0f0f0; border-bottom: none;">
+                        <tr>
+                          <th></th>
+                          <th>Classificação</th>
+                         
+                          <th>Quantidade</th>
+                       
+                        </tr>
+                      </thead>
+                      <tbody id="tabela" >
+                        
+                      </tbody>
+                    </table>
+                    <div  id="animacaoInicio"></div>
+                  </div>
+
+                  <div class="card-footer bg-white text-center" style="border-radius: 10px;height: 47px;border-radius: 0 0 20px 20px">
+                    <ul class="pagination d-flex justify-content-center" id="selecionadorPagina" onclick="">
+                      
+                    </ul>
+                  </div>
+
+                  </div>
+
+                </div>
+            </div>
+            <div class="row mt-6"> 
+              <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
+                <div class="card" style="border-radius: 20px;">
+                    <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
+                         <h4 class="mb-0" style="display: inline">
+                          Startups por fase
+
+                          </h4>
+                          <img src="img/ajudadashboard/ajuda.svg" id="ajudaStartup" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalsegmentos">
+                          
+                          
+                          <select style="border-radius: 10px;padding: 5px;width: 160px;float: right;" id="selectStartupsFases">
+                            <option value="Segmentos">Fases por Segmentos</option>
+                            <option value="Receitas">Fases por Modelo de Receitas</option>
+                            <option value="Negocio">Fases por Modelo de Negócio</option>
+                            
+                          </select>
+                          <select style="border-radius: 10px;padding: 5px;width: 160px;float: right;margin-right: 10px;" id="selectStartupsTipos">
+                            <option value="Todas">Todos os segmentos</option>
+                            <option value="Vendas diretas">FoodTech</option>
+                           
+                            
+                          </select>
+                    </div>
+                    <div class="card-body">
+                        <div id="graficoStartup" style="height: 300px"></div>
+                      
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
+              <div class="card" style="border-radius: 20px;">
+                  <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
+                       <h4 class="mb-0" style="display: inline">
+                          Segmentos de Startup
+                        </h4>
+                        <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalSegmentosStartup">
+                        <select style="border-radius: 10px;padding: 5px;width: 160px;float: right;" id="selectSegmentosStartups">
+                          <option value="Todas">Todas as regiões</option>
+                          <option value="Cariri">Cariri</option>
+                          <option value="Fortaleza">Fortaleza</option>
+                          <option value="Regional Norte">Região Norte</option>
+                          <option value="Sertão de Crateús">Sertão de Crateús</option>
+                          <option value="Sertão Central">Sertão Central</option>
+                          <option value="Chapada da Ibiapaba">
+                            Chapada da Ibiapara
+                          </option>
+                          <option value="Metropolitano">Metropolitano</option>
+                          <option value="Jaguaribe">Jaguaribe</option>
+                          <option value="Centro Sul">Centro Sul</option>
+                          <option value="Maciço do Baturité">
+                            Maciço do Baturité
+                          </option>
+                          <option value="Itapipoca">Itapipoca</option>
+                          <option value="Litoral Leste">Litoral Leste</option>
+                        </select>
+                  </div>
+                  <div class="card-body">
+                      <div id="graficoSegmentosStartup" style="height: 300px"></div>
+                    
+                  </div>
+              </div>
+          </div>
+            </div>
+            <div class="row mt-6">
+              <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
+                <div class="card" style="border-radius: 20px;">
+                    <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
+                         <h4 class="mb-0" style="display: inline">
+                            Depositantes de Patentes
+                          </h4>
+                          <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalDepositantePatenetes">
+                    </div>
+                    <div class="card-body">
+                        <div id="graficoDepositantesPatentes" style="height: 300px"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
+              <div class="card" style="border-radius: 20px;">
+                <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
+                  <h4 class="mb-0" style="display: inline">
+                      Seções de Patentes
+                    </h4>
+                    <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalSecoesPatentes">
+
+              </div>
+              <div class="table-responsive" >
+                <table class="table text-nowrap mb-0" id="categoria" >
+                  <thead class="" style="background-color: #f0f0f0; border-bottom: none;">
+                    <tr>
+                      
+                      <th>Nome</th>
+                      <th>Quantidade</th>
+                     
                     </tr>
                   </thead>
-                  <tbody id="tabela"></tbody>
+                  <tbody id="tabelaPatentes" style="height: 245px;">
+                    
+                  </tbody>
                 </table>
-                <div style="height: 260px" id="animacaoInicio"></div>
+                <div  id="animacaoInicio"></div>
               </div>
-              <!-- card footer  -->
-              <div class="card-footer bg-white text-center">
-                <a class="link-primary" style="color: #019267" id="todasCat">mostrar mais categorias</a>
+
+              <div class="card-footer bg-white text-center" style="border-radius: 10px;height: 47px;border-radius: 0 0 20px 20px">
+                <ul class="pagination d-flex justify-content-center" id="selecionadorPaginaPatentes" onclick="">
+                  
+                </ul>
               </div>
+
+              </div>
+
             </div>
-            <!-- card  -->
-          </div>
-          <br />
-          <br />
-
-          <!-- table  -->
-
-          <!-- card footer  -->
+            </div>
         </div>
-        <br />
-        <br />
-
-        <div class="row-my-6">
-          <div class="col-md-12 col-12">
-            <div class="card">
-              <!-- card header  -->
-              <div class="card-header bg-white py-4">
-                <h4 class="mb-0" style="display: inline">
-                  Categorias de entidades por região ou comunidade
-                </h4>
-
-                <select style="float: right; border-color: #fd7e14" id="filtroRegiao">
-                  <option value="todas">Todas as categorias de entidades</option>
-                  <option value="aceleradora">Aceleradora</option>
-                  <option value="catalisadores">Catalisadores Locais</option>
-
-                  <option value="comunicacao">Comunicação e Mídia</option>
-                  <option value="coworking">Coworking</option>
-                  <option value="startup">Startup</option>
-                  <option value="escolas">Escolas</option>
-                  <option value="Fábrica de Aplicativos">
-                    Fábrica de Aplicativos
-                  </option>
-                  <option value="Grandes Empresas">Grandes Empresas</option>
-                  <option value="Incubadoras">Incubadoras</option>
-                  <option value="Iniciativas Universitárias">
-                    Iniciativas Universitárias
-                  </option>
-                  <option value="Investidores">Investidores</option>
-                  <option value="Núcleos de Inovação">
-                    Núcles de Inovação
-                  </option>
-                  <option value="Parques Tecnológicos">
-                    Parques Tecnológicos
-                  </option>
-                  <option value="Propriedade Intelectual">
-                    Propriedade Intelectual
-                  </option>
-                  <option value="Mentoria">Mentoria</option>
-                  <option value="Pré Aceleradoras">Pré Aceleradoras</option>
-                </select>
-              </div>
-              <div class="row my-6" id="column" style="height: 300px; width: 100%"></div>
-            </div>
-          </div>
-        </div>
-        <!-- row  -->
-        <div class="row my-6">
-          <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
-            <!-- card  -->
-            <div class="card h-100">
-              <div class="card-header bg-white py-4">
-                <h4 class="mb-0" style="display: inline">
-                  Categorias de entidades
-                </h4>
-
-                <select style="float: right; border-color: #fd7e14" id="filtroRegiaoEntidade">
-                  <option value="nenhuma">Todas as comunidades/regiões</option>
-                  <option value="Kariri Valley">Kariri Valley</option>
-                  <option value="Rapadura">Rapadura Valley</option>
-                  <option value="Região Norte">Região Norte</option>
-                  <option value="Sertão de Crateús">Sertão de Crateús</option>
-                  <option value="Sertão Central">Sertão Central</option>
-                  <option value="Chapadan da Ibiapara">
-                    Chapada da Ibiapara
-                  </option>
-                  <option value="Metropolitano">Metropolitano</option>
-                  <option value="Jaguaribe">Jaguaribe</option>
-                  <option value="Centro Sul">Centro Sul</option>
-                  <option value="Maciço do Baturité">
-                    Maciço do Baturité
-                  </option>
-                  <option value="Itapipoca">Itapipoca</option>
-                  <option value="Litoral Leste">Litoral Leste</option>
-                </select>
-              </div>
-              <div class="card-body">
-                <div id="graficoComunidade" style="height: 300px"></div>
-              </div>
-            </div>
-          </div>
-          <!-- card  -->
-          <div class="col-xl-6 col-lg-12 col-md-12 col-12">
-            <div class="card h-100">
-              <!-- card header  -->
-              <div class="card-header bg-white py-4">
-                <h4 class="mb-0" style="display: inline">
-                  Segmentos de startup
-                </h4>
-
-                <select style="float: right; border-color: #fd7e14" id="filtroTipoStartup">
-                  <option value="nenhuma">Todas as comunidades/regiões</option>
-                  <option value="Kariri Valley">Kariri Valley</option>
-                  <option value="Rapadura">Rapadura Valley</option>
-                  <option value="Região Norte">Região Norte</option>
-                  <option value="Sertão de Crateús">Sertão De Crateús</option>
-                  <option value="Sertão Central">Sertão Central</option>
-                  <option value="Chapadan da Ibiapara">
-                    Chapada da Ibiapara
-                  </option>
-                  <option value="Metropolitano">Metropolitano</option>
-                  <option value="Jaguaribe">Jaguaribe</option>
-                  <option value="Centro Sul">Centro Sul</option>
-                  <option value="Maciço do Baturité">
-                    Maciço do Baturité
-                  </option>
-                  <option value="Itapipoca">Itapipoca</option>
-                  <option value="Litoral Leste">Litoral Leste</option>
-                </select>
-              </div>
-              <div class="card-body">
-                <div id="graficoTipoStartup" style="height: 300px"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+     
   <footer id="footer">
     <div class="footer-content">
       <div class="contact-info">
@@ -297,7 +449,160 @@
       </div>
     </div>
   </footer>
+<!--MODAIS AJUDA-->
+<div class="modal fade modalregioes" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Regiões Por Categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esse gráfico mostra o total de categorias em cada região do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+      </div>
+     
+    </div>
+  </div>
+</div>
 
+
+
+<div class="modal fade modalComunidadesPorCategoria" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Comunidades por Categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esse gráfico mostra o total de categorias em cada comunidade do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalCategoriasDeEntidadeGrafico" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Categorias de Entidade</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esse gráfico mostra cada categoria existente e seu número de entidades, em uma região ou comunidade do Ceará. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalCategoriasDeEntidadeLista" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Quantitativo de entidades por categoria
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Essa lista mostra a quantidade de entidades em cada categoria cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais entidades naquela categoria maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalSegmentosStartup" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Segmentos de Startup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esse gráfico mostra os segmentos de startup e a quantidade de startup em cada um deles nas regiões ou comunidades do Ceará, sendo possível escolher uma região ou comunidade específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalDepositantePatenetes" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Depositantes de patentes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esse gráfico mostra a quantidade de patentes cadastradas em cada depositante de patente. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalSecoesPatentes" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Seções de Patentes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Essa lista mostra a quantidade de patentes em cada seção cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais patentes na seção maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade modalsegmentos" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Fases por Segmentos de Startup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esse gráfico mostra a quantidade de segmento de startup existente (sendo possível escolher qual segmento visualizar pelo filtro “Escolha o segmento” ) nas fases daquelas startups (se estiver em dúvida de quais startups são, saiba que são todas que possuem sua fase cadastrada no segmento escolhido). Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense. O gráfico abaixo ainda está em uma versão com dados preliminares. Portanto, caso você seja uma startup e deseja contribuir conosco compartilhando os dados da sua startup, por favor entre em contato por email informando o segmento, fase e modelo de negócio.    </div>
+     
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modalreceitas" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Fases por Modelo de Receita</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esse gráfico mostra a quantidade do modelo de receita escolhido (pelo filtro “Escolha o modelo de receita”) nas fases de startups (se estiver em dúvida de quais startups são, saiba que são todas que possuem sua fase cadastrada). Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense. O gráfico abaixo ainda está em uma versão com dados preliminares. Portanto, caso você seja uma startup e deseja contribuir conosco compartilhando os dados da sua startup, por favor entre em contato por email informando o segmento, fase e modelo de negócio.    
+    </div>
+  </div>
+</div>
   <!-- Scripts -->
   <script src="javascript/dashboard/jquery.min.js"></script>
   <script src="javascript/dashboard/bootstrap.bundle.min.js"></script>
@@ -314,17 +619,22 @@
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
 
-  <script src="javascript/config.js"></script>
+  <!--TESTE BIBLIOTECA NOVA PARA O TREE MAP-->
 
+  <script src="javascript/config.js"></script>
+  <script>
+    const database = firebase.database();
+
+  </script>
   <script src="model/usuario.js"></script>
   <script src="dao/usuariodao.js"></script>
+
   <script src="javascript/logica_comum.js"></script>
   <script src="javascript/dashboard/main.js"></script>
   <script src="javascript/dashboard/feather.js"></script>
   <script src="javascript/dashboard/sidebarMenu.js"></script>
 
-  <script src="javascript/dashboard/utils.js"></script>
-  <script src="javascript/dashboard/mostra.js"></script>
+  <script src="javascript/cidadesPorRegioes.js"></script>
   <script src="javascript/dashboard/dashboard.js"></script>
 </body>
 

@@ -1,2387 +1,1196 @@
-let arrayDedados = {};
-let objetoNumeroRegiao = {};
-async function carregaFirebase() {
-  await firebase
-    .database()
-    .ref("marcadores")
-    .once("value", async function (snapshot) {
-      arrayDedados = await carregaCategoriasDeEntidade(snapshot);
-      objetoNumeroRegiao = await carregaNumeroDeTodasEntidades(snapshot);
+//variaveis
+const dbMarcadores = firebase.database().ref("marcadores");
+const dbPatentes = firebase.database().ref("patentes");
+const selectRegioesPorCategoria = document.getElementById(
+  "selectRegioesPorCategoria"
+);
 
-      carregarDados();
+let arrayRegioes = [];
+let arrayComunidades = [];
+let arrayCategoriaDeEntidade = [];
+let arrayPatentes = [];
+let arraySegmentosStartup = [];
+
+let arrayStartupsFases = [];
+//chamada de funções
+carregarTabaleCategoriasDeEntidade(0, 4);
+carregarDadosGraficos();
+ajudaModal();
+async function carregarDadosGraficos() {
+  arrayCategoriaDeEntidade = await contarTotalEntidade();
+  arrayCategoriaDeEntidade = adicionarDadosNaMatrizCategoriaDeEntidade(
+    arrayCategoriaDeEntidade
+  );
+  arrayPatentes = await adicionarDadosMatrizPatentes();
+
+  arraySegmentosStartup = await carregarClassificacoesStartup();
+  arraySegmentosStartup = await adicionarDadosMatrizSegmentosStartup(
+    arraySegmentosStartup
+  );
+
+  arrayStartupsFases = await adicionarDadosMatrizFasesStartups();
+  mudarSelectParaSegmentos();
+
+  carregarDadosMapa().then((entidades) => {
+    let quantidadeEntidadesPorRegiao = atribuirQuantidade(entidades);
+
+    arrayRegioes.push(["Regiões", "Total"]);
+    arrayRegioes = adicionarDadosNaMatriz(
+      quantidadeEntidadesPorRegiao,
+      arrayRegioes
+    );
+
+    arrayComunidades.push(["Comunidade", "Total"]);
+    arrayComunidades = adicionarDadosMatrizComunidade(
+      quantidadeEntidadesPorRegiao,
+      arrayComunidades
+    );
+
+    //arrayCategoriaDeEntidade;
+    carregarTodosGraficos();
+    $("#selectRegioesPorCategoria").change(function () {
+      verificarSelectGraficoRegioesPorCategoria(
+        quantidadeEntidadesPorRegiao,
+        entidades
+      );
     });
+    $("#selectComunidadesPorRegiao").change(function () {
+      verificarSelectGraficoComunidadesPorCategoria(
+        quantidadeEntidadesPorRegiao,
+        entidades
+      );
+    });
+    $("#selectSegmentosStartups").change(function () {
+      verificarSelectGraficoSegmentosStartups();
+    });
+    $("#selectCategoriasDeEntidade").change(async function () {
+      await verificarSelectGraficoCategoriasDeEntidade();
+    });
+    $("#selectStartupsTipos").change(async function () {
+      await verificarSelectStartups();
+    });
+    $("#selectStartupsFases").change(async function () {
+      const selectStartupsFases = document.querySelector(
+        "#selectStartupsFases"
+      );
+      if (selectStartupsFases.value === "Receitas") {
+        document
+          .getElementById("ajudaStartup")
+          .setAttribute("data-target", ".modalreceitas");
+        arrayStartupsFases = await adicionarDadosMatrizFasesPorReceitas();
+        mudarSelectParaReceitas();
+      } else if (selectStartupsFases.value === "Segmentos") {
+        document
+          .getElementById("ajudaStartup")
+          .setAttribute("data-target", ".modalsegmentos");
+        arrayStartupsFases = await adicionarDadosMatrizFasesStartups();
+        mudarSelectParaSegmentos();
+      } else if (selectStartupsFases.value === "Negocio") {
+        arrayStartupsFases = await adicionarDadosMatrizFasesPorModeloDeNegocio();
+
+        mudarSelectParaModeloDeNegocio();
+      }
+      google.charts.setOnLoadCallback(graficoStartup);
+    });
+  });
 }
-carregaFirebase();
 
-let tipoRegiao = "Total";
-//filtrar tipo de região
-let filtro = $("#filtroRegiao");
-
-filtro.on("change", async function () {
-  if (filtro.val() == "catalisadores") {
-    tipoRegiao = "Catalisadores Locais";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Catalisadores Locais",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "aceleradora") {
-    tipoRegiao = "Aceleradora";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Aceleradora",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "startup") {
-    tipoRegiao = "Startup";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Startup",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "comunicacao") {
-    tipoRegiao = "Comunicação e Mídia";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Comunicação e Mídia",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "coworking") {
-    tipoRegiao = "Coworking";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Coworking",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "escolas") {
-    tipoRegiao = "escolas";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Escolas",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Fábrica de Aplicativos") {
-    tipoRegiao = "Fábrica de Aplicativos";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Fábrica de Aplicativos",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Grandes Empresas") {
-    tipoRegiao = "Grandes Empresas";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Grandes Empresas",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Incubadoras") {
-    tipoRegiao = "Incubadoras";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Incubadoras",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Iniciativas Universitárias") {
-    tipoRegiao = "Iniciativas Universitárias";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Iniciativas Universitárias",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Investidores") {
-    tipoRegiao = "Investidores";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Investidores",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Núcleos de Inovação") {
-    tipoRegiao = "Núcleos de Inovação";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Núcleos de Inovação",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Parques Tecnológicos") {
-    tipoRegiao = "Parques Tecnológicos";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Parques Tecnológicos",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Propriedade Intelectual") {
-    tipoRegiao = "Propriedade Intelectual";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Propriedade Intelectual",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Mentoria") {
-    tipoRegiao = "Mentoria";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Mentoria",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "Pré Aceleradoras") {
-    tipoRegiao = "Pré Aceleradoras";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroEntidadesPorRegiao(
-          "Pré Aceleradoras",
-          snapshot
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
-  } else if (filtro.val() == "todas") {
-    tipoRegiao = "Todas";
-
-    await firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-        objetoNumeroRegiao = carregaNumeroDeTodasEntidades(snapshot);
-      });
-    setTimeout(() => {
-      document.getElementById("column").innerHTML = "";
-      google.charts.setOnLoadCallback(regioes);
-    }, 500);
+document.body.onresize = function () {
+  if (document.body.clientWidth < 800 || document.body.clientWidth > 800) {
+    carregarTodosGraficos();
   }
-});
+};
+function carregarTodosGraficos() {
+  google.charts.load("current", { packages: ["corechart"] });
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(graficoComunidadesPorCategoria);
+  google.charts.setOnLoadCallback(regioes);
+  google.charts.setOnLoadCallback(graficoDepositantesPatentes);
+  google.charts.setOnLoadCallback(graficoCategoriasDeEntidade);
+  google.charts.setOnLoadCallback(graficoStartup);
+
+  google.charts.load("current", { packages: ["treemap"] });
+  google.charts.setOnLoadCallback(graficoSegmentosStartup);
+  // Callback that creates and populates a data table,
+  // instantiates the pie chart, passes in the data and
+  // draws it.
+}
+
+function graficoSegmentosStartup() {
+  var data = new google.visualization.DataTable();
+  data.addColumn("string", "ID");
+  data.addColumn("string", "Parent");
+  data.addColumn("number", "Valor");
+  data.addRows(arraySegmentosStartup);
+
+  var options = {
+    highlightOnMouseOver: true,
+    maxDepth: 1,
+    maxPostDepth: 2,
+    minColor: "#00b57f",
+    midColor: "#00865e",
+    maxColor: "#005c41",
+    headerHeight: 15,
+    fontColor: "white",
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: "out",
+    },
+    showScale: true,
+    height: 300,
+    useWeightedAverageForAggregation: true,
+  };
+
+  var chart = new google.visualization.TreeMap(
+    document.getElementById("graficoSegmentosStartup")
+  );
+  chart.draw(data, options);
+}
 
 function regioes() {
-  var data = google.visualization.arrayToDataTable([
-    ["Regiões", tipoRegiao],
-    ["Kariri Valley", objetoNumeroRegiao.kaririValley],
-    ["Rapadura Valley", objetoNumeroRegiao.rapaduraValley],
-    ["Região Norte", objetoNumeroRegiao.regiaoNorte],
-    ["Sertão de Crateús", objetoNumeroRegiao.sertaoCrateus],
-    ["Sertão Central", objetoNumeroRegiao.sertaoCentral],
-    ["Chapada da Ibiapara", objetoNumeroRegiao.chapadaDaIbiapaba],
-    ["Metropolitano", objetoNumeroRegiao.metropolitano],
-    ["Jaguaribe", objetoNumeroRegiao.jaguaribe],
-    ["Centro Sul", objetoNumeroRegiao.centroSul],
-    ["Maciço do Baturité", objetoNumeroRegiao.macico],
-    ["Itapipoca", objetoNumeroRegiao.itapipoca],
-    ["Litoral Leste", objetoNumeroRegiao.litoral],
-  ]);
+  var data = google.visualization.arrayToDataTable(arrayRegioes);
 
   var options = {
     title: "Gráfico de comunidades por categoria",
     chartArea: { width: "40%", height: "90%" },
-    colors: ["#C2FF7C", "#C2FF7C"],
-
+    colors: ["#019267", "#019267"],
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: "out",
+    },
     hAxis: {
       title: "Numeros Entidades",
       minValue: 0,
+      ticks: [],
     },
     vAxis: {},
   };
   var chart = new google.visualization.BarChart(
-    document.getElementById("column")
+    document.getElementById("graficoRegioesCategoria")
   );
   chart.draw(data, options);
 }
 
-let filtroRegiaoEntidade = $("#filtroRegiaoEntidade");
-filtroRegiaoEntidade.on("change", function () {
-  if (filtroRegiaoEntidade.val() == "Rapadura") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Rapadura Valley");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Kariri Valley") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Kariri Valley");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Região Norte") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Região Norte");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Sertão de Crateús") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Sertão de Crateús");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Sertão Central") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Sertão Central");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Chapadan da Ibiapara") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(
-          snapshot,
-          "Chapadan da Ibiapara"
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Metropolitano") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Metropolitano");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Jaguaribe") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Jaguaribe");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Centro Sul") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Centro Sul");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Maciço do Baturité") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(
-          snapshot,
-          "Maciço do Baturité"
-        );
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Itapipoca") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Itapipoca");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "Litoral Leste") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Litoral Leste");
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  } else if (filtroRegiaoEntidade.val() == "nenhuma") {
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
+function graficoComunidadesPorCategoria() {
+  var data = google.visualization.arrayToDataTable(arrayComunidades);
+  //var view = new google.visualization.DataView(data);
+  var options = {
+    title: "",
+    width: "30%",
+    height: "90%",
+    colors: ["#019267"],
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: "out",
+    },
+    bar: { groupWidth: "95%" },
+    legend: { position: "none" },
+    hAxis: { ticks: [] },
+  };
+  var chart = new google.visualization.BarChart(
+    document.getElementById("graficoComunidadesPorCategoria")
+  );
+  chart.draw(data, options);
+}
+function graficoStartup() {
+  var data = google.visualization.arrayToDataTable(arrayStartupsFases);
 
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoComunidade").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoComunidade);
-    }, 500);
-  }
-});
-
-function graficoComunidade() {
-  var data = google.visualization.arrayToDataTable([
-    ["Tipo Entidade", "Numeros"],
-    ["Fábrica de Aplicativos", arrayDedados.fabrica],
-    ["Aceleradora", arrayDedados.aceleradora],
-    ["Iniciativas Universitárias", arrayDedados.iniciativas],
-    ["Investidores", arrayDedados.investidores],
-    ["Coworking", arrayDedados.coworking],
-    ["Startup", arrayDedados.startup],
-    ["Escolas", arrayDedados.escolas],
-    ["Espaços Makers", arrayDedados.markers],
-    ["Grandes Empresas", arrayDedados.grandesEmpresas],
-    ["Incubadoras", arrayDedados.incubadoras],
-    ["Núcles de Inovação", arrayDedados.nucleos],
-    ["Parques Tecnológicos", arrayDedados.parques],
-    ["Propriedade Intelectual", arrayDedados.propriedadeIntelectual],
-    ["Mentoria", arrayDedados.mentoria],
-    ["Pré Aceleradoras", arrayDedados.preAceleradora],
-    ["Espaços Makers", arrayDedados.markers],
-    ["Comunicação  e Mídia", arrayDedados.comunicacao],
-    ["Catalisadores Locais", arrayDedados.catalisadores],
-  ]);
+  var options = {
+    title: "Gráfico de comunidades por categoria",
+    chartArea: { width: "40%", height: "90%" },
+    colors: ["#019267", "#019267"],
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: "out",
+    },
+    hAxis: {
+      title: "Numeros Entidades",
+      minValue: 0,
+      ticks: [],
+    },
+    vAxis: {},
+  };
+  var chart = new google.visualization.BarChart(
+    document.getElementById("graficoStartup")
+  );
+  chart.draw(data, options);
+}
+function graficoDepositantesPatentes() {
+  var data = google.visualization.arrayToDataTable(arrayPatentes);
 
   var options = {
     title: "",
-    chartArea: { width: "100%", height: "100%" },
-
-    colors: [
-      "#D2B8D9",
-      "#F2CCB6",
-      "#2E8B57",
-      "#9ACD32",
-      "#B8860B",
-      "#D2B48C",
-      "#8A2BE2",
-      "#F08080",
-      "#FF4500",
-      "#FFFF00",
-      "#FFE4C4",
-      "#D8BFD8",
-      "#D3D3D3",
-      "#ADD8E6",
-      "#008B8B",
-      "#8FBC8F",
-      "#32CD32",
-      "#32AA32",
-    ],
+    width: "30%",
+    height: "90%",
+    colors: ["#019267"],
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: "out",
+    },
+    bar: { groupWidth: "95%" },
+    legend: { position: "none" },
+    hAxis: { ticks: [] },
   };
-
-  var chart = new google.visualization.PieChart(
-    document.getElementById("graficoComunidade")
+  var chart = new google.visualization.BarChart(
+    document.getElementById("graficoDepositantesPatentes")
   );
-
   chart.draw(data, options);
 }
-let filtroTipoStartup = $("#filtroTipoStartup");
-filtroTipoStartup.on("change", function () {
-  if (filtroTipoStartup.val() == "Rapadura") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Rapadura Valley");
 
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Região Norte") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Região Norte");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Kariri Valley") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Kariri Valley");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Sertão de Crateús") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Sertão de Crateús");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Sertão Central") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Sertão Central");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Chapadan da Ibiapara") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(
-          snapshot,
-          "Chapadan da Ibiapara"
-        );
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Metropolitano") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Metropolitano");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Jaguaribe") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Jaguaribe");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Centro Sul") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Centro Sul");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Maciço do Baturité") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(
-          snapshot,
-          "Maciço do Baturité"
-        );
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Itapipoca") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Itapipoca");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "Litoral Leste") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = condicaoEntidadesEstartup(snapshot, "Litoral Leste");
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-  if (filtroTipoStartup.val() == "nenhuma") {
-    console.log("alterado");
-    firebase
-      .database()
-      .ref("marcadores")
-      .once("value", function (snapshot) {
-        arrayDedados = carregaCategoriasDeEntidade(snapshot);
-
-        console.log(arrayDedados);
-      });
-    setTimeout(() => {
-      document.getElementById("graficoTipoStartup").innerHTML = "";
-      google.charts.setOnLoadCallback(graficoTipoStartup);
-    }, 500);
-  }
-});
-function graficoTipoStartup() {
-  var data = google.visualization.arrayToDataTable([
-    ["Classificacao", "Numeros"],
-    ["Fintech", arrayDedados.fintech],
-    ["Proptech", arrayDedados.proptech],
-    ["Agtech", arrayDedados.agtech],
-    ["Edtech", arrayDedados.edtech],
-    ["Healthtech", arrayDedados.healthtech],
-    ["Adtech - Martech", arrayDedados.Adtech_Martech],
-    ["1", arrayDedados.um],
-    ["Insurtech", arrayDedados.insurtech],
-    ["Sem Classificacao", arrayDedados.semClassificacao],
-    ["retailtech", arrayDedados.retailtech],
-    ["Legaltech", arrayDedados.legaltech],
-  ]);
+function graficoCategoriasDeEntidade() {
+  var data = google.visualization.arrayToDataTable(arrayCategoriaDeEntidade);
 
   var options = {
-    title: "",
-    chartArea: { width: "100%", height: "100%" },
-
-    colors: [
-      "#009932",
-      "#8AC6A0",
-      "#006200",
-      "#00BFFF",
-      "#7FFFD4",
-      "#A0522D",
-      "#191970",
-      "#00CED1",
-      "#2F4F4F",
-      "#7CFC00",
-      "#7CFC11",
-    ],
+    title: "Gráfico de comunidades por categoria",
+    chartArea: { width: "40%", height: "90%" },
+    colors: ["#019267", "#019267"],
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: "out",
+    },
+    hAxis: {
+      title: "Numeros Entidades",
+      minValue: 0,
+      ticks: [],
+    },
+    vAxis: {},
   };
-
-  var chart = new google.visualization.PieChart(
-    document.getElementById("graficoTipoStartup")
+  var chart = new google.visualization.BarChart(
+    document.getElementById("graficoCategoriasDeEntidade")
   );
-
   chart.draw(data, options);
 }
 
-function carregaCategoriasDeEntidade(dataSnapshot) {
-  var num = dataSnapshot.numChildren();
-  let aceleradora = 0;
-  let catalisadores = 0;
-  let comunicacao = 0;
-  let coworking = 0;
-  let escolas = 0;
-  let markers = 0;
-  let fabrica = 0;
-  let grandesEmpresas = 0;
-  let incubadoras = 0;
-  let iniciativas = 0;
-  let investidores = 0;
-  let nucleos = 0;
-  let parques = 0;
-  let preAceleradora = 0;
-  let propriedadeIntelectual = 0;
-  let mentoria = 0;
-  let startup = 0;
+function adicionarQuantidade() {
+  let quantidadeEntidadesPorRegiao = [];
+  for (let i = 0; i < regioesArray.length; i++) {
+    quantidadeEntidadesPorRegiao.push({
+      regiao: regioesArray[i].regiao,
+      quantidade: 0,
+    });
+  }
+  return quantidadeEntidadesPorRegiao;
+}
+function contarQuantidadeEntidadesPorRegiao(
+  entidade,
+  quantidadeEntidadesPorRegiao
+) {
+  for (let i = 0; i < regioesArray.length; i++) {
+    for (let j = 0; j < regioesArray[i].cidades.length; j++) {
+      if (entidade.Cidade == regioesArray[i].cidades[j]) {
+        quantidadeEntidadesPorRegiao[i].quantidade += 1;
+      }
+    }
+  }
+  return quantidadeEntidadesPorRegiao;
+}
+function carregarDadosMapa() {
+  return new Promise((resolve, reject) => {
+    dbMarcadores.on("value", (snapshot) => {
+      resolve(snapshot);
+    });
+  });
+}
+function carregarDadosPatente() {
+  return new Promise((resolve, reject) => {
+    dbPatentes.on("value", (snapshot) => {
+      resolve(snapshot);
+    });
+  });
+}
+function atribuirQuantidade(snapshot) {
+  let quantidadeEntidadesPorRegiao = adicionarQuantidade();
+  snapshot.forEach((data) => {
+    entidade = data.val();
+    if (entidade.Validacao == true) {
+      quantidadeEntidadesPorRegiao = contarQuantidadeEntidadesPorRegiao(
+        entidade,
+        quantidadeEntidadesPorRegiao
+      );
+    }
+  });
+  return quantidadeEntidadesPorRegiao;
+}
 
-  //tipos startups
-  let fintech = 0;
-  let proptech = 0;
-  let agtech = 0;
-  let edtech = 0;
-  let healthtech = 0;
-  let legaltech = 0;
-  let Adtech_Martech = 0;
-  let um = 0;
-  let semClassificacao = 0;
-  let insurtech = 0;
-  let retailtech = 0;
+function contarTipoDeEntidadePorRegiao(snapshot, tipo) {
+  let quantidadeEntidadesPorRegiao = adicionarQuantidade();
+  snapshot.forEach((data) => {
+    entidade = data.val();
+    if (entidade.Tipo.includes(tipo) && entidade.Validacao == true) {
+      quantidadeEntidadesPorRegiao = contarQuantidadeEntidadesPorRegiao(
+        entidade,
+        quantidadeEntidadesPorRegiao
+      );
+    }
+  });
+  return quantidadeEntidadesPorRegiao;
+}
 
-  dataSnapshot.forEach(function (item) {
-    //percorre todos os elementos
-    var value = item.val();
+function adicionarDadosNaMatriz(quantidadeEntidadesPorRegiao, arrayRegioes) {
+  for (let i = 0; i < quantidadeEntidadesPorRegiao.length; i++) {
+    arrayRegioes.push([
+      quantidadeEntidadesPorRegiao[i].regiao,
+      quantidadeEntidadesPorRegiao[i].quantidade,
+    ]);
+  }
+  return arrayRegioes;
+}
 
-    if (value.Validacao == true) {
-      if (value.Tipo === "Aceleradora") {
-        aceleradora++;
-      }
-      if (value.Tipo === "Comunidades") {
-        comunidades++;
-      }
+function adicionarDadosMatrizComunidade(
+  quantidadeEntidadesPorRegiao,
+  arrayComunidades
+) {
+  arrayComunidades.push([
+    "Rapadura Valley",
+    quantidadeEntidadesPorRegiao[0].quantidade,
+  ]);
 
-      if (value.Tipo === "Catalisadores Locais") {
-        catalisadores++;
+  arrayComunidades.push([
+    "Kariri Valley",
+    quantidadeEntidadesPorRegiao[5].quantidade,
+  ]);
+
+  return arrayComunidades;
+}
+
+async function adicionarDadosMatrizPatentes() {
+  let depositantes = await contarPatentesPorDepositante();
+  let matriz = [];
+  matriz.push(["nome", "quantidade"]);
+  for (let i = 0; i < depositantes.length; i++) {
+    matriz.push([depositantes[i].nome, depositantes[i].quantidade]);
+  }
+  return matriz;
+}
+async function adicionarDadosMatrizFasesStartups() {
+  let fases = await contarQuantidadesDeFase();
+  let matriz = [];
+  matriz.push(["Fase", "Quantidade"]);
+  for (let i = 0; i < fases.length; i++) {
+    matriz.push([fases[i].nome, fases[i].quantidade]);
+  }
+  return matriz;
+}
+async function adicionarDadosMatrizFasesPorReceitas() {
+  let fases = await contarQuantidadeDeFaseTodasReceitas();
+  let matriz = [];
+  matriz.push(["Fase", "Quantidade"]);
+  for (let i = 0; i < fases.length; i++) {
+    matriz.push([fases[i].nome, fases[i].quantidade]);
+  }
+  return matriz;
+}
+async function adicionarDadosMatrizFasesPorModeloDeNegocio() {
+  let fases = await contarQuantidadeDeModeloDeReceitasDasFases();
+  let matriz = [];
+  matriz.push(["Fase", "Quantidade"]);
+  for (let i = 0; i < fases.length; i++) {
+    matriz.push([fases[i].nome, fases[i].quantidade]);
+  }
+  return matriz;
+}
+async function adicionarDadosMatrizFasesPorTipoModeloDeNegocio(modelo) {
+  let fases = await contarQuantidadeFasesDeUmModeloDeNegocio(modelo);
+  let matriz = [];
+  matriz.push(["Fase", "Quantidade"]);
+  for (let i = 0; i < fases.length; i++) {
+    matriz.push([fases[i].nome, fases[i].quantidade]);
+  }
+  return matriz;
+}
+async function adicionarDadosMatrizFasesPorTipoDeReceitas(receita) {
+  let fases = await contarQuantidadeDeFasePorReceitas(receita);
+  let matriz = [];
+  matriz.push(["Fase", "Quantidade"]);
+  for (let i = 0; i < fases.length; i++) {
+    matriz.push([fases[i].nome, fases[i].quantidade]);
+  }
+  return matriz;
+}
+
+async function adicionarDadosMatrizFasesStartupsClassificacao(classificacao) {
+  let fases = await contarQuantidadesDeFasePorClassificacao(classificacao);
+  let matriz = [];
+  matriz.push(["Fase", "Quantidade"]);
+  for (let i = 0; i < fases.length; i++) {
+    matriz.push([fases[i].nome, fases[i].quantidade]);
+  }
+  return matriz;
+}
+
+async function adicionarDadosMatrizSegmentosStartup(startups) {
+  let matriz = [];
+  matriz.push(["Root", null, 0]);
+  for (let i = 0; i < startups.length; i++) {
+    matriz.push([startups[i].classe, "Root", startups[i].quantidade]);
+  }
+
+  return matriz;
+}
+function adicionarDadosNaMatrizCategoriaDeEntidade(arrayObjetosComunidades) {
+  let matriz = [];
+  matriz.push(["Tipo de Entidade", "Total"]);
+  for (let i = 0; i < arrayObjetosComunidades.length; i++) {
+    matriz.push([
+      arrayObjetosComunidades[i].nome,
+      arrayObjetosComunidades[i].quantidade,
+    ]);
+  }
+  return matriz;
+}
+
+function verificarSelectGraficoRegioesPorCategoria(
+  quantidadeEntidadesPorRegiao,
+  entidades
+) {
+  let valor = $("#selectRegioesPorCategoria").val();
+  if (valor == "Todas") {
+    quantidadeEntidadesPorRegiao = atribuirQuantidade(entidades);
+  } else {
+    quantidadeEntidadesPorRegiao = contarTipoDeEntidadePorRegiao(
+      entidades,
+      valor
+    );
+  }
+
+  arrayRegioes = [];
+  arrayRegioes.push(["Regiões", "Total"]);
+  arrayRegioes = adicionarDadosNaMatriz(
+    quantidadeEntidadesPorRegiao,
+    arrayRegioes
+  );
+
+  google.charts.setOnLoadCallback(regioes);
+}
+
+function verificarSelectGraficoComunidadesPorCategoria(
+  quantidadeEntidadesPorRegiao,
+  entidades
+) {
+  let valor = $("#selectComunidadesPorRegiao").val();
+
+  if (valor == "Todas") {
+    quantidadeEntidadesPorRegiao = atribuirQuantidade(entidades);
+  } else {
+    quantidadeEntidadesPorRegiao = contarTipoDeEntidadePorRegiao(
+      entidades,
+      valor
+    );
+  }
+
+  arrayComunidades = [];
+  arrayComunidades.push(["Regiões", "Total"]);
+  arrayComunidades = adicionarDadosMatrizComunidade(
+    quantidadeEntidadesPorRegiao,
+    arrayComunidades
+  );
+
+  google.charts.setOnLoadCallback(graficoComunidadesPorCategoria);
+}
+
+async function verificarSelectGraficoCategoriasDeEntidade() {
+  let valor = $("#selectCategoriasDeEntidade").val();
+
+  if (valor == "Todas") {
+    arrayCategoriaDeEntidade = await contarTotalEntidade();
+    arrayCategoriaDeEntidade = adicionarDadosNaMatrizCategoriaDeEntidade(
+      arrayCategoriaDeEntidade
+    );
+  } else {
+    arrayCategoriaDeEntidade = await contarTodosAsDeEntidadeDaRegiao(valor);
+  }
+
+  google.charts.setOnLoadCallback(graficoCategoriasDeEntidade);
+}
+async function verificarSelectGraficoSegmentosStartups() {
+  let valor = $("#selectSegmentosStartups").val();
+
+  if (valor === "Todas") {
+    arraySegmentosStartup = await carregarClassificacoesStartup();
+    arraySegmentosStartup = await adicionarDadosMatrizSegmentosStartup(
+      arraySegmentosStartup
+    );
+  } else {
+    arraySegmentosStartup = await contarTodosAsDeEntidadeDaRegiaoStartup(valor);
+  }
+
+  google.charts.setOnLoadCallback(graficoSegmentosStartup);
+}
+async function verificarSelectStartups() {
+  const selectStartupsFases = document.querySelector("#selectStartupsFases");
+  const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
+
+  if (selectStartupsFases.value == "Segmentos") {
+    if (selectStartupsTipos.value == "Todas") {
+      arrayStartupsFases = await adicionarDadosMatrizFasesStartups();
+    } else {
+      arrayStartupsFases = await adicionarDadosMatrizFasesStartupsClassificacao(
+        selectStartupsTipos.value
+      );
+    }
+  } else if (selectStartupsFases.value == "Negocio") {
+    console.log(selectStartupsTipos.value)
+    if (selectStartupsTipos.value == "Todas") {
+      console.log("aqui")
+      arrayStartupsFases = await adicionarDadosMatrizFasesPorModeloDeNegocio();
+
+    } else {
+      arrayStartupsFases = await adicionarDadosMatrizFasesPorTipoModeloDeNegocio(selectStartupsTipos.value)
+    }
+  }
+  else if (selectStartupsFases.value == "Receitas") {
+    if (selectStartupsTipos.value == "Todas") {
+      arrayStartupsFases = await adicionarDadosMatrizFasesPorReceitas();
+    } else {
+      arrayStartupsFases = await adicionarDadosMatrizFasesPorTipoDeReceitas(
+        selectStartupsTipos.value
+      );
+    }
+  }
+  google.charts.setOnLoadCallback(graficoStartup);
+}
+async function carregarTodosOsTiposDeEntidade() {
+  const entidades = await carregarDadosMapa();
+
+  let arrayObjetos = [];
+  entidades.forEach((valor) => {
+    valor = valor.val();
+    let boolVerifica = true;
+    for (let i = 0; i < arrayObjetos.length; i++) {
+      if (arrayObjetos[i].nome == valor.Tipo) {
+        boolVerifica = false;
       }
-      if (value.Tipo === "Comunicação e Mídia") {
-        comunicacao++;
+    }
+    if (boolVerifica == true) {
+      arrayObjetos.push({
+        nome: valor.Tipo,
+        quantidade: 0,
+      });
+    }
+  });
+  return arrayObjetos;
+}
+async function carregarTodasStartup() {
+  const entidades = await carregarDadosMapa();
+  let startup = [];
+  entidades.forEach((entidade) => {
+    entidade = entidade.val();
+    if (entidade.Tipo === "Startup" && entidade.Validacao === true) {
+      startup.push(entidade);
+    }
+  });
+  return startup;
+}
+async function carregarStartupsPorClassificacao(classificacao) {
+  const entidades = await carregarDadosMapa();
+  let startup = [];
+  entidades.forEach((entidade) => {
+    entidade = entidade.val();
+    if (
+      entidade.Tipo === "Startup" &&
+      entidade.Validacao === true &&
+      entidade.Classificacao === classificacao
+    ) {
+      startup.push(entidade);
+    }
+  });
+
+  return startup;
+}
+
+async function carregarClassificacoesStartup() {
+  const startups = await carregarTodasStartup();
+  let classficacoes = [];
+  for (let i = 0; i < startups.length; i++) {
+    let boolVerifica = true;
+    for (let j = 0; j < classficacoes.length; j++) {
+      if (startups[i].Classificacao == classficacoes[j].classe) {
+        boolVerifica = false;
+        classficacoes[j].quantidade++;
       }
-      if (value.Tipo === "Coworking") {
-        coworking++;
-      }
-      if (value.Tipo === "Escolas") {
-        escolas++;
-      }
-      if (value.Tipo === "Espaços Makers") {
-        markers++;
-      }
-      if (value.Tipo === "Fábrica de Aplicativos") {
-        fabrica++;
-      }
-      if (value.Tipo === "Grandes Empresas") {
-        grandesEmpresas++;
-      }
-      if (value.Tipo === "Incubadoras") {
-        incubadoras++;
-      }
-      if (value.Tipo === "Iniciativas Universitárias") {
-        iniciativas++;
-      }
-      if (value.Tipo === "Investidores") {
-        investidores++;
-      }
-      if (value.Tipo === "Núcleos de Inovação") {
-        nucleos++;
-      }
-      if (value.Tipo === "Pré Aceleradoras") {
-        preAceleradora++;
-      }
-      if (value.Tipo === "Parques Tecnológicos") {
-        parques++;
-      }
-      if (value.Tipo === "Propriedade Intelectual") {
-        propriedadeIntelectual++;
-      }
-      if (value.Tipo === "Mentoria") {
-        mentoria++;
-      }
-      if (value.Tipo === "Startup") {
-        startup++;
-        if (value.Classificacao == "Fintech") {
-          fintech++;
-        } else if (value.Classificacao == "Proptech") {
-          proptech++;
-        } else if (value.Classificacao == "Agtech") {
-          agtech++;
-        } else if (value.Classificacao == "Edtech") {
-          edtech++;
-        } else if (value.Classificacao == "Healthtech") {
-          healthtech++;
-        } else if (value.Classificacao == "Legaltech") {
-          legaltech++;
-        } else if (value.Classificacao == "Adtech – Martech") {
-          Adtech_Martech++;
-        } else if (value.Classificacao == "1") {
-          um++;
-        } else if (value.Classificacao == "Insurtech") {
-          insurtech++;
-        } else if (value.Classificacao == "") {
-          semClassificacao++;
-        } else if (value.Classificacao == "Retailtech") {
-          retailtech++;
-        }
+    }
+    if (boolVerifica) {
+      classficacoes.push({
+        classe: startups[i].Classificacao,
+        quantidade: 1,
+        cidade: startups[i].Cidade,
+      });
+    }
+  }
+
+  return classficacoes;
+}
+
+async function contarTotalEntidade() {
+  let valor = await carregarTodosOsTiposDeEntidade();
+  const entidades = await carregarDadosMapa();
+  entidades.forEach((dados) => {
+    dados = dados.val();
+
+    for (let i = 0; i < valor.length; i++) {
+      if (valor[i].nome == dados.Tipo && dados.Validacao == true) {
+        valor[i].quantidade += 1;
       }
     }
   });
 
-  let arrayDedados = {
-    aceleradora: aceleradora,
-    catalisadores: catalisadores,
-    comunicacao: comunicacao,
-    coworking: coworking,
-    escolas: escolas,
-    markers: markers,
-    fabrica: fabrica,
-    grandesEmpresas: grandesEmpresas,
-    incubadoras: incubadoras,
-    iniciativas: iniciativas,
-    investidores: investidores,
-    nucleos: nucleos,
-    parques: parques,
-    preAceleradora: preAceleradora,
-    propriedadeIntelectual: propriedadeIntelectual,
-    mentoria: mentoria,
-    startup: startup,
-    fintech: fintech,
-    proptech: proptech,
-    agtech: agtech,
-    edtech: edtech,
-    healthtech: healthtech,
-    Adtech_Martech: Adtech_Martech,
-    um: um,
-    insurtech: insurtech,
-    semClassificacao: semClassificacao,
-    retailtech: retailtech,
-    legaltech: legaltech,
-  };
-  console.log(arrayDedados);
-
-  return arrayDedados;
-}
-function carregarDados() {
-  setTimeout(() => {
-    console.log("carregando");
-    google.charts.load("current", { packages: ["corechart", "bar"] });
-    google.charts.setOnLoadCallback(regioes);
-    google.charts.setOnLoadCallback(graficoComunidade);
-    google.charts.setOnLoadCallback(graficoTipoStartup);
-  }, 1);
+  return valor;
 }
 
-function carregaNumeroEntidadesPorRegiao(entidade, dataSnapshot) {
-  let sertaoCentral = 0;
-  let sertaoCrateus = 0;
-  let regiaoNorte = 0;
-  let rapaduraValley = 0;
-  let kaririValley = 0;
-  let chapadaDaIbiapaba = 0;
-  let metropolitano = 0;
-  let jaguaribe = 0;
-  let centroSul = 0;
-  let macico = 0;
-  let itapipoca = 0;
-  let litoral = 0;
-
-  dataSnapshot.forEach(function (item) {
-    //percorre todos os elementos
-    var value = item.val();
-    if (value.Tipo == entidade && value.Validacao == true) {
-      if (value.Cidade == "Fortaleza") {
-        rapaduraValley++;
-      } else if (value.Cidade == "Juazeiro do Norte") {
-        kaririValley++;
-      } else if (value.Cidade == "Sobral") {
-        regiaoNorte++;
-      } else if (value.Cidade == "Crateús") {
-        sertaoCrateus++;
-      } else if (value.Cidade == "Quixadá") {
-        sertaoCentral++;
-      } else if (value.Cidade == "Guaraciaba do Norte") {
-        chapadaDaIbiapaba++;
-      } else if (
-        value.Cidade == "Caucaia" ||
-        value.Cidade == "Pentecoste" ||
-        value.Cidade == "Caridade" ||
-        value.Cidade == "Maranguape" ||
-        value.Cidade == "Horizonte"
-      ) {
-        metropolitano++;
-      } else if (
-        value.Cidade == "Russas" ||
-        value.Cidade == "Morada Nova" ||
-        value.Cidade == "Jaguaretema" ||
-        value.Cidade == "Quixere" ||
-        value.Cidade == "Palhano" ||
-        value.Cidade == "Limoeiro do Norte" ||
-        value.Cidade == "Tabuleiro do Norte" ||
-        value.Cidade == "Alto Santo" ||
-        value.Cidade == "Iracema" ||
-        value.Cidade == "Poriretema" ||
-        value.Cidade == "Ererê" ||
-        value.Cidade == "Jaguaribe" ||
-        value.Cidade == "Pereiro" ||
-        value.Cidade == "Jaguaribara" ||
-        value.Cidade == "S.J do Guararibe"
-      ) {
-        jaguaribe++;
-      } else if (
-        value.Cidade == "Iguatu" ||
-        value.Cidade == "Icó" ||
-        value.Cidade == "Jucás" ||
-        value.Cidade == "Acopiara" ||
-        value.Cidade == "Baixio" ||
-        value.Cidade == "Cariús" ||
-        value.Cidade == "Catarina" ||
-        value.Cidade == "Cedro" ||
-        value.Cidade == "Ipaumirim" ||
-        value.Cidade == "Lavras da Mangabeira*" ||
-        value.Cidade == "Orós" ||
-        value.Cidade == "Quixelô" ||
-        value.Cidade == "Saboeiro" ||
-        value.Cidade == "Umari" ||
-        value.Cidade == "Várzea Alegre"
-      ) {
-        centroSul++;
-      } else if (
-        value.Cidade == "Acarape" ||
-        value.Cidade == "Aracoiaba" ||
-        value.Cidade == "Aratuba" ||
-        value.Cidade == "Barreira" ||
-        value.Cidade == "Baturité" ||
-        value.Cidade == "Capistrano" ||
-        value.Cidade == "Guaramiranga" ||
-        value.Cidade == "Itapiúna" ||
-        value.Cidade == "Mulungu" ||
-        value.Cidade == "Ocara" ||
-        value.Cidade == "Pacoti" ||
-        value.Cidade == "Palmácia" ||
-        value.Cidade == "Redenção"
-      ) {
-        macico++;
-      } else if (
-        value.Cidade == "Itapipoca" ||
-        value.Cidade == "Bela Cruz" ||
-        value.Cidade == "Acaraú" ||
-        value.Cidade == "Itarema" ||
-        value.Cidade == "Amontada" ||
-        value.Cidade == "Miraíma" ||
-        value.Cidade == "Trairí" ||
-        value.Cidade == "Paraipaba" ||
-        value.Cidade == "Tururu" ||
-        value.Cidade == "Uruburetama" ||
-        value.Cidade == "Umirim" ||
-        value.Cidade == "Itapajé"
-      ) {
-        itapipoca++;
-      } else if (
-        value.Cidade == "Aracati" ||
-        value.Cidade == "Beberibe" ||
-        value.Cidade == "Cascavel" ||
-        value.Cidade == "Fortim" ||
-        value.Cidade == "Icapuí" ||
-        value.Cidade == "Itaiçaba" ||
-        value.Cidade == "Pindoretama"
-      ) {
-        litoral++;
-      }
+function retornarCidadesDeUmaRegiao(regiao) {
+  for (let i = 0; i < regioesArray.length; i++) {
+    if (regiao == regioesArray[i].regiao) {
+      return regioesArray[i].cidades;
     }
-  });
-  let data = {
-    sertaoCrateus: sertaoCrateus,
-    sertaoCentral: sertaoCentral,
-    regiaoNorte: regiaoNorte,
-    rapaduraValley: rapaduraValley,
-    kaririValley: kaririValley,
-    chapadaDaIbiapaba: chapadaDaIbiapaba,
-    metropolitano: metropolitano,
-    jaguaribe: jaguaribe,
-    centroSul: centroSul,
-    macico: macico,
-    itapipoca: itapipoca,
-    litoral: litoral,
-  };
-
-  return data;
+  }
 }
-function condicaoEntidadesEstartup(dataSnapshot, regiao) {
-  var num = dataSnapshot.numChildren();
-  let aceleradora = 0;
-  let catalisadores = 0;
-  let comunicacao = 0;
-  let coworking = 0;
-  let escolas = 0;
-  let markers = 0;
-  let fabrica = 0;
-  let grandesEmpresas = 0;
-  let incubadoras = 0;
-  let iniciativas = 0;
-  let investidores = 0;
-  let nucleos = 0;
-  let parques = 0;
-  let preAceleradora = 0;
-  let propriedadeIntelectual = 0;
-  let mentoria = 0;
-  let startup = 0;
 
-  //tipos startups
-  let fintech = 0;
-  let proptech = 0;
-  let agtech = 0;
-  let edtech = 0;
-  let healthtech = 0;
-  let legaltech = 0;
-  let Adtech_Martech = 0;
-  let um = 0;
-  let semClassificacao = 0;
-  let insurtech = 0;
-  let retailtech = 0;
-
-  dataSnapshot.forEach(function (item) {
-    //percorre todos os elementos
-    var value = item.val();
-
-    if (regiao == "Rapadura Valley") {
-      if (value.Cidade == "Fortaleza") {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            }
-          }
-        }
-      }
-    } else if (regiao == "Kariri Valley") {
-      if (value.Cidade == "Juazeiro do Norte") {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Região Norte") {
-      if (value.Cidade == "Sobral") {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Sertão de Crateús") {
-      if (value.Cidade == "Crateús") {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Sertão Central") {
-      if (value.Cidade == "Quixadá") {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Chapadan da Ibiapara") {
-      if (value.Cidade == "Guaraciaba do Norte") {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Metropolitano") {
-      if (
-        value.Cidade == "Caucaia" ||
-        value.Cidade == "Pentecoste" ||
-        value.Cidade == "Caridade" ||
-        value.Cidade == "Maranguape" ||
-        value.Cidade == "Horizonte"
-      ) {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Jaguaribe") {
-      if (
-        value.Cidade == "Russas" ||
-        value.Cidade == "Morada Nova" ||
-        value.Cidade == "Jaguaretema" ||
-        value.Cidade == "Quixere" ||
-        value.Cidade == "Palhano" ||
-        value.Cidade == "Limoeiro do Norte" ||
-        value.Cidade == "Tabuleiro do Norte" ||
-        value.Cidade == "Alto Santo" ||
-        value.Cidade == "Iracema" ||
-        value.Cidade == "Poriretema" ||
-        value.Cidade == "Ererê" ||
-        value.Cidade == "Jaguaribe" ||
-        value.Cidade == "Pereiro" ||
-        value.Cidade == "Jaguaribara" ||
-        value.Cidade == "S.J do Guararibe"
-      ) {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Centro Sul") {
-      if (
-        value.Cidade == "Iguatu" ||
-        value.Cidade == "Icó" ||
-        value.Cidade == "Jucás" ||
-        value.Cidade == "Acopiara" ||
-        value.Cidade == "Baixio" ||
-        value.Cidade == "Cariús" ||
-        value.Cidade == "Catarina" ||
-        value.Cidade == "Cedro" ||
-        value.Cidade == "Ipaumirim" ||
-        value.Cidade == "Lavras da Mangabeira*" ||
-        value.Cidade == "Orós" ||
-        value.Cidade == "Quixelô" ||
-        value.Cidade == "Saboeiro" ||
-        value.Cidade == "Umari" ||
-        value.Cidade == "Várzea Alegre"
-      ) {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Maciço do Baturité") {
-      if (
-        value.Cidade == "Acarape" ||
-        value.Cidade == "Aracoiaba" ||
-        value.Cidade == "Aratuba" ||
-        value.Cidade == "Barreira" ||
-        value.Cidade == "Baturité" ||
-        value.Cidade == "Capistrano" ||
-        value.Cidade == "Guaramiranga" ||
-        value.Cidade == "Itapiúna" ||
-        value.Cidade == "Mulungu" ||
-        value.Cidade == "Ocara" ||
-        value.Cidade == "Pacoti" ||
-        value.Cidade == "Palmácia" ||
-        value.Cidade == "Redenção"
-      ) {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Itapipoca") {
-      if (
-        value.Cidade == "Itapipoca" ||
-        value.Cidade == "Bela Cruz" ||
-        value.Cidade == "Acaraú" ||
-        value.Cidade == "Itarema" ||
-        value.Cidade == "Amontada" ||
-        value.Cidade == "Miraíma" ||
-        value.Cidade == "Trairí" ||
-        value.Cidade == "Paraipaba" ||
-        value.Cidade == "Tururu" ||
-        value.Cidade == "Uruburetama" ||
-        value.Cidade == "Umirim" ||
-        value.Cidade == "Itapajé"
-      ) {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
-          }
-        }
-      }
-    }
-    if (regiao == "Litoral Leste") {
-      if (
-        value.Cidade == "Aracati" ||
-        value.Cidade == "Beberibe" ||
-        value.Cidade == "Cascavel" ||
-        value.Cidade == "Fortim" ||
-        value.Cidade == "Icapuí" ||
-        value.Cidade == "Itaiçaba" ||
-        value.Cidade == "Pindoretama"
-      ) {
-        if (value.Validacao == true) {
-          if (value.Tipo === "Aceleradora") {
-            aceleradora++;
-          }
-          if (value.Tipo === "Comunidades") {
-            comunidades++;
-          }
-
-          if (value.Tipo === "Catalisadores Locais") {
-            catalisadores++;
-          }
-          if (value.Tipo === "Comunicação e Mídia") {
-            comunicacao++;
-          }
-          if (value.Tipo === "Coworking") {
-            coworking++;
-          }
-          if (value.Tipo === "Escolas") {
-            escolas++;
-          }
-          if (value.Tipo === "Espaços Makers") {
-            markers++;
-          }
-          if (value.Tipo === "Fábrica de Aplicativos") {
-            fabrica++;
-          }
-          if (value.Tipo === "Grandes Empresas") {
-            grandesEmpresas++;
-          }
-          if (value.Tipo === "Incubadoras") {
-            incubadoras++;
-          }
-          if (value.Tipo === "Iniciativas Universitárias") {
-            iniciativas++;
-          }
-          if (value.Tipo === "Investidores") {
-            investidores++;
-          }
-          if (value.Tipo === "Núcleos de Inovação") {
-            nucleos++;
-          }
-          if (value.Tipo === "Pré Aceleradoras") {
-            preAceleradora++;
-          }
-          if (value.Tipo === "Parques Tecnológicos") {
-            parques++;
-          }
-          if (value.Tipo === "Propriedade Intelectual") {
-            propriedadeIntelectual++;
-          }
-          if (value.Tipo === "Mentoria") {
-            mentoria++;
-          }
-          if (value.Tipo === "Startup") {
-            startup++;
-            if (value.Classificacao == "Fintech") {
-              fintech++;
-            } else if (value.Classificacao == "Proptech") {
-              proptech++;
-            } else if (value.Classificacao == "Agtech") {
-              agtech++;
-            } else if (value.Classificacao == "Edtech") {
-              edtech++;
-            } else if (value.Classificacao == "Healthtech") {
-              healthtech++;
-            } else if (value.Classificacao == "Legaltech") {
-              legaltech++;
-            } else if (value.Classificacao == "Adtech – Martech") {
-              Adtech_Martech++;
-            } else if (value.Classificacao == "1") {
-              um++;
-            } else if (value.Classificacao == "Insurtech") {
-              insurtech++;
-            } else if (value.Classificacao == "") {
-              semClassificacao++;
-            } else if (value.Classificacao == "Retailtech") {
-              retailtech++;
-            }
+async function contarTodosAsDeEntidadeDaRegiao(regiao) {
+  const entidades = await carregarDadosMapa();
+  const cidades = retornarCidadesDeUmaRegiao(regiao);
+  const todasEntidades = await carregarTodosOsTiposDeEntidade();
+  entidades.forEach((valor) => {
+    valor = valor.val();
+    for (let i = 0; i < cidades.length; i++) {
+      if (cidades[i] == valor.Cidade && valor.Validacao == true) {
+        for (let j = 0; j < todasEntidades.length; j++) {
+          if (todasEntidades[j].nome == valor.Tipo) {
+            todasEntidades[j].quantidade += 1;
           }
         }
       }
     }
   });
-
-  let arrayDedados = {
-    aceleradora: aceleradora,
-    catalisadores: catalisadores,
-    comunicacao: comunicacao,
-    coworking: coworking,
-    escolas: escolas,
-    markers: markers,
-    fabrica: fabrica,
-    grandesEmpresas: grandesEmpresas,
-    incubadoras: incubadoras,
-    iniciativas: iniciativas,
-    investidores: investidores,
-    nucleos: nucleos,
-    parques: parques,
-    preAceleradora: preAceleradora,
-    propriedadeIntelectual: propriedadeIntelectual,
-    mentoria: mentoria,
-    startup: startup,
-    fintech: fintech,
-    proptech: proptech,
-    agtech: agtech,
-    edtech: edtech,
-    healthtech: healthtech,
-    Adtech_Martech: Adtech_Martech,
-    um: um,
-    insurtech: insurtech,
-    semClassificacao: semClassificacao,
-    retailtech: retailtech,
-    legaltech: legaltech,
-  };
-
-  return arrayDedados;
+  return adicionarDadosNaMatrizCategoriaDeEntidade(todasEntidades);
 }
-//carrega o numero total de todas as entidades
-function carregaNumeroDeTodasEntidades(dataSnapshot) {
-  let sertaoCentral = 0;
-  let sertaoCrateus = 0;
-  let regiaoNorte = 0;
-  let rapaduraValley = 0;
-  let kaririValley = 0;
-  let chapadaDaIbiapaba = 0;
-  let metropolitano = 0;
-  let jaguaribe = 0;
-  let centroSul = 0;
-  let macico = 0;
-  let itapipoca = 0;
-  let litoral = 0;
-  dataSnapshot.forEach(function (item) {
-    //percorre todos os elementos
-    var value = item.val();
-    if (value.Validacao == true) {
-      if (value.Cidade == "Fortaleza") {
-        rapaduraValley++;
-      } else if (value.Cidade == "Juazeiro do Norte") {
-        kaririValley++;
-      } else if (value.Cidade == "Sobral") {
-        regiaoNorte++;
-      } else if (value.Cidade == "Crateús") {
-        sertaoCrateus++;
-      } else if (value.Cidade == "Quixadá") {
-        sertaoCentral++;
-      } else if (value.Cidade == "Guaraciaba do Norte") {
-        chapadaDaIbiapaba++;
-      } else if (
-        value.Cidade == "Caucaia" ||
-        value.Cidade == "Pentecoste" ||
-        value.Cidade == "Caridade" ||
-        value.Cidade == "Maranguape" ||
-        value.Cidade == "Horizonte"
-      ) {
-        metropolitano++;
-      } else if (
-        value.Cidade == "Russas" ||
-        value.Cidade == "Morada Nova" ||
-        value.Cidade == "Jaguaretema" ||
-        value.Cidade == "Quixere" ||
-        value.Cidade == "Palhano" ||
-        value.Cidade == "Limoeiro do Norte" ||
-        value.Cidade == "Tabuleiro do Norte" ||
-        value.Cidade == "Alto Santo" ||
-        value.Cidade == "Iracema" ||
-        value.Cidade == "Poriretema" ||
-        value.Cidade == "Ererê" ||
-        value.Cidade == "Jaguaribe" ||
-        value.Cidade == "Pereiro" ||
-        value.Cidade == "Jaguaribara" ||
-        value.Cidade == "S.J do Guararibe"
-      ) {
-        jaguaribe++;
-      } else if (
-        value.Cidade == "Iguatu" ||
-        value.Cidade == "Icó" ||
-        value.Cidade == "Jucás" ||
-        value.Cidade == "Acopiara" ||
-        value.Cidade == "Baixio" ||
-        value.Cidade == "Cariús" ||
-        value.Cidade == "Catarina" ||
-        value.Cidade == "Cedro" ||
-        value.Cidade == "Ipaumirim" ||
-        value.Cidade == "Lavras da Mangabeira*" ||
-        value.Cidade == "Orós" ||
-        value.Cidade == "Quixelô" ||
-        value.Cidade == "Saboeiro" ||
-        value.Cidade == "Umari" ||
-        value.Cidade == "Várzea Alegre"
-      ) {
-        centroSul++;
-      } else if (
-        value.Cidade == "Acarape" ||
-        value.Cidade == "Aracoiaba" ||
-        value.Cidade == "Aratuba" ||
-        value.Cidade == "Barreira" ||
-        value.Cidade == "Baturité" ||
-        value.Cidade == "Capistrano" ||
-        value.Cidade == "Guaramiranga" ||
-        value.Cidade == "Itapiúna" ||
-        value.Cidade == "Mulungu" ||
-        value.Cidade == "Ocara" ||
-        value.Cidade == "Pacoti" ||
-        value.Cidade == "Palmácia" ||
-        value.Cidade == "Redenção"
-      ) {
-        macico++;
-      } else if (
-        value.Cidade == "Itapipoca" ||
-        value.Cidade == "Bela Cruz" ||
-        value.Cidade == "Acaraú" ||
-        value.Cidade == "Itarema" ||
-        value.Cidade == "Amontada" ||
-        value.Cidade == "Miraíma" ||
-        value.Cidade == "Trairí" ||
-        value.Cidade == "Paraipaba" ||
-        value.Cidade == "Tururu" ||
-        value.Cidade == "Uruburetama" ||
-        value.Cidade == "Umirim" ||
-        value.Cidade == "Itapajé"
-      ) {
-        itapipoca++;
-      } else if (
-        value.Cidade == "Aracati" ||
-        value.Cidade == "Beberibe" ||
-        value.Cidade == "Cascavel" ||
-        value.Cidade == "Fortim" ||
-        value.Cidade == "Icapuí" ||
-        value.Cidade == "Itaiçaba" ||
-        value.Cidade == "Pindoretama"
-      ) {
-        litoral++;
+
+async function contarTodosAsDeEntidadeDaRegiaoStartup(regiao) {
+  const startups = await carregarTodasStartup();
+  const classficacoes = await carregarClassificacoesStartup();
+
+  const cidades = retornarCidadesDeUmaRegiao(regiao);
+  for (let i = 0; i < classficacoes.length; i++) {
+    classficacoes[i].quantidade = 0;
+  }
+
+  for (let i = 0; i < startups.length; i++) {
+    for (let j = 0; j < cidades.length; j++) {
+      for (let k = 0; k < classficacoes.length; k++) {
+        if (
+          startups[i].Cidade === cidades[j] &&
+          startups[i].Classificacao === classficacoes[k].classe
+        ) {
+          classficacoes[k].quantidade++;
+        }
+      }
+    }
+  }
+
+  return adicionarDadosMatrizSegmentosStartup(classficacoes);
+}
+
+async function carregarDepositantesPatentes() {
+  let valor = await carregarDadosPatente();
+  let arrayDepositantes = [];
+  valor.forEach((patentes) => {
+    patentes = patentes.val();
+    for (let i = 0; i < patentes.Depositantes.length; i++) {
+      arrayDepositantes.push(patentes.Depositantes[i].nome);
+    }
+  });
+
+  return filtrarPatentes(arrayDepositantes);
+}
+
+function filtrarPatentes(arrayDepositantes) {
+  let arrayNaoRepetidos = [];
+  let boolVerifica = true;
+  for (let i = 0; i < arrayDepositantes.length; i++) {
+    for (let j = 0; j < arrayNaoRepetidos.length; j++) {
+      if (arrayNaoRepetidos[j].nome == arrayDepositantes[i]) {
+        boolVerifica = false;
+      }
+    }
+    if (boolVerifica == true) {
+      arrayNaoRepetidos.push({
+        nome: arrayDepositantes[i],
+        quantidade: 0,
+      });
+    }
+    boolVerifica = true;
+  }
+  return arrayNaoRepetidos;
+}
+
+async function contarPatentesPorDepositante() {
+  const depositantes = await carregarDepositantesPatentes();
+  const patentes = await carregarDadosPatente();
+  let matrizPatentes = [];
+  patentes.forEach((valor) => {
+    valor = valor.val();
+    for (let i = 0; i < valor.Depositantes.length; i++) {
+      for (let j = 0; j < depositantes.length; j++) {
+        if (valor.Depositantes[i].nome == depositantes[j].nome) {
+          depositantes[j].quantidade += 1;
+        }
       }
     }
   });
-  let data = {
-    sertaoCrateus: sertaoCrateus,
-    sertaoCentral: sertaoCentral,
-    regiaoNorte: regiaoNorte,
-    rapaduraValley: rapaduraValley,
-    kaririValley: kaririValley,
-    chapadaDaIbiapaba: chapadaDaIbiapaba,
-    metropolitano: metropolitano,
-    jaguaribe: jaguaribe,
-    centroSul: centroSul,
-    macico: macico,
-    itapipoca: itapipoca,
-    litoral: litoral,
-  };
+  return depositantes;
+}
 
-  return data;
+async function carregarDadosCategoriasDeEntidade() {
+  const quantidadeEntidades = await contarTotalEntidade();
+  const patentes = await carregarDadosPatente();
+  const numPatentes = patentes.numChildren();
+
+  for (let i = 0; i < quantidadeEntidades.length; i++) {
+    index = vetorEntidadesComImagem.findIndex((object) => {
+      return object.nome.includes(quantidadeEntidades[i].nome);
+    });
+    if (vetorEntidadesComImagem[index] != undefined) {
+      quantidadeEntidades[i].img = vetorEntidadesComImagem[index].imagem;
+    }
+  }
+  quantidadeEntidades.push({
+    nome: "Patentes",
+    quantidade: numPatentes,
+    img: "img/img-bl/28-patentes.png",
+  });
+  return quantidadeEntidades;
+}
+
+async function paginacaoTabelaCategoriasDeEntidade(inicio, fim, tabela, tipos) {
+  //oredenação
+  tipos.sort(function (a, b) {
+    if (a.quantidade > b.quantidade) {
+      return -1;
+    } else {
+      return true;
+    }
+  });
+  let dados = "";
+  for (let i = inicio; i < fim; i++) {
+    if (tipos[i].img) {
+      dados += `
+     <tr >
+       <td>
+         <div class="d-flex align-items-center">
+           <div>
+             <img src="${tipos[i].img}" alt="" srcset="" style=" width: 38px; heigth: 38px">
+           </div>
+         </div>
+       </td>
+         <td >${tipos[i].nome}</td>
+         <td >${tipos[i].quantidade}</td>
+     </tr>`;
+    }
+  }
+
+  tabela.innerHTML = dados;
+}
+function gerenciarSelecionadorPagina(tamanho, inicio, id) {
+  const selecionadorPagina = document.querySelector(id);
+  selecionadorPagina.innerHTML += `
+  <li id="anterior"><p style="cursor: pointer;" >«</a></li>
+  
+  `;
+  for (let i = 0; i < tamanho / 5; i++) {
+    if (inicio / 5 == i) {
+      selecionadorPagina.innerHTML += `<p style="margin-right: 10px;margin-left: 10px;" href="" class="paginacao selecionado">${i + 1
+        }</a>`;
+    } else {
+      selecionadorPagina.innerHTML += `<p style="margin-right: 10px;margin-left: 10px;" href="" class="paginacao">${i + 1
+        }</a>`;
+    }
+  }
+  selecionadorPagina.innerHTML += `<li id="proximo"><p style="cursor: pointer;" >»</a></li>`;
+}
+async function carregarTabaleCategoriasDeEntidade(inicio, fim) {
+  const tabela = document.querySelector("#tabela");
+  const tipos = await carregarDadosCategoriasDeEntidade();
+
+  gerenciarSelecionadorPagina(tipos.length, inicio, "#selecionadorPagina");
+  document.querySelector("#anterior").addEventListener("click", () => {
+    gerenciarAnteriorProximo(inicio - 5);
+  });
+  document.querySelector("#proximo").addEventListener("click", () => {
+    gerenciarAnteriorProximo(inicio + 5);
+  });
+  paginacaoTabelaCategoriasDeEntidade(inicio, fim, tabela, tipos);
+  cliquePaginacao();
+}
+
+function cliquePaginacao() {
+  const paginacao = document.querySelectorAll(".paginacao");
+
+  Array.from(paginacao).forEach((el) => {
+    el.addEventListener("click", () => {
+      let inicio = parseInt(el.innerHTML);
+
+      el.className = "paginacao selecionado";
+      if (inicio) {
+        //
+
+        limparTabelaCategoriasDeEntidade();
+        inicio = (inicio - 1) * 5;
+        fim = parseInt(inicio + 4);
+
+        carregarTabaleCategoriasDeEntidade(inicio, fim);
+      }
+    });
+  });
+}
+
+function gerenciarAnteriorProximo(inicio) {
+  //alert("clicado");
+  fim = parseInt(inicio + 4);
+
+  if (inicio != -5 && inicio != 20) {
+    limparTabelaCategoriasDeEntidade();
+    carregarTabaleCategoriasDeEntidade(inicio, fim);
+  }
+}
+
+function limparTabelaCategoriasDeEntidade() {
+  const tabela = document.querySelector("#tabela");
+  tabela.innerHTML = " ";
+  const selecionadorPagina = document.querySelector("#selecionadorPagina");
+  selecionadorPagina.innerHTML = " ";
+}
+
+async function carregarTabelaSecoesPatentes() {
+  const patentes = await carregarDadosPatente();
+
+  const tabelaPatentes = document.querySelector("#tabelaPatentes");
+
+  let htmlPatentes = adiconarPatentesTabelaSecoesPatentes(patentes, 0, 4);
+  tabelaPatentes.innerHTML = htmlPatentes;
+
+}
+carregarTabelaSecoesPatentes();
+
+function adiconarPatentesTabelaSecoesPatentes(
+  dadosBrutosPatentes,
+  inicio,
+  fim
+) {
+  let dadosHtml = " ";
+  const patente = transformarDadosBrutosEmArray(dadosBrutosPatentes);
+  const secoes = buscarSecoes(patente)
+  let dadosSecoes = contarSecoes(secoes, patente)
+
+  //ordenar os elementos
+
+  dadosSecoes = ordenarDescrescente('quantidade', dadosSecoes)
+
+
+  gerenciarSelecionadorPagina(dadosSecoes.length, 0, "#selecionadorPaginaPatentes");
+  for (let i = inicio; i < fim; i++) {
+    dadosHtml += `
+    <tr>
+      <td>${dadosSecoes[i].secao}</td>
+      <td>${dadosSecoes[i].quantidade}</td>                     
+    </tr>
+    `;
+  }
+  return dadosHtml;
+}
+function ordenarDescrescente(propriedade, array) {
+  return array.sort(function (a, b) {
+    if (a[propriedade] < b[propriedade]) {
+      return 1;
+    }
+    if (a[propriedade] > b[propriedade]) {
+      return -1
+    }
+    return 0;
+  })
+}
+function buscarSecoes(patentes) {
+  let secoes = []
+  for (let i = 0; i < patentes.length; i++) {
+    for (let k = 0; k < patentes[i].Secoes.length; k++) {
+      secoes.push(patentes[i].Secoes[k])
+
+    }
+
+  }
+  //remover dados repetidos
+  const arrayNaoRepetido = [...new Set(secoes)];
+  return arrayNaoRepetido;
+}
+function contarSecoes(secoes, patentes) {
+
+  let arraySecoes = []
+  for (let i = 0; i < secoes.length; i++) {
+    arraySecoes.push({
+      secao: secoes[i],
+      quantidade: 0
+    })
+
+  }
+
+  for (let i = 0; i < patentes.length; i++) {
+    for (let k = 0; k < patentes[i].Secoes.length; k++) {
+      for (let j = 0; j < arraySecoes.length; j++) {
+        if (patentes[i].Secoes[k] == arraySecoes[j].secao && patentes[i].Validacao == true) {
+          arraySecoes[j].quantidade++;
+        }
+
+      }
+
+    }
+
+  }
+
+
+  return arraySecoes
+}
+function transformarDadosBrutosEmArray(dadosBrutos) {
+  let arrayDados = [];
+  dadosBrutos.forEach((dadosAjeitados) => {
+    dadosAjeitados = dadosAjeitados.val();
+
+    arrayDados.push(dadosAjeitados);
+  });
+
+  return arrayDados;
+}
+
+function ajudaModal() {
+  const ajudaSvg = document.querySelectorAll(".ajudaSvg");
+  Array.from(ajudaSvg).forEach((el) => { });
+}
+async function carregarTodasAsFasesStartup() {
+  const startups = await carregarTodasStartup();
+  let fases = [];
+  startups.forEach((startup) => {
+    let boolVerifica = true;
+    for (let i = 0; i < fases.length; i++) {
+      if (startup.Fase) {
+        if (startup.Fase == fases[i].nome) {
+          boolVerifica = false;
+        }
+      }
+    }
+    if (boolVerifica == true && startup.Fase) {
+      fases.push({
+        nome: startup.Fase,
+        quantidade: 0,
+      });
+    }
+  });
+  return fases;
+}
+async function carregarTodasReceitasStartup() {
+  const startups = await carregarTodasStartup();
+  let receitas = [];
+  startups.forEach((startup) => {
+    if (startup.Receitas) {
+
+      for (let j = 0; j < startup.Receitas.length; j++) {
+
+        receitas.push({
+          nome: startup.Receitas[j],
+          quantidade: 0,
+        });
+
+      }
+    }
+  });
+
+  return removerElementosRepetidos(receitas, "nome");
+}
+function removerElementosRepetidos(arrayDeObjeto, propriedade) {
+  const map = new Map();
+  arrayDeObjeto.forEach(item => {
+    map.set(item[propriedade], item)
+  })
+  const dadosNaoRepetidos = Array.from(map.values())
+
+  return dadosNaoRepetidos;
+}
+async function contarQuantidadesDeFase() {
+  const startups = await carregarTodasStartup();
+  const fases = await carregarTodasAsFasesStartup();
+
+  for (let i = 0; i < startups.length; i++) {
+    for (let j = 0; j < fases.length; j++) {
+      if (startups[i].Fase) {
+        if (startups[i].Fase == fases[j].nome) {
+          fases[j].quantidade++;
+        }
+      }
+    }
+  }
+
+  return fases;
+}
+
+async function contarQuantidadesDeFasePorClassificacao(classificacao) {
+  const startups = await carregarStartupsPorClassificacao(classificacao);
+  const fases = await carregarTodasAsFasesStartup();
+
+  for (let i = 0; i < startups.length; i++) {
+    for (let j = 0; j < fases.length; j++) {
+      if (startups[i].Fase) {
+        if (startups[i].Fase == fases[j].nome) {
+          fases[j].quantidade++;
+        }
+      }
+    }
+  }
+
+  return fases;
+}
+async function contarQuantidadeDeFaseTodasReceitas() {
+  const startups = await carregarTodasStartup();
+
+  const fases = await carregarTodasAsFasesStartup();
+
+  startups.forEach(startup => {
+
+
+    for (let k = 0; k < fases.length; k++) {
+      if (startup.Receitas) {
+
+        if (
+          startup.Fase === fases[k].nome
+
+        ) {
+          fases[k].quantidade += 1;
+        }
+
+
+      }
+    }
+
+
+
+  })
+
+
+  return fases;
+}
+async function contarQuantidadeDeFasePorReceitas(receita) {
+  const startups = await carregarTodasStartup();
+
+  const fases = await carregarTodasAsFasesStartup();
+
+  for (let i = 0; i < startups.length; i++) {
+    for (let k = 0; k < fases.length; k++) {
+      if (startups[i].Receitas) {
+        for (let n = 0; n < startups[i].Receitas.length; n++) {
+
+          if (
+            startups[i].Fase === fases[k].nome &&
+            startups[i].Receitas[n] === receita
+          ) {
+            fases[k].quantidade += 1;
+          }
+
+        }
+      }
+    }
+  }
+  console.log(fases)
+  return fases;
+}
+async function carregarTodasOsModelosDeNegocio() {
+  const startups = await carregarTodasStartup();
+  let modelo = [];
+  startups.forEach(startup => {
+    if (startup.ModeloNegocio) {
+      startup.ModeloNegocio.forEach(modelos => {
+        modelo.push({
+          nome: modelos,
+          quantidade: 0
+        })
+      })
+    }
+  })
+  console.log(modelo)
+  modelo = removerElementosRepetidos(modelo, "nome")
+  console.log(modelo)
+  return modelo;
+}
+
+async function contarQuantidadeDeModeloDeReceitasDasFases() {
+  const fases = await carregarTodasAsFasesStartup();
+  const startups = await carregarTodasStartup();
+
+  startups.forEach(startup => {
+    for (let i = 0; i < fases.length; i++) {
+
+      if (startup.ModeloNegocio) {
+        if (fases[i].nome == startup.Fase) {
+          fases[i].quantidade += 1;
+        }
+      }
+
+
+
+    }
+  })
+  return fases
+}
+async function contarQuantidadeFasesDeUmModeloDeNegocio(modelo) {
+  const fases = await carregarTodasAsFasesStartup();
+  const startups = await carregarTodasStartup();
+
+  startups.forEach(startup => {
+    for (let i = 0; i < fases.length; i++) {
+
+      if (startup.ModeloNegocio) {
+        startup.ModeloNegocio.forEach(modelos => {
+          if (modelos == modelo) {
+            if (fases[i].nome == startup.Fase) {
+              fases[i].quantidade += 1;
+            }
+          }
+        })
+      }
+
+
+
+    }
+  })
+
+  return fases
+}
+
+async function mudarSelectParaSegmentos() {
+  const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
+  const classificacoes = await carregarClassificacoesStartup();
+
+  selectStartupsTipos.innerHTML = `<option value="Todas">Todos os segmentos</option>`;
+  for (let i = 0; i < classificacoes.length; i++) {
+    selectStartupsTipos.innerHTML += `<option value="${classificacoes[i].classe}">${classificacoes[i].classe}</option>`;
+  }
+}
+async function mudarSelectParaModeloDeNegocio() {
+  const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
+  const modelos = await carregarTodasOsModelosDeNegocio();
+
+  selectStartupsTipos.innerHTML = `<option value="Todas">Todos os modelos de negócio</option>`;
+  for (let i = 0; i < modelos.length; i++) {
+    selectStartupsTipos.innerHTML += `<option value="${modelos[i].nome}">${modelos[i].nome}</option>`;
+  }
+}
+async function mudarSelectParaReceitas() {
+  const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
+  const receitas = await carregarTodasReceitasStartup();
+
+  selectStartupsTipos.innerHTML = `<option value="Todas">Todas as receitas</option>`;
+  for (let i = 0; i < receitas.length; i++) {
+    selectStartupsTipos.innerHTML += `<option value="${receitas[i].nome}">${receitas[i].nome}</option>`;
+  }
 }
