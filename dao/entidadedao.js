@@ -1,5 +1,6 @@
 class entidadeDAO {
   salvar(objEntidade, uploader) {
+    console.log(objEntidade)
     //Capturando os valores do formulário
     if (uploader === "") {
       alert("Adicione a logo");
@@ -46,7 +47,10 @@ class entidadeDAO {
             Usuario: objEntidade.getUserId(),
             Validacao: false,
             Classificacao: objEntidade.getClassificacao(),
+            Receitas: objEntidade.getReceitas(),
+            ModeloNegocio: objEntidade.getNegocio(),
             TotalPatentes: 0,
+            Fase: objEntidade.getFase()
           });
 
           $("#ModalCadastro").modal("hide");
