@@ -291,25 +291,27 @@
                     </select>
                   </div>
                   <div id="faseStartup" class="form-group col-md-4" style="display: none">
-                    <label for="faseStartup" id="labelValidacaoClassificaocao">Fase da Startup*</label>
+                    <label for="faseStartup" id="labelFaseStartup" data-i18n="navBar1.cadastro.modal.modalInstituicao.label.faseStartup">Fase da Startup*</label>
                     <select class="form-control form-control" id="faseStartupSelect" required="required"
                       placeholder="faseStartup">
-                      <option value="1" selected disabled id="validacaoClassificaocaoOption">
+                      <option value="1" selected disabled 
+                        id="validacaoClassificaocaoOption"
+                        data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.selectFaseStartup.escolhaFase">
                         Escolha a fase da startup
                       </option>
                       <option value="Scale Up" id="Scale Up">
                         Scale Up
                       </option>
-                      <option value="Ideação" id="Ideação">
+                      <option value="Ideação" id="Ideação" data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.selectFaseStartup.idedacao">
                         Ideação
                       </option>
-                      <option value="Validação" id="Validação">
+                      <option value="Validação" id="Validação" data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.selectFaseStartup.validacao">
                         Validação
                       </option>
-                      <option value="Operação" id="Operação">
+                      <option value="Operação" id="Operação" data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.selectFaseStartup.operacao">
                         Operação
                       </option>
-                      <option value="Tração" id="Tração">
+                      <option value="Tração" id="Tração" data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.selectFaseStartup.tracao">
                         Tração
                       </option>
                     </select>
@@ -317,40 +319,51 @@
                 </div>
                 <div class="form-row" id="CheckboxStartup" style="display: none;">
                   <div class="form-group col-md-6">
-                    <h6>Modelo de Receitas</h6>
+                    <h6 data-i18n="navBar1.cadastro.modal.modalInstituicao.label.modelosDeReceita">
+                      Modelo de Receitas
+                    </h6>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input receitas" type="checkbox" id="assinatura" value="Assinatura">
-                      <label class="form-check-label" for="assinatura">Assinatura</label>
+                      <label class="form-check-label" 
+                        for="assinatura"
+                        data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.opcoesModeloDeReceitas.assinatura">
+                          Assinatura
+                      </label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input receitas" type="checkbox" id="venda" value="Venda direta">
-                      <label class="form-check-label" for="venda">Venda direta
+                      <label class="form-check-label" for="venda"
+                        data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.opcoesModeloDeReceitas.vendaDireta">
+                        Venda direta
                       </label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input receitas" type="checkbox" id="servico" value="Serviços sob demanda">
-                      <label class="form-check-label" for="servico">Serviços sob demanda
-
+                      <label class="form-check-label" for="servico"
+                        data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.opcoesModeloDeReceitas.sobDemanda">
+                        Serviços sob demanda
                       </label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input receitas" type="checkbox" id="afiliados" value="Afiliados">
-                      <label class="form-check-label" for="afiliados">Afiliados
-
+                      <label class="form-check-label" for="afiliados"
+                        data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.opcoesModeloDeReceitas.afiliados">
+                        Afiliados
                       </label>
                     </div>
                     
                     <div class="form-check form-check-inline">
                       <input class="form-check-input receitas" type="checkbox" id="Licenciamento" value="Licenciamento">
-                      <label class="form-check-label" for="Licenciamento">Licenciamento
-
+                      <label class="form-check-label" for="Licenciamento"
+                        data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.opcoesModeloDeReceitas.licenciamnto">
+                        Licenciamento
                       </label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input receitas" type="checkbox" id="Advertising" value="Advertising">
-                      <label class="form-check-label" for="Advertising">Advertising (Propaganda)
-
-
+                      <label class="form-check-label" for="Advertising"
+                        data-i18n="navBar1.cadastro.modal.modalInstituicao.placeholder.opcoesModeloDeReceitas.ad">
+                        Advertising (Propaganda)
                       </label>
                     </div>
                     <div class="form-check form-check-inline">
@@ -363,7 +376,7 @@
                   </div>
                   
                   <div class="form-group custom-file col-md-6">
-                    <h6>Modelo de Negocio</h6>
+                    <h6 data-i18n="navBar1.cadastro.modal.modalInstituicao.label.modeloDeNegocio">Modelo de Negocio</h6>
                     <!-- linha2-->
                     <div class="form-check form-check-inline">
                       <input class="form-check-input negocio" type="checkbox" id="B2B" value="B2B">
