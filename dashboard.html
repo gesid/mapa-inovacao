@@ -169,40 +169,83 @@
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0" >
                     <div class="card" style="border-radius: 20px;">
                         <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                            <h4 class="mb-0" style="display: inline">
+                            <h4 class="mb-0" style="display: inline"]
+                              data-i18n="graficos.grafico1.titulo">
                                 Regiões por categoria
                               </h4>
 
                               <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalregioes" >
                               <select class="float-right" style="border-radius: 10px;padding: 5px;width: 160px;" id="selectRegioesPorCategoria">
-                                <option selected value="Todas">Todas as categorias</option>
-                                <option value="Aceleradora">Aceleradora</option>
-                                <option value="Catalisadores">Catalisadores Locais</option>
+                                <option selected 
+                                  value="Todas"
+                                  data-i18n="graficos.grafico1.select.todas"
+                                >
+                                  Todas as categorias
+                                </option>
+                                <option value="Aceleradora"
+                                  data-i18n="graficos.categorias.aceleradora"
+                                >
+                                  Aceleradora
+                                </option>
+                                <option value="Catalisadores"
+                                  data-i18n="graficos.categorias.catLocais"
+                                >
+                                  Catalisadores Locais
+                                </option>
 
-                                <option value="Comunicação">Comunicação e Mídia</option>
+                                <option value="Comunicação" 
+                                  data-i18n="graficos.categorias.comEMidia"
+                                >
+                                  Comunicação e Mídia
+                                </option>
                                 <option value="Coworking">Coworking</option>
                                 <option value="Startup">Startup</option>
-                                <option value="Escolas">Escolas</option>
-                                <option value="Fábrica de Aplicativos">
+                                <option value="Escolas" data-i18n="graficos.categorias.escolas">Escolas</option>
+                                <option value="Fábrica de Aplicativos"
+                                  data-i18n="graficos.categorias.fabApp">
                                   Fábrica de Aplicativos
                                 </option>
-                                <option value="Grandes Empresas">Grandes Empresas</option>
-                                <option value="Incubadoras">Incubadoras</option>
-                                <option value="Iniciativas Universitárias">
+                                <option value="Grandes Empresas"
+                                  data-i18n="graficos.categorias.gEmpresas"
+                                >
+                                  Grandes Empresas
+                                </option>
+                                <option value="Incubadoras"
+                                  data-i18n="graficos.categorias.incubadoras"
+                                >
+                                  Incubadoras
+                                </option>
+                                <option value="Iniciativas Universitárias"
+                                  data-i18n="graficos.categorias.iniUniversitarias"
+                                >
                                   Iniciativas Universitárias
                                 </option>
-                                <option value="Investidores">Investidores</option>
-                                <option value="Núcleos de Inovação">
+                                <option value="Investidores"
+                                  data-i18n="graficos.categorias.investidores"
+                                >
+                                  Investidores
+                                </option>
+                                <option value="Núcleos de Inovação"
+                                  data-i18n="graficos.categorias.nucInovacao"
+                                >
                                   Núcleos de Inovação
                                 </option>
-                                <option value="Parques Tecnológicos">
+                                <option value="Parques Tecnológicos"
+                                  data-i18n="graficos.categorias.parquesTec"
+                                >
                                   Parques Tecnológicos
                                 </option>
-                                <option value="Propriedade Intelectual">
+                                <option value="Propriedade Intelectual"
+                                  data-i18n="graficos.categorias.propIntelectual"
+                                >
                                   Propriedade Intelectual
                                 </option>
-                                <option value="Mentoria">Mentoria</option>
-                                <option value="Pré Aceleradoras">Pré Aceleradoras</option>
+                                <option value="Mentoria" data-i18n="graficos.categorias.mentoria">Mentoria</option>
+                                <option value="Pré Aceleradoras" 
+                                  data-i18n="graficos.categorias.preAceleradoras"
+                                >
+                                  Pré Aceleradoras
+                                </option>
                               </select>
                         </div>
                         <div class="card-body">
@@ -471,13 +514,20 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Regiões Por Categoria</h5>
+        <h5 class="modal-title" 
+          id="exampleModalLongTitle"
+          data-i18n="graficos.grafico1.titulo"
+        >
+          Regiões Por Categoria
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Esse gráfico mostra o total de categorias em cada região do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico1.ajuda">
+          Esse gráfico mostra o total de categorias em cada região do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>

@@ -36,6 +36,38 @@ const lngs = {
                 }
               },
               tituloPag:"Dashboard do Mapa do Ecossistema de Inovação Cearense",
+              graficos:{
+                grafico1:{
+                  titulo:"Regiões por categoria",
+                  select:{
+                    todas: "Todas as categorias"
+                  },
+                  ajuda:"Esse gráfico mostra o total de categorias em cada região do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense."
+                },
+                categorias:{
+                  comunidades: 'Comunidades',
+                  aceleradora: 'Aceleradora',
+                  catLocais: 'Catalisadores Locais',
+                  comEMidia: 'Comunicação e Mídia',
+                  coworking: 'Coworking',
+                  escolas: 'Escolas',
+                  espMakers: 'Espaços Makers',
+                  eventos: 'Eventos',
+                  fabApp: 'Fábrica de Aplicativos',
+                  gov: 'Governo',
+                  gEmpresas: 'Grandes Empresas',
+                  incubadoras: 'Incubadoras',
+                  iniUniversitarias: 'Iniciativas Universitárias',
+                  investidores: 'Investidores',
+                  nucInovacao: 'Núcleos de Inovação',
+                  parquesTec: 'Parques Tecnológicos',
+                  preAceleradoras: 'Pré Aceleradoras',
+                  propIntelectual: 'Propriedade Intelectual',
+                  mentoria: 'Mentoria',
+                  startup: 'Startup',
+                  patente: 'Patente'
+                }
+              },
               alert:{
                 voceEstaDeslogado: "Você está deslogado." ,
               }
@@ -63,6 +95,38 @@ const lngs = {
                   }
                 },
                 tituloPag:"Dashboard of the Mapa do Ecossistema de Inovação Cearense",
+                graficos:{
+                  grafico1:{
+                    titulo:"Regions by category",
+                    select:{
+                      todas: "All categories"
+                    },
+                    ajuda:"This graph shows the total number of categories in each region of Ceará, making it possible to choose a specific category using the available filter. The data is obtained from records made on the Mapa do Ecossistema de Inovação Cearense."
+                  },
+                  categorias:{
+                    comunidades: 'Communities',
+                    aceleradora: 'Startup Accelerator',
+                    catLocais: 'Local Catalysts',
+                    comEMidia: 'Media and Communication',
+                    coworking: 'Coworking',
+                    escolas: 'Schools',
+                    espMakers: 'Makers Space',
+                    eventos: 'Events',
+                    fabApp: 'App Factory',
+                    gov: 'Government',
+                    gEmpresas: 'Big Companies',
+                    incubadoras: 'Business Incubators',
+                    iniUniversitarias: 'University Initiatives',
+                    investidores: 'Investors',
+                    nucInovacao: 'Innovation Center',
+                    parquesTec: 'Technology Parks',
+                    preAceleradoras: 'Pre-seed Startup',
+                    propIntelectual: 'Intellectual Properties',
+                    mentoria: 'Mentorship',
+                    startup: 'Startup',
+                    patente: 'Patent'
+                  }
+                },
                 alert:{
                     voceEstaDeslogado: "You're logged out.",
                 }
