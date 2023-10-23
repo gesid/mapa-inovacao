@@ -44,6 +44,42 @@ const lngs = {
                   },
                   ajuda:"Esse gráfico mostra o total de categorias em cada região do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense."
                 },
+                grafico2:{
+                  titulo:"Comunidades por Categorias",
+                  select:{
+                    todas: "Todas as categorias"
+                  },
+                  ajuda:"Esse gráfico mostra o total de categorias em cada comunidade do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense."
+                },
+                //grafico3
+                grafico4:{
+                  titulo:"Quantitativo de entidades por categoria",
+                  classificacao:"Classificação",
+                  quantidade:"Quantidade",
+                  ajuda:"Essa lista mostra a quantidade de entidades em cada categoria cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais entidades naquela categoria maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense."
+                },
+                grafico5:{
+                  titulo:"Startups por fase",
+                  select1:{
+                    todosSegmentos:"Todos os segmentos",
+                    receitas:{
+                      todasReceitas:"Todas as receitas",
+                      assinatura: "Assinatura",
+                      vendaDireta: "Venda direta",
+                      sobDemanda: "Serviços sob demanda",
+                      afiliados: "Afiliados",
+                      licenciamnto: "Licenciamento",
+                      ad: "Advertising (Propaganda)"
+                    },
+                    todosModelos:"Todos os modelos de negócio"
+                  },
+                  select2:{
+                      porSegmento:"Fases por Segmentos",
+                      porModeloDeReceita:"Fases por Modelo de Receitas",
+                      porModeloDeNegocios: "Fases por Modelo de Negócio"
+                  },
+                  quantidade: "Quantidade"
+                },
                 categorias:{
                   comunidades: 'Comunidades',
                   aceleradora: 'Aceleradora',
@@ -65,7 +101,7 @@ const lngs = {
                   propIntelectual: 'Propriedade Intelectual',
                   mentoria: 'Mentoria',
                   startup: 'Startup',
-                  patente: 'Patente'
+                  patente: 'Patentes'
                 }
               },
               alert:{
@@ -103,6 +139,42 @@ const lngs = {
                     },
                     ajuda:"This graph shows the total number of categories in each region of Ceará, making it possible to choose a specific category using the available filter. The data is obtained from records made on the Mapa do Ecossistema de Inovação Cearense."
                   },
+                  grafico2:{
+                    titulo:"Communities by Categories",
+                    select:{
+                      todas: "All categories"
+                    },
+                    ajuda:"This graph shows the total number of categories in each community in Ceará, making it possible to choose a specific category using the available filter. The data is obtained from records made on the Mapa do Ecossistema de Inovação Cearense."
+                  },
+                  //grafico 3
+                  grafico4:{
+                    titulo:"Number of entities per category",
+                    classificacao:"Classification",
+                    quantidade:"Amount",
+                    ajuda:"This list shows the number of entities in each registered category. The classification is based on quantity, that is, the more entities in that category, the higher its classification will be. The data is obtained from records made on the Mapa do Ecossitema de Inovação Cearense."
+                  },
+                  grafico5:{
+                    titulo:"Startups by phase",
+                    select1:{
+                      todosSegmentos:"All segments",
+                      receitas:{
+                        todasReceitas:"All revenue",
+                        assinatura: "Subscription",
+                        vendaDireta: "Direct sales",
+                        sobDemanda: "On-Demand Services",
+                        afiliados: "Affiliates",
+                        licenciamnto: "Licensing ",
+                        ad: "Advertising"
+                      },
+                      todosModelos:"All business model"
+                    },
+                    select2:{
+                        porSegmento:"Phases by Segments",
+                        porModeloDeReceita:"Phases by Revenue Model",
+                        porModeloDeNegocios: "Phases by Business Model"
+                    },
+                    quantidade: "Amount"
+                  },
                   categorias:{
                     comunidades: 'Communities',
                     aceleradora: 'Startup Accelerator',
@@ -124,7 +196,7 @@ const lngs = {
                     propIntelectual: 'Intellectual Properties',
                     mentoria: 'Mentorship',
                     startup: 'Startup',
-                    patente: 'Patent'
+                    patente: 'Patents'
                   }
                 },
                 alert:{
