@@ -370,30 +370,49 @@ async function adicionarDadosMatrizPatentes() {
 async function adicionarDadosMatrizFasesStartups() {
   let fases = await contarQuantidadesDeFase();
   let matriz = [];
+  let traducao = "";
   matriz.push(["Fase", `${i18next.t("graficos.grafico5.quantidade")}`]);
   for (let i = 0; i < fases.length; i++) {
-    matriz.push([fases[i].nome, fases[i].quantidade]);
+    traducao = traducaoFasesStartups(fases[i].nome);
+    matriz.push([`${i18next.t(`graficos.grafico5.fases.${traducao}`)}`, fases[i].quantidade]);
   }
   return matriz;
 }
 async function adicionarDadosMatrizFasesPorReceitas() {
   let fases = await contarQuantidadeDeFaseTodasReceitas();
   let matriz = [];
-  matriz.push(["Fase", "Quantidade"]);
+  let traducao = "";
+  matriz.push(["Fase", `${i18next.t("graficos.grafico5.quantidade")}`]);
   for (let i = 0; i < fases.length; i++) {
-    matriz.push([fases[i].nome, fases[i].quantidade]);
+    traducao = traducaoFasesStartups(fases[i].nome);
+    matriz.push([`${i18next.t(`graficos.grafico5.fases.${traducao}`)}`, fases[i].quantidade]);
   }
   return matriz;
 }
 async function adicionarDadosMatrizFasesPorModeloDeNegocio() {
   let fases = await contarQuantidadeDeModeloDeReceitasDasFases();
   let matriz = [];
-  matriz.push(["Fase", "Quantidade"]);
+  let traducao = "";
+  matriz.push(["Fase", `${i18next.t("graficos.grafico5.quantidade")}`]);
   for (let i = 0; i < fases.length; i++) {
-    matriz.push([fases[i].nome, fases[i].quantidade]);
+    traducao = traducaoFasesStartups(fases[i].nome);
+    matriz.push([`${i18next.t(`graficos.grafico5.fases.${traducao}`)}`, fases[i].quantidade]);
   }
   return matriz;
 }
+function traducaoFasesStartups(nome){
+  if(nome == "Operação")
+    return "operacao"
+  else if(nome == "Validação")
+    return "validacao"
+  else if(nome == "Ideação")
+    return "idedacao"
+  else if(nome == "Tração")
+    return "tracao"
+  else if(nome == "Scale Up")
+    return "scaleup"
+}
+
 async function adicionarDadosMatrizFasesPorTipoModeloDeNegocio(modelo) {
   let fases = await contarQuantidadeFasesDeUmModeloDeNegocio(modelo);
   let matriz = [];
@@ -1226,7 +1245,7 @@ async function mudarSelectParaSegmentos() {
   const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
   const classificacoes = await carregarClassificacoesStartup();
 
-  selectStartupsTipos.innerHTML = `<option value="Todas" data-18n="graficos.grafico5.select1.todosSegmentos">${i18next.t("graficos.grafico5.select1.todosSegmentos")}</option>`;
+  selectStartupsTipos.innerHTML = `<option value="Todas" class="optionSelect1StartupPorFase" data-18n="graficos.grafico5.select1.todosSegmentos" value-traducao="todosSegmentos">${i18next.t("graficos.grafico5.select1.todosSegmentos")}</option>`;
   for (let i = 0; i < classificacoes.length; i++) {
     selectStartupsTipos.innerHTML += `<option value="${classificacoes[i].classe}">${classificacoes[i].classe}</option>`;
   }
@@ -1235,7 +1254,7 @@ async function mudarSelectParaModeloDeNegocio() {
   const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
   const modelos = await carregarTodasOsModelosDeNegocio();
 
-  selectStartupsTipos.innerHTML = `<option value="Todas" data-18n="graficos.grafico5.select1.todosModelos">${i18next.t("graficos.grafico5.select1.todosModelos")}</option>`;
+  selectStartupsTipos.innerHTML = `<option value="Todas" class="optionSelect1StartupPorFase" data-18n="graficos.grafico5.select1.todosModelos" value-traducao="todosModelos">${i18next.t("graficos.grafico5.select1.todosModelos")}</option>`;
   for (let i = 0; i < modelos.length; i++) {
     selectStartupsTipos.innerHTML += `<option value="${modelos[i].nome}">${modelos[i].nome}</option>`;
   }
@@ -1245,16 +1264,28 @@ async function mudarSelectParaReceitas() {
   const receitas = await carregarTodasReceitasStartup();
   let traducaoOption = "";
 
-  selectStartupsTipos.innerHTML = `<option value="Todas" data-18n="graficos.grafico5.select1.receitas.todasReceitas">${i18next.t("graficos.grafico5.select1.receitas.todasReceitas")}</option>`;
+  selectStartupsTipos.innerHTML = `<option value="Todas" class="optionSelect1StartupPorFase" data-18n="graficos.grafico5.select1.todasReceitas" value-traducao="todasReceitas">${i18next.t("graficos.grafico5.select1.todasReceitas")}</option>`;
   for (let i = 0; i < receitas.length; i++) {
     console.log(receitas[i].nome)
     traducaoOption = traducaoModelosDeNegocio(receitas[i].nome);
     if(traducaoOption != null)
-      selectStartupsTipos.innerHTML += `<option value="${receitas[i].nome}">${i18next.t(`graficos.grafico5.select1.receitas.${traducaoOption}`)}</option>`;
+      selectStartupsTipos.innerHTML += `<option value="${receitas[i].nome}" class="optionSelect1StartupPorFase" value-traducao=${traducaoOption}>${i18next.t(`graficos.grafico5.select1.${traducaoOption}`)}</option>`;
     else 
       selectStartupsTipos.innerHTML += `<option value="${receitas[i].nome}">${receitas[i].nome}</option>`;
   }
 }
+
+i18next.on('languageChanged', function(lng){
+  const LISTA_MODELOS_STARTUPS_POR_FASE = document.getElementsByClassName('optionSelect1StartupPorFase');
+  const ARRAY_LISTA_MODELOS_STARTUPS_POR_FASE = Array.from(LISTA_MODELOS_STARTUPS_POR_FASE);
+  let traducao = "";
+
+  ARRAY_LISTA_MODELOS_STARTUPS_POR_FASE.forEach(element => {
+    traducao = element.getAttribute('value-traducao');
+    element.innerHTML = i18next.t(`graficos.grafico5.select1.${traducao}`);
+  })
+});
+
 
 /*ira mudar*/
 function traducaoModelosDeNegocio(nome){
@@ -1272,3 +1303,8 @@ function traducaoModelosDeNegocio(nome){
     return "ad"
   else return null
 }
+
+
+document.getElementById("languageSwitcher").addEventListener("change", ()=>{
+  window.location.reload()
+})
