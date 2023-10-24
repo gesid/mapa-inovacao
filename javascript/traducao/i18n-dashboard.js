@@ -93,6 +93,25 @@ const lngs = {
                   todas: "Todas as regiões",
                   ajuda: "Esse gráfico mostra os segmentos de startup e a quantidade de startup em cada um deles nas regiões ou comunidades do Ceará, sendo possível escolher uma região ou comunidade específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense."
                 },
+                grafico7:{
+                  titulo: "Depositantes de Patentes",
+                  ajuda: "Esse gráfico mostra a quantidade de patentes cadastradas em cada depositante de patente. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.",
+                  quantidade: "Quantidade"
+                },
+                grafico8:{
+                  titulo:"Seções de Patentes",
+                  nome: "Nome",
+                  quantidade: "Quantidade",
+                  secaoA: "Seção A - Necessidade Humanas",
+                  secaoB: "Seção B - Operações de Processameto, Transporte",
+                  secaoC: "Seção C - Química e Metalurgia",
+                  secaoD: "Seção D - Têxteis e Papel",
+                  secaoE: "Seção E - Construções Fixas",
+                  secaoF: "Seção F - Eng. Mecânica, Iluminação, Aquecimento, Armas, Explosão",
+                  secaoG: "Seção G - Física",
+                  secaoH: "Seção H - Eletricidade",
+                  ajuda: "Essa lista mostra a quantidade de patentes em cada seção cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais patentes na seção maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense."
+                },
                 categorias:{
                   comunidades: 'Comunidades',
                   aceleradora: 'Aceleradora',
@@ -200,6 +219,25 @@ const lngs = {
                     titulo: "Startup Segments",
                     todas: "All regions",
                     ajuda: "This graph shows the startup segments and the number of startups in each of them in the regions or communities of Ceará, making it possible to choose a specific region or community using the available filter. The data is obtained from records made on the Mapa do Ecossitema de Inovação do Ceará."
+                  },
+                  grafico7:{
+                    titulo: "Patent Depositors",
+                    ajuda: "This graph shows the number of patents registered with each patent applicant. The data is obtained from records made on the Mapa do Ecossistema de Inovação Cearense.",
+                    quantidade: "Amount"
+                  },
+                  grafico8:{
+                    titulo:"Patent Sections",
+                    nome: "Name",
+                    quantidade: "Amount",
+                    secaoA: "Section A - Human Needs",
+                    secaoB: "Section B - Processing Operations, Transport",
+                    secaoC: "Section C - Chemistry and Metallurgy",
+                    secaoD: "Section D - Textiles and Paper",
+                    secaoE: "Section E - Fixed Constructions",
+                    secaoF: "Section F - Mechanical Engineering, Lighting, Heating, Weapons, Explosion",
+                    secaoG: "Section G - Physics",
+                    secaoH: "Section H - Electricity",
+                    ajuda: "This list shows the number of patents in each registered section. The classification is based on quantity, that is, the more patents in the section, the higher its classification. The data is obtained from records made on the Mapa do Ecossistema de Inovação Cearense."
                   },
                   categorias:{
                     comunidades: 'Communities',

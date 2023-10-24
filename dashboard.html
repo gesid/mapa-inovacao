@@ -486,7 +486,7 @@
               <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
                 <div class="card" style="border-radius: 20px;">
                     <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                         <h4 class="mb-0" style="display: inline">
+                         <h4 class="mb-0" style="display: inline" data-i18n="graficos.grafico7.titulo">
                             Depositantes de Patentes
                           </h4>
                           <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalDepositantePatenetes">
@@ -500,7 +500,7 @@
             <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
               <div class="card" style="border-radius: 20px;">
                 <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                  <h4 class="mb-0" style="display: inline">
+                  <h4 class="mb-0" style="display: inline" data-i18n="graficos.grafico8.titulo">
                       Seções de Patentes
                     </h4>
                     <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalSecoesPatentes">
@@ -511,8 +511,12 @@
                   <thead class="" style="background-color: #f0f0f0; border-bottom: none;">
                     <tr>
                       
-                      <th>Nome</th>
-                      <th>Quantidade</th>
+                      <th>
+                        <span data-i18n="graficos.grafico8.nome">Nome</span>
+                      </th>
+                      <th>
+                        <span data-i18n="graficos.grafico8.quantidade">Quantidade</span>
+                      </th>
                      
                     </tr>
                   </thead>
@@ -668,13 +672,15 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Depositantes de patentes</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" data-i18n="graficos.grafico7.titulo">Depositantes de patentes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Esse gráfico mostra a quantidade de patentes cadastradas em cada depositante de patente. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico7.ajuda">        
+          Esse gráfico mostra a quantidade de patentes cadastradas em cada depositante de patente. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>
@@ -685,13 +691,15 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Seções de Patentes</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" data-i18n="graficos.grafico7.titulo">Seções de Patentes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Essa lista mostra a quantidade de patentes em cada seção cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais patentes na seção maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico7.ajuda">
+          Essa lista mostra a quantidade de patentes em cada seção cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais patentes na seção maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>

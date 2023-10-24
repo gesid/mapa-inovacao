@@ -361,7 +361,7 @@ function adicionarDadosMatrizComunidade(
 async function adicionarDadosMatrizPatentes() {
   let depositantes = await contarPatentesPorDepositante();
   let matriz = [];
-  matriz.push(["nome", "quantidade"]);
+  matriz.push(["nome", `${i18next.t("graficos.grafico7.quantidade")}`]);
   for (let i = 0; i < depositantes.length; i++) {
     matriz.push([depositantes[i].nome, depositantes[i].quantidade]);
   }
@@ -964,19 +964,39 @@ function adiconarPatentesTabelaSecoesPatentes(
   //ordenar os elementos
 
   dadosSecoes = ordenarDescrescente('quantidade', dadosSecoes)
-
+  let traducao = "";
 
   gerenciarSelecionadorPagina(dadosSecoes.length, 0, "#selecionadorPaginaPatentes");
   for (let i = inicio; i < fim; i++) {
+    traducao = traducaoDadosSecoes(dadosSecoes[i].secao);
     dadosHtml += `
     <tr>
-      <td>${dadosSecoes[i].secao}</td>
+      <td>${i18next.t(`graficos.grafico8.${traducao}`)}</td>
       <td>${dadosSecoes[i].quantidade}</td>                     
     </tr>
     `;
   }
   return dadosHtml;
 }
+function traducaoDadosSecoes(nome){
+  if(nome == "Seção A - Necessidade Humanas")
+    return "secaoA"
+  else if(nome == "Seção B - Operações de Processameto, Transporte")
+    return "secaoB"
+  else if(nome == "Seção C - Química e Metalurgia")
+    return "secaoC"
+  else if(nome == "Seção D - Têxteis e Papel")
+    return "secaoD"
+  else if(nome == "Seção E - Construções Fixas")
+    return "secaoE"
+  else if(nome == "Seção F - Eng. Mecânica, Iluminação, Aquecimento, Armas, Explosão")
+    return "secaoF"
+  else if(nome == "Seção G - Física")
+    return "secaoG"
+  else if(nome == "Seção H - Eletricidade")
+    return "secaoH"
+}
+
 function ordenarDescrescente(propriedade, array) {
   return array.sort(function (a, b) {
     if (a[propriedade] < b[propriedade]) {
