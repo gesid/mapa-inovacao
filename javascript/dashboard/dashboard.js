@@ -454,14 +454,23 @@ async function adicionarDadosMatrizSegmentosStartup(startups) {
 function adicionarDadosNaMatrizCategoriaDeEntidade(arrayObjetosComunidades) {
   let matriz = [];
   matriz.push(["Tipo de Entidade", "Total"]);
+  let traducao = "";
+  let nomeEntidade = "";
   for (let i = 0; i < arrayObjetosComunidades.length; i++) {
+    traducao = traducaoCategoriasDeEntidades(arrayObjetosComunidades[i].nome);
+    if(traducao != null){
+      nomeEntidade = i18next.t(`graficos.categorias.${traducao}`);
+    } else{
+      nomeEntidade = arrayObjetosComunidades[i].nome
+    }
     matriz.push([
-      arrayObjetosComunidades[i].nome,
+      nomeEntidade,
       arrayObjetosComunidades[i].quantidade,
     ]);
   }
   return matriz;
 }
+
 
 function verificarSelectGraficoRegioesPorCategoria(
   quantidadeEntidadesPorRegiao,
@@ -868,6 +877,7 @@ function traducaoCategoriasDeEntidades(nome){
     return "startup"
   else if(nome == "Patentes")
     return "patente"
+  else return null
 }
 
 function gerenciarSelecionadorPagina(tamanho, inicio, id) {

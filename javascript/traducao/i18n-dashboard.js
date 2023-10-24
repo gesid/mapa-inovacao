@@ -51,7 +51,11 @@ const lngs = {
                   },
                   ajuda:"Esse gráfico mostra o total de categorias em cada comunidade do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense."
                 },
-                //grafico3
+                grafico3:{
+                  titulo: "Categorias de Entidade",
+                  todas: "Todas as regiões",
+                  ajuda: "Esse gráfico mostra cada categoria existente e seu número de entidades, em uma região ou comunidade do Ceará. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense."
+                },
                 grafico4:{
                   titulo:"Quantitativo de entidades por categoria",
                   classificacao:"Classificação",
@@ -185,7 +189,11 @@ const lngs = {
                     },
                     ajuda:"This graph shows the total number of categories in each community in Ceará, making it possible to choose a specific category using the available filter. The data is obtained from records made on the Mapa do Ecossistema de Inovação Cearense."
                   },
-                  //grafico 3
+                  grafico3:{
+                    titulo: "Entity Categories",
+                    todas: "All regions",
+                    ajuda: "This graph shows each existing category and its number of entities, in a region or community in Ceará. The data is obtained from records made on the Mapa do Ecossistema de Inovação Cearense."
+                  },
                   grafico4:{
                     titulo:"Number of entities per category",
                     classificacao:"Classification",
