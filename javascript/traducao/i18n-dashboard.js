@@ -136,6 +136,13 @@ const lngs = {
                   patente: 'Patentes'
                 }
               },
+              rodape: {
+                titulo: "Para mais informações, fale conosco através do mapainovacao@ufc.br",
+                descricao: "Versão 0.2 (Beta)",
+                politicaPrivacidade: "TERMOS DE PRIVACIDADE",
+                termoUso: "TERMOS DE USO",
+                termoConsentimento: "TERMOS DE CONSENTIMENTO"
+               },
               alert:{
                 voceEstaDeslogado: "Você está deslogado." ,
               }
@@ -262,6 +269,13 @@ const lngs = {
                     startup: 'Startup',
                     patente: 'Patents'
                   }
+                },
+                rodape: {
+                  titulo: "For more information, contact us through of mapainovacao@ufc.br",
+                  descricao: "Version 0.2 (Beta)",
+                  politicaPrivacidade: "PRIVACY POLICIES",
+                  termoUso: "TERMS OF USE",
+                  termoConsentimento: "TERMS OF CONSENT"
                 },
                 alert:{
                     voceEstaDeslogado: "You're logged out.",
