@@ -203,15 +203,15 @@ const lngs = {
                   grafico5:{
                     titulo:"Startups by phase",
                     select1:{
-                      todosSegmentos:"All segments",
-                        todasReceitas:"All revenue",
+                      todosSegmentos:"All Segments Model",
+                        todasReceitas:"All Revenue Model",
                         assinatura: "Subscription",
                         vendaDireta: "Direct sales",
                         sobDemanda: "On-Demand Services",
                         afiliados: "Affiliates",
                         licenciamnto: "Licensing ",
                         ad: "Advertising",
-                      todosModelos:"All business model"
+                      todosModelos:"All Business Model"
                     },
                     select2:{
                         porSegmento:"Phases by Segments",
