@@ -1397,7 +1397,7 @@ function traducaoModalInstituicao(){
   document.getElementById('labelvalidacaoCidade').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.cidade');
   document.getElementById('labelvalidacaoUF').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.uf');
   document.getElementById('labelValidacaoClassificaocao').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.startup');
-
+ 
   //botões
   document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.fechar');
   document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar')
