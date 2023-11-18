@@ -139,7 +139,7 @@ function graficoSegmentosStartup() {
       easing: "out",
     },
     showScale: true,
-    height: 300,
+    height: 400,
     useWeightedAverageForAggregation: true,
   };
 
@@ -153,7 +153,6 @@ function regioes() {
   var data = google.visualization.arrayToDataTable(arrayRegioes);
 
   var options = {
-    title: "Gráfico de comunidades por categoria",
     chartArea: { width: "40%", height: "90%" },
     colors: ["#019267", "#019267"],
     animation: {
@@ -162,7 +161,6 @@ function regioes() {
       easing: "out",
     },
     hAxis: {
-      title: "Numeros Entidades",
       minValue: 0,
       ticks: [],
     },
@@ -200,7 +198,7 @@ function graficoStartup() {
   var data = google.visualization.arrayToDataTable(arrayStartupsFases);
 
   var options = {
-    title: "Gráfico de comunidades por categoria",
+    title: "",
     chartArea: { width: "40%", height: "90%" },
     colors: ["#019267", "#019267"],
     animation: {
@@ -209,7 +207,7 @@ function graficoStartup() {
       easing: "out",
     },
     hAxis: {
-      title: "Numeros Entidades",
+      title: "",
       minValue: 0,
       ticks: [],
     },
@@ -247,7 +245,7 @@ function graficoCategoriasDeEntidade() {
   var data = google.visualization.arrayToDataTable(arrayCategoriaDeEntidade);
 
   var options = {
-    title: "Gráfico de comunidades por categoria",
+    title: "",
     chartArea: { width: "40%", height: "90%" },
     colors: ["#019267", "#019267"],
     animation: {
@@ -256,7 +254,7 @@ function graficoCategoriasDeEntidade() {
       easing: "out",
     },
     hAxis: {
-      title: "Numeros Entidades",
+      title: "",
       minValue: 0,
       ticks: [],
     },
@@ -363,7 +361,7 @@ function adicionarDadosMatrizComunidade(
 async function adicionarDadosMatrizPatentes() {
   let depositantes = await contarPatentesPorDepositante();
   let matriz = [];
-  matriz.push(["nome", "quantidade"]);
+  matriz.push(["nome", `${i18next.t("graficos.grafico7.quantidade")}`]);
   for (let i = 0; i < depositantes.length; i++) {
     matriz.push([depositantes[i].nome, depositantes[i].quantidade]);
   }
@@ -372,30 +370,49 @@ async function adicionarDadosMatrizPatentes() {
 async function adicionarDadosMatrizFasesStartups() {
   let fases = await contarQuantidadesDeFase();
   let matriz = [];
-  matriz.push(["Fase", "Quantidade"]);
+  let traducao = "";
+  matriz.push(["Fase", `${i18next.t("graficos.grafico5.quantidade")}`]);
   for (let i = 0; i < fases.length; i++) {
-    matriz.push([fases[i].nome, fases[i].quantidade]);
+    traducao = traducaoFasesStartups(fases[i].nome);
+    matriz.push([`${i18next.t(`graficos.grafico5.fases.${traducao}`)}`, fases[i].quantidade]);
   }
   return matriz;
 }
 async function adicionarDadosMatrizFasesPorReceitas() {
   let fases = await contarQuantidadeDeFaseTodasReceitas();
   let matriz = [];
-  matriz.push(["Fase", "Quantidade"]);
+  let traducao = "";
+  matriz.push(["Fase", `${i18next.t("graficos.grafico5.quantidade")}`]);
   for (let i = 0; i < fases.length; i++) {
-    matriz.push([fases[i].nome, fases[i].quantidade]);
+    traducao = traducaoFasesStartups(fases[i].nome);
+    matriz.push([`${i18next.t(`graficos.grafico5.fases.${traducao}`)}`, fases[i].quantidade]);
   }
   return matriz;
 }
 async function adicionarDadosMatrizFasesPorModeloDeNegocio() {
   let fases = await contarQuantidadeDeModeloDeReceitasDasFases();
   let matriz = [];
-  matriz.push(["Fase", "Quantidade"]);
+  let traducao = "";
+  matriz.push(["Fase", `${i18next.t("graficos.grafico5.quantidade")}`]);
   for (let i = 0; i < fases.length; i++) {
-    matriz.push([fases[i].nome, fases[i].quantidade]);
+    traducao = traducaoFasesStartups(fases[i].nome);
+    matriz.push([`${i18next.t(`graficos.grafico5.fases.${traducao}`)}`, fases[i].quantidade]);
   }
   return matriz;
 }
+function traducaoFasesStartups(nome){
+  if(nome == "Operação")
+    return "operacao"
+  else if(nome == "Validação")
+    return "validacao"
+  else if(nome == "Ideação")
+    return "idedacao"
+  else if(nome == "Tração")
+    return "tracao"
+  else if(nome == "Scale Up")
+    return "scaleup"
+}
+
 async function adicionarDadosMatrizFasesPorTipoModeloDeNegocio(modelo) {
   let fases = await contarQuantidadeFasesDeUmModeloDeNegocio(modelo);
   let matriz = [];
@@ -437,14 +454,23 @@ async function adicionarDadosMatrizSegmentosStartup(startups) {
 function adicionarDadosNaMatrizCategoriaDeEntidade(arrayObjetosComunidades) {
   let matriz = [];
   matriz.push(["Tipo de Entidade", "Total"]);
+  let traducao = "";
+  let nomeEntidade = "";
   for (let i = 0; i < arrayObjetosComunidades.length; i++) {
+    traducao = traducaoCategoriasDeEntidades(arrayObjetosComunidades[i].nome);
+    if(traducao != null){
+      nomeEntidade = i18next.t(`graficos.categorias.${traducao}`);
+    } else{
+      nomeEntidade = arrayObjetosComunidades[i].nome
+    }
     matriz.push([
-      arrayObjetosComunidades[i].nome,
+      nomeEntidade,
       arrayObjetosComunidades[i].quantidade,
     ]);
   }
   return matriz;
 }
+
 
 function verificarSelectGraficoRegioesPorCategoria(
   quantidadeEntidadesPorRegiao,
@@ -777,7 +803,9 @@ async function paginacaoTabelaCategoriasDeEntidade(inicio, fim, tabela, tipos) {
     }
   });
   let dados = "";
+  let traducao = "";
   for (let i = inicio; i < fim; i++) {
+    traducao = traducaoCategoriasDeEntidades(tipos[i].nome)
     if (tipos[i].img) {
       dados += `
      <tr >
@@ -788,7 +816,7 @@ async function paginacaoTabelaCategoriasDeEntidade(inicio, fim, tabela, tipos) {
            </div>
          </div>
        </td>
-         <td >${tipos[i].nome}</td>
+         <td class="categoriaDeEntidades-nome" prop-traducao=${traducao}>${i18next.t(`graficos.categorias.${traducao}`)}</td>
          <td >${tipos[i].quantidade}</td>
      </tr>`;
     }
@@ -796,6 +824,62 @@ async function paginacaoTabelaCategoriasDeEntidade(inicio, fim, tabela, tipos) {
 
   tabela.innerHTML = dados;
 }
+
+i18next.on('languageChanged', function(lng){
+  const NOMES_LISTA_CATEGORIAS_DE_ENTIDADES = document.getElementsByClassName('categoriaDeEntidades-nome');
+  const ARRAY_NOMES_LISTA_CATEGORIAS_DE_ENTIDADES = Array.from(NOMES_LISTA_CATEGORIAS_DE_ENTIDADES);
+  let traducao = "";
+
+  ARRAY_NOMES_LISTA_CATEGORIAS_DE_ENTIDADES.forEach(element => {
+    traducao = element.getAttribute('prop-traducao');
+    element.innerHTML = i18next.t(`graficos.categorias.${traducao}`);
+  })
+});
+
+function traducaoCategoriasDeEntidades(nome){
+  if(nome == "Aceleradora")
+    return "aceleradora"
+  else if(nome == "Catalisadores Locais")
+    return "catLocais"
+  else if(nome == "Comunicação e Mídia")
+    return "comEMidia"
+  else if(nome == "Coworking")
+    return "coworking"
+  else if(nome == "Escolas")
+    return "escolas"
+  else if(nome == "Espaços Makers")
+    return "espMakers"
+  else if(nome == "Eventos")
+    return "eventos"
+  else if(nome == "Fábrica de Aplicativos")
+    return "fabApp"
+  else if(nome == "Governo")
+    return "gov"
+  else if(nome == "Grandes Empresas")
+    return "gEmpresas"
+  else if(nome == "Incubadoras")
+    return "incubadoras"
+  else if(nome == "Iniciativas Universitárias")
+    return "iniUniversitarias"
+  else if(nome == "Investidores")
+    return "investidores"
+  else if(nome == "Núcleos de Inovação")
+    return "nucInovacao"
+  else if(nome == "Parques Tecnológicos")
+    return "parquesTec"
+  else if(nome == "Pré Aceleradoras")
+    return "preAceleradoras"
+  else if(nome == "Propriedade Intelectual")
+    return "propIntelectual"
+  else if(nome == "Mentoria")
+    return "mentoria"
+  else if(nome == "Startup")
+    return "startup"
+  else if(nome == "Patentes")
+    return "patente"
+  else return null
+}
+
 function gerenciarSelecionadorPagina(tamanho, inicio, id) {
   const selecionadorPagina = document.querySelector(id);
   selecionadorPagina.innerHTML += `
@@ -890,19 +974,39 @@ function adiconarPatentesTabelaSecoesPatentes(
   //ordenar os elementos
 
   dadosSecoes = ordenarDescrescente('quantidade', dadosSecoes)
-
+  let traducao = "";
 
   gerenciarSelecionadorPagina(dadosSecoes.length, 0, "#selecionadorPaginaPatentes");
   for (let i = inicio; i < fim; i++) {
+    traducao = traducaoDadosSecoes(dadosSecoes[i].secao);
     dadosHtml += `
     <tr>
-      <td>${dadosSecoes[i].secao}</td>
+      <td>${i18next.t(`graficos.grafico8.${traducao}`)}</td>
       <td>${dadosSecoes[i].quantidade}</td>                     
     </tr>
     `;
   }
   return dadosHtml;
 }
+function traducaoDadosSecoes(nome){
+  if(nome == "Seção A - Necessidade Humanas")
+    return "secaoA"
+  else if(nome == "Seção B - Operações de Processameto, Transporte")
+    return "secaoB"
+  else if(nome == "Seção C - Química e Metalurgia")
+    return "secaoC"
+  else if(nome == "Seção D - Têxteis e Papel")
+    return "secaoD"
+  else if(nome == "Seção E - Construções Fixas")
+    return "secaoE"
+  else if(nome == "Seção F - Eng. Mecânica, Iluminação, Aquecimento, Armas, Explosão")
+    return "secaoF"
+  else if(nome == "Seção G - Física")
+    return "secaoG"
+  else if(nome == "Seção H - Eletricidade")
+    return "secaoH"
+}
+
 function ordenarDescrescente(propriedade, array) {
   return array.sort(function (a, b) {
     if (a[propriedade] < b[propriedade]) {
@@ -1171,7 +1275,7 @@ async function mudarSelectParaSegmentos() {
   const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
   const classificacoes = await carregarClassificacoesStartup();
 
-  selectStartupsTipos.innerHTML = `<option value="Todas">Todos os segmentos</option>`;
+  selectStartupsTipos.innerHTML = `<option value="Todas" class="optionSelect1StartupPorFase" data-18n="graficos.grafico5.select1.todosSegmentos" value-traducao="todosSegmentos">${i18next.t("graficos.grafico5.select1.todosSegmentos")}</option>`;
   for (let i = 0; i < classificacoes.length; i++) {
     selectStartupsTipos.innerHTML += `<option value="${classificacoes[i].classe}">${classificacoes[i].classe}</option>`;
   }
@@ -1180,7 +1284,7 @@ async function mudarSelectParaModeloDeNegocio() {
   const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
   const modelos = await carregarTodasOsModelosDeNegocio();
 
-  selectStartupsTipos.innerHTML = `<option value="Todas">Todos os modelos de negócio</option>`;
+  selectStartupsTipos.innerHTML = `<option value="Todas" class="optionSelect1StartupPorFase" data-18n="graficos.grafico5.select1.todosModelos" value-traducao="todosModelos">${i18next.t("graficos.grafico5.select1.todosModelos")}</option>`;
   for (let i = 0; i < modelos.length; i++) {
     selectStartupsTipos.innerHTML += `<option value="${modelos[i].nome}">${modelos[i].nome}</option>`;
   }
@@ -1188,9 +1292,49 @@ async function mudarSelectParaModeloDeNegocio() {
 async function mudarSelectParaReceitas() {
   const selectStartupsTipos = document.querySelector("#selectStartupsTipos");
   const receitas = await carregarTodasReceitasStartup();
+  let traducaoOption = "";
 
-  selectStartupsTipos.innerHTML = `<option value="Todas">Todas as receitas</option>`;
+  selectStartupsTipos.innerHTML = `<option value="Todas" class="optionSelect1StartupPorFase" data-18n="graficos.grafico5.select1.todasReceitas" value-traducao="todasReceitas">${i18next.t("graficos.grafico5.select1.todasReceitas")}</option>`;
   for (let i = 0; i < receitas.length; i++) {
-    selectStartupsTipos.innerHTML += `<option value="${receitas[i].nome}">${receitas[i].nome}</option>`;
+    console.log(receitas[i].nome)
+    traducaoOption = traducaoModelosDeNegocio(receitas[i].nome);
+    if(traducaoOption != null)
+      selectStartupsTipos.innerHTML += `<option value="${receitas[i].nome}" class="optionSelect1StartupPorFase" value-traducao=${traducaoOption}>${i18next.t(`graficos.grafico5.select1.${traducaoOption}`)}</option>`;
+    else 
+      selectStartupsTipos.innerHTML += `<option value="${receitas[i].nome}">${receitas[i].nome}</option>`;
   }
 }
+
+i18next.on('languageChanged', function(lng){
+  const LISTA_MODELOS_STARTUPS_POR_FASE = document.getElementsByClassName('optionSelect1StartupPorFase');
+  const ARRAY_LISTA_MODELOS_STARTUPS_POR_FASE = Array.from(LISTA_MODELOS_STARTUPS_POR_FASE);
+  let traducao = "";
+
+  ARRAY_LISTA_MODELOS_STARTUPS_POR_FASE.forEach(element => {
+    traducao = element.getAttribute('value-traducao');
+    element.innerHTML = i18next.t(`graficos.grafico5.select1.${traducao}`);
+  })
+});
+
+
+/*ira mudar*/
+function traducaoModelosDeNegocio(nome){
+  if(nome == "Assinatura")
+    return "assinatura"
+  else if(nome == "Venda direta")
+    return "vendaDireta"
+  else if(nome == "Serviços sob demanda")
+    return "sobDemanda"
+  else if(nome == "Afiliados")
+    return "afiliados"
+  else if(nome == "Licenciamento")
+    return "licenciamnto"
+  else if(nome == "Advertising (Propaganda)")
+    return "ad"
+  else return null
+}
+
+
+document.getElementById("languageSwitcher").addEventListener("change", ()=>{
+  window.location.reload()
+})

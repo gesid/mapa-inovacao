@@ -69,6 +69,11 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
+   <!--Import da biblioteca de traducao-->
+   <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
+
   <!-- font-awsome-->
   <script src="https://kit.fontawesome.com/16786d0779.js" crossorigin="anonymous"></script>
 </head>
@@ -91,15 +96,15 @@
               <li class="nav-item">
                 <a type="button" href="index.html" class="nav-item-style">
                   <i class="fas fa-map-marker-alt"> </i>
-                  <p class="texto-nav">MAPA</p>
+                  <p class="texto-nav" data-i18n="navBar1.navMap">MAPA</p>
                 </a>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item" style="white-space: nowrap;">
                 <a type="button" href="ecossistema.html"
                   class="d-flex align-items-center justify-content-start nav-item-style">
                   <i class="fas fa-newspaper"></i>
-                  <p class="texto-nav">ECOSSISTEMA</p>
+                  <p class="texto-nav" data-i18n="navBar1.navEcossistema">ECOSSISTEMA</p>
                 </a>
               </li>
 
@@ -107,7 +112,7 @@
                 <a type="button" href="eventos.html"
                   class="d-flex align-items-center justify-content-start nav-item-style">
                   <i class="fas fa-theater-masks"> </i>
-                  <p class="texto-nav">EVENTOS</p>
+                  <p class="texto-nav" data-i18n="navBar1.navEventos">EVENTOS</p>
                 </a>
               </li>
 
@@ -117,12 +122,12 @@
                     role="button" id="dropDownNavPatente" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <i class="fas fa-stamp"> </i>
-                    <p class="texto-nav">PATENTES</p>
+                    <p class="texto-nav" data-i18n="navBar1.navPatentes.titulo">PATENTES</p>
                   </a>
 
                   <div class="dropdown-menu" id="opcoesDropdownPatentes" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="./cadastro-patente.html">Cadastrar patente</a>
-                    <a class="dropdown-item" href="./patentes.html">Ver lista de patentes</a>
+                    <a class="dropdown-item" href="./cadastro-patente.html" data-i18n="navBar1.navPatentes.subnavCadastro">Cadastrar patente</a>
+                    <a class="dropdown-item" href="./patentes.html" data-i18n="navBar1.navPatentes.subnavListar">Ver lista de patentes</a>
                   </div>
                 </div>
               </li>
@@ -137,6 +142,14 @@
             </ul>
           </div>
 
+          <form id="btn-select-traducao" class="dropdownHeader">
+            <select
+              name="language" 
+              id="languageSwitcher"
+              class="btn-traducao-dropdown-header">
+            </select>
+          </form>
+
           <form id="btn-user" class="dropdownHeader">
             <button class="btn-dropdown-header dropdown-toggle" type="button" id="dropdownMenu2"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -144,7 +157,11 @@
         </nav>
       </header>
       <div class="d-flex justify-content-center pt-5 pb-20" >
-        <div class="" id="barraDashboard"> Dashboard do Mapa do Ecossistema de Inovação Cearense</div>
+        <div class="" id="barraDashboard"> 
+          <span data-i18n="tituloPag">
+            Dashboard do Mapa do Ecossistema de Inovação Cearense
+          </span>
+        </div>
       </div>
      
         <div class="container-fluid mt-n22 px-6">
@@ -152,44 +169,87 @@
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0" >
                     <div class="card" style="border-radius: 20px;">
                         <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                            <h4 class="mb-0" style="display: inline">
+                            <h4 class="mb-0" style="display: inline"]
+                              data-i18n="graficos.grafico1.titulo">
                                 Regiões por categoria
                               </h4>
 
                               <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalregioes" >
                               <select class="float-right" style="border-radius: 10px;padding: 5px;width: 160px;" id="selectRegioesPorCategoria">
-                                <option selected value="Todas">Todas as categorias</option>
-                                <option value="Aceleradora">Aceleradora</option>
-                                <option value="Catalisadores">Catalisadores Locais</option>
+                                <option selected 
+                                  value="Todas"
+                                  data-i18n="graficos.grafico1.select.todas"
+                                >
+                                  Todas as categorias
+                                </option>
+                                <option value="Aceleradora"
+                                  data-i18n="graficos.categorias.aceleradora"
+                                >
+                                  Aceleradora
+                                </option>
+                                <option value="Catalisadores"
+                                  data-i18n="graficos.categorias.catLocais"
+                                >
+                                  Catalisadores Locais
+                                </option>
 
-                                <option value="Comunicação">Comunicação e Mídia</option>
+                                <option value="Comunicação" 
+                                  data-i18n="graficos.categorias.comEMidia"
+                                >
+                                  Comunicação e Mídia
+                                </option>
                                 <option value="Coworking">Coworking</option>
                                 <option value="Startup">Startup</option>
-                                <option value="Escolas">Escolas</option>
-                                <option value="Fábrica de Aplicativos">
+                                <option value="Escolas" data-i18n="graficos.categorias.escolas">Escolas</option>
+                                <option value="Fábrica de Aplicativos"
+                                  data-i18n="graficos.categorias.fabApp">
                                   Fábrica de Aplicativos
                                 </option>
-                                <option value="Grandes Empresas">Grandes Empresas</option>
-                                <option value="Incubadoras">Incubadoras</option>
-                                <option value="Iniciativas Universitárias">
+                                <option value="Grandes Empresas"
+                                  data-i18n="graficos.categorias.gEmpresas"
+                                >
+                                  Grandes Empresas
+                                </option>
+                                <option value="Incubadoras"
+                                  data-i18n="graficos.categorias.incubadoras"
+                                >
+                                  Incubadoras
+                                </option>
+                                <option value="Iniciativas Universitárias"
+                                  data-i18n="graficos.categorias.iniUniversitarias"
+                                >
                                   Iniciativas Universitárias
                                 </option>
-                                <option value="Investidores">Investidores</option>
-                                <option value="Núcleos de Inovação">
+                                <option value="Investidores"
+                                  data-i18n="graficos.categorias.investidores"
+                                >
+                                  Investidores
+                                </option>
+                                <option value="Núcleos de Inovação"
+                                  data-i18n="graficos.categorias.nucInovacao"
+                                >
                                   Núcleos de Inovação
                                 </option>
-                                <option value="Parques Tecnológicos">
+                                <option value="Parques Tecnológicos"
+                                  data-i18n="graficos.categorias.parquesTec"
+                                >
                                   Parques Tecnológicos
                                 </option>
-                                <option value="Propriedade Intelectual">
+                                <option value="Propriedade Intelectual"
+                                  data-i18n="graficos.categorias.propIntelectual"
+                                >
                                   Propriedade Intelectual
                                 </option>
-                                <option value="Mentoria">Mentoria</option>
-                                <option value="Pré Aceleradoras">Pré Aceleradoras</option>
+                                <option value="Mentoria" data-i18n="graficos.categorias.mentoria">Mentoria</option>
+                                <option value="Pré Aceleradoras" 
+                                  data-i18n="graficos.categorias.preAceleradoras"
+                                >
+                                  Pré Aceleradoras
+                                </option>
                               </select>
                         </div>
                         <div class="card-body">
-                            <div id="graficoRegioesCategoria" style="height: 300px"></div>
+                            <div id="graficoRegioesCategoria" style="height: 400px"></div>
 
                         </div>
                     </div>
@@ -199,42 +259,83 @@
                     <div class="card" style="border-radius: 20px;">
                         <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
                             <h4 class="mb-0" style="display: inline">
-                                Comunidades por Categorias
+                                <span data-i18n="graficos.grafico2.titulo">Comunidades por Categorias</span>
                               </h4>
                               <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalComunidadesPorCategoria">
                               <select class="float-right" style="border-radius: 10px;padding: 5px;width: 160px;" id="selectComunidadesPorRegiao">
-                                <option selected value="Todas">Todas as categorias</option>
-                                <option value="Aceleradora">Aceleradora</option>
-                                <option value="Catalisadores">Catalisadores Locais</option>
+                                <option selected value="Todas"
+                                  data-i18n="graficos.grafico2.select.todas"
+                                >
+                                  Todas as categorias
+                                </option>
+                                <option value="Aceleradora"
+                                  data-i18n="graficos.categorias.aceleradora"
+                                >
+                                  Aceleradora
+                                </option>
+                                <option value="Catalisadores"
+                                  data-i18n="graficos.categorias.catLocais"
+                                >
+                                  Catalisadores Locais
+                                </option>
 
-                                <option value="Comunicação">Comunicação e Mídia</option>
+                                <option value="Comunicação" 
+                                  data-i18n="graficos.categorias.comEMidia"
+                                >
+                                  Comunicação e Mídia
+                                </option>
                                 <option value="Coworking">Coworking</option>
                                 <option value="Startup">Startup</option>
-                                <option value="Escolas">Escolas</option>
-                                <option value="Fábrica de Aplicativos">
+                                <option value="Escolas" data-i18n="graficos.categorias.escolas">Escolas</option>
+                                <option value="Fábrica de Aplicativos"
+                                  data-i18n="graficos.categorias.fabApp">
                                   Fábrica de Aplicativos
                                 </option>
-                                <option value="Grandes Empresas">Grandes Empresas</option>
-                                <option value="Incubadoras">Incubadoras</option>
-                                <option value="Iniciativas Universitárias">
+                                <option value="Grandes Empresas"
+                                  data-i18n="graficos.categorias.gEmpresas"
+                                >
+                                  Grandes Empresas
+                                </option>
+                                <option value="Incubadoras"
+                                  data-i18n="graficos.categorias.incubadoras"
+                                >
+                                  Incubadoras
+                                </option>
+                                <option value="Iniciativas Universitárias"
+                                  data-i18n="graficos.categorias.iniUniversitarias"
+                                >
                                   Iniciativas Universitárias
                                 </option>
-                                <option value="Investidores">Investidores</option>
-                                <option value="Núcleos de Inovação">
+                                <option value="Investidores"
+                                  data-i18n="graficos.categorias.investidores"
+                                >
+                                  Investidores
+                                </option>
+                                <option value="Núcleos de Inovação"
+                                  data-i18n="graficos.categorias.nucInovacao"
+                                >
                                   Núcleos de Inovação
                                 </option>
-                                <option value="Parques Tecnológicos">
+                                <option value="Parques Tecnológicos"
+                                  data-i18n="graficos.categorias.parquesTec"
+                                >
                                   Parques Tecnológicos
                                 </option>
-                                <option value="Propriedade Intelectual">
+                                <option value="Propriedade Intelectual"
+                                  data-i18n="graficos.categorias.propIntelectual"
+                                >
                                   Propriedade Intelectual
                                 </option>
-                                <option value="Mentoria">Mentoria</option>
-                                <option value="Pré Aceleradoras">Pré Aceleradoras</option>
+                                <option value="Mentoria" data-i18n="graficos.categorias.mentoria">Mentoria</option>
+                                <option value="Pré Aceleradoras" 
+                                  data-i18n="graficos.categorias.preAceleradoras"
+                                >
+                                  Pré Aceleradoras
+                                </option>
                               </select>
                         </div>
                         <div class="card-body">
-                            <div id="graficoComunidadesPorCategoria" style="height: 300px;"></div>
+                            <div id="graficoComunidadesPorCategoria" style="height: 400px;"></div>
 
                         </div>
                     </div>
@@ -245,12 +346,12 @@
               <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
                 <div class="card" style="border-radius: 20px;">
                   <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                       <h4 class="mb-0" style="display: inline">
+                       <h4 class="mb-0" style="display: inline" data-i18n="graficos.grafico3.titulo">
                           Categorias de Entidade
                         </h4>
                         <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalCategoriasDeEntidadeGrafico">
                         <select style="border-radius: 10px;padding: 5px;width: 160px;float: right;" id="selectCategoriasDeEntidade">
-                          <option value="Todas">Todas as regiões</option>
+                          <option value="Todas" data-i18n="graficos.grafico3.todas">Todas as regiões</option>
                           <option value="Cariri">Cariri</option>
                           <option value="Fortaleza">Fortaleza</option>
                           <option value="Regional Norte">Região Norte</option>
@@ -270,7 +371,7 @@
                         </select>
                   </div>
                   <div class="card-body">
-                      <div id="graficoCategoriasDeEntidade" style="height: 300px"></div>
+                      <div id="graficoCategoriasDeEntidade" style="height: 400px"></div>
 
                   </div>
               </div>
@@ -278,7 +379,8 @@
                 <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
                   <div class="card" style="border-radius: 20px;">
                     <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                      <h4 class="mb-0" style="display: inline">
+                      <h4 class="mb-0" style="display: inline"
+                        data-i18n="graficos.grafico4.titulo">
                         Quantitativo de entidades por categoria
 
                         </h4>
@@ -289,9 +391,13 @@
                       <thead class="" style="background-color: #f0f0f0; border-bottom: none;">
                         <tr>
                           <th></th>
-                          <th>Classificação</th>
+                          <th>
+                            <span data-i18n="graficos.grafico4.classificacao">Classificação</span>
+                          </th>
                          
-                          <th>Quantidade</th>
+                          <th>
+                            <span data-i18n="graficos.grafico4.quantidade">Quantidade</span>
+                          </th>
                        
                         </tr>
                       </thead>
@@ -316,17 +422,17 @@
               <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
                 <div class="card" style="border-radius: 20px;">
                     <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                         <h4 class="mb-0" style="display: inline">
+                         <h4 class="mb-0" style="display: inline"
+                            data-i18n="graficos.grafico5.titulo">
                           Startups por fase
-
                           </h4>
                           <img src="img/ajudadashboard/ajuda.svg" id="ajudaStartup" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalsegmentos">
                           
                           
                           <select style="border-radius: 10px;padding: 5px;width: 160px;float: right;" id="selectStartupsFases">
-                            <option value="Segmentos">Fases por Segmentos</option>
-                            <option value="Receitas">Fases por Modelo de Receitas</option>
-                            <option value="Negocio">Fases por Modelo de Negócio</option>
+                            <option value="Segmentos" data-i18n="graficos.grafico5.select2.porSegmento">Fases por Segmentos</option>
+                            <option value="Receitas" data-i18n="graficos.grafico5.select2.porModeloDeReceita">Fases por Modelo de Receitas</option>
+                            <option value="Negocio" data-i18n="graficos.grafico5.select2.porModeloDeNegocios">Fases por Modelo de Negócio</option>
                             
                           </select>
                           <select style="border-radius: 10px;padding: 5px;width: 160px;float: right;margin-right: 10px;" id="selectStartupsTipos">
@@ -337,7 +443,7 @@
                           </select>
                     </div>
                     <div class="card-body">
-                        <div id="graficoStartup" style="height: 300px"></div>
+                        <div id="graficoStartup" style="height: 400px"></div>
                       
                     </div>
                 </div>
@@ -345,12 +451,12 @@
             <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
               <div class="card" style="border-radius: 20px;">
                   <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                       <h4 class="mb-0" style="display: inline">
+                       <h4 class="mb-0" style="display: inline" data-i18n="graficos.grafico6.titulo">
                           Segmentos de Startup
                         </h4>
                         <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalSegmentosStartup">
                         <select style="border-radius: 10px;padding: 5px;width: 160px;float: right;" id="selectSegmentosStartups">
-                          <option value="Todas">Todas as regiões</option>
+                          <option value="Todas" data-i18n="graficos.grafico6.todas">Todas as regiões</option>
                           <option value="Cariri">Cariri</option>
                           <option value="Fortaleza">Fortaleza</option>
                           <option value="Regional Norte">Região Norte</option>
@@ -370,7 +476,7 @@
                         </select>
                   </div>
                   <div class="card-body">
-                      <div id="graficoSegmentosStartup" style="height: 300px"></div>
+                      <div id="graficoSegmentosStartup" style="height: 400px"></div>
                     
                   </div>
               </div>
@@ -380,7 +486,7 @@
               <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
                 <div class="card" style="border-radius: 20px;">
                     <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                         <h4 class="mb-0" style="display: inline">
+                         <h4 class="mb-0" style="display: inline" data-i18n="graficos.grafico7.titulo">
                             Depositantes de Patentes
                           </h4>
                           <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalDepositantePatenetes">
@@ -394,7 +500,7 @@
             <div class="col-xl-6 col-lg-12 col-md-12 col-12 mb-6 mb-xl-0">
               <div class="card" style="border-radius: 20px;">
                 <div class="card-header bg-white py-4" style="border: none;border-radius: 20px;">
-                  <h4 class="mb-0" style="display: inline">
+                  <h4 class="mb-0" style="display: inline" data-i18n="graficos.grafico8.titulo">
                       Seções de Patentes
                     </h4>
                     <img src="img/ajudadashboard/ajuda.svg" alt="" srcset="" class="ajudaSvg" data-toggle="modal" data-target=".modalSecoesPatentes">
@@ -405,8 +511,12 @@
                   <thead class="" style="background-color: #f0f0f0; border-bottom: none;">
                     <tr>
                       
-                      <th>Nome</th>
-                      <th>Quantidade</th>
+                      <th>
+                        <span data-i18n="graficos.grafico8.nome">Nome</span>
+                      </th>
+                      <th>
+                        <span data-i18n="graficos.grafico8.quantidade">Quantidade</span>
+                      </th>
                      
                     </tr>
                   </thead>
@@ -432,20 +542,33 @@
   <footer id="footer">
     <div class="footer-content">
       <div class="contact-info">
-        <a id="email" href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}">
+        <a id="email" 
+          href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
+          data-i18n="rodape.titulo"
+        >
           Para mais informações, fale conosco através do
-          mapainovacao@ufc.br</a>
-        <p class="div-footer-beta">Versão 0.2 (Beta)</p>
+          mapainovacao@ufc.br
+        </a>
+        <p class="div-footer-beta" data-i18n="rodape.descricao">Versão 0.2 (Beta)</p>
       </div>
 
       <div class="policy">
         <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
-          target="_blank" class="">POLÍTICAS DE PRIVACIDADE</a>
-        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf" target="_blank" class="">
-          TERMOS DE USO</a>
-        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf" target="_blank"
-          class="">
-          TERMOS DE CONSENTIMENTO</a>
+          target="_blank" class="" data-i18n="rodape.politicaPrivacidade">POLÍTICAS DE PRIVACIDADE</a>
+        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf" 
+          target="_blank" 
+          class="" 
+          data-i18n="rodape.termoUso"
+        >
+          TERMOS DE USO
+        </a>
+        <a href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf" 
+          target="_blank"
+          class=""
+          data-i18n="rodape.termoConsentimento"
+        >
+          TERMOS DE CONSENTIMENTO
+        </a>
       </div>
     </div>
   </footer>
@@ -454,13 +577,20 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Regiões Por Categoria</h5>
+        <h5 class="modal-title" 
+          id="exampleModalLongTitle"
+          data-i18n="graficos.grafico1.titulo"
+        >
+          Regiões Por Categoria
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Esse gráfico mostra o total de categorias em cada região do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico1.ajuda">
+          Esse gráfico mostra o total de categorias em cada região do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>
@@ -473,13 +603,20 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Comunidades por Categoria</h5>
+        <h5 class="modal-title" 
+          id="exampleModalLongTitle"
+          data-i18n="graficos.grafico2.titulo"
+        >
+          Comunidades por Categoria
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Esse gráfico mostra o total de categorias em cada comunidade do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico2.ajuda">
+          Esse gráfico mostra o total de categorias em cada comunidade do Ceará, sendo possível escolher uma categoria específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>
@@ -507,14 +644,18 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Quantitativo de entidades por categoria
+        <h5 class="modal-title" id="exampleModalLongTitle"
+          data-i18n="graficos.grafico4.titulo">
+          Quantitativo de entidades por categoria
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Essa lista mostra a quantidade de entidades em cada categoria cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais entidades naquela categoria maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico4.ajuda"> 
+          Essa lista mostra a quantidade de entidades em cada categoria cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais entidades naquela categoria maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>
@@ -525,13 +666,15 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Segmentos de Startup</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" data-i18n="graficos.grafico6.titulo">Segmentos de Startup</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Esse gráfico mostra os segmentos de startup e a quantidade de startup em cada um deles nas regiões ou comunidades do Ceará, sendo possível escolher uma região ou comunidade específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico6.ajuda">
+          Esse gráfico mostra os segmentos de startup e a quantidade de startup em cada um deles nas regiões ou comunidades do Ceará, sendo possível escolher uma região ou comunidade específica através do filtro disponível. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>
@@ -542,13 +685,15 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Depositantes de patentes</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" data-i18n="graficos.grafico7.titulo">Depositantes de patentes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Esse gráfico mostra a quantidade de patentes cadastradas em cada depositante de patente. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico7.ajuda">        
+          Esse gráfico mostra a quantidade de patentes cadastradas em cada depositante de patente. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>
@@ -559,13 +704,15 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Seções de Patentes</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" data-i18n="graficos.grafico7.titulo">Seções de Patentes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Essa lista mostra a quantidade de patentes em cada seção cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais patentes na seção maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        <span data-i18n="graficos.grafico7.ajuda">
+          Essa lista mostra a quantidade de patentes em cada seção cadastrada. A classificação tem como base a quantidade, ou seja, quanto mais patentes na seção maior será a classificação dela. Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense.
+        </span>
       </div>
      
     </div>
@@ -577,14 +724,16 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Fases por Segmentos de Startup</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" data-i18n="graficos.grafico5.select2.porSegmento">Fases por Segmentos de Startup</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Esse gráfico mostra a quantidade de segmento de startup existente (sendo possível escolher qual segmento visualizar pelo filtro “Escolha o segmento” ) nas fases daquelas startups (se estiver em dúvida de quais startups são, saiba que são todas que possuem sua fase cadastrada no segmento escolhido). Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense. O gráfico abaixo ainda está em uma versão com dados preliminares. Portanto, caso você seja uma startup e deseja contribuir conosco compartilhando os dados da sua startup, por favor entre em contato por email informando o segmento, fase e modelo de negócio.    </div>
-     
+        <span data-i18n="graficos.grafico5.ajudaPorSegmento">
+          Esse gráfico mostra a quantidade de segmento de startup existente (sendo possível escolher qual segmento visualizar pelo filtro “Escolha o segmento” ) nas fases daquelas startups (se estiver em dúvida de quais startups são, saiba que são todas que possuem sua fase cadastrada no segmento escolhido). Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense. O gráfico abaixo ainda está em uma versão com dados preliminares. Portanto, caso você seja uma startup e deseja contribuir conosco compartilhando os dados da sua startup, por favor entre em contato por email informando o segmento, fase e modelo de negócio.    
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -593,14 +742,16 @@
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Fases por Modelo de Receita</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle" data-i18n="graficos.grafico5.select2.porModeloDeReceita">Fases por Modelo de Receita</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Esse gráfico mostra a quantidade do modelo de receita escolhido (pelo filtro “Escolha o modelo de receita”) nas fases de startups (se estiver em dúvida de quais startups são, saiba que são todas que possuem sua fase cadastrada). Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense. O gráfico abaixo ainda está em uma versão com dados preliminares. Portanto, caso você seja uma startup e deseja contribuir conosco compartilhando os dados da sua startup, por favor entre em contato por email informando o segmento, fase e modelo de negócio.    
-    </div>
+        <span data-i18n="graficos.grafico5.ajudaPorModeloDeReceita">
+          Esse gráfico mostra a quantidade do modelo de receita escolhido (pelo filtro “Escolha o modelo de receita”) nas fases de startups (se estiver em dúvida de quais startups são, saiba que são todas que possuem sua fase cadastrada). Os dados são obtidos pelos registros efetuados no mapa do ecossistema de inovação cearense. O gráfico abaixo ainda está em uma versão com dados preliminares. Portanto, caso você seja uma startup e deseja contribuir conosco compartilhando os dados da sua startup, por favor entre em contato por email informando o segmento, fase e modelo de negócio.    
+        </span>
+      </div>
   </div>
 </div>
   <!-- Scripts -->
@@ -636,6 +787,7 @@
 
   <script src="javascript/cidadesPorRegioes.js"></script>
   <script src="javascript/dashboard/dashboard.js"></script>
+  <script src="javascript/traducao/i18n-dashboard.js"></script>
 </body>
 
 </html>
