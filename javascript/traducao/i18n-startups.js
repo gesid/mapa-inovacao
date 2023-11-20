@@ -103,11 +103,11 @@ const lngs = {
               navBar2:{
                 navBotaoBusca: "Search",
                 navTipoBusca: "Search Type",
-                navPorTitulo: "Por Título",
-                navPorClassificacao: "Por Classificação",
-                navPorFase: "Por Fase",
-                navPorPublico: "Por Publico",
-                navPorReceita: "Por Receita ",
+                navPorTitulo: "Por título",
+                navPorClassificacao: "Por classificação",
+                navPorFase: "Por fase",
+                navPorPublico: "Por público alvo",
+                navPorReceita: "Por modelo de receitas",
                 tituloPainelStartups: "PAINEL DE STARTUPS"
               }
             },
@@ -201,11 +201,11 @@ const lngs = {
                 navBar2:{
                     navBotaoBusca: "Search",
                     navTipoBusca: "Search Type",
-                    navPorTitulo: "By Title",
-                    navPorClassificacao: "By Classification",
-                    navPorFase: "By Phase",
-                    navPorPublico: "By Public",
-                    navPorReceita: "By Revenue ",
+                    navPorTitulo: "By title",
+                    navPorClassificacao: "By classification",
+                    navPorFase: "By phase",
+                    navPorPublico: "By public",
+                    navPorReceita: "By revenue model",
                     tituloPainelStartups: "STARTUPS PANEL"
                   },
               alert:{

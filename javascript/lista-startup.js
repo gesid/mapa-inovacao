@@ -198,7 +198,6 @@ function translateSearchBox(){
 }
 
 
-
 function verificarPropriedades(startup) {
   if (!startup.startup.Receitas) {
     startup.startup.Receitas = "Não informado";
