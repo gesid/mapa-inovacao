@@ -596,13 +596,21 @@ function traducaoPlaceHolderPrincipalIngles(tipoDeBuscaStartup){
 }
 
 function selecionarTipoBuscaStartup(escolha) {
+  alteraTipoBarraNaBarraDeBusca(escolha);
   tipoDeBuscaStartup = escolha.getAttribute("data-texto");
+
   let traducao = document.getElementById("languageSwitcher");
   if (traducao.value == "pt"){
     traducaoPlaceHolderPrincipal(tipoDeBuscaStartup);  
   }else{
     traducaoPlaceHolderPrincipalIngles(tipoDeBuscaStartup)
   }
+}
+
+function alteraTipoBarraNaBarraDeBusca(escolha){
+  const BARRA_DE_BUSCA = document.getElementById("barraBuscaStartupMobile");
+  BARRA_DE_BUSCA.setAttribute("tipo-barra", escolha.getAttribute("data-texto"));
+  
 }
 
 function filtrarStartupPorTipoBusca() {
@@ -1015,26 +1023,26 @@ function traducaoDoPlaceHolderLogradouro() {
  }
 
 function traducaoDoPlaceHolderBarraBuscaListaStartups() {
-  const DIV_DROPDOWN_MENU_OPCOES_DE_BUSCA = document.getElementsByClassName("form-control");
+  const DIV_DROPDOWN_MENU_OPCOES_DE_BUSCA = document.getElementsByClassName("dropdown-menu");
 
   if(DIV_DROPDOWN_MENU_OPCOES_DE_BUSCA){
     let tipoBarra = document.getElementById("barraBuscaStartupMobile").getAttribute("tipo-barra");
     //let tipoBarra = refBarraBuscaMobile.getAttribute("tipo-barra");
-    let placeholderBuscaPatentes =  document.getElementsByName("barraBuscaStartupMobile")[0];
-    if(tipoBarra == "titulo"){
-      placeholderBuscaPatentes.placeholder = i18next.t("patents.sectionPatents.barraDeBusca.labelPlaceholderCompleta.depositante");
+    let placeholderBuscaStartups =  document.getElementsByName("barraBuscaStartupMobile")[0];
+    if(tipoBarra == "título"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.titulo");
     }
-    else if(tipoBarra == "classificacao"){
-      placeholderBuscaPatentes.placeholder = i18next.t("patents.sectionPatents.barraDeBusca.labelPlaceholderCompleta.secao");
+    else if(tipoBarra == "classificação"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.classificacao");
     }
     else if(tipoBarra == "fase"){
-      placeholderBuscaPatentes.placeholder = i18next.t("patents.sectionPatents.barraDeBusca.labelPlaceholderCompleta.fase");
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.fase");
     }
-    else if(tipoBarra == "publicoAlvo"){
-      placeholderBuscaPatentes.placeholder = i18next.t("patents.sectionPatents.barraDeBusca.labelPlaceholderCompleta.publicoAlvo");
+    else if(tipoBarra == "Publico alvo"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.publico");
     }
-    else if(tipoBarra == "receita"){
-      placeholderBuscaPatentes.placeholder = i18next.t("patents.sectionPatents.barraDeBusca.labelPlaceholderCompleta.revenue");
+    else if(tipoBarra == "modelo de receitas"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.receita");
     }
   }
 

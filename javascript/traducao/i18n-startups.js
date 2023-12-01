@@ -95,21 +95,37 @@ const lngs = {
                   sair: "SAIR"
                 }
               },
+              tituloDaPagina: "PAINEL DE STARTUPS",
               menuMais:{
                 publicoAlvo: "Publico Alvo:",
                 fase: "Fase: ",
                 modeloReceita: "Modelo de receitas: "
               },
-              navBar2:{
-                navBotaoBusca: "Search",
-                navTipoBusca: "Search Type",
-                navPorTitulo: "Por título",
-                navPorClassificacao: "Por classificação",
-                navPorFase: "Por fase",
-                navPorPublico: "Por público alvo",
-                navPorReceita: "Por modelo de receitas",
-                tituloPainelStartups: "PAINEL DE STARTUPS"
-              }
+              barraDeBusca:{
+                labelPreTitulo: "Tipo de busca",
+                tipo:{
+                  titulo: "título",
+                  classificacao: "classificação",
+                  fase: "fase",
+                  publico: "publico alvo",
+                  receita: "modelo de receita"
+                },
+                selecionarTipoModal:{
+                  titulo: "Pot título",
+                  classificacao: "Por classificação",
+                  fase: "Por fase",
+                  publico: "Por público alvo",
+                  receita: "Por modelo de receita"
+                },
+                labelPlaceholderCompleta:{
+                  titulo: "Tipo de busca: por título ex: Selletiva",
+                  classificacao: "Tipo de busca: por classificação ex: Fintech",
+                  fase: "Tipo de busca: por fase ex: Tração",
+                  publico: "Tipo de busca: por publico alvo ex: Mulheres",
+                  receita: "Tipo de busca: por modelo de receita ex: baseado em receitas"
+                },
+                botaoBusca: "Buscar",
+              },
             },
           },
           en: {
@@ -198,16 +214,32 @@ const lngs = {
                     sair: "LOGOUT"
                   }
                 },
-                navBar2:{
-                    navBotaoBusca: "Search",
-                    navTipoBusca: "Search Type",
-                    navPorTitulo: "By title",
-                    navPorClassificacao: "By classification",
-                    navPorFase: "By phase",
-                    navPorPublico: "By public",
-                    navPorReceita: "By revenue model",
-                    tituloPainelStartups: "STARTUPS PANEL"
+                tituloDaPagina: "STARTUPS PANEL",
+                barraDeBusca:{
+                  labelPreTitulo: "Search Type",
+                  tipo:{
+                    titulo: "title",
+                    classificacao: "classfication",
+                    fase: "fase",
+                    publico: "target public",
+                    receita: "model revenue"
                   },
+                  selecionarTipoModal:{
+                    titulo: "By title",
+                    classificacao: "By classfication",
+                    fase: "By fase",
+                    publico: "By target public",
+                    receita: "By model revenue"
+                  },
+                  labelPlaceholderCompleta:{
+                    titulo: "Search Type: by title ex: Selletiva",
+                    classificacao: "Search Type: by classfication ex: Fintech",
+                    fase: "Search Type: by fase ex: Traction",
+                    publico: "Search Type: by target public ex: Women",
+                    receita: "Search Type: by model revenue ex: based in revenue"
+                  },
+                  botaoBusca: "Search",
+                },
               alert:{
                 voceEstaDeslogado: "You're logged out.",
               }
