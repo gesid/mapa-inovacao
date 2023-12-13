@@ -63,7 +63,7 @@ L.icon = function (options) {
 };
 
 ecossistema.push(new Aceleradora());
-//ecossistema.push(new Advogados())
+ecossistema.push(new Advogados())
 ecossistema.push(new Catalisadores());
 ecossistema.push(new Comunicacao());
 //ecossistema.push(new Conexao())
@@ -130,7 +130,7 @@ function criarOpcaoRegiaoMobile(regioes) {
 
   a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center">
   <img style="height:36px; width:36px" src= "img/img-bl/31-regiao.png">
-  regioes
+  <span data-i18n="categorias.regioes">Regiões</span>
   <span class="badge badge-secondary badge-pill">${regioes.length}</span>
   </div>
   <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
@@ -173,7 +173,7 @@ function criarOpcaoRegiao(comunidades) {
   //imgLink.src = componente.getImagemBarra()
 
   a.innerHTML = `<img style="height:36px; width:36px" src= "img/img-bl/31-regiao.png">
-  Regiões
+  <span data-i18n="categorias.regioes">Regiões</span>
   <span class="badge badge-secondary badge-pill">${comunidades.length}</span>`;
 
   a.setAttribute("data-tipo", "Regiao");
@@ -215,6 +215,8 @@ function getTipoClasseI18n(tipo){
   
   if(tipo == 'Aceleradora')
     return 'aceleradora'
+  if(tipo == 'Advogados')
+    return 'advogados'
   else if(tipo == 'Catalisadores Locais')
     return 'catLocais'
   else if(tipo == 'Comunicação e Mídia')
