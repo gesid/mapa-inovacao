@@ -118,6 +118,7 @@ const lngs = {
                 },
                 categorias:{
                   comunidades: 'Comunidades',
+                  advogados: 'Advogados',
                   aceleradora: 'Aceleradora',
                   catLocais: 'Catalisadores Locais',
                   comEMidia: 'Comunicação e Mídia',
@@ -257,6 +258,7 @@ const lngs = {
                   categorias:{
                     comunidades: 'Communities',
                     aceleradora: 'Startup Accelerator',
+                    advogados: 'Lawyers',
                     catLocais: 'Local Catalysts',
                     comEMidia: 'Media and Communication',
                     coworking: 'Coworking',

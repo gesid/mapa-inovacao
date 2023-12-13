@@ -13,7 +13,7 @@ let arraySegmentosStartup = [];
 
 let arrayStartupsFases = [];
 //chamada de funções
-carregarTabaleCategoriasDeEntidade(0, 4);
+carregarTabaleCategoriasDeEntidade(0, 5);
 carregarDadosGraficos();
 ajudaModal();
 async function carregarDadosGraficos() {
@@ -808,7 +808,7 @@ async function paginacaoTabelaCategoriasDeEntidade(inicio, fim, tabela, tipos) {
     traducao = traducaoCategoriasDeEntidades(tipos[i].nome)
     if (tipos[i].img) {
       dados += `
-     <tr >
+     <tr style="height: 69.1px">
        <td>
          <div class="d-flex align-items-center">
            <div>
@@ -886,7 +886,7 @@ function gerenciarSelecionadorPagina(tamanho, inicio, id) {
   <li id="anterior"><p style="cursor: pointer;" >«</a></li>
   
   `;
-  for (let i = 0; i < tamanho / 5; i++) {
+  for (let i = 0; i < tamanho / 6; i++) {
     if (inicio / 5 == i) {
       selecionadorPagina.innerHTML += `<p style="margin-right: 10px;margin-left: 10px;" href="" class="paginacao selecionado">${i + 1
         }</a>`;
@@ -925,7 +925,7 @@ function cliquePaginacao() {
 
         limparTabelaCategoriasDeEntidade();
         inicio = (inicio - 1) * 5;
-        fim = parseInt(inicio + 4);
+        fim = parseInt(inicio + 5);
 
         carregarTabaleCategoriasDeEntidade(inicio, fim);
       }
@@ -935,7 +935,7 @@ function cliquePaginacao() {
 
 function gerenciarAnteriorProximo(inicio) {
   //alert("clicado");
-  fim = parseInt(inicio + 4);
+  fim = parseInt(inicio + 5);
 
   if (inicio != -5 && inicio != 20) {
     limparTabelaCategoriasDeEntidade();
