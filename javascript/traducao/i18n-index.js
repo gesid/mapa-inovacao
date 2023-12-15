@@ -81,7 +81,10 @@ $(function() {
                                             bairro: "Bairro*",
                                             cidade: "Cidade*",
                                             uf: "UF*",
-                                            startup: "Classificação do Local*"
+                                            startup: "Classificação do Local*",
+                                            faseStartup: "Fase da Startup*",
+                                            modelosDeReceita: "Modelo de Receitas",
+                                            modeloDeNegocio: "Modelo de Negocio"
                                         },
                                         placeholder:{
                                             nome: "Nome",
@@ -94,7 +97,22 @@ $(function() {
                                             complemento: "Complemento",
                                             bairro: "Bairro",
                                             cidade: "Cidade",
-                                            startup: "Escolha o segmento da Startup*"
+                                            startup: "Escolha o segmento da Startup*",
+                                            selectFaseStartup:{
+                                                escolhaFase: "Escolha a fase da startup",
+                                                idedacao: "Ideação",
+                                                validacao: "Validação",
+                                                operacao: "Operação",
+                                                tracao: "Tração"
+                                            },
+                                            opcoesModeloDeReceitas:{
+                                                assinatura: "Assinatura",
+                                                vendaDireta: "Venda direta",
+                                                sobDemanda: "Serviços sob demanda",
+                                                afiliados: "Afiliados",
+                                                licenciamnto: "Licenciamento",
+                                                ad: "Advertising (Propaganda)"
+                                            }
                                         }
     
                                     },
@@ -164,6 +182,8 @@ $(function() {
                             titulo: 'CATEGORIAS', 
                             tituloMobile: 'Categorias',
                             comunidades: 'Comunidades',
+                            advogados: 'Advogados',
+                            regioes: 'Regiões',
                             aceleradora: 'Aceleradora',
                             catLocais: 'Catalisadores Locais',
                             comEMidia: 'Comunicação e Mídia',
@@ -177,6 +197,7 @@ $(function() {
                             incubadoras: 'Incubadoras',
                             iniUniversitarias: 'Iniciativas Universitárias',
                             investidores: 'Investidores',
+                            regioes: 'Regiões',
                             nucInovacao: 'Núcleos de Inovação',
                             parquesTec: 'Parques Tecnológicos',
                             preAceleradoras: 'Pré Aceleradoras',
@@ -293,7 +314,10 @@ $(function() {
                                             bairro: "District*",
                                             cidade: "City*",
                                             uf: "State*",
-                                            startup: "Classification*"
+                                            startup: "Classification*",
+                                            faseStartup: "Startup Phase*",
+                                            modelosDeReceita: "Revenue Model",
+                                            modeloDeNegocio: "Business Model"
                                         },
                                         placeholder:{
                                             nome: "Name",
@@ -306,7 +330,22 @@ $(function() {
                                             complemento: "Complement",
                                             bairro: "District",
                                             cidade: "City",
-                                            startup: "Choose the startup segment"
+                                            startup: "Choose the startup segment",
+                                            selectFaseStartup:{
+                                                escolhaFase: "Choose the startup phase",
+                                                idedacao: "Idea",
+                                                validacao: "Validation",
+                                                operacao: "Operation",
+                                                tracao: "Traction"
+                                            },
+                                            opcoesModeloDeReceitas:{
+                                                assinatura: "Subscription",
+                                                vendaDireta: "Direct sales",
+                                                sobDemanda: "On-Demand Services",
+                                                afiliados: "Affiliates",
+                                                licenciamnto: "Licensing ",
+                                                ad: "Advertising"
+                                            }
                                         }
                                     },
                                     modalEventos:{
@@ -373,6 +412,7 @@ $(function() {
                             tituloMobile: 'Categories',
                             comunidades: 'Communities',
                             aceleradora: 'Startup Accelerator',
+                            advogados: 'Lawyers',
                             catLocais: 'Local Catalysts',
                             comEMidia: 'Media and Communication',
                             coworking: 'Coworking',
@@ -390,6 +430,7 @@ $(function() {
                             preAceleradoras: 'Pre-seed Startup',
                             propIntelectual: 'Intellectual Properties',
                             mentoria: 'Mentorship',
+                            regioes: 'Regions',
                             startup: 'Startup',
                             patente: 'Patent'
                         },
