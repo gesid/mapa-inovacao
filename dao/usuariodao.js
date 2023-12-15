@@ -1,57 +1,61 @@
 class usuarioDAO {
+	usuarioDaoDatabase;
+	constructor(){
+	  this.usuarioDaoDatabase = firebase.database();
 
-	cadastrar(email, password) {
-
-			firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-				// Handle Errors here.
-				var errorCode = error.code;
-				var errorMessage = error.message;
-
-				window.alert("Error: " + errorMessage);
-			});
-		
 	}
+   cadastrar(email, password) {
 
-	salvar(nome, email) {
-		//let storageRef = storage.ref('/arquivos/'+uploader1SelectedFile.name); // Define o caminho onde será guardada a imagem no storage
-		//let uploadTask = storageRef.put(uploader1SelectedFile); // guarda a imagem no storage
+		   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+			   // Handle Errors here.
+			   var errorCode = error.code;
+			   var errorMessage = error.message;
 
-		const rootRef = database.ref('/Usuario'); // define onde sera armazenada a imagem no database
-		//uploadTask.on('state_changed', function(snapshot){ //entra empre que o status mudar
-		//uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {//Captura o URL da imagem upada no storage
-		rootRef.child(firebase.auth().currentUser.uid).set({//guarda as nformações no database/
-			Nome: nome,
-			Email: email,
-		})
-	}
+			   window.alert("Error: " + errorMessage);
+		   });
+	   
+   }
 
-	buscar(userId) {
+   salvar(nome, email) {
+	   //let storageRef = storage.ref('/arquivos/'+uploader1SelectedFile.name); // Define o caminho onde será guardada a imagem no storage
+	   //let uploadTask = storageRef.put(uploader1SelectedFile); // guarda a imagem no storage
 
-		let usuarioArray = []
-		const rootRef = database.ref('/Usuario/' + userId);
+	   const rootRef = this.usuarioDaoDatabase.ref('/Usuario'); // define onde sera armazenada a imagem no database
+	   //uploadTask.on('state_changed', function(snapshot){ //entra empre que o status mudar
+	   //uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {//Captura o URL da imagem upada no storage
+	   rootRef.child(firebase.auth().currentUser.uid).set({//guarda as nformações no database/
+		   Nome: nome,
+		   Email: email,
+	   })
+   }
 
-		return rootRef.once('value').then(function (snapshot) {
-			let usuario = new Usuario(snapshot.val()?.Nome, snapshot.val()?.Email)
-			usuarioArray.push(usuario)
-			
-			return usuario
-		})
-	}
+   buscar(userId) {
 
-	enviarRelato(titulo, tipo, relato) {
+	   let usuarioArray = []
+	   const rootRef = this.usuarioDaoDatabase.ref('/Usuario/' + userId);
 
-		if (titulo != "" && tipo != "" && relato != "") {
+	   return rootRef.once('value').then(function (snapshot) {
+		   let usuario = new Usuario(snapshot.val().Nome, snapshot.val().Email)
+		   usuarioArray.push(usuario)
+		   
+		   return usuario
+	   })
+   }
 
-			const rootRef = database.ref('/relatos'); // define onse sera armazenada a imagem no database
-			const autoId = rootRef.push().key //cria uma key
+   enviarRelato(titulo, tipo, relato) {
 
-			rootRef.child(autoId).set({//guarda as nformações no database/
-				Titulo: titulo,
-				Relato: relato,
-				Tipo: tipo,
-				Usuario: usuarioLogadoKey
-			})
-			alert("Relatorio enviado")
-		}
-	}
+	   if (titulo != "" && tipo != "" && relato != "") {
+
+		   const rootRef = this.usuarioDaoDatabase.ref('/relatos'); // define onse sera armazenada a imagem no database
+		   const autoId = rootRef.push().key //cria uma key
+
+		   rootRef.child(autoId).set({//guarda as nformações no database/
+			   Titulo: titulo,
+			   Relato: relato,
+			   Tipo: tipo,
+			   Usuario: usuarioLogadoKey
+		   })
+		   alert("Relatorio enviado")
+	   }
+   }
 }
