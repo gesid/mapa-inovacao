@@ -34,9 +34,9 @@ const lngs = {
                   nome: "Nome*",
                   site: "Site*",
                   tipoLocal: "Tipo de local*",
-                  classificacao: "Classification*",
-                  modeloReceita: "Revenue Model*",
-                  publicoAlvo: "Target Audience*",
+                  classificacao: "Classificação*",
+                  modeloReceita: "Modelo de Receita*",
+                  publicoAlvo: "Publico Alvo*",
                   fase: "Fase*", 
                   selecioneLogo: "Selecione a Logo*",
                   logradouro: "Logradouro*",
@@ -47,6 +47,12 @@ const lngs = {
                   escolhaSegmento: "Escolha o segmento da startup",
                   btnConfirmar: "Confirmar",
                   btnCancelar: "Cancelar"
+                },
+                menuMais:{
+                  publicoAlvo: "Publico Alvo:",
+                  fase: "Fase: ",
+                  modeloReceita: "Modelo de receitas: ",
+                  naoInformado: "Não Informado"
                 },
                 sectionSelectFase:{
                   selecionar: "Slecionar...",
@@ -94,11 +100,6 @@ const lngs = {
                   perfil: "MEU PERFIL",
                   sair: "SAIR"
                 }
-              },
-              menuMais:{
-                publicoAlvo: "Publico Alvo:",
-                fase: "Fase: ",
-                modeloReceita: "Modelo de receitas: "
               },
               navBar2:{
                 navBotaoBusca: "Search",
@@ -149,7 +150,8 @@ const lngs = {
                   menuMais:{
                     publicoAlvo: "Target Audience:",
                     fase: "Phase: ",
-                    modeloReceita: "Revenue Model: "
+                    modeloReceita: "Revenue Model: ",
+                    naoInformado: "Uninformed"
                   },
                   sectionModeloReceita: {
                     selecionar: "Select...",

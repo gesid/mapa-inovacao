@@ -269,7 +269,8 @@ function adiconarStartupNoCard(startup) {
                     </div>
                     <div>
                         <p class="card-text" style="font-size: 10px; font-weight: 400;">
-                            Publico alvo: ${startup.startup.Publico}
+                          <span data-i18n = "navBar1.menuMais.publicoAlvo"> ${i18next.t("navBar1.menuMais.publicoAlvo")} </span>
+                          <span data-i18n = "navBar1.menuMais.naoInformado"> ${i18next.t("navBar1.menuMais.naoInformado")} </span>
                         </p>
                     </div>
                 </div>
@@ -279,7 +280,8 @@ function adiconarStartupNoCard(startup) {
                     </div>
                     <div>
                         <p class="card-text" style="font-size: 10px; font-weight: 400;">
-                            Fase: ${startup.startup.Fase}
+                        <span data-i18n = "navBar1.menuMais.fase"> ${i18next.t("navBar1.menuMais.fase")}  </span>
+                        <span data-i18n = "navBar1.menuMais.naoInformado"> ${i18next.t("navBar1.menuMais.naoInformado")} </span>
                         </p>
                     </div>
                 </div>
@@ -289,7 +291,8 @@ function adiconarStartupNoCard(startup) {
                     </div>
                     <div>
                         <p class="card-text" style="font-size: 10px; font-weight: 400;">
-                           Modelo de receitas: ${startup.startup.Receitas} 
+                        <span data-i18n = "navBar1.menuMais.modeloReceita"> ${i18next.t("navBar1.menuMais.modeloReceita")} </span>
+                        <span data-i18n = "navBar1.menuMais.naoInformado"> ${i18next.t("navBar1.menuMais.naoInformado")}  </span>
                         </p>
                     </div>
                 </div>
@@ -1014,6 +1017,7 @@ function traducaoDoPlaceHolderLogradouro() {
      placeholderchange.placeholder = i18next.t("navBar1.sectionFormulario.logradouro")
    }
  }
+ //
 
 function traducaoDoPlaceHolderBarraBuscaListaStartups() {
   const DIV_DROPDOWN_MENU_OPCOES_DE_BUSCA = document.getElementsByClassName("form-control");
