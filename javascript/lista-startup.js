@@ -17,6 +17,14 @@ let titulo = undefined;
 let fase = "";
 let publico = "";
 let receitas = "";
+
+let traducao = document.getElementById("languageSwitcher");
+translateSearchBox();
+
+traducao.onchange = function(){
+  translateSearchBox();
+}
+
 if (window.location.href.includes("titulo")) {
   titulo = window.location.href.split("?")[1].split("&")[0].split("=")[1] || 1;
 } else if (window.location.href.includes("classificacao")) {
@@ -156,6 +164,8 @@ if (titulo) {
   numeroTotalStartups().then((valor) => {
     carregarNumeroPaginas(Math.round(valor / numeroStartups));
     carregarStartups(selecionado);
+    translateSearchBox();
+
     paginaMaxima = Math.round(valor / numeroStartups);
     for (let i = 0; i < selecionadorPagina.children.length; i++) {
       selecionadorPagina.children[i].children[0].className = " ";
@@ -175,6 +185,19 @@ if (titulo) {
   });
   carregarStartups(1);
 }
+
+
+function translateSearchBox(){
+  let traducao = document.getElementById("languageSwitcher");
+
+  if (traducao.value == "pt"){
+    barraBuscaStartupMobile.placeholder = "Busca: Por título ex: Agenda Edu";
+  }else{
+    barraBuscaStartupMobile.placeholder = "Search: For title ex: Agenda Edu";
+  }
+}
+
+
 function verificarPropriedades(startup) {
   if (!startup.startup.Receitas) {
     startup.startup.Receitas = "Não informado";
@@ -245,7 +268,8 @@ function adiconarStartupNoCard(startup) {
                     </div>
                     <div>
                         <p class="card-text" style="font-size: 10px; font-weight: 400;">
-                            Publico alvo: ${startup.startup.Publico}
+                          <span data-i18n = "navBar1.menuMais.publicoAlvo"> ${i18next.t("navBar1.menuMais.publicoAlvo")} </span>
+                          <span data-i18n = "navBar1.menuMais.naoInformado"> ${i18next.t("navBar1.menuMais.naoInformado")} </span>
                         </p>
                     </div>
                 </div>
@@ -255,7 +279,8 @@ function adiconarStartupNoCard(startup) {
                     </div>
                     <div>
                         <p class="card-text" style="font-size: 10px; font-weight: 400;">
-                            Fase: ${startup.startup.Fase}
+                        <span data-i18n = "navBar1.menuMais.fase"> ${i18next.t("navBar1.menuMais.fase")}  </span>
+                        <span data-i18n = "navBar1.menuMais.naoInformado"> ${i18next.t("navBar1.menuMais.naoInformado")} </span>
                         </p>
                     </div>
                 </div>
@@ -265,7 +290,8 @@ function adiconarStartupNoCard(startup) {
                     </div>
                     <div>
                         <p class="card-text" style="font-size: 10px; font-weight: 400;">
-                            Modelo de receitas: ${startup.startup.Receitas}
+                        <span data-i18n = "navBar1.menuMais.modeloReceita"> ${i18next.t("navBar1.menuMais.modeloReceita")} </span>
+                        <span data-i18n = "navBar1.menuMais.naoInformado"> ${i18next.t("navBar1.menuMais.naoInformado")}  </span>
                         </p>
                     </div>
                 </div>
@@ -542,9 +568,7 @@ function anteriorPa() {
   }
 }
 
-function selecionarTipoBuscaStartup(escolha) {
-  tipoDeBuscaStartup = escolha.getAttribute("data-texto");
-
+function traducaoPlaceHolderPrincipal(tipoDeBuscaStartup){
   barraBuscaStartupMobile.placeholder = `Busca: por ${tipoDeBuscaStartup}`;
   if (tipoDeBuscaStartup == "classificação") {
     barraBuscaStartupMobile.placeholder += ` ex: Fintech`;
@@ -557,6 +581,39 @@ function selecionarTipoBuscaStartup(escolha) {
   } else if (tipoDeBuscaStartup == "modelo de receitas") {
     barraBuscaStartupMobile.placeholder += ` ex: baseado em receitas`;
   }
+}
+
+function traducaoPlaceHolderPrincipalIngles(tipoDeBuscaStartup){
+  barraBuscaStartupMobile.placeholder = `Search: For `;
+  if (tipoDeBuscaStartup == "classificação") {
+    barraBuscaStartupMobile.placeholder += `classification ex: Fintech`;
+  } else if (tipoDeBuscaStartup == "título") {
+    barraBuscaStartupMobile.placeholder += `title ex: Selletiva`;
+  } else if (tipoDeBuscaStartup == "fase") {
+    barraBuscaStartupMobile.placeholder += `phase ex: Traction`;
+  } else if (tipoDeBuscaStartup == "Publico alvo") {
+    barraBuscaStartupMobile.placeholder += `public target ex: Womans`;
+  } else if (tipoDeBuscaStartup == "modelo de receitas") {
+    barraBuscaStartupMobile.placeholder += `model revenue ex: based in revenue`;
+  }
+}
+
+function selecionarTipoBuscaStartup(escolha) {
+  alteraTipoBarraNaBarraDeBusca(escolha);
+  tipoDeBuscaStartup = escolha.getAttribute("data-texto");
+
+  let traducao = document.getElementById("languageSwitcher");
+  if (traducao.value == "pt"){
+    traducaoPlaceHolderPrincipal(tipoDeBuscaStartup);  
+  }else{
+    traducaoPlaceHolderPrincipalIngles(tipoDeBuscaStartup)
+  }
+}
+
+function alteraTipoBarraNaBarraDeBusca(escolha){
+  const BARRA_DE_BUSCA = document.getElementById("barraBuscaStartupMobile");
+  BARRA_DE_BUSCA.setAttribute("tipo-barra", escolha.getAttribute("data-texto"));
+  
 }
 
 function filtrarStartupPorTipoBusca() {
@@ -907,3 +964,91 @@ async function numeroTotalStartupsPorTitulo(titulo) {
     });
   return numero;
 }
+
+/**Tradução placeholder barra de busca ao mudar o idioma*/
+i18next.on('languageChanged', function(lng) {
+  traducaoDoPlaceHolderBarraBuscaListaStartups();
+  traducaoDoPlaceHolderLogradouro();
+  traducaoDoPlaceHolderNome();
+  traducaoDoPlaceHolderPublicoAlvo();
+  traducaoDoPlaceHolderNumero();
+  traducaoDoPlaceHolderBairro();
+  traducaoDoPlaceHolderCidade();
+  traducaoDoPlaceHolderComplemento();
+})
+
+function traducaoDoPlaceHolderComplemento() {
+  let placeholderchange = document.getElementById("complementoAtt")
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("navBar1.sectionFormulario.complemento")
+   }
+ }
+
+function traducaoDoPlaceHolderCidade() {
+  let placeholderchange = document.getElementById("cidadeAtt")
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("navBar1.sectionFormulario.cidade")
+   }
+ }
+
+function traducaoDoPlaceHolderBairro() {
+  let placeholderchange = document.getElementById("bairroAtt")
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("navBar1.sectionFormulario.bairro")
+   }
+ }
+
+function traducaoDoPlaceHolderNumero() {
+  let placeholderchange = document.getElementById("numeroAtt")
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("navBar1.sectionFormulario.numero")
+   }
+ }
+
+function traducaoDoPlaceHolderPublicoAlvo() {
+  let placeholderchange = document.getElementById("publicoAlvoAtt")
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("navBar1.sectionFormulario.publicoAlvo")
+   }
+ }
+
+function traducaoDoPlaceHolderNome() {
+  let placeholderchange = document.getElementById("nomeAtt")
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("navBar1.sectionFormulario.nome")
+   }
+ }
+function traducaoDoPlaceHolderLogradouro() {
+  let placeholderchange = document.getElementById("longradouroAtt")
+   if (placeholderchange) {
+     placeholderchange.placeholder = i18next.t("navBar1.sectionFormulario.logradouro")
+   }
+ }
+ //
+
+function traducaoDoPlaceHolderBarraBuscaListaStartups() {
+  const DIV_DROPDOWN_MENU_OPCOES_DE_BUSCA = document.getElementsByClassName("dropdown-menu");
+
+  if(DIV_DROPDOWN_MENU_OPCOES_DE_BUSCA){
+    let tipoBarra = document.getElementById("barraBuscaStartupMobile").getAttribute("tipo-barra");
+    //let tipoBarra = refBarraBuscaMobile.getAttribute("tipo-barra");
+    let placeholderBuscaStartups =  document.getElementsByName("barraBuscaStartupMobile")[0];
+    if(tipoBarra == "título"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.titulo");
+    }
+    else if(tipoBarra == "classificação"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.classificacao");
+    }
+    else if(tipoBarra == "fase"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.fase");
+    }
+    else if(tipoBarra == "Publico alvo"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.publico");
+    }
+    else if(tipoBarra == "modelo de receitas"){
+      placeholderBuscaStartups.placeholder = i18next.t("barraDeBusca.labelPlaceholderCompleta.receita");
+    }
+  }
+
+  
+ }
