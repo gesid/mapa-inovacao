@@ -17,7 +17,10 @@ class Entidade {
     userId,
     validacao,
     classificacao,
-    totalPatentes
+    totalPatentes,
+    negocio,
+    receitas,
+    fase
   ) {
     this.nome = nome;
     this.site = site;
@@ -37,6 +40,10 @@ class Entidade {
     this.validacao = validacao;
     this.classificacao = classificacao;
     this.totalPatentes = totalPatentes;
+    this.negocio = negocio;
+    this.receitas = receitas;
+    this.fase = fase;
+
   }
   getNome() {
     return this.nome;
@@ -92,5 +99,14 @@ class Entidade {
 
   getTotalPatentes() {
     return this.totalPatentes;
+  }
+  getReceitas(){
+    return this.receitas;
+  }
+  getNegocio(){
+    return this.negocio;
+  }
+  getFase(){
+    return this.fase;
   }
 }
