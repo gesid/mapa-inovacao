@@ -234,6 +234,7 @@
         <div class="input-group buscaHeader">
           <input
             id="barraBuscaStartupMobile"
+            name="barraBuscaStartupMobile"
             type="text"
             class="form-control"
             placeholder="Busca: Por título ex: Agenda Edu"
@@ -246,7 +247,7 @@
               type="button"
               onclick="filtrarStartupPorTipoBusca()"
             >
-            <span data-i18n="navBar2.navBotaoBusca" >
+            <span data-i18n="barraDeBusca.botaoBusca" >
               Buscar
             </span>
             </button>
@@ -261,19 +262,20 @@
             </button>
 
             <div class="dropdown-menu">
-              <a data-i18n="navBar2.navTipoBusca" class="dropdown-item disabled" href="#">Tipo de busca</a>
+              <a data-i18n="barraDeBusca.labelPreTitulo" class="dropdown-item disabled" href="#">Tipo de busca</a>
               <div class="dropdown-divider"></div>
-              <a data-i18n="navBar2.navPorTitulo"
+              <a data-i18n="barraDeBusca.selecionarTipoModal.titulo"
               class="dropdown-item"
               href="#"
               data-tipo="Título"
               data-texto="título"
               data-label="título"
               onclick="selecionarTipoBuscaStartup(this)"
+              tipo-barra="título"
               >Por título</a
             >
              
-              <a data-i18n="navBar2.navPorClassificacao"
+              <a data-i18n="barraDeBusca.selecionarTipoModal.classificacao"
                 class="dropdown-item"
                 href="#"
                 data-tipo="Classificacao"
@@ -282,7 +284,7 @@
                 onclick="selecionarTipoBuscaStartup(this)"
                 >Por classificação</a
               >
-              <a data-i18n="navBar2.navPorFase"
+              <a data-i18n="barraDeBusca.selecionarTipoModal.fase"
                 class="dropdown-item"
                 href="#"
                 data-tipo="fase"
@@ -291,7 +293,7 @@
                 onclick="selecionarTipoBuscaStartup(this)"
                 >Por fase</a
               >
-              <a data-i18n="navBar2.navPorPublico"
+              <a data-i18n="barraDeBusca.selecionarTipoModal.publico"
                 class="dropdown-item"
                 href="#"
                 data-tipo="publico"
@@ -300,7 +302,7 @@
                 onclick="selecionarTipoBuscaStartup(this)"
                 >Por público alvo</a
               >
-              <a data-i18n="navBar2.navPorReceita"
+              <a data-i18n="barraDeBusca.selecionarTipoModal.receita"
                 class="dropdown-item"
                 href="#"
                 data-tipo="modelo de receitas"
@@ -332,7 +334,7 @@
           <div
             class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
           >
-            <p data-i18n="navBar1.navTutorial.subtitulo" id="título-modal">
+            <p id="titulo-modal" data-i18n="navBar1.navTutorial.subtitulo">
               Colaborar é muito simples! Veja no vídeo abaixo como funciona:
             </p>
             <button
@@ -1013,7 +1015,7 @@
       <!--Barra do título da página-->
       <div class="d-flex justify-content-center">
         <div id="barra-title">
-          <p data-i18n="navBar2.tituloPainelStartups" 
+          <p data-i18n="tituloDaPagina" 
             id="barra-text-title"
             class="d-flex align-items-center justify-content-center"
           >
