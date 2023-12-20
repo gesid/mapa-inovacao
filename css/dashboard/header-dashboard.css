@@ -48,23 +48,6 @@
   .btn-busca-dropdown:hover {
     color: #1f4d37;
   }
-  .btn-traducao-dropdown-header {
-    border: 1px solid #fc6a38;
-    width: 80.4px;
-    height: 35.2px;
-    background-color: rgba(255, 255, 255, 0);
-    color: white;
-    font-size: x-small;
-    text-align: center;
-    margin: 0px 3px;
-    
-  }
-  .option-traducao{
-    width: 80.4px;
-    display: block;
-    padding: 0.25rem 1.5rem;
-    color: #212529;
-  }
   .form-control {
     /* width: 200px; */
     height: 35.2px;
@@ -152,23 +135,7 @@
   .dropdown-item:active {
     color: #00833a;
   }
-  .btn-traducao-dropdown-header {
-    border: 1px solid #fc6a38;
-    width: 80.4px;
-    height: 35.2px;
-    background-color: rgba(255, 255, 255, 0);
-    color: white;
-    font-size: x-small;
-    text-align: center;
-    margin: 0px 3px;
-    
-  }
-  .option-traducao{
-    width: 80.4px;
-    display: block;
-    padding: 0.25rem 1.5rem;
-    color: #212529;
-  }
+
   .buscaHeader {
     position: absolute;
     right: 220px;
@@ -317,23 +284,6 @@
   }
   .dropdown-item:active {
     color: #00833a;
-  }
-  .btn-traducao-dropdown-header {
-    border: 1px solid #fc6a38;
-    width: 80.4px;
-    height: 35.2px;
-    background-color: rgba(255, 255, 255, 0);
-    color: white;
-    font-size: x-small;
-    text-align: center;
-    margin: 0px 3px;
-    
-  }
-  .option-traducao{
-    width: 80.4px;
-    display: block;
-    padding: 0.25rem 1.5rem;
-    color: #212529;
   }
   .btn-login {
     border: 1px solid #fc6a38;

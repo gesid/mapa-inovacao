@@ -63,7 +63,7 @@ L.icon = function (options) {
 };
 
 ecossistema.push(new Aceleradora());
-ecossistema.push(new Advogados())
+//ecossistema.push(new Advogados())
 ecossistema.push(new Catalisadores());
 ecossistema.push(new Comunicacao());
 //ecossistema.push(new Conexao())
@@ -130,7 +130,7 @@ function criarOpcaoRegiaoMobile(regioes) {
 
   a.innerHTML = `<div style="width:inherit" class="d-flex justify-content-between align-items-center">
   <img style="height:36px; width:36px" src= "img/img-bl/31-regiao.png">
-  <span data-i18n="categorias.regioes">Regiões</span>
+  regioes
   <span class="badge badge-secondary badge-pill">${regioes.length}</span>
   </div>
   <i style="padding-left:50px" class="fas fa-angle-right"></i>`;
@@ -215,8 +215,6 @@ function getTipoClasseI18n(tipo){
   
   if(tipo == 'Aceleradora')
     return 'aceleradora'
-  if(tipo == 'Advogados')
-    return 'advogados'
   else if(tipo == 'Catalisadores Locais')
     return 'catLocais'
   else if(tipo == 'Comunicação e Mídia')
@@ -1228,56 +1226,17 @@ function dropdownStartup() {
   if (document.getElementById("validacaoTipoLocal").value === "Startup") {
     $("#dropdownStartup").attr("style", "display: all;");
     $("#uploaderLabel1").attr("style", "top: 32px");
-
-    $("#CheckboxStartup").attr("style", "display: all;");
-    $("#faseStartup").attr("style", "display: all;");
-
   } else {
     $("#dropdownStartup").attr("style", "display: none;");
     $("#uploaderLabel1").attr("style", "top: 0px");
-
-    $("#CheckboxStartup").attr("style", "display: none;");
-    $("#faseStartup").attr("style", "display: none;");
   }
 }
-function checckboxStartup(){
-  const receitas = document.querySelectorAll(".receitas")
-  let arrayReceitas = []
-  const negocios = document.querySelectorAll(".negocio")
-  let arrayNegocios = []
 
- 
-
-  console.log(arrayNegocios)
-  console.log(arrayReceitas)
-  Array.from(receitas, (receita=>{
-  
-    if(receita.checked){
-      arrayReceitas.push(receita.value)
-    }
-  }))
-  Array.from(negocios, (negocio=>{
-  
-    if(negocio.checked){
-      arrayNegocios.push(negocio.value)
-    }
-  }))
-
-
-  return [arrayReceitas, arrayNegocios];
-}
 //Gravando Cadastro dos locais
 function gravarCadastroLocal() {
-  let receitas  = checckboxStartup()[0];
-
-  let modeloNegocio = checckboxStartup()[1];
-  let fase = document.getElementById("faseStartupSelect").value;
   //Fazendo com que seja passado null para classificação caso não seja uma Startup (Conveniencia...)
   if (document.getElementById("validacaoTipoLocal").value !== "Startup") {
     document.getElementById("validacaoClassificacao").value = null;
-    receitas = null;
-    modeloNegocio = null;
-    fase = null;
   }
 
   //Capturando os valores do formulário e passando para um objeto entidade
@@ -1298,11 +1257,7 @@ function gravarCadastroLocal() {
     null,
     firebase.auth().currentUser.uid,
     false,
-    document.getElementById("validacaoClassificacao").value,
-    false,
-    modeloNegocio,
-    receitas,
-    fase
+    document.getElementById("validacaoClassificacao").value
   );
 
   entidadedao.salvar(entidade, uploader1SelectedFile);
