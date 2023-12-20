@@ -1204,7 +1204,7 @@ function gravarFormulario() {
   
   const tabLocais = document.getElementById("local-tab");
   const tabEventos = document.getElementById("evento-tab");
-  const tabPatentes = document.getElementById("patentes-tab");
+
 
   if (tabLocais.classList.contains("active")) {
     gravarCadastroLocal();
@@ -1216,10 +1216,7 @@ function gravarFormulario() {
     return;
   }
 
-  if (tabPatentes.classList.contains("active")) {
-    salvarPatente();
-    return;
-  }
+  
 }
 
 function dropdownStartup() {
@@ -1268,7 +1265,7 @@ function checckboxStartup(){
 //Gravando Cadastro dos locais
 function gravarCadastroLocal() {
   let receitas  = checckboxStartup()[0];
-
+  console.log("teste😀")
   let modeloNegocio = checckboxStartup()[1];
   let fase = document.getElementById("faseStartupSelect").value;
   //Fazendo com que seja passado null para classificação caso não seja uma Startup (Conveniencia...)
