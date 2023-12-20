@@ -1201,6 +1201,7 @@ function zoomMarcador(componente) {
 }
 
 function gravarFormulario() {
+  
   const tabLocais = document.getElementById("local-tab");
   const tabEventos = document.getElementById("evento-tab");
   const tabPatentes = document.getElementById("patentes-tab");
@@ -1226,17 +1227,56 @@ function dropdownStartup() {
   if (document.getElementById("validacaoTipoLocal").value === "Startup") {
     $("#dropdownStartup").attr("style", "display: all;");
     $("#uploaderLabel1").attr("style", "top: 32px");
+
+    $("#CheckboxStartup").attr("style", "display: all;");
+    $("#faseStartup").attr("style", "display: all;");
+
   } else {
     $("#dropdownStartup").attr("style", "display: none;");
     $("#uploaderLabel1").attr("style", "top: 0px");
+
+    $("#CheckboxStartup").attr("style", "display: none;");
+    $("#faseStartup").attr("style", "display: none;");
   }
 }
+function checckboxStartup(){
+  const receitas = document.querySelectorAll(".receitas")
+  let arrayReceitas = []
+  const negocios = document.querySelectorAll(".negocio")
+  let arrayNegocios = []
 
+ 
+
+  console.log(arrayNegocios)
+  console.log(arrayReceitas)
+  Array.from(receitas, (receita=>{
+  
+    if(receita.checked){
+      arrayReceitas.push(receita.value)
+    }
+  }))
+  Array.from(negocios, (negocio=>{
+  
+    if(negocio.checked){
+      arrayNegocios.push(negocio.value)
+    }
+  }))
+
+
+  return [arrayReceitas, arrayNegocios];
+}
 //Gravando Cadastro dos locais
 function gravarCadastroLocal() {
+  let receitas  = checckboxStartup()[0];
+
+  let modeloNegocio = checckboxStartup()[1];
+  let fase = document.getElementById("faseStartupSelect").value;
   //Fazendo com que seja passado null para classificação caso não seja uma Startup (Conveniencia...)
   if (document.getElementById("validacaoTipoLocal").value !== "Startup") {
     document.getElementById("validacaoClassificacao").value = null;
+    receitas = null;
+    modeloNegocio = null;
+    fase = null;
   }
 
   //Capturando os valores do formulário e passando para um objeto entidade
@@ -1257,7 +1297,11 @@ function gravarCadastroLocal() {
     null,
     firebase.auth().currentUser.uid,
     false,
-    document.getElementById("validacaoClassificacao").value
+    document.getElementById("validacaoClassificacao").value,
+    false,
+    modeloNegocio,
+    receitas,
+    fase
   );
 
   entidadedao.salvar(entidade, uploader1SelectedFile);
@@ -1401,7 +1445,7 @@ function traducaoModalInstituicao(){
   document.getElementById('labelvalidacaoCidade').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.cidade');
   document.getElementById('labelvalidacaoUF').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.uf');
   document.getElementById('labelValidacaoClassificaocao').innerText = i18next.t('navBar1.cadastro.modal.modalInstituicao.label.startup');
-
+ 
   //botões
   document.getElementById('btn-fechar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.fechar');
   document.getElementById('btn-enviar-modal-cadastro').innerHTML = i18next.t('navBar1.cadastro.modal.btn.enviar')
