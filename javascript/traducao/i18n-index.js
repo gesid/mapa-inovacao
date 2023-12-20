@@ -411,6 +411,7 @@ $(function() {
                             titulo: 'CATEGORIES',
                             tituloMobile: 'Categories',
                             comunidades: 'Communities',
+                            regioes: 'Regions',
                             aceleradora: 'Startup Accelerator',
                             advogados: 'Lawyers',
                             catLocais: 'Local Catalysts',

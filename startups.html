@@ -66,11 +66,7 @@
     <link rel="stylesheet" type="text/css" href="css/header.css" />
     <link rel="stylesheet" type="text/css" href="css/lista-patentes.css" />
     
-    <!--Import da biblioteca de traducao-->
-    <script src="https://cdn.jsdelivr.net/npm/i18next@21.6.10/i18next.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-i18next@1.2.1/jquery-i18next.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
-
+    
     <script src="model/evento.js"></script>
   
     <script src="model/usuario.js"></script>
@@ -120,7 +116,7 @@
             <li class="nav-item">
               <a type="button" href="index.html" class="nav-item-style">
                 <i class="fas fa-map-marker-alt"> </i>
-                <p data-i18n="navBar1.navMap" class="texto-nav">MAPA</p>
+                <p class="texto-nav">MAPA</p>
               </a>
             </li>
 
@@ -131,7 +127,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-newspaper"></i>
-                <p data-i18n="navBar1.navEcossistema" class="texto-nav">ECOSSISTEMA</p>
+                <p class="texto-nav">ECOSSISTEMA</p>
               </a>
             </li>
 
@@ -144,7 +140,7 @@
                 data-target="#modalSobre"
               >
                 <i class="fas fa-chalkboard-teacher"> </i>
-                <p data-i18n="navBar1.navTutorial.titulo" class="texto-nav">COMO UTILIZAR</p>
+                <p class="texto-nav">COMO UTILIZAR</p>
               </a>
             </li>
 
@@ -155,7 +151,7 @@
                 class="d-flex align-items-center justify-content-start nav-item-style"
               >
                 <i class="fas fa-theater-masks"> </i>
-                <p data-i18n="navBar1.navEventos" class="texto-nav">EVENTOS</p>
+                <p class="texto-nav">EVENTOS</p>
               </a>
             </li>
 
@@ -171,7 +167,7 @@
                   aria-expanded="false"
                 >
                   <i class="fas fa-stamp"> </i>
-                  <p data-i18n="navBar1.navPatentes.titulo" class="texto-nav">PATENTES</p>
+                  <p class="texto-nav">PATENTES</p>
                 </a>
 
                 <div
@@ -179,10 +175,10 @@
                   id="opcoesDropdownPatentes"
                   aria-labelledby="dropdownMenuLink"
                 >
-                  <a data-i18n="navBar1.navPatentes.subnavCadastro" class="dropdown-item" href="./cadastro-patente.html"
+                  <a class="dropdown-item" href="./cadastro-patente.html"
                     >Cadastrar patente</a
                   >
-                  <a data-i18n="navBar1.navPatentes.subnavListar" class="dropdown-item" href="./patentes.html"
+                  <a class="dropdown-item" href="./patentes.html"
                     >Ver lista de patentes</a
                   >
                 </div>
@@ -201,14 +197,6 @@
             </li>
           </ul>
         </div>
-
-        <form id="btn-select-traducao" class="dropdownHeader"></form>
-        <select
-          name="language" 
-          id="languageSwitcher"
-          class="btn-traducao-dropdown-header">
-        </select>
-      </form>
 
         <div id="menu-nav" class="collapse navbar-collapse">
           <ul class="navbar-nav btnNav"></ul>
@@ -234,7 +222,6 @@
         <div class="input-group buscaHeader">
           <input
             id="barraBuscaStartupMobile"
-            name="barraBuscaStartupMobile"
             type="text"
             class="form-control"
             placeholder="Busca: Por título ex: Agenda Edu"
@@ -247,9 +234,7 @@
               type="button"
               onclick="filtrarStartupPorTipoBusca()"
             >
-            <span data-i18n="barraDeBusca.botaoBusca" >
               Buscar
-            </span>
             </button>
             <button
               type="button"
@@ -262,20 +247,19 @@
             </button>
 
             <div class="dropdown-menu">
-              <a data-i18n="barraDeBusca.labelPreTitulo" class="dropdown-item disabled" href="#">Tipo de busca</a>
+              <a class="dropdown-item disabled" href="#">Tipo de busca</a>
               <div class="dropdown-divider"></div>
-              <a data-i18n="barraDeBusca.selecionarTipoModal.titulo"
+              <a
               class="dropdown-item"
               href="#"
               data-tipo="Título"
               data-texto="título"
               data-label="título"
               onclick="selecionarTipoBuscaStartup(this)"
-              tipo-barra="título"
               >Por título</a
             >
              
-              <a data-i18n="barraDeBusca.selecionarTipoModal.classificacao"
+              <a
                 class="dropdown-item"
                 href="#"
                 data-tipo="Classificacao"
@@ -284,7 +268,7 @@
                 onclick="selecionarTipoBuscaStartup(this)"
                 >Por classificação</a
               >
-              <a data-i18n="barraDeBusca.selecionarTipoModal.fase"
+              <a
                 class="dropdown-item"
                 href="#"
                 data-tipo="fase"
@@ -293,7 +277,7 @@
                 onclick="selecionarTipoBuscaStartup(this)"
                 >Por fase</a
               >
-              <a data-i18n="barraDeBusca.selecionarTipoModal.publico"
+              <a
                 class="dropdown-item"
                 href="#"
                 data-tipo="publico"
@@ -302,7 +286,7 @@
                 onclick="selecionarTipoBuscaStartup(this)"
                 >Por público alvo</a
               >
-              <a data-i18n="barraDeBusca.selecionarTipoModal.receita"
+              <a
                 class="dropdown-item"
                 href="#"
                 data-tipo="modelo de receitas"
@@ -334,7 +318,7 @@
           <div
             class="modal-header modal-header-utilizar d-flex align-items-center justify-content-center"
           >
-            <p id="titulo-modal" data-i18n="navBar1.navTutorial.subtitulo">
+            <p id="título-modal">
               Colaborar é muito simples! Veja no vídeo abaixo como funciona:
             </p>
             <button
@@ -370,7 +354,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 data-i18n="navBar1.sectionFormulario.titulo"
+            <h5
               class="modal-title"
               id="exampleModalLabel"
               style="font-weight: bold"
@@ -402,7 +386,7 @@
                   <!-- Inicio do Conteúdo do Cadastro de locais-->
                   <div class="form-row">
                     <div class="form-group col-md-3">
-                      <label for="validacaoNomeLocal"><span data-i18n="navBar1.sectionFormulario.nome">Nome*</span></label>
+                      <label for="validacaoNomeLocal">Nome*</label>
                       <input
                         class="form-control form-control"
                         type="text"
@@ -414,7 +398,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="validacaoSiteLocal"><span data-i18n="navBar1.sectionFormulario.site">Site*</span></label>
+                      <label for="validacaoSiteLocal">Site*</label>
                       <input
                         class="form-control form-control"
                         type="text"
@@ -425,7 +409,7 @@
                     </div>
 
                     <div class="form-group col-md-2">
-                      <label for="validacaoTipoLocal"><p data-i18n="navBar1.sectionFormulario.tipoLocal">Tipo de Local*</p></label>
+                      <label for="validacaoTipoLocal">Tipo de Local*</label>
                       <select
                         class="form-control form-control"
                         id="tipoAtt"
@@ -433,34 +417,34 @@
                         placeholder="validacaoTipoLocal"
                         onclick=""
                       >
-                        <option data-i18n="navBar1.sectionSelectStartups.titulo" value="1" selected disabled>
+                        <option value="1" selected disabled>
                           Selecionar...
                         </option>
-                        <option data-i18n="navBar1.sectionSelectStartups.aceleradora" value="Aceleradora">Aceleradora</option>
+                        <option value="Aceleradora">Aceleradora</option>
                         <!--<option>Advogados</option>-->
-                        <option data-i18n="navBar1.sectionSelectStartups.catalisadoresLocais" value="Catalisadores Locais">Catalisadores Locais</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.comunicacaoEmidia" value="Comunicação e Mídia">Comunicação e Mídia</option>
+                        <option value="Catalisadores Locais">Catalisadores Locais</option>
+                        <option value="Comunicação e Mídia">Comunicação e Mídia</option>
                         <!--<option>Conexão com Mercado</option>-->
                         <!--<option>Conteúdo</option>-->
                         <option value="Coworking">Coworking</option>
                         <!--<option>Créditos</option>-->
                         <!--<option>Editais</option>-->
-                        <option data-i18n="navBar1.sectionSelectStartups.escolas" value="Escolas">Escolas</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.espacoMakers" value="Espaços Makers">Espaços Makers</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.eventos" value="Eventos">Eventos</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.fabricaDeAplicativos" value="Fábrica de Aplicativos">Fábrica de Aplicativos</option>
+                        <option value="Escolas">Escolas</option>
+                        <option value="Espaços Makers">Espaços Makers</option>
+                        <option value="Eventos">Eventos</option>
+                        <option value="Fábrica de Aplicativos">Fábrica de Aplicativos</option>
                         <!--<option>Governo</option>-->
-                        <option data-i18n="navBar1.sectionSelectStartups.grandesEmpresas" value="Grandes Empresas">Grandes Empresas</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.incubadoras" value="Incubadoras">Incubadoras</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.iniciativasUniversitarias" value="Iniciativas Universitárias">Iniciativas Universitárias</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.investidores" value="Investidores">Investidores</option>
+                        <option value="Grandes Empresas">Grandes Empresas</option>
+                        <option value="Incubadoras">Incubadoras</option>
+                        <option value="Iniciativas Universitárias">Iniciativas Universitárias</option>
+                        <option value="Investidores">Investidores</option>
                         <!--<option>Missões de Negócios</option>-->
-                        <option data-i18n="navBar1.sectionSelectStartups.nucleosDeInovacao" value="Núcleos de Inovação">Núcleos de Inovação</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.parquesTecnologicos" value="Parques Tecnológicos">Parques Tecnológicos</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.preAceleradoras" value="Pré Aceleradoras">Pré Aceleradoras</option>
-                        <option data-i18n="navBar1.sectionSelectStartups.propriedadeIntelectual" value="Propriedade Intelectual">Propriedade Intelectual</option>
+                        <option value="Núcleos de Inovação">Núcleos de Inovação</option>
+                        <option value="Parques Tecnológicos">Parques Tecnológicos</option>
+                        <option value="Pré Aceleradoras">Pré Aceleradoras</option>
+                        <option value="Propriedade Intelectual">Propriedade Intelectual</option>
                         <!--<option>Provedores de Serviços</option>-->
-                        <option data-i18n="navBar1.sectionSelectStartups.mentoria" value="Mentoria">Mentoria</option>
+                        <option value="Mentoria">Mentoria</option>
                         <option value="Startup">Startup</option>
                       </select>
                     </div>
@@ -474,7 +458,7 @@
                         id="uploaderLabelImage"
                         class="custom-file-label"
                         for="imageAtt"
-                        ><span data-i18n="navBar1.sectionFormulario.selecioneLogo">Selecione a Logo*</span></label
+                        >Selecione a Logo*</label
                       >
                     </div>
                   </div>
@@ -487,7 +471,7 @@
                       style="display: none"
                     >
                       <label for="validacaoTipoLocal"
-                        ><span data-i18n="navBar1.sectionFormulario.classificacao">Classificação*</span></label
+                        >Classificação*</label
                       >
                       <select
                         class="form-control form-control"
@@ -496,7 +480,7 @@
                         required="required"
                        
                       >
-                        <option data-i18n="navBar1.sectionFormulario.escolhaSegmento" value="1" selected disabled>
+                        <option value="1" selected disabled>
                           Escolha o segmento da startup
 
                         </option>
@@ -527,7 +511,7 @@
                     </div>
                     
                     <div class="form-group col-md-4">
-                      <label><span data-i18n="navBar1.sectionFormulario.modeloReceita">Modelo de Receitas*</span></label>
+                      <label>Modelo De Receitas*</label>
                       <select
                       class="form-control form-control"
                       id="modeloReceitaAtt"
@@ -535,22 +519,22 @@
                       placeholder="modeloReceitaAtt"
                       onclick=""
                       >
-                        <option data-i18n="navBar1.sectionModeloReceita.selecionar"value="1" selected disabled>
+                        <option value="1" selected disabled>
                           Selecionar... 
-                      <option data-i18n="navBar1.sectionModeloReceita.vendaDireta" value="Venda Direta">Venda direta</option>
-                      <option data-i18n="navBar1.sectionModeloReceita.servicoSobDemanda" value="Serviço sob Demanda">Serviço sob Demanda</option>
-                      <option data-i18n="navBar1.sectionModeloReceita.afiliados" value="Afiliados">Afiliados</option>
-                      <option data-i18n="navBar1.sectionModeloReceita.licenciamento" value="Licenciamento">Licenciamento</option>
-                      <option data-i18n="navBar1.sectionModeloReceita.assinaturas" value="Assinaturas">Assinaturas</option>
-                      <option data-i18n="navBar1.sectionModeloReceita.modeloReceita" value="Freemium">Freemium</option>
-                      <option data-i18n="navBar1.sectionModeloReceita.modeloReceita" value="Advertising (Propraganda)">Advertising (Propraganda)</option>
+                      <option value="Venda Direta">Venda direta</option>
+                      <option value="Serviço sob Demanda">Serviço sob Demanda</option>
+                      <option value="Afiliados">Afiliados</option>
+                      <option value="Licenciamento">Licenciamento</option>
+                      <option value="Assinaturas">Assinaturas</option>
+                      <option value="Freemium">Freemium</option>
+                      <option value="Advertising (Propraganda)">Advertising (Propraganda)</option>
                         </option>
                        
                       </select>
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label><span data-i18n="navBar1.sectionFormulario.publicoAlvo">Público Alvo*</span></label>
+                      <label>Público Alvo*</label>
                       <input
                         class="form-control form-control"
                         type="text"
@@ -567,7 +551,7 @@
                   <div class="form-row" style="margin-top: 7px">
                     <!-- linha3-->
                     <div class="form-group col-md-3">
-                      <label><span data-i18n="navBar1.sectionFormulario.fase">Fase*</span></label>
+                      <label>Fase*</label>
                       <select
                       class="form-control form-control"
                       id="faseAtt"
@@ -575,13 +559,12 @@
                       placeholder="faseAtt"
                       onclick=""
                     >
-                      <option data-i18n="navBar1.sectionSelectFase.selecionar" value="1" selected disabled>
+                      <option value="1" selected disabled>
                         Selecionar...
-                      </option> 
-                      <option data-i18n="navBar1.sectionSelectFase.ideacao" value="Ideação">Ideação</option>
-                      <option data-i18n="navBar1.sectionSelectFase.validacao" value="Validação">Validação</option>
-                      <option data-i18n="navBar1.sectionSelectFase.operacao" value="Operação">Operação</option>
-                      <option data-i18n="navBar1.sectionSelectFase.tracao" value="Tração">Tração</option>
+                      </option> <option value="Ideação">Ideação</option>
+                      <option value="Validação">Validação</option>
+                      <option value="Operação">Operação</option>
+                      <option value="Tração">Tração</option>
                       <option value="Scale-up">Scale-up</option>
                     </select>
                     </div>
@@ -627,8 +610,8 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                      <label for="validacaoLogradouroLocal"><span data-i18n="navBar1.sectionFormulario.logradouro">Logradouro*</span></label>
-                      <input 
+                      <label for="validacaoLogradouroLocal">Logradouro*</label>
+                      <input
                         class="form-control form-control"
                         type="text"
                         required="required"
@@ -639,7 +622,7 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                      <label for="validacaoNumeroLocal"><span data-i18n="navBar1.sectionFormulario.numero">Número*</span></label>
+                      <label for="validacaoNumeroLocal">Número*</label>
                       <input
                         class="form-control form-control"
                         type="text"
@@ -655,7 +638,7 @@
                   <div class="form-row">
                     <!-- linha5-->
                     <div class="form-group col-md-4">
-                      <label for="validacaoComplementoLocal"><span data-i18n="navBar1.sectionFormulario.numero">Número*</span></label>
+                      <label for="validacaoComplementoLocal">Complemento</label>
                       <input
                         class="form-control form-control"
                         type="text"
@@ -666,7 +649,7 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                      <label for="validacaoBairroLocal"><span data-i18n="navBar1.sectionFormulario.bairro">Bairro*</span></label>
+                      <label for="validacaoBairroLocal">Bairro*</label>
                       <input
                         class="form-control form-control"
                         type="text"
@@ -678,7 +661,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="validacaoCidadeLocal"><span data-i18n="navBar1.sectionFormulario.cidade">Cidade*</span></label>
+                      <label for="validacaoCidadeLocal">Cidade*</label>
                       <input
                         class="form-control form-control"
                         type="text"
@@ -987,7 +970,7 @@
           </div>
 
           <div class="modal-footer">
-            <button data-i18n="navBar1.sectionFormulario.btnCancelar"
+            <button
               type="button"
               class="btn-att2"
               data-dismiss="modal"
@@ -995,7 +978,7 @@
             >
               Cancelar
             </button>
-            <button data-i18n="navBar1.sectionFormulario.btnConfirmar"
+            <button
               id="btn-enviarAtt"
               type="button"
               class="btn-att"
@@ -1015,7 +998,7 @@
       <!--Barra do título da página-->
       <div class="d-flex justify-content-center">
         <div id="barra-title">
-          <p data-i18n="tituloDaPagina" 
+          <p
             id="barra-text-title"
             class="d-flex align-items-center justify-content-center"
           >
@@ -1055,35 +1038,35 @@
       <div class="prefooter">
         <div class="div-footer1">
           <ul>
-            <li> 
-              <a data-i18n="navBar1.sectionRodape.titulo"
+            <li>
+              <a
                 id="email"
                 href="mailto:mapainovacao@ufc.br?body=%0D%0A%0D%0AAtenciosamente,%0D%0A${NOME}"
               >
                 Para mais informações, fale conosco através do
                 mapainovacao@ufc.br</a
               >
-              <p data-i18n="navBar1.sectionRodape.descricao" class="div-footer-beta">Versão 0.2 (Beta)</p>
+              <p class="div-footer-beta">Versão 0.2 (Beta)</p>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="div-footer2">
-        <a data-i18n="navBar1.sectionRodape.politicaPrivacidade"
+        <a
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Política de Privacidade e Segurança de Dados.pdf"
           target="_blank"
           class=""
           >POLÍTICAS DE PRIVACIDADE</a
         >
-        <a data-i18n="navBar1.sectionRodape.termoUso"
+        <a
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Uso.pdf"
           target="_blank"
           class=""
         >
           TERMOS DE USO</a
         >
-        <a data-i18n="navBar1.sectionRodape.termoConsentimento"
+        <a
           href="/documentos/Mapa do Ecossistema de Inovação Cearense - Termo de Consentimento.pdf"
           target="_blank"
           class=""
@@ -1117,8 +1100,8 @@
     <script src="javascript/logica_comum.js"></script>
     <script src="javascript/login.js"></script>
     <script src="javascript/modal.js"></script>
-    <script src="javascript/traducao/i18n-startups.js" type="module"></script>
     <script src="javascript/lista-startup.js"></script>
+    <script src="javascript/traducao/i18n-index.js" type="module"></script>
  
   </body>
 </html>
