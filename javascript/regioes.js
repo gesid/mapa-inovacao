@@ -26,11 +26,11 @@ function exibirRegiao(componente) {
 
   if (map.hasLayer(layerArray[componente.getAttribute("data-key")])) {
     map.removeLayer(layerArray[componente.getAttribute("data-key")]);
-    aux[0].innerHTML = "Ativar no mapa";
+    aux[0].innerHTML = i18next.t('barraLateral.cards.cardsComunidade.btnAtivar');
     aux[0].setAttribute("Style", "background: #FC6A38;");
   } else {
     map.addLayer(layerArray[componente.getAttribute("data-key")]);
-    aux[0].innerHTML = "Desativar do mapa";
+    aux[0].innerHTML = i18next.t('barraLateral.cards.cardsComunidade.btnDesativar');
     aux[0].setAttribute("Style", "background: #CF5B15;");
   }
 }
