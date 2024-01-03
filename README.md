@@ -8,7 +8,7 @@ No Ceará existem várias iniciativas de inovação tecnológica surgindo em div
 
 ## 📍 Proposta 
 
-Sob o escopo de um projeto acadêmico articulado pelo Grupo de Estudos em Sistemas de Informação e Inovação Digital (<a href="https://gesid.github.io/" target="_blank" rel="noopener noreferrer">GESID</a>), o Mapa do Ecossistema de Inovação Cearense é uma plataforma colaborativa, tanto do ponto de vista do desenvolvimento, quanto do seu uso, que objetiva reunir de forma integrada informações sobre entidade, eventos e patentes, proporcionando a todos que tem interesse na comunidade cearense uma visão geral do ecossistema de inovação por meio de um mapa interativo e colaborativo.
+Sob o escopo de um projeto acadêmico articulado pelo Grupo de Estudos em Sistemas de Informação e Inovação Digital (<a href="https://gesid.github.io/" target="_blank" rel="noopener noreferrer">GESID</a>), o Mapa do Ecossistema de Inovação Cearense é uma plataforma colaborativa, tanto do ponto de vista do desenvolvimento, quanto do seu uso, que objetiva reunir de forma integrada informações sobre entidades, eventos e patentes, proporcionando a todos que tem interesse na comunidade cearense uma visão geral do ecossistema de inovação por meio de um mapa interativo e colaborativo.
 
 ## 🚀 Desenvolvimento 
 
