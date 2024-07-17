@@ -20,8 +20,8 @@ Como material de apoio para a realização da categorização inicial dos agente
 - <a href="https://via.ufsc.br/mapas-da-via/">Mapa do ecossistema de inovação de Santa Catarina</a>, mapeado pela VIA;
 - <a href="http://mapainovacao.secti.al.gov.br/">Mapa do ecossistema de inovação de Alagoas</a>, desenvolvido pela Secretaria de Estado da Ciência, da Tecnologia e da Inovação (SECTI) de Alagoas.
 
-A release atual (em fase beta) da solução encontra-se disponível em:
+A release (em fase beta) da solução encontra-se disponível em:
 
 - http://gesid.github.io/mapa-inovacao
 
-**Agradecemos a todos(as) que colaboraram para o desenvolvimento do projeto!** 💪
+**Esta iniciativa encontra-se desativada por tempo indeterminado e, consequentemente, com processo de manutenção interrompido. Agradecemos a todos(as) que colaboraram para o desenvolvimento do projeto!** 💪
