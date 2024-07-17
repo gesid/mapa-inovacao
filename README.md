@@ -2,6 +2,8 @@
 
 # Mapa do Ecossistema de Inovação Cearense
 
+**Esta iniciativa encontra-se desativada por tempo indeterminado e, consequentemente, com processo de manutenção interrompido. Agradecemos a todos(as) que colaboraram para o desenvolvimento do projeto!** 💪
+
 ## 🗺️ Motivação 
 
 No Ceará existem várias iniciativas de inovação tecnológica surgindo em diversas regiões do estado. Dentre os principais ecossistemas de inovação existentes, pode-se destacar o ecossistema de Fortaleza, o Rapadura Valley, e o ecossistema do Cariri, o Kariri Valley, porém também existem outras iniciativas surgindo em outras regiões do estado, como o ecossistema de Sobral, de Quixadá, de Crateús, entre outros. Na região nordeste, o ecossistema cearense tem se posicionado com um dos centros de inovação maiores da região. Constata-se, assim, a oportunidade em prover uma solução intrinsecamente colaborativa, open source e de abrangência estadual para geovisualização dos agentes que compõem o ecossistema cearense, tendo em vista o potencial em aproximar os agentes envolvidos e, consequentemente, catalisar parcerias inovadoras no estado.
@@ -23,5 +25,3 @@ Como material de apoio para a realização da categorização inicial dos agente
 A release (em fase beta) da solução encontra-se disponível em:
 
 - http://gesid.github.io/mapa-inovacao
-
-**Esta iniciativa encontra-se desativada por tempo indeterminado e, consequentemente, com processo de manutenção interrompido. Agradecemos a todos(as) que colaboraram para o desenvolvimento do projeto!** 💪
